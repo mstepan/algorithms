@@ -1,0 +1,7 @@
+We are using the Community Write pattern.
+There is no public write access, except for leaving page comments. You must be registered and logged in to leave comments.
+Please do add page comments when a page should answer your question but doesn't. (That means, potentially on any page.)
+The most effective page comments will include links to relevant email discussion threads, e.g., on the Hotspot compiler-dev list.
+Any member of the OpenJDK Hotspot Group or a related group should feel free to contribute.
+Actually, anybody with a (demonstrable) working knowledge of the Hotspot internals will be welcome to contribute content.
+Write permissions are not automatic until and unless the DBs get on speaking terms. If you think you should have write permission and don't contact the wiki administrator.

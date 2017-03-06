@@ -1,0 +1,157 @@
+A Bloom ﬁlter is a simple space-eﬃcient randomized data
+structure for representing a set in order to support member-
+ship queries. Although Bloom ﬁlters allow false positives,
+for many applications the space savings outweigh this draw-
+back when the probability of an error is suﬃciently low. We
+introduce compressed Bloom ﬁlters, which improve perfor-
+mance when the Bloom ﬁlter is passed as a message, and its
+transmission size is a limiting factor. For example, Bloom
+ﬁlters have been suggested as a means for sharingWeb cache
+information. In this setting, proxies do not share the exact
+contents of their caches, but instead periodically broadcast
+Bloom ﬁlters representing their cache. By using compressed
+Bloom ﬁlters, proxies can reduce the number of bits broad-
+cast, the false positive rate, and/or the amount of computa-
+tion per lookup. The cost is the processing time for compres-
+sion and decompression, which can use simple arithmetic
+coding, and more memory use at the proxies, which utilize
+the larger uncompressed form of the Bloom ﬁlter.
+1. INTRODUCTION
+Bloom ﬁlters are an excellent data structure for succinctly
+representing a set in order to support membership queries
+[3]. We describe them in detail in Section 2.1; here, we
+simply note that the data structure is randomized (in that
+it uses randomly selected hash functions), and hence has
+some probability of giving a false positive; that is, it may
+incorrectly return that an element is in a set when it is not.
+For many applications, the probability of a false positive
+can be made suﬃciently small and the space savings are
+signiﬁcant enough that Bloom ﬁlters are useful.
+In fact, Bloom ﬁlters have a great deal of potential for dis-
+tributed protocols where systems need to share information
+about what data they have available. For example, Fan et
+al. describe how Bloom ﬁlters can be used for Web cache
+∗Supported in part by NSF CAREER Grant CCR-9983832
+and an Alfred P. Sloan Research Fellowship.
+sharing [7]. To reduce message traﬃc, proxies do not trans-
+fer URL lists corresponding to the exact contents of their
+caches, but instead periodically broadcast Bloom ﬁlters that
+represent the contents of their cache. If a proxy wishes to
+determine if another proxy has a page in its cache, it checks
+the appropriate Bloom ﬁlter. In the case of a false positive,
+a proxy may request a page from another proxy, only to ﬁnd
+that proxy does not actually have that page cached. In that
+case, some additional delay has been incurred. The small
+chance of a false positive introduced by using a Bloom ﬁlter
+is greatly outweighed by the signiﬁcant reduction in network
+traﬃc achieved by using the succinct Bloom ﬁlter instead of
+sending the full list of cache contents. This technique is used
+in the open source Web proxy cache Squid, where the Bloom
+ﬁlters are referred to as Cache Digests [15, 13]. Bloom ﬁlters
+have also been suggested for other distributed protocols, e.g.
+[6, 9, 14].
+Our paper is based on the following insight: in this situation,
+the Bloom ﬁlter plays a dual role. It is both a data struc-
+ture being used at the proxies, and a message being passed
+between them. When we use the Bloom ﬁlter as a data struc-
+ture, we may tune its parameters for optimal performance
+as a data structure; that is, we minimize the probability
+of a false positive for a given memory size and number of
+items. Indeed, this is the approach taken in the analysis of
+[7]. If this data structure is also being passed around as a
+message, however, then we introduce another performance
+measure we may wish to optimize for: transmission size.
+Transmission size may be of greater importance when the
+amount of network traﬃc is a concern but there is memory
+available at the endpoint machines. This is especially true in
+distributed systems where information must be transmitted
+repeatedly from one endpoint machine to many others. For
+example, in the Web cache sharing system described above,
+the required memory at each proxy is linear in the number
+of proxies, while the total message traﬃc rate is quadratic
+in the number of proxies, assuming point-to-point commu-
+nication is used. Moreover, the amount of memory required
+at the endpoint machines is ﬁxed for the life of the system,
+where the traﬃc is additive over the life of the system.
+Transmission size can be aﬀected by using compression. In
+this paper, we show how compressing a Bloom ﬁlter can lead
+to improved performance. By using compressed Bloom ﬁl-
+ters, protocols reduce the number of bits broadcast, the false
+positive rate, and/or the amount of computation per lookup.
+The tradeoﬀ costs are the increased processing requirement
+for compression and decompression and larger memory re-
+quirements at the endpoint machines, who may use a larger
+original uncompressed form of the Bloom ﬁlter in order to
+achieve improved transmission size.
+We start by deﬁning the problem as an optimization prob-
+lem, which we solve using some simplifying assumptions. We
+then consider practical issues, including eﬀective compres-
+sion schemes and actual performance. We recommend arith-
+metic coding [11], a simple compression scheme well-suited
+to this situation with fast implementations. We follow by
+showing how to extend our work to other important cases,
+such as in the case where it is possible to update by send-
+ing changes (or deltas) in the Bloom ﬁlter rather than new
+Bloom ﬁlters.
+Our work underscores an important general principle for
+distributed algorithms: when using a data structure as a
+message, one should consider the parameters of the data
+structure with both of these roles in mind. If transmission
+size is important, tuning the parameters so that compression
+can be used eﬀectively may yield dividends.
+object that must be transferred between proxies. This fact
+suggests that we may not want to optimize the number of
+hash functions for m and n, but instead optimize the num-
+ber of hash functions for the size of the data that needs to
+be sent, or the transmission size. The transmission size,
+however, need not be m; we might be able to compress the
+bit array. Therefore we choose our parameters to minimize
+the failure probability after using compression.
+Let us consider the standard uncompressed Bloom ﬁlter,
+which is optimized for k = (ln 2) · (m/n), or equivalently
+for p = 1/2. Can we gain anything by compressing the
+resulting bit array? Under our assumption of good random
+hash functions, the bit array appears to be a random string
+of m 0’s and 1’s, with each entry being 0 or 1 independently
+with probability 1/2.
+1
+Hence compression does not gain
+anything for this choice of k.
+Suppose, however, we instead choose k so that each of the
+entries in the m bit array is 1 with probability 1/3. Then
+we can take advantage of this fact to compress the m bit
+array and reduce the transmission size. After transmission,
+the bit array is decompressed for actual use. Note that the
+uncompressed Bloom ﬁlter size is still m bits. While this
+choice of k is not optimal for the uncompressed size m, if
+our goal is to optimize for the transmission size, using com-
+pression may yield a better result. The question is whether
+this compression gains us anything, or if we would have been
+situations the transmission size may be more important than
+the uncompressed ﬁlter size.
+We may establish the problem as an optimization problem
+as follows. Let z be the desired compressed size. Recall
+that each bit in the bit array is 0 with probability p; we
+treat the bits as independent. Also, as a mathematically
+convenient approximation, we assume that we have an op-
+timal compressor. That is, we assume that our m bit ﬁl-
+ter can be compressed down to only mH(p) bits, where
+H(p) = −p log2 p − (1 − p) log2(1 − p) is the entropy func-
+tion. Our compressor therefore uses the optimal H(p) bits
+on average for each bit in the original string. We consider
+the practical implications more carefully subsequently. Here
+we note just that near-optimal compressors exist; arithmetic
+coding, for example, requires on average less than H(p) + ǫ
+bits per character for any ǫ > 0 given suitably large strings.
+Our optimization problem is as follows: given n and z,
+choose m and k to minimize f subject to mH(p) ≤ z. One
+possibility is to choose m = z and k = (ln 2) · (m/n) so that
+p = 1/2; this is the original optimized Bloom ﬁlter. Hence
+we can guarantee that f ≤ (0.6185)
+z/n.
+We can, however, do better. Indeed, in theory this choice
+of k is the worst choice possible once we allow compres-
+sion. To see this, let us again write f as a function of p:
+f = (1 − p)
+(−ln p)(m/n)
+subject to m = z/H(p) (we may

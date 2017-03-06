@@ -1,0 +1,7 @@
+one=dsfdsfs
+max={name:
+max="{name:
+olesia={firstName: "Olesia", age: 30, lastName: "Stepanenko"}
+max={name: "Maksym", age: 30}
+max={firstName: "Maksym", lastName: "Stepanenko", age: 30, job: "EM"}
+42='{"name":"San Francisco","attractions":["Golden Gate Bridge"]}'

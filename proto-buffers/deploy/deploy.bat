@@ -1,0 +1,1 @@
+mvn install:install-file  -Dfile=trove-3.0.3.jar -DgroupId=trove -DartifactId=trove -Dversion=3.0.3 -Dpackaging=jar -Dsources=trove-3.0.3-src.jar

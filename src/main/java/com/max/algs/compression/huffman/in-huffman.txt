@@ -1,0 +1,40 @@
+Before anything else, please check the reference to the title if you didn’t get it.
+This week, Vaadin released its version 7.3 with the new easily configurable Valo theme. I just had to 
+blog about this on my other blog, morevaadin.com, which uses Jekyll as static-site generation engine.  The problem I had to tackle is that not only did I not use Jekyll since 5 months, my laptop had been remastered and I had to re-install the software.
+Now, with the help of my friend Google, I managed to install homebrew, rbenv, ruby-build and jekyll
+ (yes, Jekyll is a Ruby gem) in the course of an evening. The same evening, I wrote my blog post, 
+ fixed the configuration as well as bad link reference and generated the site. Easy as pie, even though 
+ I didn’t touch the thing is so much time!
+Today, my thoughts hovered around that fact: it is easy! Just like some other tools – like WordPress, 
+are easy: easy to install, easy to configure and easy to use. In parallel, I thought about the original 
+version of morevaadin.com I developed with Drupal. Let me tell you what: Drupal is extremely powerful but 
+is a nightmare to configure. Making the switch from Drupal to Jekyll made my life easier a thousandfold.
+The my mind wandered further and drew a parallel between simple programming languages and more powerful 
+ones. This has been my experience when I tried to do some Scala workshop at the beginning of the year: after 
+6 months, I’ve been able to use only the simplest features, not the most powerful constructs. That had been 
+sorely disappointing to me, as I realized I was worse in Scala than I thought.
+I’m aware this parallel might be a little overstretched, however I cannot stop theorizing languages features 
+power can be an asset but also a curse if one has to constantly keep using them to remember them. For example,
+I think that Java’s syntax is easy enough not only to use but also to remember, though I must conced I might be 
+biased because I have more than 10 years experience developing in that language.
+Whatever you design, tool, technique or language, it might be the best at what it does, but please consider 
+that simplicity is a virtue.
+Many of the designations used by manufacturers and sellers to distinguish their prod- ucts are claimed as trademarks. Where those designations appear in this book, and The Pragmatic Programmers, LLC was aware of a trademark claim, the designations have been printed in initial capital letters or in all capitals. The Pragmatic Starter Kit, The Pragmatic Programmer, Pragmatic Programming, Pragmatic Bookshelf and the linking g device are trademarks of The Pragmatic Programmers, LLC.
+Every precaution was taken in the preparation of this book. However, the publisher assumes no responsibility for errors or omissions, or for damages that may result from the use of information (including program listings) contained herein.
+Our Pragmatic courses, workshops, and other products can help you and your team create better software and have more fun. For more information, as well as the latest Pragmatic titles, please visit us at
+I lately became interested in Vaadin, another web framework but where everything is done on the server side: no need for developers to learn HTML, CSS nor JavaScript. Since Vaadin adress my remarks about web applications being to expensive because of a constant need of well-rounded developers, I dug a little deeper: it will probably be the subject of another post.
+Anyway, i became a little disappointed when I wanted to use my favourite Dependency Injection framework, namely Spring, in Vaadin. After a little Google research, I found the Vaadin Wiki and more precisely the page talking about Vaadin Spring Integration. It exposes two ways to integrate Spring in Vaadin.
+The first one uses the Helper “pattern”, a class with static method that has access to the Spring application context. IMHO, those Helper classes should be forgotten now we have DI since they completely defeat its purpose. If you need to explicitly call the Helper static method in order to get the bean, where’s the Inversion of Control?
+The second solution uses Spring proprietary annotation @Autowired in order to use DI. Since IoC is all about decoupling, I’m vehemently opposed to coupling my code to the Spring framework.
+Since neither option seemed viable to me, let me present you the one I imagined: it is very simple and consists of subclassing the Vaadin’s AbstractApplicationServlet and using it instead of the classical ApplicationServlet.
+- See more at: http://blog.frankel.ch/page/20#sthash.i96Gn191.dpuf
+With a provocation this big, I hope I’ve caught your attention. So, let’s draw some lines: the objective is, of course, not to let others do you work. It is to share work once between the client, the business analyst and the person that will run the acceptance test.
+From my point of view, all these persons do the same work:
+the client wants features. As such, he will test those features when the product will be delivered
+the business analyst will describe those features in details. He has to know the intricacies of each use case
+the person that is in charge of acceptance test will likely run them more than once, probably with each delivery
+As such, it is a mistake for these scenarios to be written thrice. At first, the client should describe the acceptance test that he will run: it is on these scenarios that the product will be accepted or not. The business analyst will refine these, when he describes the business. And then the acceptance test will be run.
+Why not let the one of the actors do the work? In fact, in a webapp, such thing is possible with Selenium. Selenium is a suite of tools to automate your web acceptance tests. Let’s just say that one of them, Selenium IDE, is a neat little plugin that finds its way into Firefox (one more reason to use it) and acts as a recorder for interactions and page flow. The record can be exported in many formats (JUnit and TestNG for Java, but other languages are supported), modified, then put in a continuous build.
+Let’s imagine that one of our trio records the use-cases. He can then share them with the other two, so that all three have the same scenarios to run.
+On one of my latest project, I convinced the project manager to use Selenium IDE. He seems quite happy with it so I hope I will be able to go further the route I described earlier. I would be very interested in your own experience in this field.
+- See more at: http://blog.frankel.ch/page/20#sthash.i96Gn191.dpuf
