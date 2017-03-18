@@ -20,8 +20,8 @@ public class XYPoint implements java.io.Serializable {
 
 	private static final long serialVersionUID = 169126389859696350L;
 	
-	private final int x;
-	private final int y;
+	final int x;
+	final int y;
 	
 	public XYPoint(int x, int y) {
 		super();
