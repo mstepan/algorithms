@@ -41,6 +41,20 @@ public final class XYLine {
         return new XYLine(a, b);
     }
 
+    public double evaluate(double x) {
+        return a * x + b;
+    }
+
+    public double calculateError(XYPoint[] points) {
+        double error = 0.0;
+
+        for (XYPoint point : points) {
+            double diff = evaluate(point.x) - point.y;
+            error += (diff * diff);
+        }
+        return error;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -1,31 +1,35 @@
 package com.max.algs;
 
 
-import com.max.algs.ds.tree.geometry.XYLine;
-import com.max.algs.ds.tree.geometry.XYPoint;
+import rx.Observable;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public final class AlgorithmsMain {
 
+    private static void iteratorApproach() {
+        List<String> data = Arrays.asList("One", "Two", "Three", "Four", "Five");
+
+        Iterator<String> it = data.iterator();
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+
+    private static void reactiveApproach() {
+        List<String> data = Arrays.asList("One", "Two", "Three", "Four", "Five");
+
+        Observable<String> lazyData = Observable.from(data);
+
+        lazyData.subscribe(System.out::println,
+                           Throwable::printStackTrace,
+                           () -> System.out.println("All done"));
+    }
 
     private AlgorithmsMain() throws Exception {
-
-        XYPoint[] points = {
-                new XYPoint(1, 0),
-                new XYPoint(3, 1),
-                new XYPoint(6, 2),
-                new XYPoint(9, 3),
-        };
-
-//        XYPoint[] points = {
-//                new XYPoint(0, 0),
-//                new XYPoint(1, 1),
-//                new XYPoint(2, 2),
-//                new XYPoint(3, 3),
-//        };
-
-        XYLine line = XYLine.bestFitLine(points);
-
-        System.out.println(line);
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
