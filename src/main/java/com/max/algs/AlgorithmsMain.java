@@ -2,34 +2,118 @@ package com.max.algs;
 
 
 import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.subjects.ReplaySubject;
+import rx.subjects.Subject;
+import rx.subscriptions.Subscriptions;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public final class AlgorithmsMain {
 
-    private static void iteratorApproach() {
-        List<String> data = Arrays.asList("One", "Two", "Three", "Four", "Five");
+    private static final class TestSubscriber<T> extends Subscriber<T> {
 
-        Iterator<String> it = data.iterator();
+        @Override
+        public void onCompleted() {
+            System.out.println("Completed");
+        }
 
-        while (it.hasNext()) {
-            System.out.println(it.next());
+        @Override
+        public void onError(Throwable ex) {
+            System.out.println("Error: " + ex.getMessage());
+            unsubscribe();
+        }
+
+        @Override
+        public void onNext(T value) {
+            System.out.println(Thread.currentThread().getName() + ": " + value);
         }
     }
 
-    private static void reactiveApproach() {
-        List<String> data = Arrays.asList("One", "Two", "Three", "Four", "Five");
+    private static final class TwitterStream1 {
 
-        Observable<String> lazyData = Observable.from(data);
+        private final Subject<String, String> subject = ReplaySubject.create();
 
-        lazyData.subscribe(System.out::println,
-                           Throwable::printStackTrace,
-                           () -> System.out.println("All done"));
+        public static TwitterStream1 create(String username, String password) {
+
+            TwitterStream1 obs = new TwitterStream1();
+
+            Thread th = new Thread(() -> {
+
+                int cnt = 0;
+
+                while (!Thread.currentThread().isInterrupted()) {
+                    try {
+                        obs.subject.onNext("cnt: " + cnt);
+                        ++cnt;
+                        TimeUnit.SECONDS.sleep(1);
+                    }
+                    catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            });
+            th.setDaemon(true);
+            th.start();
+
+            return obs;
+
+        }
+
+        public Observable<String> observable() {
+            return subject;
+        }
     }
 
     private AlgorithmsMain() throws Exception {
+
+        Observable<String> twitterObs = Observable.create(subs -> {
+
+            Thread th = new Thread(() -> {
+
+                System.out.println("Connecting to network...");
+
+                int cnt = 0;
+
+                while (!subs.isUnsubscribed() && !Thread.currentThread().isInterrupted()) {
+                    try {
+                        subs.onNext("cnt: " + cnt);
+                        ++cnt;
+                        TimeUnit.SECONDS.sleep(1);
+                    }
+                    catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                        subs.onError(ex);
+                    }
+                }
+
+                subs.onCompleted();
+
+                System.out.println(Thread.currentThread().getName() + " completed...");
+            });
+
+            subs.add(Subscriptions.create(() -> {
+                System.out.println("Disconnect");
+                subs.unsubscribe();
+            }));
+
+            th.start();
+        });
+
+        Observable<String> twitterObsLazy = twitterObs.publish().refCount();
+        TimeUnit.SECONDS.sleep(3);
+
+        Subscription subscription1 = twitterObsLazy.subscribe(new TestSubscriber<>());
+        TimeUnit.SECONDS.sleep(3);
+
+        Subscription subscription2 = twitterObsLazy.subscribe(new TestSubscriber<>());
+
+        TimeUnit.SECONDS.sleep(5);
+        subscription1.unsubscribe();
+
+        TimeUnit.SECONDS.sleep(5);
+        subscription2.unsubscribe();
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
