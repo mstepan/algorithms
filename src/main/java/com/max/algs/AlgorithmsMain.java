@@ -4,6 +4,7 @@ package com.max.algs;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.observables.ConnectableObservable;
 import rx.subjects.ReplaySubject;
 import rx.subjects.Subject;
 import rx.subscriptions.Subscriptions;
@@ -66,6 +67,10 @@ public final class AlgorithmsMain {
         }
     }
 
+    private static void saveValue(String value) {
+        System.out.printf("status: %s %n", value);
+    }
+
     private AlgorithmsMain() throws Exception {
 
         Observable<String> twitterObs = Observable.create(subs -> {
@@ -101,19 +106,20 @@ public final class AlgorithmsMain {
             th.start();
         });
 
-        Observable<String> twitterObsLazy = twitterObs.publish().refCount();
+        ConnectableObservable<String> mainSubs = twitterObs.publish();
+
+        Subscription subs1 = mainSubs.subscribe(new TestSubscriber<>());
+        TimeUnit.SECONDS.sleep(1);
+
+        Subscription subs2 = mainSubs.subscribe(new TestSubscriber<>());
+        TimeUnit.SECONDS.sleep(1);
+
+        mainSubs.connect();
+
         TimeUnit.SECONDS.sleep(3);
 
-        Subscription subscription1 = twitterObsLazy.subscribe(new TestSubscriber<>());
-        TimeUnit.SECONDS.sleep(3);
-
-        Subscription subscription2 = twitterObsLazy.subscribe(new TestSubscriber<>());
-
-        TimeUnit.SECONDS.sleep(5);
-        subscription1.unsubscribe();
-
-        TimeUnit.SECONDS.sleep(5);
-        subscription2.unsubscribe();
+        subs1.unsubscribe();
+        subs2.unsubscribe();
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
