@@ -37,6 +37,11 @@ public class CanFormBinaryTree {
                 return false;
             }
 
+            // left and right points to the same node
+            if (left == right) {
+                return false;
+            }
+
             possibleRootNodes.remove(left);
             possibleRootNodes.remove(right);
 
