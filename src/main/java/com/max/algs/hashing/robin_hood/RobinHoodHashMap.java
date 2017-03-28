@@ -1,5 +1,12 @@
 package com.max.algs.hashing.robin_hood;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.AbstractMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -7,7 +14,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <p>
  * See: http://codecapsule.com/2013/11/11/robin-hood-hashing/
  */
-public class RobinHoodHashMap<K, V> {
+public class RobinHoodHashMap<K, V> extends AbstractMap<K, V> {
 
     // big prime number
     private static final int SALT = 7_368_787;
@@ -25,14 +32,16 @@ public class RobinHoodHashMap<K, V> {
         this.data = new Entry[INITIAL_CAPACITY];
     }
 
-    public V get(K key) {
-        checkNotNull(key);
+    @SuppressWarnings("unchecked")
+    @Override
+    public V get(Object keyObj) {
+        checkNotNull(keyObj);
 
-        Entry<K, V> entry = findNode(key);
-        return entry == null ? null : entry.value;
+        EntryWithBucket<K, V> node = findNodeWithBucket((K) keyObj);
+        return node == null ? null : node.entry.value;
     }
 
-    private Entry<K, V> findNode(K key) {
+    private EntryWithBucket<K, V> findNodeWithBucket(K key) {
 
         int bucket = bucket(key);
         int keyHashCode = key.hashCode();
@@ -48,25 +57,27 @@ public class RobinHoodHashMap<K, V> {
             Entry<K, V> entry = data[i];
 
             if (entry.key.hashCode() == keyHashCode && entry.key.equals(key)) {
-                return entry;
+                return new EntryWithBucket<>(entry, i);
             }
 
             // cur node distance < distance for a search key
-            if (entry.distance(i) < (i - bucket)) {
+            //TODO: check if we need here Math.abs(i - bucket) or just i - bucket
+            if (entry.distance(i, data.length) < calculateDistance(bucket, i, data.length)) {
                 return null;
             }
         }
     }
 
+    @Override
+    public V put(K key, V value) {
 
-    public void put(K key, V value) {
-
-        Entry<K, V> entry = findNode(key);
+        EntryWithBucket<K, V> node = findNodeWithBucket(key);
 
         // update existing entry
-        if (entry != null) {
-            entry.value = value;
-            return;
+        if (node != null) {
+            V oldValue = node.entry.value;
+            node.entry.value = value;
+            return oldValue;
         }
 
         Entry<K, V> entryToInsert = new Entry<>(key, value, bucket(key));
@@ -80,7 +91,7 @@ public class RobinHoodHashMap<K, V> {
             }
 
             // found entry with smaller distance, swap entries and proceed
-            else if (data[i].distance(i) < entryToInsert.distance(i)) {
+            else if (data[i].distance(i, data.length) < entryToInsert.distance(i, data.length)) {
                 @SuppressWarnings("unchecked")
                 Entry<K, V> temp = data[i];
                 data[i] = entryToInsert;
@@ -92,10 +103,60 @@ public class RobinHoodHashMap<K, V> {
         if (Double.compare(loadFactor(), RESIZE_LOAD_FACTOR) >= 0) {
             resize();
         }
+
+        return null;
     }
 
-    public void delete(K key) {
-        //TODO: implement
+
+    /**
+     * Use backward-shift algorithm.
+     * <p>
+     * http://codecapsule.com/2013/11/17/robin-hood-hashing-backward-shift-deletion/
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public V remove(Object keyObj) {
+
+        EntryWithBucket<K, V> node = findNodeWithBucket((K) keyObj);
+
+        if (node == null) {
+            return null;
+        }
+
+        data[node.bucketIndex] = null;
+
+        for (int i = (node.bucketIndex + 1) & (data.length - 1);
+             (data[i] != null && data[i].distance(i, data.length) != 0);
+             i = (i + 1) & (data.length - 1)) {
+
+            if (i == 0) {
+                data[data.length - 1] = data[0];
+                data[0] = null;
+            }
+            else {
+                data[i - 1] = data[i];
+                data[i] = null;
+            }
+        }
+
+        --size;
+        return node.entry.value;
+    }
+
+    @SuppressWarnings("unchecked")
+    @NotNull
+    @Override
+    public Set<Map.Entry<K, V>> entrySet() {
+
+        Set<Map.Entry<K, V>> entries = new HashSet<>();
+
+        for (Entry<K, V> entry : data) {
+            if (entry != null) {
+                entries.add(new SimpleEntry<K, V>(entry.key, entry.value));
+            }
+        }
+
+        return entries;
     }
 
     public boolean contains(K key) {
@@ -133,6 +194,16 @@ public class RobinHoodHashMap<K, V> {
         return ((double) size) / data.length;
     }
 
+    private static final class EntryWithBucket<K, V> {
+        private final Entry<K, V> entry;
+        private final int bucketIndex;
+
+        EntryWithBucket(Entry<K, V> entry, int bucketIndex) {
+            this.entry = entry;
+            this.bucketIndex = bucketIndex;
+        }
+    }
+
     private static final class Entry<K, V> {
 
         final K key;
@@ -148,14 +219,23 @@ public class RobinHoodHashMap<K, V> {
         /**
          * DIB - distance to initial bucket
          */
-        int distance(int curBucketIndex) {
-            return curBucketIndex - initialBucket;
+        int distance(int curBucketIndex, int dataCapacity) {
+            return calculateDistance(initialBucket, curBucketIndex, dataCapacity);
         }
 
         @Override
         public String toString() {
             return String.valueOf(key) + "=" + String.valueOf(value) + "[" + initialBucket + "]";
         }
+    }
+
+    private static int calculateDistance(int initialBucket, int curBucketIndex, int dataCapacity){
+        if (curBucketIndex >= initialBucket) {
+            return curBucketIndex - initialBucket;
+        }
+
+        // TODO:
+        return dataCapacity - initialBucket + curBucketIndex;
     }
 
 }

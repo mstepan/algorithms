@@ -2,7 +2,9 @@ package com.max.algs.hashing.robin_hood;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,21 +18,31 @@ public class RobinHoodHashMapTest {
 
     @Test
     public void putAndGetRandomValuesWithLotsOfDuplicates() {
-        putAndGetValuesInRange(100);
+        changeMap(100, 0.0);
     }
 
     @Test
     public void putAndGetRandomValues() {
-        putAndGetValuesInRange(null);
+        changeMap(null, 0.0);
     }
 
-    private static void putAndGetValuesInRange(Integer maxValue) {
-        RobinHoodHashMap<Integer, Integer> actualMap = new RobinHoodHashMap<>();
+    @Test
+    public void putGetAndRemoveRandomValues() {
+        changeMap(null, 0.1);
+        changeMap(null, 0.2);
+        changeMap(null, 0.3);
+    }
+
+
+    private static void changeMap(Integer maxValue, double deletionRate) {
+        Map<Integer, Integer> actualMap = new RobinHoodHashMap<>();
         Map<Integer, Integer> expectedMap = new HashMap<>();
+
+        List<Integer> keyElements = new ArrayList<>();
 
         Random rand = new Random();
 
-        for (int i = 0; i < 1000; ++i) {
+        for (int i = 0; i < 10_000; ++i) {
             int key;
             int value;
 
@@ -43,22 +55,43 @@ public class RobinHoodHashMapTest {
                 value = rand.nextInt(maxValue);
             }
 
-            expectedMap.put(key, value);
-            actualMap.put(key, value);
+            // delete element
+            if (!keyElements.isEmpty() && Double.compare(rand.nextDouble(), deletionRate) <= 0) {
 
-            assertEquals(expectedMap.size(), actualMap.size());
-            assertEquals(expectedMap.isEmpty(), actualMap.isEmpty());
+                int indexToDelete = rand.nextInt(keyElements.size());
 
-            for (Integer expKey : expectedMap.keySet()) {
-                assertEquals(expectedMap.get(expKey), actualMap.get(expKey));
+                Integer elemToRemove = keyElements.get(indexToDelete);
+
+                actualMap.remove(elemToRemove);
+                expectedMap.remove(elemToRemove);
+
+                keyElements.remove(indexToDelete);
+
             }
+            // add element
+            else {
+                expectedMap.put(key, value);
+                actualMap.put(key, value);
+                keyElements.add(key);
+            }
+
+            assertMapEquals(expectedMap, actualMap);
+        }
+    }
+
+    private static <K, V> void assertMapEquals(Map<K, V> expectedMap, Map<K, V> actualMap) {
+        assertEquals(expectedMap.size(), actualMap.size());
+        assertEquals(expectedMap.isEmpty(), actualMap.isEmpty());
+
+        for (K key : expectedMap.keySet()) {
+            assertEquals(expectedMap.get(key), actualMap.get(key));
         }
     }
 
 
     @Test
     public void putAndGet() {
-        RobinHoodHashMap<Integer, String> map = new RobinHoodHashMap<>();
+        Map<Integer, String> map = new RobinHoodHashMap<>();
 
         assertEquals(map.size(), 0);
         assertTrue(map.isEmpty());
@@ -79,6 +112,33 @@ public class RobinHoodHashMapTest {
         assertEquals("133-2", map.get(133));
         assertEquals("155", map.get(155));
         assertEquals("177", map.get(177));
+    }
+
+    @Test
+    public void checkRemove() {
+        Map<Integer, Integer> map = new RobinHoodHashMap<>();
+
+        for (int i = 0; i < 100; ++i) {
+            map.put(i, i);
+        }
+
+        assertEquals(100, map.size());
+        assertFalse(map.isEmpty());
+
+        for (int i = 0; i < 100; ++i) {
+            if ((i & 1) == 0) {
+                assertEquals(Integer.valueOf(i), (Integer) map.remove(i));
+            }
+        }
+
+        assertEquals(50, map.size());
+        assertFalse(map.isEmpty());
+
+        for (int i = 0; i < 100; ++i) {
+            if ((i & 1) != 0) {
+                assertEquals(Integer.valueOf(i), map.get(i));
+            }
+        }
     }
 
 }
