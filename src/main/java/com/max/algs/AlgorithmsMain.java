@@ -1,45 +1,28 @@
 package com.max.algs;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.parboiled.common.Preconditions.checkNotNull;
+import com.max.algs.util.MathUtils;
 
 public final class AlgorithmsMain {
 
-
-    /**
-     * time: O(N)
-     * space: O(N)
-     */
-    private static int countSubstrings(String str) {
-        checkNotNull(str);
-
-        if (str.length() < 2) {
-            return str.length();
-        }
-
-        Map<Character, Integer> freq = new HashMap<>();
-        int cnt = str.length();
-
-        for (int i = 0, strLength = str.length(); i < strLength; ++i) {
-            char ch = str.charAt(i);
-
-            Integer curChCount = freq.computeIfAbsent(ch, key -> 0);
-            cnt += curChCount;
-
-            freq.put(ch, curChCount + 1);
-        }
-
-        return cnt;
-    }
-
     private AlgorithmsMain() throws Exception {
 
-        String str = "abcab";
+        System.out.printf("Huffman codes: %.2f %n", (0.6 * 1 + 0.3 * 2 + 0.05 * 3 + (2 * 0.025 * 4)));
 
-        System.out.println(countSubstrings(str));
+        System.out.printf("Fixed length: %.2f %n", (0.6 * 4 + 0.3 * 4 + 0.05 * 4 + (2 * 0.025 * 4)));
+
+        double[] probabilities = {0.6, 0.3, 0.05, 0.025, 0.025};
+
+        double res = 0.0;
+
+        for (double p : probabilities) {
+            res += p * MathUtils.log2(p);
+        }
+
+        res = -res;
+
+        System.out.printf("entropy: %.2f %n", res);
+
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
