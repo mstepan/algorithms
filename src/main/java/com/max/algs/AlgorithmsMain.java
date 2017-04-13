@@ -3,6 +3,7 @@ package com.max.algs;
 
 public final class AlgorithmsMain {
 
+
     private AlgorithmsMain() throws Exception {
 
 
