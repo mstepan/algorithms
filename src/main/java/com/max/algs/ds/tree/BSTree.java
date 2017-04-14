@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Unbalanced binary search tree. Not thread safe. Don't allow duplicates. Don't
@@ -76,6 +78,64 @@ public class BSTree<K extends Comparable<K>> {
         node.right = constructRec(node, arr, mid + 1, hi);
 
         return node;
+    }
+
+    /**
+     * Find lowest common ancestor in binary search tree.
+     * time: O(lgN)
+     * space: O(1)
+     */
+    public Optional<K> lca(K first, K second) {
+        checkNotNull(first, "Can't find LCA for null value");
+        checkNotNull(second, "Can't find LCA for null value");
+
+        // both elements should present in a tree
+        if (!(contains(first) && contains(second))) {
+            return Optional.empty();
+        }
+
+        // elements are equal, LCA is the element value itself
+        if (first.equals(second)) {
+            return Optional.of(first);
+        }
+
+        K minValue = first;
+        K maxValue = second;
+
+        if (first.compareTo(second) > 0) {
+            minValue = second;
+            maxValue = first;
+        }
+
+        Node<K> cur = root;
+
+        while (true) {
+
+            if (cur.value.equals(minValue) || cur.value.equals(maxValue)) {
+                return Optional.of(cur.value);
+            }
+
+            int cmpResForMin = minValue.compareTo(cur.value);
+
+            if (cmpResForMin < 0 && maxValue.compareTo(cur.value) > 0) {
+                return Optional.of(cur.value);
+            }
+
+            // both values located to the 'left'
+            if (cmpResForMin < 0) {
+
+                assert maxValue.compareTo(cur.value) < 0 : "Incorrect invariant detected for left side move";
+
+                cur = cur.left;
+            }
+            // both values located to the 'right'
+            else {
+
+                assert maxValue.compareTo(cur.value) > 0 : "Incorrect invariant detected for right side move";
+
+                cur = cur.right;
+            }
+        }
     }
 
     /**
