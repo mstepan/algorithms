@@ -31,7 +31,7 @@ public final class ArrayUtils {
 
     /**
      * Rotate array i-th positions to the left.
-     *
+     * <p>
      * time: O(N)
      * space: O(1)
      */
@@ -1143,6 +1143,14 @@ public final class ArrayUtils {
         });
 
         return arr;
+    }
+
+    /**
+     * Generate random array of some random length.
+     */
+    public static int[] generateRandomArrayOfRandomLength(int maxLength) {
+        checkArgument(maxLength > 0);
+        return generateRandomArray(1 + RAND.nextInt(maxLength));
     }
 
 
