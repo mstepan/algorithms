@@ -7,6 +7,7 @@ public final class AlgorithmsMain {
     private AlgorithmsMain() throws Exception {
 
 
+
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
