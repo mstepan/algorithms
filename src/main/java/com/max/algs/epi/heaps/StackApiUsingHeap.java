@@ -13,6 +13,7 @@ import java.util.Queue;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -33,7 +34,7 @@ public class StackApiUsingHeap {
         /**
          * time: O(lgN)
          */
-        public void push(int value) {
+        public void push(Integer value) {
 
             if (sequenceNo == Integer.MAX_VALUE) {
                 throw new IllegalStateException("Possible overflow");
@@ -46,7 +47,7 @@ public class StackApiUsingHeap {
         /**
          * time: O(lgN)
          */
-        public int pop() {
+        public Integer pop() {
 
             if (isEmpty()) {
                 throw new IllegalStateException("Can't 'pop' from empty array");
@@ -62,7 +63,10 @@ public class StackApiUsingHeap {
         /**
          * time: O(1)
          */
-        public int top() {
+        public Integer top() {
+            if (isEmpty()) {
+                return null;
+            }
             return maxHeap.peek().value;
         }
 
@@ -81,10 +85,10 @@ public class StackApiUsingHeap {
         }
 
         private static final class StackEntry implements Comparable<StackEntry> {
-            final int value;
+            final Integer value;
             final int sequence;
 
-            StackEntry(int value, int sequence) {
+            StackEntry(Integer value, int sequence) {
                 this.value = value;
                 this.sequence = sequence;
             }
@@ -104,23 +108,25 @@ public class StackApiUsingHeap {
         assertEquals(0, stack.size());
 
         stack.push(10);
-        assertEquals(10, stack.top());
+        assertEquals(Integer.valueOf(10), stack.top());
         assertFalse(stack.isEmpty());
         assertEquals(1, stack.size());
 
         stack.push(1);
         stack.push(5);
-        assertEquals(5, stack.pop());
-        assertEquals(1, stack.pop());
+        assertEquals(Integer.valueOf(5), stack.pop());
+        assertEquals(Integer.valueOf(1), stack.pop());
 
         stack.push(7);
         stack.push(12);
         stack.push(4);
 
-        assertEquals(4, stack.pop());
-        assertEquals(12, stack.pop());
-        assertEquals(7, stack.pop());
-        assertEquals(10, stack.pop());
+        assertEquals(Integer.valueOf(4), stack.pop());
+        assertEquals(Integer.valueOf(12), stack.pop());
+        assertEquals(Integer.valueOf(7), stack.pop());
+        assertEquals(Integer.valueOf(10), stack.pop());
+
+        assertSame(null, stack.top());
         assertTrue(stack.isEmpty());
         assertEquals(0, stack.size());
     }
