@@ -77,6 +77,7 @@ public class FindFirstAndLastPosition {
 
         System.out.printf("indexes: %s %n", indexes);
 
+
         System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
     }
 
