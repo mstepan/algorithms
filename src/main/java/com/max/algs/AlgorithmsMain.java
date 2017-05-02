@@ -1,8 +1,12 @@
 package com.max.algs;
 
 
-public final class AlgorithmsMain {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+
+public final class AlgorithmsMain {
 
     private AlgorithmsMain() throws Exception {
 
