@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  * Not thread safe.
  *
  * For general idea see: https://en.wikipedia.org/wiki/Bloom_filter
- * For hashing strategy see: http://www.eecs.harvard.edu/~kirsch/pubs/bbbf/esa06.pdf
+ * For hashing strategy see: https://www.eecs.harvard.edu/~michaelm/postscripts/tr-02-05.pdf
  */
 public class BloomFilter<E> extends AbstractSet<E> implements Set<E>, Cloneable, java.io.Serializable {
 
