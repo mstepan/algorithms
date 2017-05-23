@@ -46,6 +46,25 @@ public final class StringUtils {
     private static final Random RAND = ThreadLocalRandom.current();
 
     /**
+     * time: O(N)
+     * space: O(N)
+     */
+    public static String randomShuffle(String str) {
+        checkNotNull(str);
+
+        if (str.length() < 2) {
+            return str;
+        }
+
+        char[] arr = str.toCharArray();
+
+        ArrayUtils.randomShuffle(arr);
+
+        return new String(arr);
+    }
+
+
+    /**
      * Check is string 'perm' is permutation of string 'str' in parallel.
      * <p>
      * time: O(N*lnN / CPUs)
@@ -809,7 +828,7 @@ public final class StringUtils {
 
         if (distance < 0) {
             throw new IllegalArgumentException("Negative 'distance' passed: "
-                                                       + distance);
+                    + distance);
         }
 
         if (distance > str.length()) {
