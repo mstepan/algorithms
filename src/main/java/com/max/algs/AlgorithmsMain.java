@@ -1,6 +1,7 @@
 package com.max.algs;
 
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public final class AlgorithmsMain {
@@ -19,7 +20,7 @@ public final class AlgorithmsMain {
             double x = RAND.nextDouble();
             double y = RAND.nextDouble();
 
-            if (Double.compare(x * x + y * y, 1) < 0) {
+            if (Double.compare(x * x + y * y, 1.0) < 0) {
                 ++withinCircle;
             }
         }
@@ -27,10 +28,12 @@ public final class AlgorithmsMain {
         double lambda = ((double) (withinCircle)) / itCount;
 
         return 4.0 * lambda;
+    }
 
-//        BigDecimal lambda =
-//                new BigDecimal(withinCircle).divide(new BigDecimal(itCount), 11, BigDecimal.ROUND_HALF_UP);
-//        return new BigDecimal("4.0").multiply(lambda);
+    private static BigDecimal calculateAsBigDecimal(double withinCircle, int itCount) {
+        BigDecimal lambda =
+                new BigDecimal(withinCircle).divide(new BigDecimal(itCount), 11, BigDecimal.ROUND_HALF_UP);
+        return new BigDecimal("4.0").multiply(lambda);
     }
 
     private AlgorithmsMain() throws Exception {
@@ -39,7 +42,8 @@ public final class AlgorithmsMain {
         double pi = estimatePi(100_000_000);
         long endTime = System.currentTimeMillis();
 
-        System.out.printf("PI: %s, PI from library: %.10f %n", pi, Math.PI);
+        System.out.printf("estimated PI: %.10f %n", pi);
+        System.out.printf("real      PI: %.10f %n", Math.PI);
         System.out.printf("Time spend: %d ms%n", (endTime - startTime));
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
