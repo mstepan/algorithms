@@ -2,6 +2,7 @@ package com.max.algs.epi.hashing;
 
 import org.junit.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import static junit.framework.TestCase.*;
@@ -22,6 +23,24 @@ public class IsbnCacheTest {
     @Test(expected = IllegalArgumentException.class)
     public void createBigCapacity() {
         new IsbnCache(1_000_001);
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void iteratingAndModifyingAtTheSameTime() {
+        IsbnCache cache = new IsbnCache(5);
+        cache.put("1", 1.0);
+        cache.put("2", 2.0);
+        cache.put("3", 3.0);
+
+        Iterator<IsbnCache.IsbnPricePair> it = cache.iterator();
+
+        assertTrue(it.hasNext());
+        assertNotNull(it.next());
+
+        cache.put("4", 4.0);
+
+        assertTrue(it.hasNext());
+        it.next();
     }
 
     @Test
@@ -52,7 +71,7 @@ public class IsbnCacheTest {
         IsbnCache cache = new IsbnCache(5);
 
         for (int i = 0; i < 10; ++i) {
-            cache.put(String.valueOf(i), (double) i);
+            cache.put(String.valueOf(i), (double) i + 100.0);
         }
 
         assertCacheSame(new String[]{"9", "8", "7", "6", "5"}, cache);

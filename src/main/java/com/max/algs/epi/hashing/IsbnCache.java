@@ -8,11 +8,16 @@ import java.util.Iterator;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * LRU cache for ISBN -> book price.
  */
 public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
+
+    private static final int SIGN_BIT_MASK = 0x7F_FF_FF_FF;
+
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
     private final int capacity;
 
@@ -23,35 +28,47 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     private final IsbnEntry head = new IsbnEntry("HEAD", 0.0);
     private final IsbnEntry tail = new IsbnEntry("TAIL", 0.0);
 
-    private BucketEntry[] buckets;
+    {
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    private final BucketEntry[] buckets;
+
+    public IsbnCache() {
+        this(DEFAULT_INITIAL_CAPACITY);
+    }
 
     public IsbnCache(int capacity) {
         checkArgument(capacity > 0 && capacity < 1_000_000,
                 "Incorrect capacity value, should be in range [%s, %s], found: %s",
                 1, 1_000_000, capacity);
-
-        combineHeadTail();
-
         this.capacity = capacity;
-        int bucketsCount = (int) Math.ceil((100.0 * capacity) / 75.0);
-        this.buckets = (BucketEntry[]) Array.newInstance(BucketEntry.class, bucketsCount);
+        this.buckets = (BucketEntry[]) Array.newInstance(BucketEntry.class, calculateBucketsCount(capacity));
+        initAllBuckets();
+    }
 
+    private void initAllBuckets() {
         for (int i = 0; i < buckets.length; ++i) {
             buckets[i] = BucketEntry.createSentinel();
         }
     }
 
-    private void combineHeadTail() {
-        head.next = tail;
-        tail.prev = head;
+    private static int calculateBucketsCount(int capacity) {
+        return (int) Math.ceil((100.0 * capacity) / 75.0);
     }
 
+
     public Double put(String isbn, Double price) {
+        checkNotNull(isbn);
+        checkArgument(Double.compare(price, 0.0) > 0 && Double.compare(price, 1_000_000.0) < 0);
 
         ++baseModCount;
 
+        BucketEntry bucketEntry = findEntry(isbn);
+
         // not exists in hash table
-        if (findEntry(isbn) == null) {
+        if (bucketEntry == null) {
 
             IsbnEntry entry = new IsbnEntry(isbn, price);
 
@@ -69,8 +86,6 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         }
 
         // entry already exists
-        BucketEntry bucketEntry = findEntry(isbn);
-
         Double prevPrice = bucketEntry.entry.price;
         bucketEntry.entry.price = price;
 
@@ -81,6 +96,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     }
 
     public Double get(String isbn) {
+        checkNotNull(isbn);
 
         BucketEntry bucketEntry = findEntry(isbn);
 
@@ -166,7 +182,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     }
 
     private int calculateBucket(String isbn) {
-        return (isbn.hashCode() & 0x7F_FF_FF_FF) % buckets.length;
+        return (isbn.hashCode() & SIGN_BIT_MASK) % buckets.length;
     }
 
     @NotNull
@@ -259,11 +275,10 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     }
 
     // === BUCKETS single linked list ===
-
     private static final class BucketEntry {
 
         static BucketEntry createSentinel() {
-            return new BucketEntry(new IsbnEntry("sentinal", 0.0), null);
+            return new BucketEntry(new IsbnEntry("sentinel", 0.0), null);
         }
 
         BucketEntry(IsbnEntry entry, BucketEntry next) {
