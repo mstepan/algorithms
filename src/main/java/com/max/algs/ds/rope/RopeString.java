@@ -45,8 +45,16 @@ public final class RopeString implements CharSequence {
     public RopeString append(String otherStr) {
         checkNotNull(otherStr);
 
-        RopeMidNode combinedRoot = new RopeMidNode(this.root, new RopeLeafNode(otherStr));
+        RopeMidNode combinedRoot = combineWithRebalancing(this.root, new RopeLeafNode(otherStr));
 
         return new RopeString(combinedRoot, this.totalLength + otherStr.length());
+    }
+
+    private static RopeMidNode combineWithRebalancing(RopeNode left, RopeNode right) {
+        RopeMidNode combinedRoot = new RopeMidNode(left, right);
+
+        //TODO: do rebelancing if needed
+
+        return combinedRoot;
     }
 }

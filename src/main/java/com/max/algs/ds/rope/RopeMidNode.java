@@ -46,4 +46,9 @@ final class RopeMidNode implements RopeNode {
         checkNotNull(right);
         return right.getChar(index - length);
     }
+
+    @Override
+    public String toString() {
+        return "left = " + left.length() + ", right = " + right.length();
+    }
 }

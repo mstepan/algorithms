@@ -28,4 +28,9 @@ final class RopeLeafNode implements RopeNode {
     public RopeNode getRight() {
         return null;
     }
+
+    @Override
+    public String toString(){
+        return data + ", length = " + data.length();
+    }
 }
