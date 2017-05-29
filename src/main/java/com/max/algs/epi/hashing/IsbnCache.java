@@ -23,7 +23,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     private final IsbnEntry head = new IsbnEntry("HEAD", 0.0);
     private final IsbnEntry tail = new IsbnEntry("TAIL", 0.0);
 
-    private IsbnEntryBucket[] buckets;
+    private BucketEntry[] buckets;
 
     public IsbnCache(int capacity) {
         checkArgument(capacity > 0 && capacity < 1_000_000,
@@ -34,7 +34,11 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
 
         this.capacity = capacity;
         int bucketsCount = (int) Math.ceil((100.0 * capacity) / 75.0);
-        this.buckets = (IsbnEntryBucket[]) Array.newInstance(IsbnEntryBucket.class, bucketsCount);
+        this.buckets = (BucketEntry[]) Array.newInstance(BucketEntry.class, bucketsCount);
+
+        for (int i = 0; i < buckets.length; ++i) {
+            buckets[i] = BucketEntry.createSentinel();
+        }
     }
 
     private void combineHeadTail() {
@@ -53,14 +57,8 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
 
             int bucketIndex = calculateBucket(isbn);
 
-            if (buckets[bucketIndex] == null) {
-                buckets[bucketIndex] = new IsbnEntryBucket();
-            }
-
-            IsbnEntryBucket bucketList = buckets[bucketIndex];
-
-            entry.next = bucketList.entry;
-            bucketList.entry = entry;
+            // insert to head
+            buckets[bucketIndex].next = new BucketEntry(entry, buckets[bucketIndex].next);
 
             insertAfterHead(entry);
             ++size;
@@ -71,39 +69,64 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         }
 
         // entry already exists
-        IsbnEntry entry = findEntry(isbn);
+        BucketEntry bucketEntry = findEntry(isbn);
 
-        Double prevPrice = entry.price;
-        entry.price = price;
+        Double prevPrice = bucketEntry.entry.price;
+        bucketEntry.entry.price = price;
 
-        deleteEntryFromList(entry);
-        insertAfterHead(entry);
+        deleteEntryFromList(bucketEntry.entry);
+        insertAfterHead(bucketEntry.entry);
 
         return prevPrice;
     }
 
     public Double get(String isbn) {
 
-        IsbnEntry entry = findEntry(isbn);
+        BucketEntry bucketEntry = findEntry(isbn);
 
-        if (entry == null) {
+        if (bucketEntry == null) {
             return null;
         }
 
         ++baseModCount;
 
-        deleteEntryFromList(entry);
-        insertAfterHead(entry);
+        deleteEntryFromList(bucketEntry.entry);
+        insertAfterHead(bucketEntry.entry);
 
-        return entry.price;
+        return bucketEntry.entry.price;
     }
 
     private void ensureCapacity() {
         if (size > capacity) {
             // evict last element from double-linked-list
-
-            System.out.println("ensureCapacity");
+            IsbnEntry deleteEntry = deleteLast();
+//            System.out.println("LRU evicted: " + deleteEntry.isbn);
         }
+    }
+
+    private IsbnEntry deleteLast() {
+        // delete last element from double linked list
+        IsbnEntry entryToDelete = tail.prev;
+
+        tail.prev = entryToDelete.prev;
+        entryToDelete.prev.next = tail;
+
+        entryToDelete.next = null;
+        entryToDelete.prev = null;
+
+        // delete element from bucket single linked list
+        BucketEntry cur = buckets[calculateBucket(entryToDelete.isbn)];
+
+        while (cur.next.entry != entryToDelete) {
+            cur = cur.next;
+        }
+
+        BucketEntry bucketEntryToDelete = cur.next;
+
+        cur.next = bucketEntryToDelete.next;
+        bucketEntryToDelete.next = null;
+
+        return entryToDelete;
     }
 
     private void insertAfterHead(IsbnEntry entry) {
@@ -125,20 +148,14 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         entry.prev = null;
     }
 
-    private IsbnEntry findEntry(String isbn) {
+    private BucketEntry findEntry(String isbn) {
 
         int bucketIndex = calculateBucket(isbn);
 
-        IsbnEntryBucket bucket = buckets[bucketIndex];
-
-        if (bucket == null) {
-            return null;
-        }
-
-        IsbnEntry cur = bucket.entry;
+        BucketEntry cur = buckets[bucketIndex].next;
 
         while (cur != null) {
-            if (cur.isbn.equals(isbn)) {
+            if (cur.entry.isbn.equals(isbn)) {
                 return cur;
             }
 
@@ -243,9 +260,19 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
 
     // === BUCKETS single linked list ===
 
-    private static final class IsbnEntryBucket {
+    private static final class BucketEntry {
+
+        static BucketEntry createSentinel() {
+            return new BucketEntry(new IsbnEntry("sentinal", 0.0), null);
+        }
+
+        BucketEntry(IsbnEntry entry, BucketEntry next) {
+            this.entry = entry;
+            this.next = next;
+        }
+
         IsbnEntry entry;
-        IsbnEntry next;
+        BucketEntry next;
     }
 
 }

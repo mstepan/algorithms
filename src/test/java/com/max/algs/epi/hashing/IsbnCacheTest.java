@@ -56,6 +56,17 @@ public class IsbnCacheTest {
         }
 
         assertCacheSame(new String[]{"9", "8", "7", "6", "5"}, cache);
+
+        cache.get("7");
+        cache.get("8");
+
+        assertCacheSame(new String[]{"8", "7", "9", "6", "5"}, cache);
+
+        cache.put("13", 13.0);
+        cache.put("14", 14.0);
+        cache.put("15", 15.0);
+
+        assertCacheSame(new String[]{"15", "14", "13", "8", "7"}, cache);
     }
 
     private static void assertCacheSame(String[] arr, IsbnCache cache) {
