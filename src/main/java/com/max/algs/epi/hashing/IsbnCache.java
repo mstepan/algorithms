@@ -21,6 +21,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     private int baseModCount;
 
     private final IsbnEntry head = new IsbnEntry("HEAD", 0.0);
+    private final IsbnEntry tail = new IsbnEntry("TAIL", 0.0);
 
     private IsbnEntryBucket[] buckets;
 
@@ -28,9 +29,17 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         checkArgument(capacity > 0 && capacity < 1_000_000,
                 "Incorrect capacity value, should be in range [%s, %s], found: %s",
                 1, 1_000_000, capacity);
+
+        combineHeadTail();
+
         this.capacity = capacity;
         int bucketsCount = (int) Math.ceil((100.0 * capacity) / 75.0);
         this.buckets = (IsbnEntryBucket[]) Array.newInstance(IsbnEntryBucket.class, bucketsCount);
+    }
+
+    private void combineHeadTail() {
+        head.next = tail;
+        tail.prev = head;
     }
 
     public Double put(String isbn, Double price) {
@@ -94,7 +103,6 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
             // evict last element from double-linked-list
 
             System.out.println("ensureCapacity");
-
         }
     }
 
@@ -102,10 +110,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         entry.next = head.next;
         entry.prev = head;
 
-        if (head.next != null) {
-            head.next.prev = entry;
-        }
-
+        head.next.prev = entry;
         head.next = entry;
     }
 
@@ -114,10 +119,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         IsbnEntry entryNext = entry.next;
 
         entryPrev.next = entryNext;
-
-        if (entryNext != null) {
-            entryNext.prev = entryPrev;
-        }
+        entryNext.prev = entryPrev;
 
         entry.next = null;
         entry.prev = null;
@@ -169,7 +171,7 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
 
         @Override
         public boolean hasNext() {
-            return cur != null;
+            return cur != IsbnCache.this.tail;
         }
 
         @Override
