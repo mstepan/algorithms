@@ -3,31 +3,85 @@ package com.max.algs.math;
 
 import java.math.BigDecimal;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class EstimatePi {
-
-    private static final Random RAND = new Random();
 
     /**
      * Estimate PI using Monte-Carlo method.
      */
     public static double estimatePi(int itCount) {
+        double lambda = ((double) (hitCount(itCount))) / itCount;
+        return 4.0 * lambda;
+    }
+
+    /**
+     * Estimate PI using Monte-Carlo method.
+     */
+    public static double estimatePiParallel(int itCount) {
+        double lambda = ((double) (hitCountParallel(itCount))) / itCount;
+        return 4.0 * lambda;
+    }
+
+
+    private static int hitCount(int itCount) {
+
+        Random rand = ThreadLocalRandom.current();
 
         int withinCircle = 0;
 
         for (int i = 0; i < itCount; ++i) {
 
-            double x = RAND.nextDouble();
-            double y = RAND.nextDouble();
+            double x = rand.nextDouble();
+            double y = rand.nextDouble();
 
             if (Double.compare(x * x + y * y, 1.0) < 0) {
                 ++withinCircle;
             }
         }
 
-        double lambda = ((double) (withinCircle)) / itCount;
+        return withinCircle;
+    }
 
-        return 4.0 * lambda;
+    public static int hitCountParallel(int itCount) {
+
+        final int threadsCount = Runtime.getRuntime().availableProcessors();
+        ExecutorService pool = Executors.newFixedThreadPool(threadsCount);
+
+        int chunkSize = (int) Math.ceil(((double) itCount) / threadsCount);
+
+        @SuppressWarnings("unchecked")
+        Future<Integer>[] res = new Future[threadsCount];
+
+        int totalSize = 0;
+        int lastChunkSize = (itCount % chunkSize == 0) ? chunkSize : itCount % chunkSize;
+
+        for (int i = 0; i < threadsCount; ++i) {
+            int curItCount = (i == threadsCount - 1) ? lastChunkSize : chunkSize;
+
+            totalSize += curItCount;
+
+            res[i] = pool.submit(() -> hitCount(curItCount));
+        }
+
+        pool.shutdownNow();
+        System.out.println("totalSize: " + totalSize);
+
+        int totalHitCount = 0;
+
+        for (Future<Integer> future : res) {
+            try {
+                totalHitCount += future.get();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return totalHitCount;
     }
 
     private static BigDecimal calculateAsBigDecimal(double withinCircle, int itCount) {
@@ -38,8 +92,29 @@ public final class EstimatePi {
 
     private EstimatePi() throws Exception {
 
+        /*
+        //------------
+        sequential:
+        //------------
+        estimated PI: 3.1415803040
+        real      PI: 3.1415926536
+        Time spend: 16572 ms
+
+        //------------
+        parallel:
+        //------------
+        estimated PI: 3.1415694240
+        real      PI: 3.1415926536
+        Time spend: 3347 ms
+         */
+
+        final int itCount = 2_000_000_000;
+
         long startTime = System.currentTimeMillis();
-        double pi = estimatePi(100_000_000);
+
+//        double pi = estimatePi(itCount);
+        double pi = estimatePiParallel(itCount);
+
         long endTime = System.currentTimeMillis();
 
         System.out.printf("estimated PI: %.10f %n", pi);
