@@ -1,4 +1,4 @@
-package com.max.algs.topcoder;
+package topcoder;
 
 /*
 *
