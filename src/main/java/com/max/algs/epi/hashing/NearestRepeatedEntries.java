@@ -45,7 +45,7 @@ public final class NearestRepeatedEntries {
 
     private NearestRepeatedEntries() throws Exception {
 
-        String[] arr = "hello world World".split(" "); //, "All work and no play makes for no work no fun and o results".split(" ");
+        String[] arr = "All work and no play makes for no work no fun and o results".split(" ");
 
         int minDistance = findMinRepeatedDistance(arr);
 
