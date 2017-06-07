@@ -9,7 +9,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * 13.7. Find the smallest subarray covering all values.
  */
-public final class SmallestSubarrayCoveringAllValues {
+public final class SmallestSubarrayCoveringAllValues1 {
 
     /**
      * N - arr.length
@@ -95,7 +95,7 @@ public final class SmallestSubarrayCoveringAllValues {
         }
     }
 
-    private static final class Subarray {
+    public static final class Subarray {
 
         static final Subarray EMPTY = new Subarray(-1, -1);
         static final Subarray MAX_VALUE = new Subarray(0, Integer.MAX_VALUE);
@@ -120,7 +120,7 @@ public final class SmallestSubarrayCoveringAllValues {
     }
 
 
-    private SmallestSubarrayCoveringAllValues() throws Exception {
+    private SmallestSubarrayCoveringAllValues1() throws Exception {
 
         String textToSearch = "hello the wonderful and beautiful world this world is hello like";
 
@@ -135,7 +135,7 @@ public final class SmallestSubarrayCoveringAllValues {
 
     public static void main(String[] args) {
         try {
-            new SmallestSubarrayCoveringAllValues();
+            new SmallestSubarrayCoveringAllValues1();
         }
         catch (Exception ex) {
             ex.printStackTrace();
