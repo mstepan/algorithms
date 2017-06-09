@@ -159,6 +159,13 @@ public final class ArrayUtils {
 
         return buf.toString();
     }
+    public static void randomShuffle(String[] arr) {
+        checkArgument(arr != null, "null 'arr' parameter passed");
+
+        for (int i = 0, lastIndex = arr.length - 1; i < lastIndex; i++) {
+            swap(arr, i, i + RAND.nextInt(arr.length - i));
+        }
+    }
 
     /**
      * time: O(N)
