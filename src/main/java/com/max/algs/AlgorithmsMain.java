@@ -1,8 +1,10 @@
 package com.max.algs;
 
 
-import com.max.algs.ds.probabalistic.CountMinSketch;
+import com.max.algs.ds.probabalistic.HyperLogLog;
 import com.max.algs.util.MathUtils;
+
+import java.util.Random;
 
 public final class AlgorithmsMain {
 
@@ -55,22 +57,15 @@ public final class AlgorithmsMain {
     private AlgorithmsMain() throws Exception {
 //        bloomFilterParameters();
 
-        CountMinSketch data = new CountMinSketch(0.01, 0.90);
+        Random rand = new Random();
 
-        data.add("192.169.1.1");
-        data.add("192.169.1.1");
-        data.add("192.169.1.1");
+        HyperLogLog data = new HyperLogLog();
 
-        data.add("192.169.1.2");
-        data.add("192.169.1.2");
+        for (int i = 0; i < 333_000; ++i) {
+            data.add("val-" + i);
+        }
 
-        data.add("192.169.1.3");
-
-        System.out.println(data.getCount("192.169.1.1"));
-        System.out.println(data.getCount("192.169.1.2"));
-        System.out.println(data.getCount("192.169.1.3"));
-
-        System.out.println(data.getCount("192.169.1.4"));
+        System.out.println(data.cardinality());
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }

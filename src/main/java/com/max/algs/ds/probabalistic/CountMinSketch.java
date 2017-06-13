@@ -5,6 +5,15 @@ import com.max.algs.util.MathUtils;
 
 /**
  * Count-min sketch frequency calculation data structure.
+ * <p>
+ * Example:
+ * <p>
+ * error rate = 0.001 (aka 0.1%)
+ * accuracy = 0.999 (aka 99.9%)
+ * <p>
+ * Calculated parameters: width = 2719, depth = 7
+ * <p>
+ * Space used = (2719 * 7 * 4 bytes) = 74KB
  */
 public class CountMinSketch {
 
