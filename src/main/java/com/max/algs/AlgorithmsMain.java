@@ -29,7 +29,7 @@ public final class AlgorithmsMain {
      * m = -216553*ln(0.01) / (ln(2)^2) = 997263 / 0.48045 = 2,075,686 bits (253 kB)
      * k = m/n * ln(2) = 2075686/216553 * 0.693147 = 6.46 hash functions (7 hash functions)
      */
-    private static final void bloomFilterParameters() {
+    private static void bloomFilterParameters() {
 
         // expected number of elements
         int n = 1000;
@@ -53,7 +53,6 @@ public final class AlgorithmsMain {
 
 
     private AlgorithmsMain() throws Exception {
-//        bloomFilterParameters();
 
         final int n = 1_000_000;
 

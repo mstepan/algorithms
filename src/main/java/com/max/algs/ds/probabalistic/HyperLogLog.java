@@ -4,9 +4,11 @@ import com.max.algs.hashing.universal.UniversalHashFunction;
 import com.max.algs.util.MathUtils;
 
 /**
- * LogLog: error rate = 1.3 / sqrt(buckets) = 1.3/sqrt(1024) = 0.04 (aka 4 %)
+ * This code is not as described in HyperLogLog paper, so can be very INACCURATE.
  * <p>
- * HyperLogLog: error rate = 1.05 / sqrt(buckets) = 1.05 / sqrt(1024) = 0.032 (aka 3.2%)
+ * LogLog: expected error rate = 1.3 / sqrt(buckets) = 1.3/sqrt(1024) = 0.04 (aka 4%)
+ * <p>
+ * HyperLogLog: expected error rate = 1.05 / sqrt(buckets) = 1.05 / sqrt(1024) = 0.032 (aka 3.2%)
  */
 public class HyperLogLog {
 
@@ -51,6 +53,8 @@ public class HyperLogLog {
             ++zeros;
         }
 
+        assert zeros >= 0 && zeros <= WORD_SIZE : "countTrailingZeros found incorrect number of '0's";
+
         return zeros;
     }
 
@@ -58,7 +62,6 @@ public class HyperLogLog {
      * Estimate cardinality.
      */
     public int cardinality() {
-
         int sumValues = sum(buckets);
 
         double cardinality = Math.pow(2.0, ((double) sumValues) / BUCKETS_COUNT) * BUCKETS_COUNT *
@@ -67,7 +70,7 @@ public class HyperLogLog {
         return (int) Math.round(cardinality);
     }
 
-    private double estimatorFactor(int m) {
+    private static double estimatorFactor(int m) {
         switch (m) {
             case 16:
                 return 0.673;
@@ -82,13 +85,35 @@ public class HyperLogLog {
 
 
     private static int sum(byte[] arr) {
-
         int sum = 0;
 
-        for (int value : arr) {
-            sum += value;
+        for (int val : arr) {
+            sum += val;
         }
         return sum;
+    }
+
+    public static void main(String[] args) {
+        try {
+            final int n = 1_000_000;
+
+            HyperLogLog data = new HyperLogLog();
+
+            for (int it = 0; it < 10; ++it) {
+                for (int i = 0; i < n; ++i) {
+                    data.add("val-" + i);
+                }
+            }
+
+            System.out.println(data.cardinality());
+
+            System.out.printf("error: %.1f%% %n", Math.abs(100.0 - (data.cardinality() * 100.0 / n)));
+
+            System.out.printf("HyperLogLog done: java-%s %n", System.getProperty("java.version"));
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
