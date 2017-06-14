@@ -4,8 +4,6 @@ package com.max.algs;
 import com.max.algs.ds.probabalistic.HyperLogLog;
 import com.max.algs.util.MathUtils;
 
-import java.util.Random;
-
 public final class AlgorithmsMain {
 
     private static final double LN_2 = MathUtils.ln(2.0);
@@ -57,15 +55,19 @@ public final class AlgorithmsMain {
     private AlgorithmsMain() throws Exception {
 //        bloomFilterParameters();
 
-        Random rand = new Random();
+        final int n = 1_000_000;
 
         HyperLogLog data = new HyperLogLog();
 
-        for (int i = 0; i < 333_000; ++i) {
-            data.add("val-" + i);
+        for (int it = 0; it < 10; ++it) {
+            for (int i = 0; i < n; ++i) {
+                data.add("val-" + i);
+            }
         }
 
         System.out.println(data.cardinality());
+
+        System.out.printf("error: %.1f%% %n", Math.abs(100.0 - (data.cardinality() * 100.0 / n)));
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }

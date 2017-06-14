@@ -10,18 +10,13 @@ import com.max.algs.util.MathUtils;
  */
 public class HyperLogLog {
 
-    // 0.79402
-    // 0.39701
-    private static final double ESTIMATOR_FACTOR = 0.79402; // suitable for size > 64
-
-
     private static final int BUCKETS_COUNT = 1024;
     private static final int BITS_FOR_BUCKET = (int) MathUtils.log2(BUCKETS_COUNT);
 
     private static final int WORD_SIZE = 32;
     private static final int BITS_FOR_VALUE = WORD_SIZE - BITS_FOR_BUCKET;
 
-    private final int[] buckets = new int[BUCKETS_COUNT];
+    private final byte[] buckets = new byte[BUCKETS_COUNT];
 
     private final UniversalHashFunction<String> hashFunc = UniversalHashFunction.generate();
 
@@ -35,9 +30,11 @@ public class HyperLogLog {
         // use 10 bit for bucket [0;1023]
         int bucketIndex = hashValue & (BUCKETS_COUNT - 1);
 
-        int binaryValue = hashValue >>> BITS_FOR_BUCKET;
+        int trailingZeros = countTrailingZeros(hashValue >>> BITS_FOR_BUCKET);
 
-        buckets[bucketIndex] = Math.max(buckets[bucketIndex], countTrailingZeros(binaryValue));
+        assert trailingZeros <= WORD_SIZE : "incorrect value for 'trailingZeros'";
+
+        buckets[bucketIndex] = (byte) Math.max(buckets[bucketIndex], trailingZeros);
     }
 
     private static int countTrailingZeros(int baseValue) {
@@ -64,13 +61,27 @@ public class HyperLogLog {
 
         int sumValues = sum(buckets);
 
-        double cardinality = Math.pow(2.0, ((double) sumValues) / BUCKETS_COUNT) * BUCKETS_COUNT * ESTIMATOR_FACTOR;
+        double cardinality = Math.pow(2.0, ((double) sumValues) / BUCKETS_COUNT) * BUCKETS_COUNT *
+                estimatorFactor(buckets.length);
 
         return (int) Math.round(cardinality);
     }
 
+    private double estimatorFactor(int m) {
+        switch (m) {
+            case 16:
+                return 0.673;
+            case 32:
+                return 0.697;
+            case 64:
+                return 0.709;
+            default:
+                return 0.7213 / (1.0 + 1.079 / m);
+        }
+    }
 
-    private static int sum(int[] arr) {
+
+    private static int sum(byte[] arr) {
 
         int sum = 0;
 
