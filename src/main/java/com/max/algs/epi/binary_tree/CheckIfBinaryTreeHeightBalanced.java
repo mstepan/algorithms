@@ -9,6 +9,25 @@ public class CheckIfBinaryTreeHeightBalanced {
 
     private static final Random RAND = ThreadLocalRandom.current();
 
+    private CheckIfBinaryTreeHeightBalanced() throws Exception {
+
+        BinaryTree tree = new BinaryTree();
+
+        tree.addEdges(
+                "A-B-LEFT",
+                "A-C-RIGHT",
+                "C-D-LEFT",
+                "C-E-RIGHT"
+
+//                "D-F-RIGHT"
+        );
+
+
+        System.out.printf("balanced: %b %n", isBalanced(tree.root));
+
+        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N), space: O(h) ~ O(N)
      * <p>
@@ -31,7 +50,7 @@ public class CheckIfBinaryTreeHeightBalanced {
         BinaryTreeNode firstChild = cur.left;
         BinaryTreeNode secondChild = cur.right;
 
-        if( RAND.nextBoolean() ){
+        if (RAND.nextBoolean()) {
             BinaryTreeNode temp = firstChild;
             firstChild = secondChild;
             secondChild = temp;
@@ -54,25 +73,6 @@ public class CheckIfBinaryTreeHeightBalanced {
         }
 
         return 1 + Math.max(firstHeight, secondHeight);
-    }
-
-    private CheckIfBinaryTreeHeightBalanced() throws Exception {
-
-        BinaryTree tree = new BinaryTree();
-
-        tree.addEdges(
-                "A-B-LEFT",
-                "A-C-RIGHT",
-                "C-D-LEFT",
-                "C-E-RIGHT"
-
-//                "D-F-RIGHT"
-        );
-
-
-        System.out.printf("balanced: %b %n", isBalanced(tree.root));
-
-        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

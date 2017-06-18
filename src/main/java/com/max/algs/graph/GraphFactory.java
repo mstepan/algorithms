@@ -14,7 +14,8 @@ final class GraphFactory {
 
     private static final Random RAND = ThreadLocalRandom.current();
 
-    private GraphFactory(){}
+    private GraphFactory() {
+    }
 
     /**
      * @param vertexesCount
@@ -26,7 +27,7 @@ final class GraphFactory {
 
         if (edgeProbability < 0 || edgeProbability > 100) {
             throw new IllegalArgumentException("'edgeProbability' is incorrect: " + edgeProbability + ", should be in range " +
-                                                       "[1, 100]");
+                    "[1, 100]");
         }
 
         Graph<Integer> graph = Graph.createGraph();

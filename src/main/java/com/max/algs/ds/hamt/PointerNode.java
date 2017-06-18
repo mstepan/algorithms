@@ -1,7 +1,6 @@
 package com.max.algs.ds.hamt;
 
 
-
 public class PointerNode implements IDataNode {
 
     final BitNode ptr;

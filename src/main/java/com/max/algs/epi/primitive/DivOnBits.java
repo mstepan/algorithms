@@ -9,6 +9,46 @@ public class DivOnBits {
 
     private static final int SIGN_BIT = Integer.SIZE - 1;
 
+    private DivOnBits() throws Exception {
+
+        Random rand = new Random();
+
+        int x, y;
+        int expectedSum, actualSum;
+
+        for (int i = 0; i < 1_000_000; ++i) {
+            x = rand.nextInt();
+            y = rand.nextInt();
+
+            expectedSum = x / y;
+            actualSum = div(x, y);
+
+            if (expectedSum != actualSum) {
+                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
+                        ", for x = " + x + " and y = " + y);
+            }
+        }
+
+        System.out.printf("'DivOnBits' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
+    private static int negate(int value) {
+        return (~value) + 1;
+    }
+
+    private static boolean hasSameSign(int x, int y) {
+        return ((x >>> SIGN_BIT) ^ (y >>> SIGN_BIT)) == 0;
+    }
+
+    public static void main(String[] args) {
+        try {
+            new DivOnBits();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     /**
      * Divide 'value' on 'divider' using only addition, subtraction and shift operations.
      */
@@ -39,46 +79,6 @@ public class DivOnBits {
         }
 
         return hasSameSign(value, divider) ? res : negate(res);
-    }
-
-    private static int negate(int value) {
-        return (~value) + 1;
-    }
-
-    private static boolean hasSameSign(int x, int y) {
-        return ((x >>> SIGN_BIT) ^ (y >>> SIGN_BIT)) == 0;
-    }
-
-    private DivOnBits() throws Exception {
-
-        Random rand = new Random();
-
-        int x, y;
-        int expectedSum, actualSum;
-
-        for (int i = 0; i < 1_000_000; ++i) {
-            x = rand.nextInt();
-            y = rand.nextInt();
-
-            expectedSum = x / y;
-            actualSum = div(x, y);
-
-            if (expectedSum != actualSum) {
-                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
-                                                        ", for x = " + x + " and y = " + y);
-            }
-        }
-
-        System.out.printf("'DivOnBits' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new DivOnBits();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

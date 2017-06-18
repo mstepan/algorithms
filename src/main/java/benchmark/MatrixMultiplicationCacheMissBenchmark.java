@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.MatrixUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -33,32 +20,13 @@ public class MatrixMultiplicationCacheMissBenchmark {
 
     private static final int ARR_SIZE = 100;
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(MatrixMultiplicationCacheMissBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public int[][] a1;
-        public int[][] b1;
-
-        public int[][] a2;
-        public int[][] b2;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            a1 = MatrixUtils.generateRandomMatrix(ARR_SIZE);
-            b1 = MatrixUtils.generateRandomMatrix(ARR_SIZE);
-
-            a2 = MatrixUtils.deepCopy(a1);
-            b2 = MatrixUtils.deepCopy(b1);
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            a1 = null;
-            b1 = null;
-
-            a2 = null;
-            b2 = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -106,13 +74,32 @@ public class MatrixMultiplicationCacheMissBenchmark {
 
     }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(MatrixMultiplicationCacheMissBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+    @State(Scope.Thread)
+    public static class ArrPerThread {
 
-        new Runner(opt).run();
+        public int[][] a1;
+        public int[][] b1;
+
+        public int[][] a2;
+        public int[][] b2;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            a1 = MatrixUtils.generateRandomMatrix(ARR_SIZE);
+            b1 = MatrixUtils.generateRandomMatrix(ARR_SIZE);
+
+            a2 = MatrixUtils.deepCopy(a1);
+            b2 = MatrixUtils.deepCopy(b1);
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            a1 = null;
+            b1 = null;
+
+            a2 = null;
+            b2 = null;
+        }
     }
 
 }

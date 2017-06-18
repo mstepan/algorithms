@@ -11,11 +11,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class NearestRepeatedEntries {
 
+    private NearestRepeatedEntries() throws Exception {
+
+        String[] arr = "All work and no play makes for no work no fun and o results".split(" ");
+
+        int minDistance = findMinRepeatedDistance(arr);
+
+        System.out.printf("minDistance = %d %n", minDistance);
+
+        System.out.printf("NearestRepeatedEntries: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
-     *
      * N - all words from input.
      * M - distinct words.
-     *
+     * <p>
      * time: O(N)
      * space: O(M)
      */
@@ -40,18 +50,6 @@ public final class NearestRepeatedEntries {
         }
 
         return minDistance == Integer.MAX_VALUE ? -1 : minDistance;
-    }
-
-
-    private NearestRepeatedEntries() throws Exception {
-
-        String[] arr = "All work and no play makes for no work no fun and o results".split(" ");
-
-        int minDistance = findMinRepeatedDistance(arr);
-
-        System.out.printf("minDistance = %d %n", minDistance);
-
-        System.out.printf("NearestRepeatedEntries: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -1,13 +1,8 @@
 package com.max.algs.string;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.max.algs.util.MatrixUtils;
+
+import java.util.*;
 
 /*
  * Given a 2d matrix with characters and a dictionary. 
@@ -21,143 +16,143 @@ import com.max.algs.util.MatrixUtils;
  */
 public class SearchWordsInMatrix {
 
-	public List<String> findValidWords(char[][] data, String[] dictionary) {
+    public List<String> findValidWords(char[][] data, String[] dictionary) {
 
-		if (!MatrixUtils.isMatrix(data)) {
-			throw new IllegalArgumentException("Not a matrix passed");
-		}
+        if (!MatrixUtils.isMatrix(data)) {
+            throw new IllegalArgumentException("Not a matrix passed");
+        }
 
-		List<String> words = new ArrayList<>();
+        List<String> words = new ArrayList<>();
 
-		Map<Character, List<String>> posMap = createPositionsMap(data);
+        Map<Character, List<String>> posMap = createPositionsMap(data);
 
-		String[] rowColStr;
+        String[] rowColStr;
 
-		for (String word : dictionary) {
+        for (String word : dictionary) {
 
-			char firstCh = word.charAt(0);
+            char firstCh = word.charAt(0);
 
-			List<String> charLocations = posMap.get(firstCh);
+            List<String> charLocations = posMap.get(firstCh);
 
-			if (charLocations != null) {
-				for (String location : charLocations) {
+            if (charLocations != null) {
+                for (String location : charLocations) {
 
-					rowColStr = location.split(";");
+                    rowColStr = location.split(";");
 
-					if (hasFullWord(word.toCharArray(), 0, data,
-							Integer.valueOf(rowColStr[0]),
-							Integer.valueOf(rowColStr[1]))) {
-						words.add(word);
-						break;
-					}
-				}
-			}
-		}
+                    if (hasFullWord(word.toCharArray(), 0, data,
+                            Integer.valueOf(rowColStr[0]),
+                            Integer.valueOf(rowColStr[1]))) {
+                        words.add(word);
+                        break;
+                    }
+                }
+            }
+        }
 
-		return words;
-	}
+        return words;
+    }
 
-	private boolean hasFullWord(char[] word, int baseIndex, char[][] data,
-			int baseRow, int baseCol) {
+    private boolean hasFullWord(char[] word, int baseIndex, char[][] data,
+                                int baseRow, int baseCol) {
 
-		Deque<Integer> workingStack = new ArrayDeque<>();
+        Deque<Integer> workingStack = new ArrayDeque<>();
 
-		workingStack.push(baseCol);
-		workingStack.push(baseRow);
-		workingStack.push(baseIndex);
+        workingStack.push(baseCol);
+        workingStack.push(baseRow);
+        workingStack.push(baseIndex);
 
-		int index;
-		int row;
-		int col;
+        int index;
+        int row;
+        int col;
 
-		while (!workingStack.isEmpty()) {
+        while (!workingStack.isEmpty()) {
 
-			index = workingStack.pop();
-			row = workingStack.pop();
-			col = workingStack.pop();
+            index = workingStack.pop();
+            row = workingStack.pop();
+            col = workingStack.pop();
 
-			if (row < 0 || row >= data.length || col < 0
-					|| col >= data[row].length) {
-				continue;
-			}
+            if (row < 0 || row >= data.length || col < 0
+                    || col >= data[row].length) {
+                continue;
+            }
 
-			if (index >= word.length) {
-				return true;
-			}
+            if (index >= word.length) {
+                return true;
+            }
 
-			if (word[index] != data[row][col]) {
-				continue;
-			}
+            if (word[index] != data[row][col]) {
+                continue;
+            }
 
-			// left
-			workingStack.push((col - 1 >= 0 ? col - 1 : data[row].length - 1));
-			workingStack.push(row);
-			workingStack.push(index + 1);
+            // left
+            workingStack.push((col - 1 >= 0 ? col - 1 : data[row].length - 1));
+            workingStack.push(row);
+            workingStack.push(index + 1);
 
-			// up
-			workingStack.push(col);
-			workingStack.push((row - 1 >= 0 ? row - 1 : data.length - 1));
-			workingStack.push(index + 1);
+            // up
+            workingStack.push(col);
+            workingStack.push((row - 1 >= 0 ? row - 1 : data.length - 1));
+            workingStack.push(index + 1);
 
-			// right
-			workingStack.push((col + 1) % data[row].length);
-			workingStack.push(row);
-			workingStack.push(index + 1);
+            // right
+            workingStack.push((col + 1) % data[row].length);
+            workingStack.push(row);
+            workingStack.push(index + 1);
 
-			// down
-			workingStack.push(col);
-			workingStack.push((row + 1) % data.length);
-			workingStack.push(index + 1);
+            // down
+            workingStack.push(col);
+            workingStack.push((row + 1) % data.length);
+            workingStack.push(index + 1);
 
-			// diagonal. right down
-			workingStack.push((col + 1) % data[row].length);
-			workingStack.push((row + 1) % data.length);
-			workingStack.push(index + 1);
+            // diagonal. right down
+            workingStack.push((col + 1) % data[row].length);
+            workingStack.push((row + 1) % data.length);
+            workingStack.push(index + 1);
 
-			// diagonal, left down
-			workingStack.push((col - 1) >= 0 ? col - 1 : data[row].length - 1);
-			workingStack.push((row + 1) % data.length);
-			workingStack.push(index + 1);
+            // diagonal, left down
+            workingStack.push((col - 1) >= 0 ? col - 1 : data[row].length - 1);
+            workingStack.push((row + 1) % data.length);
+            workingStack.push(index + 1);
 
-			// diagonal, left up
-			workingStack.push((col - 1) >= 0 ? col - 1 : data[row].length - 1);
-			workingStack.push((row - 1) >= 0 ? row - 1 : data.length - 1);
-			workingStack.push(index + 1);
+            // diagonal, left up
+            workingStack.push((col - 1) >= 0 ? col - 1 : data[row].length - 1);
+            workingStack.push((row - 1) >= 0 ? row - 1 : data.length - 1);
+            workingStack.push(index + 1);
 
-			// diagonal, right up
-			workingStack.push((col + 1) % data[row].length);
-			workingStack.push((row - 1) >= 0 ? row - 1 : data.length - 1);
-			workingStack.push(index + 1);
-		}
+            // diagonal, right up
+            workingStack.push((col + 1) % data[row].length);
+            workingStack.push((row - 1) >= 0 ? row - 1 : data.length - 1);
+            workingStack.push(index + 1);
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	private Map<Character, List<String>> createPositionsMap(char[][] data) {
+    private Map<Character, List<String>> createPositionsMap(char[][] data) {
 
-		Map<Character, List<String>> charLocation = new HashMap<>();
+        Map<Character, List<String>> charLocation = new HashMap<>();
 
-		char ch;
-		List<String> positions;
+        char ch;
+        List<String> positions;
 
-		for (int i = 0; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; j++) {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
 
-				ch = data[i][j];
+                ch = data[i][j];
 
-				positions = charLocation.get(ch);
+                positions = charLocation.get(ch);
 
-				if (positions == null) {
-					positions = new ArrayList<>();
-					charLocation.put(ch, positions);
-				}
+                if (positions == null) {
+                    positions = new ArrayList<>();
+                    charLocation.put(ch, positions);
+                }
 
-				positions.add(new String(i + ";" + j));
-			}
-		}
+                positions.add(new String(i + ";" + j));
+            }
+        }
 
-		return charLocation;
+        return charLocation;
 
-	}
+    }
 
 }

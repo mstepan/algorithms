@@ -8,9 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 final class DenseWeightedRandom extends java.util.Random {
 
-    private final int[] data;
-
     private static final Random RAND = ThreadLocalRandom.current();
+    private final int[] data;
 
 
     /**

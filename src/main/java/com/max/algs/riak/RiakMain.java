@@ -21,21 +21,6 @@ public class RiakMain {
 
     private static final Logger LOG = Logger.getLogger(RiakMain.class);
 
-    private static RiakCluster createRiakCluster() throws UnknownHostException {
-
-        RiakNode node = new RiakNode.Builder()
-                .withRemoteAddress("127.0.0.1")
-                .withRemotePort(8087)
-                .build();
-
-        RiakCluster cluster = new RiakCluster.Builder(node)
-                .build();
-
-        cluster.start();
-
-        return cluster;
-    }
-
     private RiakMain() throws Exception {
 
         RiakClient client = new RiakClient(createRiakCluster());
@@ -63,6 +48,20 @@ public class RiakMain {
         LOG.info("Main completed...");
     }
 
+    private static RiakCluster createRiakCluster() throws UnknownHostException {
+
+        RiakNode node = new RiakNode.Builder()
+                .withRemoteAddress("127.0.0.1")
+                .withRemotePort(8087)
+                .build();
+
+        RiakCluster cluster = new RiakCluster.Builder(node)
+                .build();
+
+        cluster.start();
+
+        return cluster;
+    }
 
     public static void main(String[] args) {
         try {

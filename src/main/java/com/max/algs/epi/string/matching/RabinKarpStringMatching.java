@@ -22,6 +22,30 @@ public class RabinKarpStringMatching {
         }
     }
 
+    private RabinKarpStringMatching() throws Exception {
+
+        Random rand = new Random();
+
+        for (int i = 0; i < 1_000; ++i) {
+            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
+            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
+
+            int actualIndex = find(str, pattern);
+            int expectedIndex = str.indexOf(pattern);
+
+//            System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
+
+            if (actualIndex != expectedIndex) {
+                System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
+                throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
+                        pattern + "'");
+            }
+        }
+
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Rabin-Karp substring exact matching algorithm.
      * <p>
@@ -32,7 +56,7 @@ public class RabinKarpStringMatching {
         checkArgument(str != null, "null 'str' argument passed");
         checkArgument(pattern != null, "null 'pattern' argument passed");
         checkArgument(str.length() >= pattern.length(), "str.length < pattern.length: %s < %s",
-                      str.length(), pattern.length());
+                str.length(), pattern.length());
 
         final int strLength = str.length();
         final int patternLength = pattern.length();
@@ -117,30 +141,6 @@ public class RabinKarpStringMatching {
         }
 
         return signature;
-    }
-
-    private RabinKarpStringMatching() throws Exception {
-
-        Random rand = new Random();
-
-        for (int i = 0; i < 1_000; ++i) {
-            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
-            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
-
-            int actualIndex = find(str, pattern);
-            int expectedIndex = str.indexOf(pattern);
-
-//            System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
-
-            if (actualIndex != expectedIndex) {
-                System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
-                throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
-                                                        pattern + "'");
-            }
-        }
-
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

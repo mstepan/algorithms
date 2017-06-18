@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class Max2DSubarrayTest {
 
     @Test
-    public void findMaxSubarray(){
+    public void findMaxSubarray() {
         int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 1, 1, 0, 0, 0},

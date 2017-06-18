@@ -5,138 +5,136 @@ import java.util.concurrent.RecursiveTask;
 
 public final class MergeSorter {
 
-	private MergeSorter() {
-		super();
-	}
+    /**
+     * If the length of an array to be sorted is less than this constant,
+     * insertion sort is used.
+     */
+    private static final int INSERTION_SORT_THRESHOLD = 47;
+    private static final int PROCESSORS_COUNT = Runtime.getRuntime()
+            .availableProcessors();
 
-	/**
-	 * If the length of an array to be sorted is less than this constant,
-	 * insertion sort is used.
-	 */
-	private static final int INSERTION_SORT_THRESHOLD = 47;
+    private MergeSorter() {
+        super();
+    }
 
-	private static final int PROCESSORS_COUNT = Runtime.getRuntime()
-			.availableProcessors();
+    public static void parallelSort(int[] arr) {
+        ForkJoinPool pool = new ForkJoinPool(PROCESSORS_COUNT);
+        pool.invoke(new MergeSortTask(arr, 0, arr.length - 1));
+    }
 
-	public static void parallelSort(int[] arr) {
-		ForkJoinPool pool = new ForkJoinPool(PROCESSORS_COUNT);
-		pool.invoke(new MergeSortTask(arr, 0, arr.length - 1));
-	}
+    /**
+     * Implement recursive mergesort.
+     * <p>
+     * Time: O(N*lgN) Space: O(N)
+     */
+    public static void sort(int[] arr) {
+        mergeRecursively(arr, 0, arr.length - 1);
+    }
 
-	private static final class MergeSortTask extends RecursiveTask<Void> {
+    private static void mergeRecursively(int[] arr, int from, int to) {
 
-		private static final long serialVersionUID = 4700360510743306538L;
+        if ((to - from + 1) < INSERTION_SORT_THRESHOLD) {
+            insertionSort(arr, from, to);
+            return;
+        }
 
-		private final int[] arr;
-		private final int from;
-		private final int to;
+        int middle = (from + to) >>> 1;
 
-		public MergeSortTask(int[] arr, int from, int to) {
-			super();
-			this.arr = arr;
-			this.from = from;
-			this.to = to;
-		}
+        mergeRecursively(arr, from, middle);
+        mergeRecursively(arr, middle + 1, to);
 
-		@Override
-		protected Void compute() {
+        mergeSorted(arr, from, middle, to);
+    }
 
-			int elems = to - from + 1;
+    private static void insertionSort(int[] arr, int from, int to) {
 
-			if (elems < INSERTION_SORT_THRESHOLD) {
-				SortUtils.insertionSort(arr, from, to);
-				return null;
-			}
+        for (int i = from + 1; i <= to; i++) {
 
-			int middle = (from + to) >>> 1;
+            int temp = arr[i];
 
-			RecursiveTask<Void> left = new MergeSortTask(arr, from, middle);
-			left.fork();
+            int j = i - 1;
 
-			RecursiveTask<Void> right = new MergeSortTask(arr, middle + 1, to);
-			right.fork();
+            while (j >= from && arr[j] > temp) {
+                arr[j + 1] = arr[j];
+                --j;
+            }
 
-			left.join();
-			right.join();
+            arr[j + 1] = temp;
+        }
 
-			SortUtils.merge(arr, from, middle, middle + 1, to);
+    }
 
-			return null;
-		}
+    private static void mergeSorted(int[] arr, int from, int middle, int to) {
 
-	}
+        int[] arr1 = new int[middle - from + 1 + 1];
+        System.arraycopy(arr, from, arr1, 0, arr1.length - 1);
+        arr1[arr1.length - 1] = Integer.MAX_VALUE;
 
-	/**
-	 * Implement recursive mergesort.
-	 * 
-	 * Time: O(N*lgN) Space: O(N)
-	 * 
-	 */
-	public static void sort(int[] arr) {
-		mergeRecursively(arr, 0, arr.length - 1);
-	}
+        int[] arr2 = new int[to - (middle + 1) + 1 + 1];
+        System.arraycopy(arr, middle + 1, arr2, 0, arr2.length - 1);
+        arr2[arr2.length - 1] = Integer.MAX_VALUE;
 
-	private static void mergeRecursively(int[] arr, int from, int to) {
+        int elemsCount = to - from + 1;
 
-		if ((to - from + 1) < INSERTION_SORT_THRESHOLD) {
-			insertionSort(arr, from, to);
-			return;
-		}
+        int index1 = 0;
+        int index2 = 0;
 
-		int middle = (from + to) >>> 1;
+        int baseIndex = from;
 
-		mergeRecursively(arr, from, middle);
-		mergeRecursively(arr, middle + 1, to);
+        while (elemsCount > 0) {
+            if (arr1[index1] <= arr2[index2]) {
+                arr[baseIndex] = arr1[index1++];
+            }
+            else {
+                arr[baseIndex] = arr2[index2++];
+            }
 
-		mergeSorted(arr, from, middle, to);
-	}
+            ++baseIndex;
+            --elemsCount;
+        }
+    }
 
-	private static void insertionSort(int[] arr, int from, int to) {
+    private static final class MergeSortTask extends RecursiveTask<Void> {
 
-		for (int i = from + 1; i <= to; i++) {
+        private static final long serialVersionUID = 4700360510743306538L;
 
-			int temp = arr[i];
+        private final int[] arr;
+        private final int from;
+        private final int to;
 
-			int j = i - 1;
+        public MergeSortTask(int[] arr, int from, int to) {
+            super();
+            this.arr = arr;
+            this.from = from;
+            this.to = to;
+        }
 
-			while (j >= from && arr[j] > temp) {
-				arr[j + 1] = arr[j];
-				--j;
-			}
+        @Override
+        protected Void compute() {
 
-			arr[j + 1] = temp;
-		}
+            int elems = to - from + 1;
 
-	}
+            if (elems < INSERTION_SORT_THRESHOLD) {
+                SortUtils.insertionSort(arr, from, to);
+                return null;
+            }
 
-	private static void mergeSorted(int[] arr, int from, int middle, int to) {
+            int middle = (from + to) >>> 1;
 
-		int[] arr1 = new int[middle - from + 1 + 1];
-		System.arraycopy(arr, from, arr1, 0, arr1.length - 1);
-		arr1[arr1.length - 1] = Integer.MAX_VALUE;
+            RecursiveTask<Void> left = new MergeSortTask(arr, from, middle);
+            left.fork();
 
-		int[] arr2 = new int[to - (middle + 1) + 1 + 1];
-		System.arraycopy(arr, middle + 1, arr2, 0, arr2.length - 1);
-		arr2[arr2.length - 1] = Integer.MAX_VALUE;
+            RecursiveTask<Void> right = new MergeSortTask(arr, middle + 1, to);
+            right.fork();
 
-		int elemsCount = to - from + 1;
+            left.join();
+            right.join();
 
-		int index1 = 0;
-		int index2 = 0;
+            SortUtils.merge(arr, from, middle, middle + 1, to);
 
-		int baseIndex = from;
+            return null;
+        }
 
-		while (elemsCount > 0) {
-			if (arr1[index1] <= arr2[index2]) {
-				arr[baseIndex] = arr1[index1++];
-			}
-			else {
-				arr[baseIndex] = arr2[index2++];
-			}
-
-			++baseIndex;
-			--elemsCount;
-		}
-	}
+    }
 
 }

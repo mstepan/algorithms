@@ -2,21 +2,19 @@ package com.max.algs.ds.heap;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TernaryMinHeapTest {
 
-    @Test(expected =  IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void extractFromEmptyHeap() {
         TernaryMinHeap<Integer> heap = new TernaryMinHeap<>();
 
-        for( int i = 0; i < 17; i++){
+        for (int i = 0; i < 17; i++) {
             heap.add(i);
         }
 
-        while( ! heap.isEmpty() ){
+        while (!heap.isEmpty()) {
             heap.extract();
         }
         heap.extract();
@@ -54,12 +52,12 @@ public class TernaryMinHeapTest {
         assertEquals(new Integer(4), heap.extract());
         assertEquals(new Integer(5), heap.extract());
         assertEquals(5, heap.size());
-        assertDataEquals(new Integer[]{6,9,7,6,10}, heap.data);
+        assertDataEquals(new Integer[]{6, 9, 7, 6, 10}, heap.data);
 
         assertEquals(new Integer(6), heap.extract());
         assertEquals(new Integer(6), heap.extract());
         assertEquals(3, heap.size());
-        assertDataEquals(new Integer[]{7,9,10}, heap.data);
+        assertDataEquals(new Integer[]{7, 9, 10}, heap.data);
 
         assertEquals(new Integer(7), heap.min());
         assertEquals(new Integer(7), heap.extract());

@@ -7,7 +7,7 @@ import com.max.algs.util.MathUtils;
  */
 public final class SubsetsCountWithXorValue {
 
-    private SubsetsCountWithXorValue(){
+    private SubsetsCountWithXorValue() {
         throw new IllegalStateException("Can't instantiate utility class");
     }
 

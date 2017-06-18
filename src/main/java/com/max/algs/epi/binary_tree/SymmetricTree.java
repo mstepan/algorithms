@@ -14,6 +14,32 @@ import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 public final class SymmetricTree {
 
 
+    private SymmetricTree() throws Exception {
+
+        BinaryTree tree = new BinaryTree();
+
+        tree.addEdges(
+                "A-B-LEFT",
+                "A-b-RIGHT",
+
+                "B-C-RIGHT",
+//                "B-T-LEFT",
+
+                "b-c-LEFT",
+
+                "C-D-LEFT",
+                "C-E-RIGHT",
+
+                "c-e-LEFT",
+                "c-d-RIGHT"
+        );
+
+
+        System.out.printf("isSymmetric: %b %n", isSymmetric(tree.root));
+
+        System.out.printf("SymmetricTree done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Iterative approach.
      * <p>
@@ -51,32 +77,6 @@ public final class SymmetricTree {
         }
 
         return true;
-    }
-
-    private SymmetricTree() throws Exception {
-
-        BinaryTree tree = new BinaryTree();
-
-        tree.addEdges(
-                "A-B-LEFT",
-                "A-b-RIGHT",
-
-                "B-C-RIGHT",
-//                "B-T-LEFT",
-
-                "b-c-LEFT",
-
-                "C-D-LEFT",
-                "C-E-RIGHT",
-
-                "c-e-LEFT",
-                "c-d-RIGHT"
-        );
-
-
-        System.out.printf("isSymmetric: %b %n", isSymmetric(tree.root));
-
-        System.out.printf("SymmetricTree done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

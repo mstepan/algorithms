@@ -4,20 +4,50 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- *
- Given an array of non-negative integers, you are initially positioned at the first index of the array.
-
- Each element in the array represents your maximum jump length at that position.
-
- Your goal is to reach the last index in the minimum number of jumps.
-
- For example:
- Given array A = [2,3,1,1,4]
-
- The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
- *
+ * Given an array of non-negative integers, you are initially positioned at the first index of the array.
+ * <p>
+ * Each element in the array represents your maximum jump length at that position.
+ * <p>
+ * Your goal is to reach the last index in the minimum number of jumps.
+ * <p>
+ * For example:
+ * Given array A = [2,3,1,1,4]
+ * <p>
+ * The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
  */
 public class JumpGame2 {
+
+    private JumpGame2() throws Exception {
+
+        int value = 25_000;
+
+        int[] arr = new int[value + 3];
+
+        for (int i = 0; i < arr.length; i++, value--) {
+            arr[i] = (value > 0 ? value : 1);
+        }
+
+//        int[] arr = {4, 1, 1, 3, 1, 1, 1};
+
+        long startTime = System.nanoTime();
+        int jumps = jump(arr);
+        long endTime = System.nanoTime();
+
+
+        System.out.println("jumps: " + jumps);
+        System.out.println("time: " + ((endTime - startTime) / 1_000_000) + " ms");
+
+        System.out.println("Main done...");
+    }
+
+    public static void main(String[] args) {
+        try {
+            new JumpGame2();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public int jumpSlow(int[] nums) {
         int[] d = new int[nums.length];
@@ -88,39 +118,6 @@ public class JumpGame2 {
 
 
         return (int) stack.pop().jump;
-    }
-
-
-    private JumpGame2() throws Exception {
-
-        int value = 25_000;
-
-        int[] arr = new int[value + 3];
-
-        for (int i = 0; i < arr.length; i++, value--) {
-            arr[i] = (value > 0 ? value : 1);
-        }
-
-//        int[] arr = {4, 1, 1, 3, 1, 1, 1};
-
-        long startTime = System.nanoTime();
-        int jumps = jump(arr);
-        long endTime = System.nanoTime();
-
-
-        System.out.println("jumps: " + jumps);
-        System.out.println("time: " + ((endTime - startTime) / 1_000_000) + " ms");
-
-        System.out.println("Main done...");
-    }
-
-    public static void main(String[] args) {
-        try {
-            new JumpGame2();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

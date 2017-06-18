@@ -2,17 +2,43 @@ package com.max.algs.epi.string.matching;
 
 import com.max.algs.string.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class BoyerMooreStringMatching {
+
+    private BoyerMooreStringMatching() throws Exception {
+
+        Random rand = new Random();
+
+        for (int i = 0; i < 10_000; ++i) {
+            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
+            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
+
+            int expectedIndex = str.indexOf(pattern);
+
+            int actualIndex = find(str, pattern);
+
+            if (actualIndex != expectedIndex) {
+                System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
+                throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
+                        pattern + "'");
+            }
+
+            int actualIndexExtended = findExtended(str, pattern);
+
+            if (actualIndexExtended != expectedIndex) {
+                System.out.printf("actualIndexExtended = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
+                throw new IllegalStateException("actualIndexExtended != expectedIndex for string '" + str + "' and pattern '" +
+                        pattern + "'");
+            }
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * Boyer-Moore substring matching algorithm.
@@ -145,7 +171,6 @@ public class BoyerMooreStringMatching {
         return -1;
     }
 
-
     private static Map<Character, List<Integer>> calculateBadCharacterExtended(String pat) {
 
         Map<Character, List<Integer>> badChOffsets = new HashMap<>();
@@ -155,36 +180,6 @@ public class BoyerMooreStringMatching {
         }
 
         return badChOffsets;
-    }
-
-    private BoyerMooreStringMatching() throws Exception {
-
-        Random rand = new Random();
-
-        for (int i = 0; i < 10_000; ++i) {
-            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
-            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
-
-            int expectedIndex = str.indexOf(pattern);
-
-            int actualIndex = find(str, pattern);
-
-            if (actualIndex != expectedIndex) {
-                System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
-                throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
-                                                        pattern + "'");
-            }
-
-            int actualIndexExtended = findExtended(str, pattern);
-
-            if (actualIndexExtended != expectedIndex) {
-                System.out.printf("actualIndexExtended = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
-                throw new IllegalStateException("actualIndexExtended != expectedIndex for string '" + str + "' and pattern '" +
-                                                        pattern + "'");
-            }
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

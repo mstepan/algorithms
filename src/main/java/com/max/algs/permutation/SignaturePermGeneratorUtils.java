@@ -16,120 +16,118 @@ import java.util.List;
  */
 public final class SignaturePermGeneratorUtils {
 
-	/**
-	 * 
-	 * Construct permutation by signature using backtracking.
-	 * 
-	 */
-	public static List<Integer> findPermute(String signature) {
+    private SignaturePermGeneratorUtils() {
+        super();
+    }
 
-		List<Integer> numbers = generateSortedSequence(signature.length());
-		BitSet usedNumbers = new BitSet(numbers.size() + 1);
+    /**
+     * Construct permutation by signature using backtracking.
+     */
+    public static List<Integer> findPermute(String signature) {
 
-		for (int i = 0; i < numbers.size(); i++) {
+        List<Integer> numbers = generateSortedSequence(signature.length());
+        BitSet usedNumbers = new BitSet(numbers.size() + 1);
 
-			int curNum = numbers.get(i);
+        for (int i = 0; i < numbers.size(); i++) {
 
-			List<Integer> seq = new ArrayList<Integer>();
-			seq.add(curNum);
-			usedNumbers.set(curNum);
+            int curNum = numbers.get(i);
 
-			List<Integer> available = new ArrayList<Integer>(numbers);
-			available.remove(i);
+            List<Integer> seq = new ArrayList<Integer>();
+            seq.add(curNum);
+            usedNumbers.set(curNum);
 
-			List<Integer> genSeq = generatePermutation(seq, available,
-					signature, 0);
+            List<Integer> available = new ArrayList<Integer>(numbers);
+            available.remove(i);
 
-			// sequence fully generated
-			if (genSeq.size() == numbers.size()) {
-				return genSeq;
-			}
-		}
+            List<Integer> genSeq = generatePermutation(seq, available,
+                    signature, 0);
 
-		return Collections.emptyList();
-	}
+            // sequence fully generated
+            if (genSeq.size() == numbers.size()) {
+                return genSeq;
+            }
+        }
 
-	public static boolean isSignatureMatched(List<Integer> data,
-			String signature) {
+        return Collections.emptyList();
+    }
 
-		if (data == null || signature == null) {
-			throw new IllegalArgumentException(
-					"'arr' or 'signature' parameter is NULL");
-		}
+    public static boolean isSignatureMatched(List<Integer> data,
+                                             String signature) {
 
-		if (data.size() != signature.length() + 1) {
-			throw new IllegalArgumentException(
-					"'arr' length != 'signature' length + 1: array length = "
-							+ data.size() + ", signature length = "
-							+ signature.length());
-		}
+        if (data == null || signature == null) {
+            throw new IllegalArgumentException(
+                    "'arr' or 'signature' parameter is NULL");
+        }
 
-		signature = signature.toUpperCase();
+        if (data.size() != signature.length() + 1) {
+            throw new IllegalArgumentException(
+                    "'arr' length != 'signature' length + 1: array length = "
+                            + data.size() + ", signature length = "
+                            + signature.length());
+        }
 
-		char chSig;
-		final int dataSize = data.size();
-		for (int i = 1; i < dataSize; i++) {
-			chSig = signature.charAt(i - 1);
-			if ((chSig == 'D' && data.get(i - 1) < data.get(i))
-					|| (chSig == 'I' && data.get(i - 1) > data.get(i))) {
-				return false;
-			}
-		}
+        signature = signature.toUpperCase();
 
-		return true;
-	}
+        char chSig;
+        final int dataSize = data.size();
+        for (int i = 1; i < dataSize; i++) {
+            chSig = signature.charAt(i - 1);
+            if ((chSig == 'D' && data.get(i - 1) < data.get(i))
+                    || (chSig == 'I' && data.get(i - 1) > data.get(i))) {
+                return false;
+            }
+        }
 
-	private static List<Integer> generatePermutation(
-			List<Integer> constuctedSeq, List<Integer> availableNumbers,
-			String signature, int sigIndex) {
+        return true;
+    }
 
-		if (sigIndex >= signature.length()) {
-			return constuctedSeq;
-		}
+    private static List<Integer> generatePermutation(
+            List<Integer> constuctedSeq, List<Integer> availableNumbers,
+            String signature, int sigIndex) {
 
-		char di = signature.charAt(sigIndex);
+        if (sigIndex >= signature.length()) {
+            return constuctedSeq;
+        }
 
-		for (int i = 0; i < availableNumbers.size(); i++) {
+        char di = signature.charAt(sigIndex);
 
-			int lastElem = constuctedSeq.get(constuctedSeq.size() - 1);
-			int curElem = availableNumbers.get(i);
+        for (int i = 0; i < availableNumbers.size(); i++) {
 
-			if ((di == 'D' && lastElem > curElem)
-					|| (di == 'I' && lastElem < curElem)) {
+            int lastElem = constuctedSeq.get(constuctedSeq.size() - 1);
+            int curElem = availableNumbers.get(i);
 
-				List<Integer> newSeq = new ArrayList<Integer>(constuctedSeq);
-				newSeq.add(curElem);
+            if ((di == 'D' && lastElem > curElem)
+                    || (di == 'I' && lastElem < curElem)) {
 
-				List<Integer> newAvailNumbers = new ArrayList<Integer>(
-						availableNumbers);
-				newAvailNumbers.remove(i);
+                List<Integer> newSeq = new ArrayList<Integer>(constuctedSeq);
+                newSeq.add(curElem);
 
-				List<Integer> partPerm = generatePermutation(newSeq,
-						newAvailNumbers, signature, sigIndex + 1);
+                List<Integer> newAvailNumbers = new ArrayList<Integer>(
+                        availableNumbers);
+                newAvailNumbers.remove(i);
 
-				if (partPerm.size() > 0) {
-					return partPerm;
-				}
-			}
-		}
+                List<Integer> partPerm = generatePermutation(newSeq,
+                        newAvailNumbers, signature, sigIndex + 1);
 
-		return new ArrayList<Integer>();
-	}
+                if (partPerm.size() > 0) {
+                    return partPerm;
+                }
+            }
+        }
 
-	private static List<Integer> generateSortedSequence(int sigLength) {
-		List<Integer> numbers = new ArrayList<Integer>();
+        return new ArrayList<Integer>();
+    }
 
-		for (int i = 0; i < sigLength; i++) {
-			numbers.add(i + 1);
-		}
+    private static List<Integer> generateSortedSequence(int sigLength) {
+        List<Integer> numbers = new ArrayList<Integer>();
 
-		numbers.add(sigLength + 1);
+        for (int i = 0; i < sigLength; i++) {
+            numbers.add(i + 1);
+        }
 
-		return numbers;
-	}
+        numbers.add(sigLength + 1);
 
-	private SignaturePermGeneratorUtils() {
-		super();
-	}
+        return numbers;
+    }
 
 }

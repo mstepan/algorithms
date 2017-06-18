@@ -2,11 +2,9 @@ package com.max.algs.epi.hashing;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * LRU cache for ISBN -> book price using LinkedHashMap implementation.

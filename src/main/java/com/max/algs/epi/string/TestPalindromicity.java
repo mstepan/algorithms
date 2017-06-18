@@ -5,6 +5,15 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class TestPalindromicity {
 
+    private TestPalindromicity() throws Exception {
+
+        String str = "A man, a plan, a canal, Panama";
+
+        System.out.printf("isPalindrome = %b %n", isPalindrome(str));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 7.5. Test palindromicity.
      * <p>
@@ -38,16 +47,6 @@ public class TestPalindromicity {
         }
 
         return true;
-    }
-
-
-    private TestPalindromicity() throws Exception {
-
-        String str = "A man, a plan, a canal, Panama";
-
-        System.out.printf("isPalindrome = %b %n", isPalindrome(str));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

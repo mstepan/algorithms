@@ -1,19 +1,7 @@
 package benchmark.cpu;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -37,6 +25,63 @@ public class BranchAndConditionalMoveBenchmark {
 
     private static final int TEN_PERCENTS = 10;
     private static final int ONE_HUNDRED_PERCENTS = 100;
+
+    private static void minMax(int[] a, int[] b) {
+        for (int i = 0; i < a.length; ++i) {
+            if (a[i] > b[i]) {
+                int temp = a[i];
+                a[i] = b[i];
+                b[i] = temp;
+            }
+        }
+    }
+
+    private static void minMaxConditionalMove(int[] a, int[] b) {
+        for (int i = 0; i < a.length; ++i) {
+            int min = a[i] < b[i] ? a[i] : b[i];
+            int max = a[i] > b[i] ? a[i] : b[i];
+
+            a[i] = min;
+            b[i] = max;
+        }
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(BranchAndConditionalMoveBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("jeRandomArray")
+    @GroupThreads(2)
+    public void jeRandomArray(ArrPerThread state) {
+        minMax(state.arrRandom1, state.arrRandom2);
+    }
+
+    @Benchmark
+    @Group("jePredictableArray")
+    @GroupThreads(2)
+    public void jePredictableArray(ArrPerThread state) {
+        minMax(state.arrPred1, state.arrPred2);
+    }
+
+    @Benchmark
+    @Group("cmovRandomArray")
+    @GroupThreads(2)
+    public void cmovRandomArray(ArrPerThread state) {
+        minMaxConditionalMove(state.arrRandom3, state.arrRandom4);
+    }
+
+    @Benchmark
+    @Group("cmovPredictableArray")
+    @GroupThreads(2)
+    public void cmovPredictableArray(ArrPerThread state) {
+        minMaxConditionalMove(state.arrPred3, state.arrPred4);
+    }
 
     @State(Scope.Thread)
     public static class ArrPerThread {
@@ -68,63 +113,6 @@ public class BranchAndConditionalMoveBenchmark {
             arrPred3 = Arrays.copyOf(arrPred1, arrPred1.length);
             arrPred4 = Arrays.copyOf(arrPred2, arrPred2.length);
         }
-    }
-
-    @Benchmark
-    @Group("jeRandomArray")
-    @GroupThreads(2)
-    public void jeRandomArray(ArrPerThread state) {
-        minMax(state.arrRandom1, state.arrRandom2);
-    }
-
-    @Benchmark
-    @Group("jePredictableArray")
-    @GroupThreads(2)
-    public void jePredictableArray(ArrPerThread state) {
-        minMax(state.arrPred1, state.arrPred2);
-    }
-
-    @Benchmark
-    @Group("cmovRandomArray")
-    @GroupThreads(2)
-    public void cmovRandomArray(ArrPerThread state) {
-        minMaxConditionalMove(state.arrRandom3, state.arrRandom4);
-    }
-
-    @Benchmark
-    @Group("cmovPredictableArray")
-    @GroupThreads(2)
-    public void cmovPredictableArray(ArrPerThread state) {
-        minMaxConditionalMove(state.arrPred3, state.arrPred4);
-    }
-
-    private static void minMax(int[] a, int[] b) {
-        for (int i = 0; i < a.length; ++i) {
-            if (a[i] > b[i]) {
-                int temp = a[i];
-                a[i] = b[i];
-                b[i] = temp;
-            }
-        }
-    }
-
-    private static void minMaxConditionalMove(int[] a, int[] b) {
-        for (int i = 0; i < a.length; ++i) {
-            int min = a[i] < b[i] ? a[i] : b[i];
-            int max = a[i] > b[i] ? a[i] : b[i];
-
-            a[i] = min;
-            b[i] = max;
-        }
-    }
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(BranchAndConditionalMoveBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
 }

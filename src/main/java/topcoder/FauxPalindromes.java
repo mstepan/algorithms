@@ -9,20 +9,18 @@ public final class FauxPalindromes {
 
 
     /**
-     *
      * time: O(N)
      * space: O(N)
-     *
      */
-    public static String classifyIt(String word){
+    public static String classifyIt(String word) {
 
-        if( isPalindrome( word) ){
+        if (isPalindrome(word)) {
             return "PALINDROME";
         }
 
-        word = replaceRepeatedCharsWithOne( word );
+        word = replaceRepeatedCharsWithOne(word);
 
-        if( isPalindrome( word) ){
+        if (isPalindrome(word)) {
             return "FAUX";
         }
 
@@ -33,30 +31,30 @@ public final class FauxPalindromes {
 
         StringBuilder buf = new StringBuilder();
 
-        for(int i = 1; i < word.length(); i++ ){
-            if( word.charAt(i-1) != word.charAt(i) ){
-                buf.append( word.charAt(i-1) );
+        for (int i = 1; i < word.length(); i++) {
+            if (word.charAt(i - 1) != word.charAt(i)) {
+                buf.append(word.charAt(i - 1));
             }
         }
 
-        buf.append( word.charAt( word.length()-1) );
+        buf.append(word.charAt(word.length() - 1));
 
         return buf.toString();
     }
 
 
-    private static boolean isPalindrome( String str ){
-        int i =0;
-        int j = str.length()-1;
+    private static boolean isPalindrome(String str) {
+        int i = 0;
+        int j = str.length() - 1;
 
 
-        while( i < j ){
+        while (i < j) {
 
-            if( str.charAt(i) != str.charAt(j) ){
+            if (str.charAt(i) != str.charAt(j)) {
                 return false;
             }
 
-             ++i;
+            ++i;
             --j;
         }
 

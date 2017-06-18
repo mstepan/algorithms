@@ -7,6 +7,33 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class ReplaceAndRemove {
 
+    private ReplaceAndRemove() throws Exception {
+
+        char[] arr = "acaa   ".toCharArray();
+
+        System.out.println(Arrays.toString(arr));
+
+        int length = transform(arr, 4);
+
+        char[] transformedArr = Arrays.copyOf(arr, length);
+
+        System.out.println(Arrays.toString(transformedArr));
+
+        System.out.println("Variant:");
+        int[] left = {1, 8, 10, 18, 19, 0, 0, 0, 0};
+        int[] right = {4, 7, 12, 22};
+
+        System.out.println(Arrays.toString(left));
+        System.out.println(Arrays.toString(right));
+
+        merge(left, 5, right);
+
+        System.out.println(Arrays.toString(left));
+        System.out.println(Arrays.toString(right));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 7.4. Replace and remove.
      * <p>
@@ -23,7 +50,7 @@ public class ReplaceAndRemove {
         final int newLength = calculateNewLength(arr, length);
 
         checkArgument(newLength <= arr.length, "Check failed 'newLength <= arr.length': newLength = %s, arr.length = %s",
-                      newLength, arr.length);
+                newLength, arr.length);
 
         int index = removeB(arr, length);
 
@@ -105,33 +132,6 @@ public class ReplaceAndRemove {
             }
         }
 
-    }
-
-    private ReplaceAndRemove() throws Exception {
-
-        char[] arr = "acaa   ".toCharArray();
-
-        System.out.println(Arrays.toString(arr));
-
-        int length = transform(arr, 4);
-
-        char[] transformedArr = Arrays.copyOf(arr, length);
-
-        System.out.println(Arrays.toString(transformedArr));
-
-        System.out.println("Variant:");
-        int[] left = {1, 8, 10, 18, 19, 0, 0, 0, 0};
-        int[] right = {4, 7, 12, 22};
-
-        System.out.println(Arrays.toString(left));
-        System.out.println(Arrays.toString(right));
-
-        merge(left, 5, right);
-
-        System.out.println(Arrays.toString(left));
-        System.out.println(Arrays.toString(right));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

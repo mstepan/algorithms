@@ -1,16 +1,55 @@
 package com.max.algs.epi.binary_tree;
 
 import java.math.BigInteger;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class PathsWithSpecifiedSum {
+
+    private PathsWithSpecifiedSum() throws Exception {
+
+        BinaryTree tree = new BinaryTree();
+
+        tree.addEdges(
+                "A314-B6-LEFT",
+                "A314-I6-RIGHT",
+
+                "B6-C271-LEFT",
+                "B6-F561-RIGHT",
+
+                "C271-D28-LEFT",
+                "C271-E0-RIGHT",
+
+                "F561-G3-RIGHT",
+
+                "G3-H17-LEFT",
+
+
+                "6I-J2-LEFT",
+                "I6-O271-RIGHT",
+
+                "O271-P28-RIGHT",
+
+                "J2-K1-RIGHT",
+
+                "K1-L401-LEFT",
+                "K1-N257-RIGHT",
+
+                "L401-M641-RIGHT"
+        );
+
+        int expSum = 619;
+
+        List<String> paths = findAllPathsWithSum(tree.root, expSum);
+
+        for (String singlePath : paths) {
+            System.out.println(singlePath);
+        }
+
+        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * 10.6. Variant.
@@ -65,50 +104,6 @@ public class PathsWithSpecifiedSum {
         }
 
         partialPath.pollLast();
-    }
-
-
-    private PathsWithSpecifiedSum() throws Exception {
-
-        BinaryTree tree = new BinaryTree();
-
-        tree.addEdges(
-                "A314-B6-LEFT",
-                "A314-I6-RIGHT",
-
-                "B6-C271-LEFT",
-                "B6-F561-RIGHT",
-
-                "C271-D28-LEFT",
-                "C271-E0-RIGHT",
-
-                "F561-G3-RIGHT",
-
-                "G3-H17-LEFT",
-
-
-                "6I-J2-LEFT",
-                "I6-O271-RIGHT",
-
-                "O271-P28-RIGHT",
-
-                "J2-K1-RIGHT",
-
-                "K1-L401-LEFT",
-                "K1-N257-RIGHT",
-
-                "L401-M641-RIGHT"
-        );
-
-        int expSum = 619;
-
-        List<String> paths = findAllPathsWithSum(tree.root, expSum);
-
-        for (String singlePath : paths) {
-            System.out.println(singlePath);
-        }
-
-        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

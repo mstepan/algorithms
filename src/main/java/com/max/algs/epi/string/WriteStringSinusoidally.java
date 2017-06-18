@@ -5,6 +5,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class WriteStringSinusoidally {
 
+    private WriteStringSinusoidally() throws Exception {
+
+        System.out.println(getSinusoidalForm("Hello world!"));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 7.11. Write a string sinusoidally.
      * time: O(N)
@@ -30,14 +37,6 @@ public class WriteStringSinusoidally {
         for (int i = from, strLength = str.length(); i < strLength; i += offset) {
             buf.append(str.charAt(i));
         }
-    }
-
-
-    private WriteStringSinusoidally() throws Exception {
-
-        System.out.println(getSinusoidalForm("Hello world!"));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

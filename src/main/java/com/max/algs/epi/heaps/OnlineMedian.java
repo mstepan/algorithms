@@ -14,6 +14,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class OnlineMedian {
 
 
+    private OnlineMedian() throws Exception {
+
+        int[] arr = {0, 3, 0, 9, 4, 6, 5, 3, 3, 9}; //ArrayUtils.generateRandomArray(10, 10);
+
+        System.out.println(Arrays.toString(arr));
+
+        printOnlineMedian(arr);
+
+        System.out.printf("'OnlineMedian' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N*lgN)
      * space: O(N)
@@ -67,18 +78,6 @@ public class OnlineMedian {
             return ((double) maxHeap.peek() + minHeap.peek()) / 2.0;
         }
         return maxHeap.peek();
-    }
-
-
-    private OnlineMedian() throws Exception {
-
-        int[] arr = {0, 3, 0, 9, 4, 6, 5, 3, 3, 9}; //ArrayUtils.generateRandomArray(10, 10);
-
-        System.out.println(Arrays.toString(arr));
-
-        printOnlineMedian(arr);
-
-        System.out.printf("'OnlineMedian' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,28 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class SpiralOrderingOf2DArray {
 
 
+    private SpiralOrderingOf2DArray() throws Exception {
+
+        int n = 7;
+
+        int[][] m = new int[n][n];
+
+        for (int row = 0, elem = 1; row < n; ++row) {
+            for (int col = 0; col < n; ++col, ++elem) {
+                m[row][col] = elem;
+            }
+        }
+
+        int[][] m2 = MatrixUtils.deepCopy(m);
+
+//        System.out.println(MatrixUtils.toString(m));
+
+        printInSpiralOrder(m);
+        printInSpiralOrderAsTraversation(m2);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Print 2-D matrix in spiral order.
      * <p>
@@ -56,6 +78,66 @@ public class SpiralOrderingOf2DArray {
 
         // call `println` to flush the stream.
         System.out.println();
+    }
+
+    /**
+     * time: O(N^2)
+     * space: O(1)
+     */
+    public static void printInSpiralOrderAsTraversation(int[][] matrix) {
+
+        int row = 0;
+        int col = 0;
+
+        Direction curDir = Direction.RIGTH;
+
+        while (matrix[row][col] != 0) {
+
+            System.out.print(matrix[row][col] + ", ");
+            matrix[row][col] = 0;
+
+            // check if we need to change the direction
+            if (!curDir.canMove(matrix, row, col)) {
+                curDir = curDir.nextDirection();
+
+                // stop algorithm, if after changing
+                // the direction there is no move left
+                if (!curDir.canMove(matrix, row, col)) {
+                    break;
+                }
+            }
+
+            int[] pair = curDir.next(row, col);
+
+            row = pair[0];
+            col = pair[1];
+        }
+
+        System.out.println();
+
+    }
+
+    private static boolean isSquareMatrix(int[][] m) {
+        assert m != null;
+
+        int rowsCnt = m.length;
+
+        for (int[] row : m) {
+            if (row == null || row.length != rowsCnt) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        try {
+            new SpiralOrderingOf2DArray();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private static enum Direction {
@@ -129,89 +211,6 @@ public class SpiralOrderingOf2DArray {
         abstract Direction nextDirection();
 
         abstract int[] next(int row, int col);
-    }
-
-    /**
-     * time: O(N^2)
-     * space: O(1)
-     */
-    public static void printInSpiralOrderAsTraversation(int[][] matrix) {
-
-        int row = 0;
-        int col = 0;
-
-        Direction curDir = Direction.RIGTH;
-
-        while (matrix[row][col] != 0) {
-
-            System.out.print(matrix[row][col] + ", ");
-            matrix[row][col] = 0;
-
-            // check if we need to change the direction
-            if (!curDir.canMove(matrix, row, col)) {
-                curDir = curDir.nextDirection();
-
-                // stop algorithm, if after changing
-                // the direction there is no move left
-                if (!curDir.canMove(matrix, row, col)) {
-                    break;
-                }
-            }
-
-            int[] pair = curDir.next(row, col);
-
-            row = pair[0];
-            col = pair[1];
-        }
-
-        System.out.println();
-
-    }
-
-    private static boolean isSquareMatrix(int[][] m) {
-        assert m != null;
-
-        int rowsCnt = m.length;
-
-        for (int[] row : m) {
-            if (row == null || row.length != rowsCnt) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-
-    private SpiralOrderingOf2DArray() throws Exception {
-
-        int n = 7;
-
-        int[][] m = new int[n][n];
-
-        for (int row = 0, elem = 1; row < n; ++row) {
-            for (int col = 0; col < n; ++col, ++elem) {
-                m[row][col] = elem;
-            }
-        }
-
-        int[][] m2 = MatrixUtils.deepCopy(m);
-
-//        System.out.println(MatrixUtils.toString(m));
-
-        printInSpiralOrder(m);
-        printInSpiralOrderAsTraversation(m2);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new SpiralOrderingOf2DArray();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

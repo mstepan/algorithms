@@ -25,6 +25,41 @@ package com.max.algs.leetcode;
  */
 public class WildcardMatching {
 
+    private WildcardMatching() throws Exception {
+
+        long startTime = System.nanoTime();
+
+        String[][] pairs = new String[][]{
+                {"aa", "a"},
+                {"aa", "aa"},
+                {"aaa", "aa"},
+                {"aa", "*"},
+                {"aa", "a*"},
+                {"ab", "?*"},
+                {"aab", "c*a*b"},
+                {"babaaababaabababbbbbbaabaabbabababbaababbaaabbbaaab", "***bba**a*bbba**aab**b"}
+        };
+
+        for (String[] pair : pairs) {
+            System.out.println(String.format("isMatching(%s, %s) => %s", pair[0], pair[1], isMatch(pair[0], pair[1])));
+        }
+
+        long endTime = System.nanoTime();
+
+        System.out.println("time: " + ((endTime - startTime) / 1_000_000) + " ms");
+
+        System.out.println("WildcardMatching done...");
+    }
+
+    public static void main(String[] args) {
+        try {
+            new WildcardMatching();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public boolean isMatch(String base, String patern) {
 
         int starsCount = 0;
@@ -82,41 +117,5 @@ public class WildcardMatching {
         }
 
         return lastRow[cols - 1];
-    }
-
-
-    private WildcardMatching() throws Exception {
-
-        long startTime = System.nanoTime();
-
-        String[][] pairs = new String[][]{
-                {"aa", "a"},
-                {"aa", "aa"},
-                {"aaa", "aa"},
-                {"aa", "*"},
-                {"aa", "a*"},
-                {"ab", "?*"},
-                {"aab", "c*a*b"},
-                {"babaaababaabababbbbbbaabaabbabababbaababbaaabbbaaab", "***bba**a*bbba**aab**b"}
-        };
-
-        for (String[] pair : pairs) {
-            System.out.println(String.format("isMatching(%s, %s) => %s", pair[0], pair[1], isMatch(pair[0], pair[1])));
-        }
-
-        long endTime = System.nanoTime();
-
-        System.out.println("time: " + ((endTime - startTime) / 1_000_000) + " ms");
-
-        System.out.println("WildcardMatching done...");
-    }
-
-    public static void main(String[] args) {
-        try {
-            new WildcardMatching();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 }

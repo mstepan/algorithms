@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @link https://en.wikipedia.org/wiki/Dining_philosophers_problem
- *
+ * <p>
  * Try lock solution to dining philosophers problem.
  */
 public final class DiningPhilosophersTryLock {

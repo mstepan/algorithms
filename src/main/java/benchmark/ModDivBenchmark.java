@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -33,20 +20,13 @@ import java.util.concurrent.TimeUnit;
 @Fork(5)
 public class ModDivBenchmark {
 
-    @State(Scope.Thread)
-    public static class DataState {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(ModDivBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public int[] arr;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr = ArrayUtils.generateRandomArray(1000, 20);
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -67,12 +47,19 @@ public class ModDivBenchmark {
         }
     }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(ModDivBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+    @State(Scope.Thread)
+    public static class DataState {
 
-        new Runner(opt).run();
+        public int[] arr;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr = ArrayUtils.generateRandomArray(1000, 20);
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr = null;
+        }
     }
 }

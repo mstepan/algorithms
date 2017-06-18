@@ -2,37 +2,13 @@ package com.max.algs.hashing.robin_hood;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static junit.framework.TestCase.assertSame;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class RobinHoodHashMapTest {
-
-    @Test
-    public void putAndGetRandomValuesWithLotsOfDuplicates() {
-        changeMap(100, 0.0);
-    }
-
-    @Test
-    public void putAndGetRandomValues() {
-        changeMap(null, 0.0);
-    }
-
-    @Test
-    public void putGetAndRemoveRandomValues() {
-        changeMap(null, 0.1);
-        changeMap(null, 0.2);
-        changeMap(null, 0.3);
-    }
-
 
     private static void changeMap(Integer maxValue, double deletionRate) {
         Map<Integer, Integer> actualMap = new RobinHoodHashMap<>();
@@ -88,6 +64,22 @@ public class RobinHoodHashMapTest {
         }
     }
 
+    @Test
+    public void putAndGetRandomValuesWithLotsOfDuplicates() {
+        changeMap(100, 0.0);
+    }
+
+    @Test
+    public void putAndGetRandomValues() {
+        changeMap(null, 0.0);
+    }
+
+    @Test
+    public void putGetAndRemoveRandomValues() {
+        changeMap(null, 0.1);
+        changeMap(null, 0.2);
+        changeMap(null, 0.3);
+    }
 
     @Test
     public void putAndGet() {

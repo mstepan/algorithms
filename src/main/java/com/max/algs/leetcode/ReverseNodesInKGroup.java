@@ -20,20 +20,6 @@ package com.max.algs.leetcode;
  */
 public class ReverseNodesInKGroup {
 
-    public ListNode reverseKGroup(ListNode head, int k) {
-
-        if (k == 0) {
-            return head;
-        }
-
-        ListNode newHead = head;
-
-
-        //TODO:
-        return newHead;
-    }
-
-
     public ReverseNodesInKGroup() throws Exception {
 
         ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
@@ -47,7 +33,6 @@ public class ReverseNodesInKGroup {
 
     }
 
-
     public static void main(String[] args) {
         try {
             new ReverseNodesInKGroup();
@@ -55,6 +40,19 @@ public class ReverseNodesInKGroup {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+        if (k == 0) {
+            return head;
+        }
+
+        ListNode newHead = head;
+
+
+        //TODO:
+        return newHead;
     }
 
     public class ListNode {

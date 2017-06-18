@@ -2,20 +2,7 @@ package benchmark;
 
 import com.max.algs.hashing.robin_hood.RobinHoodHashMap;
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -39,31 +26,13 @@ public class RobinHoodHashMapBenchmark {
     private static final int ARR_LENGTH = 100_000;
     private static final Integer VALUE = 1;
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(RobinHoodHashMapBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        private int[] arr;
-        private Map<Integer, Integer> robinMap;
-        private Map<Integer, Integer> jdkMap;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr = ArrayUtils.generateRandomArray(ARR_LENGTH);
-            robinMap = new RobinHoodHashMap<>();
-            jdkMap = new HashMap<>();
-
-            for (int val : arr) {
-                robinMap.put(val, VALUE);
-                jdkMap.put(val, VALUE);
-            }
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr = null;
-            robinMap = null;
-            jdkMap = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -90,14 +59,31 @@ public class RobinHoodHashMapBenchmark {
         }
     }
 
+    @State(Scope.Thread)
+    public static class ArrPerThread {
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(RobinHoodHashMapBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+        private int[] arr;
+        private Map<Integer, Integer> robinMap;
+        private Map<Integer, Integer> jdkMap;
 
-        new Runner(opt).run();
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr = ArrayUtils.generateRandomArray(ARR_LENGTH);
+            robinMap = new RobinHoodHashMap<>();
+            jdkMap = new HashMap<>();
+
+            for (int val : arr) {
+                robinMap.put(val, VALUE);
+                jdkMap.put(val, VALUE);
+            }
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr = null;
+            robinMap = null;
+            jdkMap = null;
+        }
     }
 
 }

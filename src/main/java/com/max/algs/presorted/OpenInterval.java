@@ -1,8 +1,6 @@
 package com.max.algs.presorted;
 
 
-
-
 public class OpenInterval {
 
     private final double a;
@@ -24,8 +22,8 @@ public class OpenInterval {
     }
 
 
-    public OpenInterval overlap( OpenInterval other ){
-        if( other == null ){
+    public OpenInterval overlap(OpenInterval other) {
+        if (other == null) {
             throw new IllegalArgumentException("'other' parameter is NULL");
         }
 
@@ -33,27 +31,27 @@ public class OpenInterval {
         OpenInterval right = this;
 
         // exchange intervals left <-> right
-        if( right.a < left.a ){
+        if (right.a < left.a) {
             left = this;
             right = other;
         }
 
         // intervals do not overlap
-        if( left.b <= right.a ){
+        if (left.b <= right.a) {
             return null;
         }
 
         // one interval within another, right within left
-        if( right.b <= left.b ){
-            return new OpenInterval( right.a, right.b );
+        if (right.b <= left.b) {
+            return new OpenInterval(right.a, right.b);
         }
 
-        return new OpenInterval( right.a, left.b );
+        return new OpenInterval(right.a, left.b);
     }
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "(" + a + ", " + b + ")";
     }
 
@@ -61,19 +59,19 @@ public class OpenInterval {
     @Override
     public boolean equals(Object o) {
         if (this == o) {
-        	return true;
+            return true;
         }
         if (o == null || getClass() != o.getClass()) {
-        	return false;
+            return false;
         }
 
         OpenInterval xyPoint = (OpenInterval) o;
 
         if (Double.compare(xyPoint.a, a) != 0) {
-        	return false;
+            return false;
         }
         if (Double.compare(xyPoint.b, b) != 0) {
-        	return false;
+            return false;
         }
 
         return true;

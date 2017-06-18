@@ -13,7 +13,7 @@ public final class EncodeUtils {
 
     private static final String HASH_ALGORITHM = "SHA-256";
 
-    private static final String[] byteToStringMap = new String[UNSIGNED_BYTE_MAX_VALUE+1];
+    private static final String[] byteToStringMap = new String[UNSIGNED_BYTE_MAX_VALUE + 1];
 
     private static MessageDigest digest;
 
@@ -25,12 +25,13 @@ public final class EncodeUtils {
             throw new ExceptionInInitializerError("Can't find hashing algorithm '" + HASH_ALGORITHM + "': " + ex.getMessage());
         }
 
-        for(int i = 0; i < byteToStringMap.length; i++){
+        for (int i = 0; i < byteToStringMap.length; i++) {
             byteToStringMap[i] = byteToBinaryString(i);
         }
     }
 
-    private EncodeUtils(){}
+    private EncodeUtils() {
+    }
 
     public static String byteToBinaryString(int value) {
 

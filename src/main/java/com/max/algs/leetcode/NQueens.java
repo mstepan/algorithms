@@ -1,16 +1,12 @@
 package com.max.algs.leetcode;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that
  * no two queens attack each other.
- *
+ * <p>
  * see: https://leetcode.com/problems/n-queens/
  */
 public class NQueens {
@@ -19,6 +15,21 @@ public class NQueens {
     private static final char EMPTY = '.';
     private static final String QUEEN_STR = "" + QUEEN;
 
+
+    public NQueens() throws Exception {
+        int n = 10;
+        List<String[]> solutions = solveNQueens(n);
+        System.out.println(solutions.size());
+    }
+
+    public static void main(String[] args) {
+        try {
+            new NQueens();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public List<String[]> solveNQueens(int n) {
 
@@ -112,23 +123,6 @@ public class NQueens {
         }
 
         return solution;
-    }
-
-
-    public NQueens() throws Exception {
-        int n = 10;
-        List<String[]> solutions = solveNQueens(n);
-        System.out.println(solutions.size());
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            new NQueens();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

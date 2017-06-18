@@ -4,18 +4,8 @@ import com.max.algs.annotations.ThreadSafe;
 import com.max.algs.util.ArrayUtils;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -44,6 +34,12 @@ public final class StringUtils {
     private static final int OFFSET_ASCII_PRINTABLE = 126 - 32 + 1;
 
     private static final Random RAND = ThreadLocalRandom.current();
+    private static final char[] DNA_CHARS = "ACTG".toCharArray();
+
+
+    private StringUtils() {
+        super();
+    }
 
     /**
      * time: O(N)
@@ -62,7 +58,6 @@ public final class StringUtils {
 
         return new String(arr);
     }
-
 
     /**
      * Check is string 'perm' is permutation of string 'str' in parallel.
@@ -125,57 +120,6 @@ public final class StringUtils {
 
         return res;
     }
-
-    private static class ChunkTask implements Callable<Boolean> {
-
-        private final char[] strArrSorted;
-        private final char[] permArrSorted;
-
-        private final int from;
-        private final int chunkSize;
-
-        private final AtomicBoolean globalStatus;
-
-        private static final int ITERATIONS_TO_CHECK_GLOBAL_STATUS = 1_000;
-
-        ChunkTask(char[] strArrSorted, char[] permArrSorted, int from, int chunkSize,
-                  AtomicBoolean globalStatus) {
-            this.strArrSorted = strArrSorted;
-            this.permArrSorted = permArrSorted;
-            this.from = from;
-            this.chunkSize = chunkSize;
-            this.globalStatus = globalStatus;
-        }
-
-        @Override
-        public Boolean call() throws Exception {
-
-            final int to = Math.min(from + chunkSize, strArrSorted.length);
-
-            int itCount = 0;
-
-            for (int i = from; i < to && !Thread.currentThread().isInterrupted(); ++i, ++itCount) {
-
-                // check global status every 1000 iterations.
-                if (itCount == ITERATIONS_TO_CHECK_GLOBAL_STATUS) {
-                    itCount = 0;
-
-                    if (!globalStatus.get()) {
-                        System.out.println("Premature stop");
-                        return Boolean.TRUE;
-                    }
-                }
-
-                if (strArrSorted[i] != permArrSorted[i]) {
-                    globalStatus.set(false);
-                    return Boolean.FALSE;
-                }
-            }
-
-            return Boolean.TRUE;
-        }
-    }
-
 
     /**
      * Check is string 'perm' is permutation of stirng 'str'.
@@ -734,8 +678,6 @@ public final class StringUtils {
         return new String(arr, 0, lastPos + 1);
     }
 
-    private static final char[] DNA_CHARS = "ACTG".toCharArray();
-
     /**
      * Generate random DNA string with specified length.
      */
@@ -1250,7 +1192,50 @@ public final class StringUtils {
         return new String(arr);
     }
 
-    private StringUtils() {
-        super();
+    private static class ChunkTask implements Callable<Boolean> {
+
+        private static final int ITERATIONS_TO_CHECK_GLOBAL_STATUS = 1_000;
+        private final char[] strArrSorted;
+        private final char[] permArrSorted;
+        private final int from;
+        private final int chunkSize;
+        private final AtomicBoolean globalStatus;
+
+        ChunkTask(char[] strArrSorted, char[] permArrSorted, int from, int chunkSize,
+                  AtomicBoolean globalStatus) {
+            this.strArrSorted = strArrSorted;
+            this.permArrSorted = permArrSorted;
+            this.from = from;
+            this.chunkSize = chunkSize;
+            this.globalStatus = globalStatus;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+
+            final int to = Math.min(from + chunkSize, strArrSorted.length);
+
+            int itCount = 0;
+
+            for (int i = from; i < to && !Thread.currentThread().isInterrupted(); ++i, ++itCount) {
+
+                // check global status every 1000 iterations.
+                if (itCount == ITERATIONS_TO_CHECK_GLOBAL_STATUS) {
+                    itCount = 0;
+
+                    if (!globalStatus.get()) {
+                        System.out.println("Premature stop");
+                        return Boolean.TRUE;
+                    }
+                }
+
+                if (strArrSorted[i] != permArrSorted[i]) {
+                    globalStatus.set(false);
+                    return Boolean.FALSE;
+                }
+            }
+
+            return Boolean.TRUE;
+        }
     }
 }

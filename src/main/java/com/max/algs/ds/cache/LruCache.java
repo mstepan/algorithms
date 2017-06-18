@@ -6,86 +6,84 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class LruCache {
 
-	private int size;
-	private final int capacity;
+    private final int capacity;
+    private final Node head;
+    private final Map<Integer, Node> data = new HashMap<>();
+    private int size;
 
-	private final Node head;
+    public LruCache(int capacity) {
+        super();
+        this.capacity = capacity;
+        head = new Node(-1);
+        head.next = head;
+        head.previous = head;
 
-	private final Map<Integer, Node> data = new HashMap<>();
+    }
 
-	public LruCache(int capacity) {
-		super();
-		this.capacity = capacity;
-		head = new Node(-1);
-		head.next = head;
-		head.previous = head;
+    public void add(int value) {
 
-	}
+        Node newNode = new Node(value);
 
-	public void add(int value) {
+        newNode.next = head.next;
+        head.next.previous = newNode;
+        newNode.previous = head;
+        head.next = newNode;
 
-		Node newNode = new Node(value);
+        data.put(value, newNode);
 
-		newNode.next = head.next;
-		head.next.previous = newNode;
-		newNode.previous = head;
-		head.next = newNode;
+        ++size;
+    }
 
-		data.put(value, newNode);
+    public int get(int value) {
+        return 0;
+    }
 
-		++size;
-	}
+    @Override
+    public String toString() {
+        StringBuilder buf = new StringBuilder();
 
-	public int get(int value) {
-		return 0;
-	}
+        Node cur = head.next;
 
-	@Override
-	public String toString() {
-		StringBuilder buf = new StringBuilder();
+        while (cur != head) {
+            buf.append(cur.value).append(", ");
+            cur = cur.next;
+        }
 
-		Node cur = head.next;
+        return buf.toString();
+    }
 
-		while (cur != head) {
-			buf.append(cur.value).append(", ");
-			cur = cur.next;
-		}
+    private static class Node {
 
-		return buf.toString();
-	}
+        private final int value;
+        private Node next;
+        private Node previous;
 
-	private static class Node {
+        public Node(int value) {
+            super();
+            this.value = value;
+        }
 
-		private Node next;
-		private Node previous;
-		private final int value;
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
 
-		public Node(int value) {
-			super();
-			this.value = value;
-		}
+        @Override
+        public int hashCode() {
+            return com.google.common.base.Objects.hashCode(value);
+        }
 
-		@Override
-		public String toString() {
-			return String.valueOf(value);
-		}
-
-		@Override
-		public int hashCode() {
-			return com.google.common.base.Objects.hashCode(value);
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null || getClass() != obj.getClass()) {
-				return false;
-			}
-			Node other = (Node) obj;
-			return com.google.common.base.Objects.equal(value, other.value);
-		}
-	}
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null || getClass() != obj.getClass()) {
+                return false;
+            }
+            Node other = (Node) obj;
+            return com.google.common.base.Objects.equal(value, other.value);
+        }
+    }
 
 }

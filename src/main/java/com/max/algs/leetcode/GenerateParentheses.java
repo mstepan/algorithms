@@ -9,6 +9,27 @@ import java.util.List;
 public class GenerateParentheses {
 
 
+    private GenerateParentheses() throws Exception {
+
+        int n = 3;
+        List<String> solutions = generateParenthesis(n);
+
+        for (String singlSolution : solutions) {
+            System.out.println(singlSolution);
+        }
+
+        System.out.println("Main done...");
+    }
+
+    public static void main(String[] args) {
+        try {
+            new GenerateParentheses();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public List<String> generateParenthesis(int n) {
         List<String> solutions = new ArrayList<>();
         genRec(0, 0, n, new ArrayDeque<>(), solutions);
@@ -42,28 +63,6 @@ public class GenerateParentheses {
             singleRes.add(')');
             genRec(leftCnt, rightCnt + 1, pairsCount, singleRes, solutions);
             singleRes.pollLast();
-        }
-    }
-
-
-    private GenerateParentheses() throws Exception {
-
-        int n = 3;
-        List<String> solutions = generateParenthesis(n);
-
-        for (String singlSolution : solutions) {
-            System.out.println(singlSolution);
-        }
-
-        System.out.println("Main done...");
-    }
-
-    public static void main(String[] args) {
-        try {
-            new GenerateParentheses();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

@@ -1,7 +1,6 @@
 package com.max.algs.ds.tree;
 
 import com.max.system.UnsafeUtils;
-import sun.misc.Unsafe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +18,22 @@ public class XorBinarySearchTree {
     private int size;
 
 
-    public boolean contains(int value){
+    public boolean contains(int value) {
 
-        if( root == null ){
+        if (root == null) {
             return false;
         }
 
         long parentAdr = 0;
         Node cur = root;
 
-        while( cur != null ){
+        while (cur != null) {
 
-            if( cur.value == value ){
+            if (cur.value == value) {
                 return true;
             }
 
-            long newParentAdr = UnsafeUtils.addressOf( cur );
+            long newParentAdr = UnsafeUtils.addressOf(cur);
 
             try {
                 // go left
@@ -46,7 +45,7 @@ public class XorBinarySearchTree {
                     cur = UnsafeUtils.getElementByAddress(cur.right ^ parentAdr);
                 }
             }
-            catch(ClassCastException ex){
+            catch (ClassCastException ex) {
                 Object obj = UnsafeUtils.getElementByAddress(cur.right ^ parentAdr);
                 int x = 10;
             }
@@ -57,9 +56,9 @@ public class XorBinarySearchTree {
         return false;
     }
 
-    public boolean add(int value){
+    public boolean add(int value) {
 
-        if(root == null ){
+        if (root == null) {
             root = new Node(value);
             ++size;
             return true;
@@ -68,17 +67,17 @@ public class XorBinarySearchTree {
         long parentAdr = 0L;
         Node cur = root;
 
-        while( true ){
+        while (true) {
 
-            if( cur.value == value ){
+            if (cur.value == value) {
                 return false;
             }
 
             // go left
-            if( value < cur.value ){
+            if (value < cur.value) {
                 Node newCur = UnsafeUtils.getElementByAddress(cur.left ^ parentAdr);
 
-                if( newCur == null ){
+                if (newCur == null) {
 
                     Node newNode = new Node(value, UnsafeUtils.addressOf(cur));
 
@@ -98,7 +97,7 @@ public class XorBinarySearchTree {
 
                 Node newCur = UnsafeUtils.getElementByAddress(cur.right ^ parentAdr);
 
-                if( newCur == null ){
+                if (newCur == null) {
 
                     Node newNode = new Node(value, UnsafeUtils.addressOf(cur));
 
@@ -118,11 +117,11 @@ public class XorBinarySearchTree {
     }
 
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
@@ -144,7 +143,7 @@ public class XorBinarySearchTree {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return String.valueOf(value);
         }
     }

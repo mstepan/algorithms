@@ -11,7 +11,7 @@ public final class Max2DSubarray {
 
     private Max2DSubarray() {
         throw new IllegalArgumentException("Can't call constructor for non instantiable class '" +
-                                                   Max2DSubarray.class + "'");
+                Max2DSubarray.class + "'");
     }
 
     /**

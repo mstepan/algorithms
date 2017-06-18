@@ -6,21 +6,21 @@ package com.max.algs.ds.heap;
 public class FibonacciHeap {
 
 
-    public void add(int value){
+    public void add(int value) {
 
     }
 
 
-    public int min(){
+    public int min() {
         return 0;
     }
 
 
-    public int extractMin(){
+    public int extractMin() {
         return 0;
     }
 
-    private void merge(FibonacciHeap other){
+    private void merge(FibonacciHeap other) {
 
     }
 

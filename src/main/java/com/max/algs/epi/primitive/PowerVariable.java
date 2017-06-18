@@ -11,6 +11,32 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class PowerVariable {
 
+    private PowerVariable() throws Exception {
+
+        final int decimalPlacesAfterCommaToCompare = 10;
+        Random rand = new Random();
+
+        double x;
+        int y;
+
+        double expectedSum, actualSum;
+
+        for (int i = 0; i < 1_000_000; ++i) {
+            x = rand.nextDouble();
+            y = rand.nextInt(100);
+
+            expectedSum = Math.pow(x, y);
+            actualSum = powIter(x, y);
+
+            if (NumberUtils.compareRounded(expectedSum, actualSum, decimalPlacesAfterCommaToCompare) != 0) {
+                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
+                        ", for x = " + x + " and y = " + y);
+            }
+        }
+
+        System.out.printf("'PowerVariable' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(lg*N), where N is 'power'.
      */
@@ -76,32 +102,6 @@ public class PowerVariable {
         }
 
         return res;
-    }
-
-    private PowerVariable() throws Exception {
-
-        final int decimalPlacesAfterCommaToCompare = 10;
-        Random rand = new Random();
-
-        double x;
-        int y;
-
-        double expectedSum, actualSum;
-
-        for (int i = 0; i < 1_000_000; ++i) {
-            x = rand.nextDouble();
-            y = rand.nextInt(100);
-
-            expectedSum = Math.pow(x, y);
-            actualSum = powIter(x, y);
-
-            if (NumberUtils.compareRounded(expectedSum, actualSum, decimalPlacesAfterCommaToCompare) != 0) {
-                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
-                                                        ", for x = " + x + " and y = " + y);
-            }
-        }
-
-        System.out.printf("'PowerVariable' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

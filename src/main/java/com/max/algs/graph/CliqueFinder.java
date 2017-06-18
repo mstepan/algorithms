@@ -2,11 +2,7 @@ package com.max.algs.graph;
 
 import com.google.common.collect.ImmutableSet;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Find clique of max size in undirected graph.
@@ -74,29 +70,6 @@ public final class CliqueFinder {
         return true;
     }
 
-    private static final class VertexWithDegree<U> {
-
-        private static final Comparator<VertexWithDegree<?>> DEGREE_ASC_CMP = new Comparator<VertexWithDegree<?>>() {
-            @Override
-            public int compare(VertexWithDegree<?> first, VertexWithDegree<?> second) {
-                return -Integer.compare(first.degree, second.degree);
-            }
-        };
-
-        final U vertex;
-        final int degree;
-
-        public VertexWithDegree(U vertex, int degree) {
-            this.vertex = vertex;
-            this.degree = degree;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(vertex) + ": " + degree;
-        }
-    }
-
     public static void main(String[] args) {
         try {
             Graph<Integer> graph = Graph.createGraph();
@@ -122,6 +95,29 @@ public final class CliqueFinder {
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static final class VertexWithDegree<U> {
+
+        private static final Comparator<VertexWithDegree<?>> DEGREE_ASC_CMP = new Comparator<VertexWithDegree<?>>() {
+            @Override
+            public int compare(VertexWithDegree<?> first, VertexWithDegree<?> second) {
+                return -Integer.compare(first.degree, second.degree);
+            }
+        };
+
+        final U vertex;
+        final int degree;
+
+        public VertexWithDegree(U vertex, int degree) {
+            this.vertex = vertex;
+            this.degree = degree;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(vertex) + ": " + degree;
         }
     }
 }

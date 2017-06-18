@@ -13,6 +13,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class SilentObjectCreator {
 
+    private SilentObjectCreator() {
+        throw new IllegalStateException("Utility only class '" + SilentObjectCreator.class.getCanonicalName() +
+                "' was instantiated.");
+    }
+
     public static <T> T create(Class<T> clazz) {
         return create(clazz, Object.class);
     }
@@ -32,9 +37,14 @@ public final class SilentObjectCreator {
         }
     }
 
-    private SilentObjectCreator() {
-        throw new IllegalStateException("Utility only class '" + SilentObjectCreator.class.getCanonicalName() +
-                                                "' was instantiated.");
+    public static void main(String[] args) {
+        try {
+            MySingleton obj = SilentObjectCreator.create(MySingleton.class);
+            System.out.printf("obj.value = %s %n", obj.value);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private static final class MySingleton {
@@ -48,16 +58,6 @@ public final class SilentObjectCreator {
 
         public String getValue() {
             return value;
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            MySingleton obj = SilentObjectCreator.create(MySingleton.class);
-            System.out.printf("obj.value = %s %n", obj.value);
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 }

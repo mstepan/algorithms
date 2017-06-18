@@ -12,6 +12,30 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class BuySellStockTwice {
 
+    private BuySellStockTwice() throws Exception {
+
+        Random rand = new Random();
+
+        for (int i = 0; i < 1000; ++i) {
+            int[] arr1 = ArrayUtils.generateRandomArray(1 + rand.nextInt(10_000), 1000);
+            int[] arr2 = Arrays.copyOf(arr1, arr1.length);
+
+            int maxProfit = maxProfitWithTwoTransactions(arr1);
+            checkAllElementsPositive(arr1);
+
+            int maxProfitBruteforce = maxProfitWithTwoTransactionsBruteforce(arr2);
+
+            if (maxProfit != maxProfitBruteforce) {
+                throw new IllegalStateException("Results arent equals for array: " +
+                        Arrays.toString(arr2) +
+                        ", maxProfit = " + maxProfit +
+                        ", maxProfitB = " + maxProfitBruteforce);
+            }
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N^2)
      * space: O(1)
@@ -51,7 +75,6 @@ public class BuySellStockTwice {
         }
         return maxProfit;
     }
-
 
     /**
      * Highly optimized solution.
@@ -162,30 +185,6 @@ public class BuySellStockTwice {
                 throw new IllegalArgumentException("Negative value found: " + arr[i]);
             }
         }
-    }
-
-    private BuySellStockTwice() throws Exception {
-
-        Random rand = new Random();
-
-        for (int i = 0; i < 1000; ++i) {
-            int[] arr1 = ArrayUtils.generateRandomArray(1 + rand.nextInt(10_000), 1000);
-            int[] arr2 = Arrays.copyOf(arr1, arr1.length);
-
-            int maxProfit = maxProfitWithTwoTransactions(arr1);
-            checkAllElementsPositive(arr1);
-
-            int maxProfitBruteforce = maxProfitWithTwoTransactionsBruteforce(arr2);
-
-            if (maxProfit != maxProfitBruteforce) {
-                throw new IllegalStateException("Results arent equals for array: " +
-                                                        Arrays.toString(arr2) +
-                                                        ", maxProfit = " + maxProfit +
-                                                        ", maxProfitB = " + maxProfitBruteforce);
-            }
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
 }

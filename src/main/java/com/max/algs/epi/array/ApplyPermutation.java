@@ -7,6 +7,19 @@ import java.util.Arrays;
 
 public class ApplyPermutation {
 
+    private ApplyPermutation() throws Exception {
+
+        int[] arr = {1, 2, 3, 4};
+        int[] p = {2, 1, 3, 0};
+
+        applyPermutation(arr, p);
+
+        // {4, 2, 1, 3} after applying permutation
+        System.out.println(Arrays.toString(arr));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Apply permutation represented by 'p' to array 'arr'.
      * <p>
@@ -33,19 +46,6 @@ public class ApplyPermutation {
         for (int i = 0; i < p.length; ++i) {
             p[i] += n;
         }
-    }
-
-    private ApplyPermutation() throws Exception {
-
-        int[] arr = {1, 2, 3, 4};
-        int[] p = {2, 1, 3, 0};
-
-        applyPermutation(arr, p);
-
-        // {4, 2, 1, 3} after applying permutation
-        System.out.println(Arrays.toString(arr));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -2,20 +2,7 @@ package benchmark;
 
 import com.max.algs.string.matching.NewShiftAndMatcher;
 import com.max.algs.string.matching.ShiftOrMatcher;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -51,23 +38,13 @@ public class ShiftAndOrMatcherBenchmark {
         return buf.toString();
     }
 
-    @State(Scope.Thread)
-    public static class StringPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(ShiftAndOrMatcherBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public String pattern;
-        public String text;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            pattern = generateRandomDNA(20);
-            text = generateRandomDNA(1_000_000);
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            pattern = null;
-            text = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -91,14 +68,23 @@ public class ShiftAndOrMatcherBenchmark {
         int index = state.text.indexOf(state.pattern);
     }
 
+    @State(Scope.Thread)
+    public static class StringPerThread {
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(ShiftAndOrMatcherBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+        public String pattern;
+        public String text;
 
-        new Runner(opt).run();
+        @Setup(Level.Invocation)
+        public void setUp() {
+            pattern = generateRandomDNA(20);
+            text = generateRandomDNA(1_000_000);
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            pattern = null;
+            text = null;
+        }
     }
 
 }

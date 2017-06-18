@@ -1,6 +1,6 @@
 package com.max.algs.epi.searching;
 
-import java.util.Random;
+import org.apache.log4j.Logger;
 
 /**
  * 12.5. Variant. Divide two floating point numbers, x/y within specific tolerance.
@@ -11,11 +11,27 @@ public class DivideFloatingPointNumbers {
     private static final double EPSILON = 0.0001;
     private static final double NEG_EPSILON = -EPSILON;
 
+    private static final Logger LOG = Logger.getLogger(DivideFloatingPointNumbers.class);
+
+
+    private DivideFloatingPointNumbers() throws Exception {
+
+        double x = 0.6;
+        double y = 0.8;
+
+        double res = divide(x, y);
+
+        System.out.printf("%.1f / %.1f = %.4f %n", x, y, res);
+
+        System.out.println(x / y);
+
+        System.out.printf("'DivideFloatingPointNumbers' completed. java-%s %n", System.getProperty("java.version"));
+    }
 
     public static double divide(double x, double y) {
 
-        if( compare(y, 0.0) == 0 ){
-            return compare(x, 0.0) == 0  ? Double.NaN : Double.POSITIVE_INFINITY;
+        if (compare(y, 0.0) == 0) {
+            return compare(x, 0.0) == 0 ? Double.NaN : Double.POSITIVE_INFINITY;
         }
 
         int sign = 1;
@@ -89,27 +105,12 @@ public class DivideFloatingPointNumbers {
         return 0;
     }
 
-    private DivideFloatingPointNumbers() throws Exception {
-
-        Random rand = new Random();
-        double x = 0.6; //rand.nextDouble();
-        double y = 0.8; //rand.nextDouble();
-
-        double res = divide(x, y);
-
-        System.out.printf("%.1f / %.1f = %.4f %n", x, y, res);
-
-        System.out.println(x/y);
-
-        System.out.printf("'DivideFloatingPointNumbers' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new DivideFloatingPointNumbers();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

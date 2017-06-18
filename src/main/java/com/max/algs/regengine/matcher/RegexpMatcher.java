@@ -5,36 +5,36 @@ import com.max.algs.regengine.automat.NfaState;
 
 public final class RegexpMatcher {
 
-	private final DfaState start;
-	private final NfaState end;
+    private final DfaState start;
+    private final NfaState end;
 
-	public RegexpMatcher(DfaState start, NfaState end) {
-		this.start = start;
-		this.end = end;
-	}
+    public RegexpMatcher(DfaState start, NfaState end) {
+        this.start = start;
+        this.end = end;
+    }
 
-	public boolean match(String str) {
+    public boolean match(String str) {
 
-		DfaState cur = start;
+        DfaState cur = start;
 
-		for (int i = 0; i < str.length() && cur != null; i++) {
-			char ch = str.charAt(i);
-			cur = cur.getTransition(ch);
-		}
+        for (int i = 0; i < str.length() && cur != null; i++) {
+            char ch = str.charAt(i);
+            cur = cur.getTransition(ch);
+        }
 
-		if (cur == null) {
-			return false;
-		}
+        if (cur == null) {
+            return false;
+        }
 
-		for (NfaState nfaState : cur.getNfaStates()) {
-			if (nfaState == end) {
-				return true;
-			}
-		}
+        for (NfaState nfaState : cur.getNfaStates()) {
+            if (nfaState == end) {
+                return true;
+            }
+        }
 
-		return false;
+        return false;
 
-		/** redesign to support DFA automat */
-	}
+        /** redesign to support DFA automat */
+    }
 
 }

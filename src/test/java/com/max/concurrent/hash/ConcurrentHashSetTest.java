@@ -18,14 +18,14 @@ public class ConcurrentHashSetTest {
 
         assertTrue(set.isEmpty());
 
-        for( int i = 0; i < itCount; i++){
+        for (int i = 0; i < itCount; i++) {
             assertTrue(set.add(i));
         }
 
         assertEquals(itCount, set.size());
         assertFalse(set.isEmpty());
 
-        for( int i = 0; i < itCount; i++){
+        for (int i = 0; i < itCount; i++) {
             assertTrue(set.contains(i));
         }
     }

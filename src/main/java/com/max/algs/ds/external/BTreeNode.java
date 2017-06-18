@@ -15,7 +15,7 @@ final class BTreeNode {
 
     BTreeNode(int capacity) {
         checkArgument(capacity >= MIN_CAPACITY && capacity <= MAX_CAPACITY, "capacity '%s': should be in range [%s, %s]",
-                      capacity, MIN_CAPACITY, MAX_CAPACITY);
+                capacity, MIN_CAPACITY, MAX_CAPACITY);
         checkArgument(isEven(capacity), "capacity '%s': not an even value", capacity);
 
         this.nodes = new String[capacity];

@@ -7,6 +7,15 @@ public class LookAndSayProblem {
 
     private static final String INITIAL_NUMBER = "1";
 
+    private LookAndSayProblem() throws Exception {
+
+        for (int i = 0; i < 11; ++i) {
+            System.out.printf("i = %s, number = %s %n", i, getNthNumber(i));
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(n * 2^n)
      * space: O(2^n)
@@ -53,15 +62,6 @@ public class LookAndSayProblem {
         res.append(cnt).append(number.charAt(numberLength - 1));
 
         return res.toString();
-    }
-
-    private LookAndSayProblem() throws Exception {
-
-        for (int i = 0; i < 11; ++i) {
-            System.out.printf("i = %s, number = %s %n", i, getNthNumber(i));
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

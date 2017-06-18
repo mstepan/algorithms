@@ -20,20 +20,16 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
     private final int capacity;
-
-    private int size;
-
-    private int baseModCount;
-
     private final IsbnEntry head = new IsbnEntry("HEAD", 0.0);
     private final IsbnEntry tail = new IsbnEntry("TAIL", 0.0);
+    private final BucketEntry[] buckets;
+    private int size;
+    private int baseModCount;
 
     {
         head.next = tail;
         tail.prev = head;
     }
-
-    private final BucketEntry[] buckets;
 
     public IsbnCache() {
         this(DEFAULT_INITIAL_CAPACITY);
@@ -48,16 +44,15 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         initAllBuckets();
     }
 
+    private static int calculateBucketsCount(int capacity) {
+        return (int) Math.ceil((100.0 * capacity) / 75.0);
+    }
+
     private void initAllBuckets() {
         for (int i = 0; i < buckets.length; ++i) {
             buckets[i] = BucketEntry.createSentinel();
         }
     }
-
-    private static int calculateBucketsCount(int capacity) {
-        return (int) Math.ceil((100.0 * capacity) / 75.0);
-    }
-
 
     public Double put(String isbn, Double price) {
         checkNotNull(isbn);
@@ -191,34 +186,6 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
         return new LinearOrderIterator();
     }
 
-    // === ISBN to book price iterator ===
-    public final class LinearOrderIterator implements Iterator<IsbnPricePair> {
-
-        private IsbnEntry cur;
-        private final int modCount;
-
-        LinearOrderIterator() {
-            this.cur = IsbnCache.this.head.next;
-            this.modCount = IsbnCache.this.baseModCount;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return cur != IsbnCache.this.tail;
-        }
-
-        @Override
-        public IsbnPricePair next() {
-            if (this.modCount != IsbnCache.this.baseModCount) {
-                throw new ConcurrentModificationException("Collection was modified during traversation");
-            }
-
-            IsbnPricePair res = new IsbnPricePair(cur.isbn, cur.price);
-            cur = cur.next;
-            return res;
-        }
-    }
-
     // === Iterator entry ===
     public static final class IsbnPricePair {
         public final String isbn;
@@ -277,17 +244,45 @@ public class IsbnCache implements Iterable<IsbnCache.IsbnPricePair> {
     // === BUCKETS single linked list ===
     private static final class BucketEntry {
 
-        static BucketEntry createSentinel() {
-            return new BucketEntry(new IsbnEntry("sentinel", 0.0), null);
-        }
+        IsbnEntry entry;
+        BucketEntry next;
 
         BucketEntry(IsbnEntry entry, BucketEntry next) {
             this.entry = entry;
             this.next = next;
         }
 
-        IsbnEntry entry;
-        BucketEntry next;
+        static BucketEntry createSentinel() {
+            return new BucketEntry(new IsbnEntry("sentinel", 0.0), null);
+        }
+    }
+
+    // === ISBN to book price iterator ===
+    public final class LinearOrderIterator implements Iterator<IsbnPricePair> {
+
+        private final int modCount;
+        private IsbnEntry cur;
+
+        LinearOrderIterator() {
+            this.cur = IsbnCache.this.head.next;
+            this.modCount = IsbnCache.this.baseModCount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cur != IsbnCache.this.tail;
+        }
+
+        @Override
+        public IsbnPricePair next() {
+            if (this.modCount != IsbnCache.this.baseModCount) {
+                throw new ConcurrentModificationException("Collection was modified during traversation");
+            }
+
+            IsbnPricePair res = new IsbnPricePair(cur.isbn, cur.price);
+            cur = cur.next;
+            return res;
+        }
     }
 
 }

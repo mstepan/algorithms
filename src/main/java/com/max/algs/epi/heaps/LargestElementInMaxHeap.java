@@ -17,36 +17,43 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class LargestElementInMaxHeap {
 
-    private static final class HeapEntry implements Comparable<HeapEntry> {
-
-        final Object[] arr;
-        final int index;
-
-        HeapEntry(Object[] arr, int index) {
-            this.arr = arr;
-            this.index = index;
-        }
-
-        Integer getValue() {
-            return (Integer) arr[index];
-        }
-
-        int getIndex() {
-            return index;
-        }
-
-        @Override
-        public int compareTo(@NotNull HeapEntry other) {
-            return getValue().compareTo(other.getValue());
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(getValue());
-        }
-    }
-
     private static final int[] EMPTY_ARR = new int[0];
+
+    private LargestElementInMaxHeap() throws Exception {
+
+        Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        maxHeap.add(10);
+
+        maxHeap.add(6);
+        maxHeap.add(8);
+
+        maxHeap.add(3);
+        maxHeap.add(4);
+        maxHeap.add(7);
+        maxHeap.add(5);
+
+        maxHeap.add(1);
+        maxHeap.add(2);
+        maxHeap.add(3);
+        maxHeap.add(2);
+        maxHeap.add(6);
+        maxHeap.add(5);
+
+        /*
+         * Access array field for PriorityQueue using reflection, otherwise
+         * we need to use 'maxHeap.toArray(new Integer[0])', but this will add space complexity O(N).
+        */
+        Field arrField = PriorityQueue.class.getDeclaredField("queue");
+        arrField.setAccessible(true);
+
+        int k = 5;
+        int[] arr = getLargestElements((Object[]) arrField.get(maxHeap), maxHeap.size(), k);
+
+        System.out.println(Arrays.toString(arr));
+
+        System.out.printf("'OnlineMedian' completed. java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * time: O(K*lgK)
@@ -94,48 +101,41 @@ public class LargestElementInMaxHeap {
         return largest;
     }
 
-    private LargestElementInMaxHeap() throws Exception {
-
-        Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-
-        maxHeap.add(10);
-
-        maxHeap.add(6);
-        maxHeap.add(8);
-
-        maxHeap.add(3);
-        maxHeap.add(4);
-        maxHeap.add(7);
-        maxHeap.add(5);
-
-        maxHeap.add(1);
-        maxHeap.add(2);
-        maxHeap.add(3);
-        maxHeap.add(2);
-        maxHeap.add(6);
-        maxHeap.add(5);
-
-        /*
-         * Access array field for PriorityQueue using reflection, otherwise
-         * we need to use 'maxHeap.toArray(new Integer[0])', but this will add space complexity O(N).
-        */
-        Field arrField = PriorityQueue.class.getDeclaredField("queue");
-        arrField.setAccessible(true);
-
-        int k = 5;
-        int[] arr = getLargestElements((Object[]) arrField.get(maxHeap), maxHeap.size(), k);
-
-        System.out.println(Arrays.toString(arr));
-
-        System.out.printf("'OnlineMedian' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new LargestElementInMaxHeap();
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static final class HeapEntry implements Comparable<HeapEntry> {
+
+        final Object[] arr;
+        final int index;
+
+        HeapEntry(Object[] arr, int index) {
+            this.arr = arr;
+            this.index = index;
+        }
+
+        Integer getValue() {
+            return (Integer) arr[index];
+        }
+
+        int getIndex() {
+            return index;
+        }
+
+        @Override
+        public int compareTo(@NotNull HeapEntry other) {
+            return getValue().compareTo(other.getValue());
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(getValue());
         }
     }
 

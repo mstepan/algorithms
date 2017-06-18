@@ -4,16 +4,38 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class InOrderBinaryTreeTraversal {
 
-    private static final class BinaryTreeNode {
-        BinaryTreeNode left;
-        BinaryTreeNode right;
-        BinaryTreeNode parent;
+    private InOrderBinaryTreeTraversal() throws Exception {
 
-        final int value;
+        BinaryTreeNode ten = new BinaryTreeNode(10);
+        BinaryTreeNode five = new BinaryTreeNode(5);
+        BinaryTreeNode seven = new BinaryTreeNode(7);
 
-        BinaryTreeNode(int value) {
-            this.value = value;
-        }
+        ten.left = five;
+        five.parent = ten;
+        five.right = seven;
+        seven.parent = five;
+
+
+        BinaryTreeNode twenty = new BinaryTreeNode(20);
+        BinaryTreeNode seventeen = new BinaryTreeNode(17);
+        BinaryTreeNode twentyFour = new BinaryTreeNode(24);
+        BinaryTreeNode twentyOne = new BinaryTreeNode(21);
+
+        ten.right = twenty;
+        twenty.parent = ten;
+
+        twenty.left = seventeen;
+        seventeen.parent = twenty;
+
+        twenty.right = twentyFour;
+        twentyFour.parent = twenty;
+
+        twentyFour.left = twentyOne;
+        twentyOne.parent = twentyFour;
+
+        inOrderTraversal(ten);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     /**
@@ -59,46 +81,23 @@ public class InOrderBinaryTreeTraversal {
         System.out.println();
     }
 
-    private InOrderBinaryTreeTraversal() throws Exception {
-
-        BinaryTreeNode ten = new BinaryTreeNode(10);
-        BinaryTreeNode five = new BinaryTreeNode(5);
-        BinaryTreeNode seven = new BinaryTreeNode(7);
-
-        ten.left = five;
-        five.parent = ten;
-        five.right = seven;
-        seven.parent = five;
-
-
-        BinaryTreeNode twenty = new BinaryTreeNode(20);
-        BinaryTreeNode seventeen = new BinaryTreeNode(17);
-        BinaryTreeNode twentyFour = new BinaryTreeNode(24);
-        BinaryTreeNode twentyOne = new BinaryTreeNode(21);
-
-        ten.right = twenty;
-        twenty.parent = ten;
-
-        twenty.left = seventeen;
-        seventeen.parent = twenty;
-
-        twenty.right = twentyFour;
-        twentyFour.parent = twenty;
-
-        twentyFour.left = twentyOne;
-        twentyOne.parent = twentyFour;
-
-        inOrderTraversal(ten);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new InOrderBinaryTreeTraversal();
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static final class BinaryTreeNode {
+        final int value;
+        BinaryTreeNode left;
+        BinaryTreeNode right;
+        BinaryTreeNode parent;
+
+        BinaryTreeNode(int value) {
+            this.value = value;
         }
     }
 

@@ -39,6 +39,15 @@ public final class TimSorterMain {
         System.out.println("TimSorterMain completed...");
     }
 
+    public static void main(String[] args) {
+        try {
+            new TimSorterMain();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private boolean isSorted(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             if (arr[i - 1] > arr[i]) {
@@ -47,14 +56,5 @@ public final class TimSorterMain {
             }
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        try {
-            new TimSorterMain();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 }

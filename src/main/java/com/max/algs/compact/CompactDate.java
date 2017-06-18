@@ -31,6 +31,11 @@ public final class CompactDate implements java.io.Serializable {
         this(1, 1, 1970);
     }
 
+    private static void checkRange(int value, String name, int lower, int upper) {
+        checkArgument(value >= lower && value <= upper, "'%' value is incorrect should be in range [%s; %s], found %s",
+                name, lower, upper, value);
+    }
+
     public int getDay() {
         return data >> (YEAR_BITS + MONTH_BITS);
     }
@@ -59,10 +64,5 @@ public final class CompactDate implements java.io.Serializable {
         res |= year;
 
         return res;
-    }
-
-    private static void checkRange(int value, String name, int lower, int upper) {
-        checkArgument(value >= lower && value <= upper, "'%' value is incorrect should be in range [%s; %s], found %s",
-                      name, lower, upper, value);
     }
 }

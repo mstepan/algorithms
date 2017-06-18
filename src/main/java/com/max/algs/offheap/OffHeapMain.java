@@ -1,11 +1,14 @@
 package com.max.algs.offheap;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.concurrent.TimeUnit;
 
 
 public final class OffHeapMain {
 
+    private static final Logger LOG = Logger.getLogger(OffHeapMain.class);
 
     private OffHeapMain() throws Exception {
 
@@ -20,10 +23,9 @@ public final class OffHeapMain {
             list.add(i);
         }
 
-        System.out.println("OffHeapLongList creation completed");
+        LOG.info("OffHeapLongList creation completed");
 
         list = null;
-        System.gc();
 
         TimeUnit.SECONDS.sleep(10);
 
@@ -35,7 +37,7 @@ public final class OffHeapMain {
             new OffHeapMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

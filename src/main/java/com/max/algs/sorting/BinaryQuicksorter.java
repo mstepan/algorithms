@@ -1,7 +1,6 @@
 package com.max.algs.sorting;
 
 import com.max.algs.util.ArrayUtils;
-import com.max.algs.util.BitUtils;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -85,12 +84,12 @@ public final class BinaryQuicksorter {
     /**
      * Determine next bit to check.
      */
-    private static int nextDifferentBit(int[] arr, int from, int to, int lastBitChecked){
+    private static int nextDifferentBit(int[] arr, int from, int to, int lastBitChecked) {
 
         int andValue = 1;
         int orValue = 0;
 
-        for(int i = from; i <= to; i++){
+        for (int i = from; i <= to; i++) {
             andValue &= arr[i];
             orValue |= arr[i];
         }
@@ -98,9 +97,9 @@ public final class BinaryQuicksorter {
         int xoredValue = andValue ^ orValue;
         int nextBit = 0;
 
-        for( int i = 0; i < lastBitChecked && xoredValue != 0; i++){
+        for (int i = 0; i < lastBitChecked && xoredValue != 0; i++) {
 
-            if( (xoredValue & 1) != 0 ){
+            if ((xoredValue & 1) != 0) {
                 nextBit = i;
             }
 

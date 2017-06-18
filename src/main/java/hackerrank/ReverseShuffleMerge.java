@@ -46,11 +46,11 @@ public class ReverseShuffleMerge {
             boundary = place(entry, boundary, arr, res);
         }
 
-        StringBuilder buf = new StringBuilder(res.length/2);
+        StringBuilder buf = new StringBuilder(res.length / 2);
 
-        for( int i = res.length-1; i >=0; --i){
+        for (int i = res.length - 1; i >= 0; --i) {
             char ch = res[i];
-            if( ch != '\u0000' ){
+            if (ch != '\u0000') {
                 buf.append(ch);
             }
         }
@@ -67,7 +67,7 @@ public class ReverseShuffleMerge {
         int newBoundary = boundary;
 
         // move 'left' from boundary
-        for (int i = boundary - 1; i >= 0 && count !=0; --i, --newBoundary) {
+        for (int i = boundary - 1; i >= 0 && count != 0; --i, --newBoundary) {
             if (original[i] == ch) {
                 res[i] = ch;
                 --count;

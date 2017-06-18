@@ -1,7 +1,6 @@
 package com.max.concurrent.hash;
 
 
-
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -24,11 +23,11 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
 
     private volatile int size;
 
-    public LockFreeConcurrentHashSet(){
+    public LockFreeConcurrentHashSet() {
         this(DEFAULT_CAPACITY);
     }
 
-    public LockFreeConcurrentHashSet(int capacity){
+    public LockFreeConcurrentHashSet(int capacity) {
         initBuckets(capacity);
         owner = new AtomicMarkableReference<>(null, false);
     }
@@ -57,7 +56,7 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
     }
 
     @Override
-    public boolean remove(int value)throws InterruptedException {
+    public boolean remove(int value) throws InterruptedException {
 
         Lock mutex = lockBucket(value);
 
@@ -98,12 +97,12 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
         Thread me = Thread.currentThread();
         Thread who;
 
-        while( true ){
+        while (true) {
 
             do {
                 who = owner.get(mark);
             }
-            while( mark[0] && who != me );
+            while (mark[0] && who != me);
 
             Lock[] oldLocks = locks;
 
@@ -112,7 +111,7 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
 
             who = owner.get(mark);
 
-            if( (! mark[0] || who == me) && locks == oldLocks ){
+            if ((!mark[0] || who == me) && locks == oldLocks) {
                 return oldLock;
             }
             else {
@@ -122,15 +121,15 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
         }
     }
 
-    private int hash(int value){
+    private int hash(int value) {
         return Math.abs(Integer.valueOf(value).hashCode());
     }
 
-    private double loadFactor(){
-        return (double)size / buckets.length;
+    private double loadFactor() {
+        return (double) size / buckets.length;
     }
 
-    private boolean shouldResize(){
+    private boolean shouldResize() {
         return Double.compare(loadFactor(), LOAD_FACTOR) >= 0;
     }
 
@@ -141,10 +140,10 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
         final int oldCapacity = buckets.length;
         final Thread me = Thread.currentThread();
 
-        if( owner.compareAndSet(null, me, false, true) ){
+        if (owner.compareAndSet(null, me, false, true)) {
             try {
                 // someone else has resized the table
-                if( oldCapacity != buckets.length ){
+                if (oldCapacity != buckets.length) {
                     return;
                 }
 
@@ -163,7 +162,7 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
 
     }
 
-    private void initBuckets(int capacity){
+    private void initBuckets(int capacity) {
         buckets = new List[capacity];
         locks = new Lock[capacity];
 
@@ -173,13 +172,14 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
         }
     }
 
-    private void waitAllLocks(){
-        for( Lock singleLock : locks ){
-            while( ((ReentrantLock)singleLock).isLocked() ){}
+    private void waitAllLocks() {
+        for (Lock singleLock : locks) {
+            while (((ReentrantLock) singleLock).isLocked()) {
+            }
         }
     }
 
-    private void copyBuckets(List[] oldBuckets){
+    private void copyBuckets(List[] oldBuckets) {
         for (List<Integer> prevBucket : oldBuckets) {
             for (Integer value : prevBucket) {
                 buckets[hash(value) % buckets.length].add(value);
@@ -188,12 +188,12 @@ public class LockFreeConcurrentHashSet implements ConcurrentSet {
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 

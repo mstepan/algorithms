@@ -11,23 +11,23 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class BuildTreeFromBooleanMatrix {
 
-    private static final class TreeNode {
-        final int value;
-        final Set<TreeNode> children;
+    private BuildTreeFromBooleanMatrix() throws Exception {
 
-        TreeNode(int value) {
-            this.value = value;
-            this.children = new LinkedHashSet<>();
-        }
+        boolean[][] matrix = {
+                {false, false, false, false, false, false},
+                {true, false, false, false, true, false},
+                {false, false, false, false, false, false},
+                {false, false, false, false, false, false},
+                {false, false, true, true, false, true},
+                {false, false, false, false, false, false},
+        };
 
-        void addChild(TreeNode child) {
-            children.add(child);
-        }
 
-        @Override
-        public String toString() {
-            return String.valueOf(value) + ", " + (children.size() == 0 ? "leaf" : "node");
-        }
+        TreeNode root = buildTree(matrix);
+
+        System.out.println(root);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     /**
@@ -112,32 +112,31 @@ public class BuildTreeFromBooleanMatrix {
         }
     }
 
-
-    private BuildTreeFromBooleanMatrix() throws Exception {
-
-        boolean[][] matrix = {
-                {false, false, false, false, false, false},
-                {true, false, false, false, true, false},
-                {false, false, false, false, false, false},
-                {false, false, false, false, false, false},
-                {false, false, true, true, false, true},
-                {false, false, false, false, false, false},
-        };
-
-
-        TreeNode root = buildTree(matrix);
-
-        System.out.println(root);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new BuildTreeFromBooleanMatrix();
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static final class TreeNode {
+        final int value;
+        final Set<TreeNode> children;
+
+        TreeNode(int value) {
+            this.value = value;
+            this.children = new LinkedHashSet<>();
+        }
+
+        void addChild(TreeNode child) {
+            children.add(child);
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value) + ", " + (children.size() == 0 ? "leaf" : "node");
         }
     }
 

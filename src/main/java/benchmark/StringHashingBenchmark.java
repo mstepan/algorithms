@@ -2,20 +2,7 @@ package benchmark;
 
 import com.max.algs.hashing.HashUtils;
 import com.max.algs.string.StringUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -25,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Micro benchmark for a String hashing algorithms.
- *
+ * <p>
  * Benchmark                            Mode  Cnt        Score        Error  Units
  * StringHashingBenchmark.fnvHash       avgt   25  4007097.524 ± 540003.555  ns/op
  * StringHashingBenchmark.jenkinsHash   avgt   25  5349687.158 ± 508751.838  ns/op
@@ -43,26 +30,14 @@ public class StringHashingBenchmark {
     private static final int WORDS_COUNT = 100_000;
     private static final int AVG_WORD_LENGTH = 20;
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(StringHashingBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public String[] arr;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr = new String[WORDS_COUNT];
-
-            for (int i = 0, length = arr.length; i < length; ++i) {
-                arr[i] = StringUtils.randomLowerCase(AVG_WORD_LENGTH);
-            }
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr = null;
-        }
+        new Runner(opt).run();
     }
-
 
     @Benchmark
     @Group("standardHash")
@@ -100,13 +75,24 @@ public class StringHashingBenchmark {
         }
     }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(StringHashingBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+    @State(Scope.Thread)
+    public static class ArrPerThread {
 
-        new Runner(opt).run();
+        public String[] arr;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr = new String[WORDS_COUNT];
+
+            for (int i = 0, length = arr.length; i < length; ++i) {
+                arr[i] = StringUtils.randomLowerCase(AVG_WORD_LENGTH);
+            }
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr = null;
+        }
     }
 
 }

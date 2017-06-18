@@ -3,23 +3,7 @@ package com.max.algs.graph;
 import com.max.algs.ds.set.DisjointSet;
 import com.max.algs.it.SubsetIterator;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -35,10 +19,8 @@ public class Graph<T> {
 
 
     private final Map<T, Map<T, Edge<T>>> vertexes = new TreeMap<>();
-
-    private int edgesCount;
-
     private final boolean directed;
+    private int edgesCount;
 
     /**
      * Graph copy constructor.
@@ -59,15 +41,17 @@ public class Graph<T> {
         }
     }
 
+    Graph(boolean directed) {
+        this.directed = directed;
+    }
+
     public static <T> Graph<T> createGraph() {
         return new Graph<T>(false);
     }
 
-
     public static <T> Graph<T> createDirectedGraph() {
         return new Graph<T>(true);
     }
-
 
     /**
      * Find all connected components with all vertexes of 'k' degree.
@@ -315,7 +299,6 @@ public class Graph<T> {
         return vertexes.containsKey(vertex);
     }
 
-
     public List<Edge<T>> getAllEdges() {
         List<Edge<T>> edges = new ArrayList<>();
 
@@ -326,11 +309,9 @@ public class Graph<T> {
         return edges;
     }
 
-
     public boolean isEmpty() {
         return vertexes.isEmpty();
     }
-
 
     public List<T> vertexCoverageApproximation() {
 
@@ -375,7 +356,6 @@ public class Graph<T> {
         }
 
     }
-
 
     /**
      * Get all minimal vertex coverage using brute force algorithm.
@@ -425,7 +405,6 @@ public class Graph<T> {
         return coveredEdges.size() == edgesCount;
     }
 
-
     /**
      * Construct minimum spanning tree using greedy approach (Kruskal's algorithm).
      * <p>
@@ -454,7 +433,6 @@ public class Graph<T> {
 
         return spanningTree;
     }
-
 
     public List<T> bfs() {
 
@@ -496,7 +474,6 @@ public class Graph<T> {
 
         return bfsPath;
     }
-
 
     public Map<T, Integer> bellmanFordShortestPath() {
 
@@ -546,12 +523,6 @@ public class Graph<T> {
 
         return distance;
     }
-
-
-    Graph(boolean directed) {
-        this.directed = directed;
-    }
-
 
     public T firstVertex() {
         if (isEmpty()) {

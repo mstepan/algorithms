@@ -11,6 +11,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FindLocalMinimum {
 
 
+    private FindLocalMinimum() throws Exception {
+
+        int[] arr = {15, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
+
+        int index = findLocalMinimumIndex(arr);
+
+        if (index < 0) {
+            System.out.println("Not found");
+        }
+        else {
+            System.out.printf("arr[%d] = %d %n", index, arr[index]);
+        }
+
+        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(lgN)
      * space: O(1)
@@ -60,22 +76,6 @@ public class FindLocalMinimum {
 
             assert elementsCount > (hi - lo) + 1 : "Number of elements wasn't decreased";
         }
-    }
-
-    private FindLocalMinimum() throws Exception {
-
-        int[] arr = {15, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
-
-        int index = findLocalMinimumIndex(arr);
-
-        if (index < 0) {
-            System.out.println("Not found");
-        }
-        else {
-            System.out.printf("arr[%d] = %d %n", index, arr[index]);
-        }
-
-        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

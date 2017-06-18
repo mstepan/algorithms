@@ -1,10 +1,6 @@
 package com.max.algs.permutation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * Read only permutation generator.
@@ -130,6 +126,18 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
 
     }
 
+    private static enum Direction {
+        LEFT("<-"),
+        RIGHT("->");
+
+        private final String symbol;
+
+        Direction(String symbol) {
+            this.symbol = symbol;
+        }
+
+    }
+
     private static final class ElementWithDirection<U extends Comparable<U>>
             implements Comparable<ElementWithDirection<U>> {
 
@@ -155,18 +163,6 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
             assert direction != null && value != null;
             return String.valueOf(direction.symbol) + ":" + String.valueOf(value);
         }
-    }
-
-    private static enum Direction {
-        LEFT("<-"),
-        RIGHT("->");
-
-        private final String symbol;
-
-        Direction(String symbol) {
-            this.symbol = symbol;
-        }
-
     }
 
 }

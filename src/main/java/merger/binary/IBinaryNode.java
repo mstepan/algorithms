@@ -1,9 +1,9 @@
 package merger.binary;
 
-public interface IBinaryNode {	
+public interface IBinaryNode {
 
-	String getValue();
-	
-	String next();
-	
+    String getValue();
+
+    String next();
+
 }

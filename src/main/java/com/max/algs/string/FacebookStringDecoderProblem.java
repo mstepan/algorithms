@@ -7,6 +7,25 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class FacebookStringDecoderProblem {
 
+    private FacebookStringDecoderProblem() throws Exception {
+
+        String str = "3[a2[bd]g4[ef]h]"; //"5[k]fc3[de]abc";
+
+        System.out.println(str);
+
+        String decodedStr = decode(str);
+
+        String expected = "abdbdgefefefefhabdbdgefefefefhabdbdgefefefefh";
+
+        System.out.println(decodedStr);
+
+        if (!expected.equals(decodedStr)) {
+            throw new AssertionError("Strings aren't equals");
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Write code to decode a string.
      * <p>
@@ -122,25 +141,6 @@ public class FacebookStringDecoderProblem {
             StringBuilder first = stack.pop();
             stack.peekFirst().append(first);
         }
-    }
-
-    private FacebookStringDecoderProblem() throws Exception {
-
-        String str = "3[a2[bd]g4[ef]h]"; //"5[k]fc3[de]abc";
-
-        System.out.println(str);
-
-        String decodedStr = decode(str);
-
-        String expected = "abdbdgefefefefhabdbdgefefefefhabdbdgefefefefh";
-
-        System.out.println(decodedStr);
-
-        if (!expected.equals(decodedStr)) {
-            throw new AssertionError("Strings aren't equals");
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

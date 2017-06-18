@@ -10,6 +10,40 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class EstimatePi {
 
+    private EstimatePi() throws Exception {
+
+        /*
+        //------------
+        sequential:
+        //------------
+        estimated PI: 3.1415803040
+        real      PI: 3.1415926536
+        Time spend: 16572 ms
+
+        //------------
+        parallel:
+        //------------
+        estimated PI: 3.1415694240
+        real      PI: 3.1415926536
+        Time spend: 3347 ms
+         */
+
+        final int itCount = 2_000_000_000;
+
+        long startTime = System.currentTimeMillis();
+
+//        double pi = estimatePi(itCount);
+        double pi = estimatePiParallel(itCount);
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.printf("estimated PI: %.10f %n", pi);
+        System.out.printf("real      PI: %.10f %n", Math.PI);
+        System.out.printf("Time spend: %d ms%n", (endTime - startTime));
+
+        System.out.printf("EstimatePi done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Estimate PI using Monte-Carlo method.
      */
@@ -25,7 +59,6 @@ public final class EstimatePi {
         double lambda = ((double) (hitCountParallel(itCount))) / itCount;
         return 4.0 * lambda;
     }
-
 
     private static int hitCount(int itCount) {
 
@@ -88,40 +121,6 @@ public final class EstimatePi {
         BigDecimal lambda =
                 new BigDecimal(withinCircle).divide(new BigDecimal(itCount), 11, BigDecimal.ROUND_HALF_UP);
         return new BigDecimal("4.0").multiply(lambda);
-    }
-
-    private EstimatePi() throws Exception {
-
-        /*
-        //------------
-        sequential:
-        //------------
-        estimated PI: 3.1415803040
-        real      PI: 3.1415926536
-        Time spend: 16572 ms
-
-        //------------
-        parallel:
-        //------------
-        estimated PI: 3.1415694240
-        real      PI: 3.1415926536
-        Time spend: 3347 ms
-         */
-
-        final int itCount = 2_000_000_000;
-
-        long startTime = System.currentTimeMillis();
-
-//        double pi = estimatePi(itCount);
-        double pi = estimatePiParallel(itCount);
-
-        long endTime = System.currentTimeMillis();
-
-        System.out.printf("estimated PI: %.10f %n", pi);
-        System.out.printf("real      PI: %.10f %n", Math.PI);
-        System.out.printf("Time spend: %d ms%n", (endTime - startTime));
-
-        System.out.printf("EstimatePi done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

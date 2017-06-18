@@ -2,15 +2,7 @@ package com.max.algs;
 
 import com.max.algs.util.MathUtils;
 
-import java.util.AbstractMap;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 public class ConvertNumbers {
@@ -58,52 +50,6 @@ public class ConvertNumbers {
         }
 
         return "";
-    }
-
-    private static final class PartialSolution implements Comparable<PartialSolution> {
-
-        final int searchValue;
-        final int value;
-        final String res;
-        final int resSize;
-
-        public PartialSolution(int searchValue, int value, String res, int resSize) {
-            this.searchValue = searchValue;
-            this.value = value;
-            this.res = res;
-            this.resSize = resSize;
-        }
-
-        /**
-         * 'A*' heuristic function 'h'.
-         * This heuristic is admissible and consistent (satisfy triangle inequality).
-         */
-        private int expectedLength() {
-
-            if (value == searchValue) {
-                return 0;
-            }
-
-            if (value > searchValue) {
-                return value - searchValue;
-            }
-
-            return (int) MathUtils.log2(Math.round((double) searchValue / value));
-        }
-
-        @Override
-        public int compareTo(PartialSolution other) {
-
-            int curCost = resSize + expectedLength();
-            int otherCost = other.resSize + other.expectedLength();
-
-            return Integer.compare(curCost, otherCost);
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value) + ", res: " + res;
-        }
     }
 
     /**
@@ -175,5 +121,66 @@ public class ConvertNumbers {
         }
 
         System.out.println("Main done...");
+    }
+
+    private static final class PartialSolution implements Comparable<PartialSolution> {
+
+        final int searchValue;
+        final int value;
+        final String res;
+        final int resSize;
+
+        public PartialSolution(int searchValue, int value, String res, int resSize) {
+            this.searchValue = searchValue;
+            this.value = value;
+            this.res = res;
+            this.resSize = resSize;
+        }
+
+        /**
+         * 'A*' heuristic function 'h'.
+         * This heuristic is admissible and consistent (satisfy triangle inequality).
+         */
+        private int expectedLength() {
+
+            if (value == searchValue) {
+                return 0;
+            }
+
+            if (value > searchValue) {
+                return value - searchValue;
+            }
+
+            return (int) MathUtils.log2(Math.round((double) searchValue / value));
+        }
+
+        private int calculateCost() {
+            return resSize + expectedLength();
+        }
+
+        @Override
+        public int compareTo(PartialSolution other) {
+            return Integer.compare(resSize + expectedLength(), other.calculateCost());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PartialSolution that = (PartialSolution) o;
+
+            return calculateCost() == that.calculateCost();
+        }
+
+        @Override
+        public int hashCode() {
+            return calculateCost();
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value) + ", res: " + res;
+        }
     }
 }

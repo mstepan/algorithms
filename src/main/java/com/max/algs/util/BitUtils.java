@@ -12,6 +12,7 @@ public class BitUtils {
 
 
     private static final int[] REVERSE_BYTES = new int[BYTE_BOUNDARY];
+    private static final int BYTE_TO_INDEX[] = {0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4};
 
     static {
         for (int i = 0; i < BYTE_BOUNDARY; i++) {
@@ -24,12 +25,9 @@ public class BitUtils {
 
     }
 
-
     private BitUtils() {
         throw new IllegalStateException("Can't instantiate '" + BitUtils.class.getName() + "'");
     }
-
-    private static final int BYTE_TO_INDEX[] = {0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4};
 
     /**
      * Return most significant bit index(left most) that is set to '1', zero based indexing.

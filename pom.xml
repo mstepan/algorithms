@@ -17,6 +17,9 @@
     </properties>
 
     <build>
+
+
+
         <plugins>
             <!-- Java compile plugin -->
             <plugin>

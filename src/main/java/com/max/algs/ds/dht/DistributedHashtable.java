@@ -1,259 +1,249 @@
 package com.max.algs.ds.dht;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.Random;
-import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
-
+import com.max.algs.ds.dht.cache_node.CacheNode;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
 
-import com.max.algs.ds.dht.cache_node.CacheNode;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class DistributedHashtable implements AutoCloseable {
 
-	private static final Logger LOG = Logger
-			.getLogger(DistributedHashtable.class);
+    private static final Logger LOG = Logger
+            .getLogger(DistributedHashtable.class);
 
-	private static final String LINE_SEPARATOR = System
-			.getProperty("line.separator");
+    private static final String LINE_SEPARATOR = System
+            .getProperty("line.separator");
 
-	private static final int REPLICAS_COUNT = 3;
+    private static final int REPLICAS_COUNT = 3;
 
-	private static final Random RAND = ThreadLocalRandom.current();
+    private static final Random RAND = ThreadLocalRandom.current();
+    private static final int RING_LENGTH = 360;
+    private final MessageDigest messageDigest;
+    private final NavigableMap<Integer, Node> ring = new TreeMap<>(); // 'ring'
+    // of
+    // buckets
 
-	private final MessageDigest messageDigest;
+    private final Map<String, List<Integer>> replicas = new HashMap<>(); // track
+    // url
+    // =>
+    // bucket
+    // indexes
 
-	private static final int RING_LENGTH = 360;
+    private final HttpClient httpClient = new DefaultHttpClient();
 
-	private final NavigableMap<Integer, Node> ring = new TreeMap<>(); // 'ring'
-																		// of
-																		// buckets
+    private int nodesCount; // 'logical' nodes count without replicas
 
-	private final Map<String, List<Integer>> replicas = new HashMap<>(); // track
-																			// url
-																			// =>
-																			// bucket
-																			// indexes
+    private int size;
 
-	private final HttpClient httpClient = new DefaultHttpClient();
+    public DistributedHashtable() {
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-1");
+        }
+        catch (NoSuchAlgorithmException ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
-	private int nodesCount; // 'logical' nodes count without replicas
+    public void addNode(String urlStr) {
+        try {
 
-	private int size;
+            startCacheServer("node-" + nodesCount, urlStr);
 
-	public DistributedHashtable() {
-		try {
-			messageDigest = MessageDigest.getInstance("SHA-1");
-		}
-		catch (NoSuchAlgorithmException ex) {
-			throw new ExceptionInInitializerError(ex);
-		}
-	}
+            List<Integer> replicasIndexes = new ArrayList<>();
 
-	public void addNode(String urlStr) {
-		try {
+            Node newNode = new Node(urlStr, httpClient);
 
-			startCacheServer("node-" + nodesCount, urlStr);
+            for (int i = 0; i < REPLICAS_COUNT; i++) {
 
-			List<Integer> replicasIndexes = new ArrayList<>();
+                int bucketIndex = -1;
 
-			Node newNode = new Node(urlStr, httpClient);
+                while (bucketIndex < 0 || ring.containsKey(bucketIndex)) {
+                    bucketIndex = nodeIndex(urlStr + "_" + i) % RING_LENGTH;
+                }
 
-			for (int i = 0; i < REPLICAS_COUNT; i++) {
+                replicasIndexes.add(bucketIndex);
 
-				int bucketIndex = -1;
+                ring.put(bucketIndex, newNode);
 
-				while (bucketIndex < 0 || ring.containsKey(bucketIndex)) {
-					bucketIndex = nodeIndex(urlStr + "_" + i) % RING_LENGTH;
-				}
+                checkRemapping(newNode, bucketIndex);
 
-				replicasIndexes.add(bucketIndex);
+            }
 
-				ring.put(bucketIndex, newNode);
+            replicas.put(urlStr, replicasIndexes);
 
-				checkRemapping(newNode, bucketIndex);
+            ++nodesCount;
+        }
+        catch (Exception ex) {
+            LOG.error(ex);
+        }
+    }
 
-			}
+    private void checkRemapping(Node newNode, int bucketIndex) {
 
-			replicas.put(urlStr, replicasIndexes);
+        // don't do any remapping if table is empty or just one logical node
+        // presented
+        if (size == 0 || nodesCount <= 1) {
+            return;
+        }
 
-			++nodesCount;
-		}
-		catch (Exception ex) {
-			LOG.error(ex);
-		}
-	}
+        Node nextNode = nextNode(bucketIndex);
 
-	private void checkRemapping(Node newNode, int bucketIndex) {
+        // don't do remappping for the same node replicas
+        if (newNode.equals(nextNode)) {
+            return;
+        }
 
-		// don't do any remapping if table is empty or just one logical node
-		// presented
-		if (size == 0 || nodesCount <= 1) {
-			return;
-		}
+        Map.Entry<Integer, Node> prevEntry = prevEntry(bucketIndex);
 
-		Node nextNode = nextNode(bucketIndex);
+        // remap range of keys
+        nextNode.remap(newNode, prevEntry.getKey() + 1, bucketIndex);
+    }
 
-		// don't do remappping for the same node replicas
-		if (newNode.equals(nextNode)) {
-			return;
-		}
+    private void startCacheServer(String name, String urlStr)
+            throws URISyntaxException {
+        URI nodeUrl = new URI(urlStr);
+        new Thread(new CacheNode(name, nodeUrl.getPort())).start();
+    }
 
-		Map.Entry<Integer, Node> prevEntry = prevEntry(bucketIndex);
+    public void put(String key, String value) {
+        boolean wasAdded = findNode(key).put(key, value, bucketIndex(key));
 
-		// remap range of keys
-		nextNode.remap(newNode, prevEntry.getKey() + 1, bucketIndex);
-	}
+        if (wasAdded) {
+            ++size;
+        }
+    }
 
-	private void startCacheServer(String name, String urlStr)
-			throws URISyntaxException {
-		URI nodeUrl = new URI(urlStr);
-		new Thread(new CacheNode(name, nodeUrl.getPort())).start();
-	}
+    public String get(String key) {
+        return findNode(key).getValue(key);
+    }
 
-	public void put(String key, String value) {
-		boolean wasAdded = findNode(key).put(key, value, bucketIndex(key));
+    public boolean contains(String key) {
+        return findNode(key).getValue(key) != null;
+    }
 
-		if (wasAdded) {
-			++size;
-		}
-	}
+    public boolean remove(String key) {
+        boolean wasDeleted = findNode(key).remove(key);
 
-	public String get(String key) {
-		return findNode(key).getValue(key);
-	}
+        if (wasDeleted) {
+            --size;
+        }
 
-	public boolean contains(String key) {
-		return findNode(key).getValue(key) != null;
-	}
+        return wasDeleted;
+    }
 
-	public boolean remove(String key) {
-		boolean wasDeleted = findNode(key).remove(key);
+    private Node findNode(String key) {
 
-		if (wasDeleted) {
-			--size;
-		}
+        int index = bucketIndex(key);
 
-		return wasDeleted;
-	}
+        for (Map.Entry<Integer, Node> entry : ring.entrySet()) {
+            if (entry.getKey() >= index) {
+                return entry.getValue();
+            }
+        }
 
-	private Node findNode(String key) {
+        return ring.get(ring.firstKey());
+    }
 
-		int index = bucketIndex(key);
+    private int nodeIndex(String url) {
+        String urlWithPrefix = new String(messageDigest.digest((url + RAND
+                .nextInt()).getBytes()));
+        return bucketIndex(urlWithPrefix);
+    }
 
-		for (Map.Entry<Integer, Node> entry : ring.entrySet()) {
-			if (entry.getKey() >= index) {
-				return entry.getValue();
-			}
-		}
+    private int bucketIndex(String key) {
+        return Math.abs(key.hashCode() & 0x7F_FF_FF_FF) % RING_LENGTH;
+    }
 
-		return ring.get(ring.firstKey());
-	}
+    public void removeNode(String url) {
 
-	private int nodeIndex(String url) {
-		String urlWithPrefix = new String(messageDigest.digest((url + RAND
-				.nextInt()).getBytes()));
-		return bucketIndex(urlWithPrefix);
-	}
+        List<Integer> replicaIndexes = replicas.get(url);
 
-	private int bucketIndex(String key) {
-		return Math.abs(key.hashCode() & 0x7F_FF_FF_FF) % RING_LENGTH;
-	}
+        for (int replicaToRemoveIndex : replicaIndexes) {
 
-	public void removeNode(String url) {
+            Node nodeToRemove = ring.get(replicaToRemoveIndex);
 
-		List<Integer> replicaIndexes = replicas.get(url);
+            Node nextNode = nextNode(replicaToRemoveIndex);
 
-		for (int replicaToRemoveIndex : replicaIndexes) {
+            /** merge data from previous node, handle all corner cases here */
+            nextNode.mergeData(nodeToRemove);
 
-			Node nodeToRemove = ring.get(replicaToRemoveIndex);
+            ring.remove(replicaToRemoveIndex);
+        }
 
-			Node nextNode = nextNode(replicaToRemoveIndex);
+    }
 
-			/** merge data from previous node, handle all corner cases here */
-			nextNode.mergeData(nodeToRemove);
+    private Map.Entry<Integer, Node> prevEntry(int index) {
 
-			ring.remove(replicaToRemoveIndex);
-		}
+        --index;
 
-	}
+        if (index < 0) {
+            index = RING_LENGTH - 1;
+        }
 
-	private Map.Entry<Integer, Node> prevEntry(int index) {
+        Map.Entry<Integer, Node> prevEntry = ring.floorEntry(index);
 
-		--index;
+        if (prevEntry == null) {
+            return ring.lastEntry();
+        }
 
-		if (index < 0) {
-			index = RING_LENGTH - 1;
-		}
+        return prevEntry;
+    }
 
-		Map.Entry<Integer, Node> prevEntry = ring.floorEntry(index);
+    private Node nextNode(int index) {
 
-		if (prevEntry == null) {
-			return ring.lastEntry();
-		}
+        Map.Entry<Integer, Node> nextEntry = ring.ceilingEntry((index + 1)
+                % RING_LENGTH);
 
-		return prevEntry;
-	}
+        if (nextEntry == null) {
+            if (ring.firstEntry() != null) {
+                return ring.firstEntry().getValue();
+            }
 
-	private Node nextNode(int index) {
+            return null;
+        }
 
-		Map.Entry<Integer, Node> nextEntry = ring.ceilingEntry((index + 1)
-				% RING_LENGTH);
+        return nextEntry.getValue();
+    }
 
-		if (nextEntry == null) {
-			if (ring.firstEntry() != null) {
-				return ring.firstEntry().getValue();
-			}
+    @SuppressWarnings("unused")
+    private Node findNodeByIndex(int index) {
 
-			return null;
-		}
+        Map.Entry<Integer, Node> entry = ring.ceilingEntry(index);
 
-		return nextEntry.getValue();
-	}
+        if (entry == null) {
+            if (ring.firstEntry() != null) {
+                return ring.firstEntry().getValue();
+            }
 
-	@SuppressWarnings("unused")
-	private Node findNodeByIndex(int index) {
+            return null;
+        }
 
-		Map.Entry<Integer, Node> entry = ring.ceilingEntry(index);
+        return entry.getValue();
 
-		if (entry == null) {
-			if (ring.firstEntry() != null) {
-				return ring.firstEntry().getValue();
-			}
+    }
 
-			return null;
-		}
+    @Override
+    public void close() throws Exception {
+        httpClient.getConnectionManager().shutdown();
+    }
 
-		return entry.getValue();
+    @Override
+    public String toString() {
 
-	}
+        StringBuilder buf = new StringBuilder();
 
-	@Override
-	public void close() throws Exception {
-		httpClient.getConnectionManager().shutdown();
-	}
+        for (Map.Entry<Integer, Node> entry : ring.entrySet()) {
+            buf.append(entry.getKey() + "=>" + entry.getValue().getUrl())
+                    .append(LINE_SEPARATOR);
+        }
 
-	@Override
-	public String toString() {
-
-		StringBuilder buf = new StringBuilder();
-
-		for (Map.Entry<Integer, Node> entry : ring.entrySet()) {
-			buf.append(entry.getKey() + "=>" + entry.getValue().getUrl())
-					.append(LINE_SEPARATOR);
-		}
-
-		return buf.toString();
-	}
+        return buf.toString();
+    }
 
 }

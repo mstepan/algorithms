@@ -9,16 +9,16 @@ public class BTree {
 
     private BTreeNode root;
 
-    public BTree(){
+    public BTree() {
         root = new BTreeNode(DEFAULT_BRANCH_FACTOR);
     }
 
 
-    public void add(String key){
+    public void add(String key) {
 
     }
 
-    public boolean contains(String key){
+    public boolean contains(String key) {
         return false;
     }
 

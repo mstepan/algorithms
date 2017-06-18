@@ -1,13 +1,24 @@
 package com.max.algs.epi.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class OnlineSampling {
+
+    private OnlineSampling() throws Exception {
+
+        List<Integer> data = new ArrayList<>();
+        for (int i = 0; i < 100; ++i) {
+            data.add(i);
+        }
+
+        int sampleSize = 5;
+        int[] sample = onlineSampling(data.iterator(), sampleSize);
+
+        System.out.println(Arrays.toString(sample));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * time: O(N)
@@ -43,21 +54,6 @@ public class OnlineSampling {
         }
 
         return sample;
-    }
-
-    private OnlineSampling() throws Exception {
-
-        List<Integer> data = new ArrayList<>();
-        for (int i = 0; i < 100; ++i) {
-            data.add(i);
-        }
-
-        int sampleSize = 5;
-        int[] sample = onlineSampling(data.iterator(), sampleSize);
-
-        System.out.println(Arrays.toString(sample));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

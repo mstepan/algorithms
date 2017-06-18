@@ -3,60 +3,24 @@ package com.max.algs.puzzle_8;
 
 import com.max.algs.util.ArrayUtils;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public final class Puzzle8Main {
 
     private static List<MoveDirection> solution = null;
 
-    private static enum MoveDirection {
-        LEFT(0, -1) {
-            @Override
-            public MoveDirection inverse() {
-                return RIGTH;
-            }
-        },
-        RIGTH(0, 1) {
-            @Override
-            public MoveDirection inverse() {
-                return LEFT;
-            }
-        },
-        UP(-1, 0) {
-            @Override
-            public MoveDirection inverse() {
-                return DOWN;
-            }
-        },
-        DOWN(1, 0) {
-            @Override
-            public MoveDirection inverse() {
-                return UP;
-            }
-        };
+    private Puzzle8Main() throws Exception {
 
-        private final int rowOffset;
-        private final int colOffset;
+        int[][] board = createRandomBoard();
 
-        MoveDirection(int rowOffset, int colOffset) {
-            this.rowOffset = rowOffset;
-            this.colOffset = colOffset;
-        }
+        int[][] boardCopy = makeCopy(board);
 
-        public abstract MoveDirection inverse();
+        solve(boardCopy);
 
-        public int[] makeMove(int[][] board, int row, int col) {
-            board[row][col] = board[row + rowOffset][col + colOffset];
-            board[row + rowOffset][col + colOffset] = 0;
+//        checkSolution(board, solution);
 
-            return new int[]{row + rowOffset, col + colOffset};
-        }
 
+        System.out.println("Puzzle 8 done...");
     }
 
     private static void solve(int[][] board) {
@@ -171,19 +135,13 @@ public final class Puzzle8Main {
         }
     }
 
-
-    private Puzzle8Main() throws Exception {
-
-        int[][] board = createRandomBoard();
-
-        int[][] boardCopy = makeCopy(board);
-
-        solve(boardCopy);
-
-//        checkSolution(board, solution);
-
-
-        System.out.println("Puzzle 8 done...");
+    public static void main(String[] args) {
+        try {
+            new Puzzle8Main();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 //    private void checkSolution(int[][] initialBoardState, List<MoveDirection> curSolution) {
@@ -215,13 +173,49 @@ public final class Puzzle8Main {
     }
 
 
-    public static void main(String[] args) {
-        try {
-            new Puzzle8Main();
+    private static enum MoveDirection {
+        LEFT(0, -1) {
+            @Override
+            public MoveDirection inverse() {
+                return RIGTH;
+            }
+        },
+        RIGTH(0, 1) {
+            @Override
+            public MoveDirection inverse() {
+                return LEFT;
+            }
+        },
+        UP(-1, 0) {
+            @Override
+            public MoveDirection inverse() {
+                return DOWN;
+            }
+        },
+        DOWN(1, 0) {
+            @Override
+            public MoveDirection inverse() {
+                return UP;
+            }
+        };
+
+        private final int rowOffset;
+        private final int colOffset;
+
+        MoveDirection(int rowOffset, int colOffset) {
+            this.rowOffset = rowOffset;
+            this.colOffset = colOffset;
         }
-        catch (Exception ex) {
-            ex.printStackTrace();
+
+        public abstract MoveDirection inverse();
+
+        public int[] makeMove(int[][] board, int row, int col) {
+            board[row][col] = board[row + rowOffset][col + colOffset];
+            board[row + rowOffset][col + colOffset] = 0;
+
+            return new int[]{row + rowOffset, col + colOffset};
         }
+
     }
 
 

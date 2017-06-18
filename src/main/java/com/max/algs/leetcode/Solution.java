@@ -1,15 +1,32 @@
 package com.max.algs.leetcode;
 
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Solution {
+
+    public Solution() throws Exception {
+
+        int[] nums = {1, 1, 2};
+
+        List<List<Integer>> allSolutions = permuteUnique(nums);
+
+        for (List<Integer> singleSolution : allSolutions) {
+            System.out.println(singleSolution);
+        }
+
+
+        System.out.println("Main done...");
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Solution();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public List<List<Integer>> permuteUnique(int[] nums) {
 
@@ -47,31 +64,6 @@ public class Solution {
             }
         }
 
-    }
-
-
-    public Solution() throws Exception {
-
-        int[] nums = {1, 1, 2};
-
-        List<List<Integer>> allSolutions = permuteUnique(nums);
-
-        for (List<Integer> singleSolution : allSolutions) {
-            System.out.println(singleSolution);
-        }
-
-
-        System.out.println("Main done...");
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            new Solution();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

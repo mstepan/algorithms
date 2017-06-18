@@ -11,6 +11,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class LongestContainedInterval {
 
+    private LongestContainedInterval() throws Exception {
+
+        int[] arr = {3, -2, 7, 9, 8, 1, 2, 0, -1, 5, 8};
+
+        int length = findLongestContainedIntervalLength(arr);
+
+        System.out.printf("longest interval length = %d %n", length);
+
+        System.out.printf("LongestContainedInterval: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - arr.length
      * D - distinct elements count in 'arr'
@@ -71,17 +82,6 @@ public final class LongestContainedInterval {
         }
 
         return val + 1;
-    }
-
-    private LongestContainedInterval() throws Exception {
-
-        int[] arr = {3, -2, 7, 9, 8, 1, 2, 0, -1, 5, 8};
-
-        int length = findLongestContainedIntervalLength(arr);
-
-        System.out.printf("longest interval length = %d %n", length);
-
-        System.out.printf("LongestContainedInterval: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

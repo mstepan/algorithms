@@ -11,8 +11,8 @@ import static com.google.common.base.Preconditions.checkState;
 public class MergeTree {
 
 
-    private int size;
     private final int[][] data;
+    private int size;
     private INode root;
 
     public MergeTree(int[][] matrix) {
@@ -34,15 +34,15 @@ public class MergeTree {
     }
 
 
-    private INode createTree(){
+    private INode createTree() {
 
         Deque<INode> queue = new ArrayDeque<>();
 
-        for( int row = 0; row < data.length; row++ ){
+        for (int row = 0; row < data.length; row++) {
             queue.add(new LeafNode(row, 0));
         }
 
-        while( queue.size() > 1 ){
+        while (queue.size() > 1) {
             INode node1 = queue.poll();
             INode node2 = queue.poll();
             queue.add(new CombinedNode(node1, node2));
@@ -77,7 +77,7 @@ public class MergeTree {
     private int calculateSize(int[][] matrix) {
         int total = 0;
 
-        for (int[] rowArr : matrix ) {
+        for (int[] rowArr : matrix) {
             total += rowArr.length;
         }
 
@@ -85,9 +85,9 @@ public class MergeTree {
     }
 
 
-
     private interface INode {
         int getValue();
+
         void moveToNext();
     }
 
@@ -109,7 +109,7 @@ public class MergeTree {
 
         @Override
         public void moveToNext() {
-            if( value == left.getValue() ){
+            if (value == left.getValue()) {
                 left.moveToNext();
             }
             else {
@@ -121,7 +121,7 @@ public class MergeTree {
 
 
         @Override
-        public String toString(){
+        public String toString() {
             return "[" + getValue() + "]";
         }
     }
@@ -152,7 +152,7 @@ public class MergeTree {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return "[" + row + ", " + col + "] => " + getValue();
         }
 

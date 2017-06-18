@@ -10,6 +10,18 @@ import static junit.framework.TestCase.*;
 
 public class IsbnCacheTest {
 
+    private static void assertCacheSame(String[] arr, IsbnCache cache) {
+
+        Iterator<IsbnCache.IsbnPricePair> it = cache.iterator();
+
+        for (int i = 0; i < arr.length; ++i) {
+            assertTrue("Cache iterator is empty", it.hasNext());
+            assertEquals(arr[i], it.next().isbn);
+        }
+
+        assertFalse("Cache it not fully exhausted", it.hasNext());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void createNegativeCapacity() {
         new IsbnCache(-10);
@@ -86,18 +98,6 @@ public class IsbnCacheTest {
         cache.put("15", 15.0);
 
         assertCacheSame(new String[]{"15", "14", "13", "8", "7"}, cache);
-    }
-
-    private static void assertCacheSame(String[] arr, IsbnCache cache) {
-
-        Iterator<IsbnCache.IsbnPricePair> it = cache.iterator();
-
-        for (int i = 0; i < arr.length; ++i) {
-            assertTrue("Cache iterator is empty", it.hasNext());
-            assertEquals(arr[i], it.next().isbn);
-        }
-
-        assertFalse("Cache it not fully exhausted", it.hasNext());
     }
 
 

@@ -13,9 +13,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- *
  * @link https://en.wikipedia.org/wiki/Dining_philosophers_problem
- *
+ * <p>
  * Resource hierarchy solution.
  * <p>
  * This solution to the problem is the one originally proposed by Dijkstra.

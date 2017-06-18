@@ -9,15 +9,7 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public final class MainIndexer {
 
@@ -101,6 +93,15 @@ public final class MainIndexer {
 
     }
 
+    public static void main(String[] args) {
+        try {
+            new MainIndexer();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
 
     private boolean isDigit(String str) {
 
@@ -187,17 +188,6 @@ public final class MainIndexer {
 
     private Integer nextOrNull(Iterator<Integer> it) {
         return it.hasNext() ? it.next() : null;
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            new MainIndexer();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
     }
 
 }

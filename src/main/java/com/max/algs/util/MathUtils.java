@@ -225,8 +225,8 @@ public final class MathUtils {
         }
 
         throw new IllegalStateException("Can't compute sqrt for '" + value + "' with precision '" +
-                                                SQRT_PRECISION + "' using '" +
-                                                SQRT_MAX_ITERATIONS_COUNT + "' iterations");
+                SQRT_PRECISION + "' using '" +
+                SQRT_MAX_ITERATIONS_COUNT + "' iterations");
     }
 
     /**
@@ -461,44 +461,6 @@ public final class MathUtils {
         return res;
     }
 
-    private static final class FacRecTask extends RecursiveTask<BigInteger> {
-
-        private static final int SEQ_THRESHOLD = 50;
-
-        private final int from;
-        private final int to;
-
-        public FacRecTask(int from, int to) {
-            this.from = from;
-            this.to = to;
-        }
-
-        @Override
-        protected BigInteger compute() {
-
-            int elemsCount = to - from + 1;
-
-            if (elemsCount <= SEQ_THRESHOLD) {
-
-                BigInteger res = BigInteger.valueOf(to);
-
-                for (int i = from; i < to; ++i) {
-                    res = res.multiply(BigInteger.valueOf(i));
-                }
-
-                return res;
-            }
-            int mid = from + ((to - from) >> 1);
-
-            FacRecTask leftTask = new FacRecTask(from, mid);
-            leftTask.fork();
-
-            FacRecTask rightTask = new FacRecTask(mid + 1, to);
-
-            return rightTask.compute().multiply(leftTask.join());
-        }
-    }
-
     public static BigInteger factorialBig(BigInteger value) {
 
         checkArgument(value.compareTo(BigInteger.ZERO) >= 0, "Can't find factorial for negative value");
@@ -536,6 +498,44 @@ public final class MathUtils {
 
     public static int combinations(int k, int n) {
         return factorial(n) / (factorial(k) * factorial(n - k));
+    }
+
+    private static final class FacRecTask extends RecursiveTask<BigInteger> {
+
+        private static final int SEQ_THRESHOLD = 50;
+
+        private final int from;
+        private final int to;
+
+        public FacRecTask(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        protected BigInteger compute() {
+
+            int elemsCount = to - from + 1;
+
+            if (elemsCount <= SEQ_THRESHOLD) {
+
+                BigInteger res = BigInteger.valueOf(to);
+
+                for (int i = from; i < to; ++i) {
+                    res = res.multiply(BigInteger.valueOf(i));
+                }
+
+                return res;
+            }
+            int mid = from + ((to - from) >> 1);
+
+            FacRecTask leftTask = new FacRecTask(from, mid);
+            leftTask.fork();
+
+            FacRecTask rightTask = new FacRecTask(mid + 1, to);
+
+            return rightTask.compute().multiply(leftTask.join());
+        }
     }
 
 }

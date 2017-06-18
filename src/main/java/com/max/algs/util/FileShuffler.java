@@ -1,16 +1,6 @@
 package com.max.algs.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.Closeable;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,52 +30,6 @@ public final class FileShuffler {
         checkArgument(Files.exists(inPath), "File not exists with path: '%s'", inPath.toString());
         this.inFile = inPath.toFile();
         this.outFile = outPath.toFile();
-    }
-
-    /**
-     * Do random shuffle.
-     */
-    public void shuffle() {
-
-        int temporaryFilesCount = calculateTempFilesCount();
-
-        System.out.println("temporaryFilesCount: " + temporaryFilesCount);
-
-        File[] tempFiles = createTempFiles(temporaryFilesCount);
-
-        distributeDataAcrossFiles(tempFiles);
-
-        for (File singleTempFile : tempFiles) {
-            shuffleInMemoryAndWriteToOutputFile(singleTempFile, outFile);
-        }
-    }
-
-    private void distributeDataAcrossFiles(File[] tempFiles) {
-        DataOutputStream[] streams = createDataOutputStreams(tempFiles);
-
-        try {
-            try {
-                try (FileInputStream inStream = new FileInputStream(inFile);
-                     BufferedInputStream bufferedIn = new BufferedInputStream(inStream);
-                     DataInputStream dataStream = new DataInputStream(bufferedIn)) {
-
-                    while (true) {
-                        try {
-                            streams[RAND.nextInt(streams.length)].writeInt(dataStream.readInt());
-                        }
-                        catch (EOFException ex) {
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (IOException ioEx) {
-                throw new IllegalStateException(ioEx);
-            }
-        }
-        finally {
-            closeStreams(streams);
-        }
     }
 
     /**
@@ -150,35 +94,6 @@ public final class FileShuffler {
         }
     }
 
-    private int calculateTempFilesCount() {
-        int temporaryFilesCount = (int) (inFile.length() / INTS_COUNT_IN_GB);
-
-        if (inFile.length() % INTS_COUNT_IN_GB != 0) {
-            ++temporaryFilesCount;
-        }
-
-        return temporaryFilesCount;
-    }
-
-    private File[] createTempFiles(int temporaryFilesCount) {
-        File[] tempFiles = new File[temporaryFilesCount];
-        for (int i = 0; i < tempFiles.length; ++i) {
-            tempFiles[i] = createTempFile(i);
-        }
-
-        return tempFiles;
-    }
-
-    private DataOutputStream[] createDataOutputStreams(File[] tempFiles) {
-
-        DataOutputStream[] streams = new DataOutputStream[tempFiles.length];
-        for (int i = 0; i < tempFiles.length; ++i) {
-            streams[i] = createDataOutputStream(tempFiles[i]);
-        }
-
-        return streams;
-    }
-
     private static File createTempFile(int index) {
         try {
             File file = File.createTempFile("random-shuffle-" + index + "-chunk", ".tmp");
@@ -226,6 +141,81 @@ public final class FileShuffler {
         shuffler.shuffle();
 
         System.out.printf("FileShuffler done: java-%s %n", System.getProperty("java.version"));
+    }
+
+    /**
+     * Do random shuffle.
+     */
+    public void shuffle() {
+
+        int temporaryFilesCount = calculateTempFilesCount();
+
+        System.out.println("temporaryFilesCount: " + temporaryFilesCount);
+
+        File[] tempFiles = createTempFiles(temporaryFilesCount);
+
+        distributeDataAcrossFiles(tempFiles);
+
+        for (File singleTempFile : tempFiles) {
+            shuffleInMemoryAndWriteToOutputFile(singleTempFile, outFile);
+        }
+    }
+
+    private void distributeDataAcrossFiles(File[] tempFiles) {
+        DataOutputStream[] streams = createDataOutputStreams(tempFiles);
+
+        try {
+            try {
+                try (FileInputStream inStream = new FileInputStream(inFile);
+                     BufferedInputStream bufferedIn = new BufferedInputStream(inStream);
+                     DataInputStream dataStream = new DataInputStream(bufferedIn)) {
+
+                    while (true) {
+                        try {
+                            streams[RAND.nextInt(streams.length)].writeInt(dataStream.readInt());
+                        }
+                        catch (EOFException ex) {
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (IOException ioEx) {
+                throw new IllegalStateException(ioEx);
+            }
+        }
+        finally {
+            closeStreams(streams);
+        }
+    }
+
+    private int calculateTempFilesCount() {
+        int temporaryFilesCount = (int) (inFile.length() / INTS_COUNT_IN_GB);
+
+        if (inFile.length() % INTS_COUNT_IN_GB != 0) {
+            ++temporaryFilesCount;
+        }
+
+        return temporaryFilesCount;
+    }
+
+    private File[] createTempFiles(int temporaryFilesCount) {
+        File[] tempFiles = new File[temporaryFilesCount];
+        for (int i = 0; i < tempFiles.length; ++i) {
+            tempFiles[i] = createTempFile(i);
+        }
+
+        return tempFiles;
+    }
+
+    private DataOutputStream[] createDataOutputStreams(File[] tempFiles) {
+
+        DataOutputStream[] streams = new DataOutputStream[tempFiles.length];
+        for (int i = 0; i < tempFiles.length; ++i) {
+            streams[i] = createDataOutputStream(tempFiles[i]);
+        }
+
+        return streams;
     }
 
 }

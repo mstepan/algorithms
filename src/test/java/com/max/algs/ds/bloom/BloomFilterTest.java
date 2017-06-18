@@ -21,8 +21,8 @@ public class BloomFilterTest {
         assertFalse(filter.contains("222"));
     }
 
-    @Test(expected =  UnsupportedOperationException.class)
-    public void remove(){
+    @Test(expected = UnsupportedOperationException.class)
+    public void remove() {
         BloomFilter<String> filter = new BloomFilter<>(100);
         filter.add("111");
         filter.remove("111");

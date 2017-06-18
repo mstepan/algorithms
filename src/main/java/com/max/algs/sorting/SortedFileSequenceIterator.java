@@ -1,111 +1,107 @@
 package com.max.algs.sorting;
 
+import org.apache.log4j.Logger;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
-
 public class SortedFileSequenceIterator implements Iterator<String> {
 
-	private static final Logger LOG = Logger
-			.getLogger(SortedFileSequenceIterator.class);
+    private static final Logger LOG = Logger
+            .getLogger(SortedFileSequenceIterator.class);
+    private final byte[] buf = new byte[1024];
+    private final RandomAccessFile randFile;
+    private int curPos = 0;
+    private int readedBytes = -1;
+    private long handledBytesCount = 0;
+    private String word;
 
-	private int curPos = 0;
-	private int readedBytes = -1;
+    public SortedFileSequenceIterator(Path path) {
+        try {
+            randFile = new RandomAccessFile(path.toFile(), "r");
+            next();
+        }
+        catch (FileNotFoundException ex) {
+            throw new IllegalStateException(ex);
+        }
 
-	private final byte[] buf = new byte[1024];
+    }
 
-	private final RandomAccessFile randFile;
+    public boolean fullyFinished() {
+        try {
+            return handledBytesCount == randFile.length();
+        }
+        catch (IOException ioEx) {
+            LOG.error(ioEx);
+        }
 
-	private long handledBytesCount = 0;
-	private String word;
+        return true;
+    }
 
-	public SortedFileSequenceIterator(Path path) {
-		try {
-			randFile = new RandomAccessFile(path.toFile(), "r");
-			next();
-		}
-		catch (FileNotFoundException ex) {
-			throw new IllegalStateException(ex);
-		}
+    @Override
+    public boolean hasNext() {
+        return word == null;
+    }
 
-	}
+    @Override
+    public String next() {
 
-	public boolean fullyFinished() {
-		try {
-			return handledBytesCount == randFile.length();
-		}
-		catch (IOException ioEx) {
-			LOG.error(ioEx);
-		}
+        String retValue = word;
 
-		return true;
-	}
+        word = extractWord();
 
-	@Override
-	public boolean hasNext() {
-		return word == null;
-	}
+        return retValue;
+    }
 
-	@Override
-	public String next() {
+    private String extractWord() {
 
-		String retValue = word;
+        if (curPos < readedBytes) {
 
-		word = extractWord();
+            StringBuilder wordBuf = new StringBuilder();
 
-		return retValue;
-	}
+            while (true) {
 
-	private String extractWord() {
+                if (buf[curPos] == ' ') {
+                    break;
+                }
 
-		if (curPos < readedBytes) {
+                if (buf[curPos] == System.lineSeparator().charAt(0)) {
+                }
 
-			StringBuilder wordBuf = new StringBuilder();
+                wordBuf.append(buf[curPos]);
+                ++curPos;
+            }
 
-			while (true) {
+            return wordBuf.toString();
+        }
 
-				if (buf[curPos] == ' ') {
-					break;
-				}
+        // try top read next chunk
+        else {
+            readNextChunk();
 
-				if (buf[curPos] == System.lineSeparator().charAt(0)) {
-				}
+            if (readedBytes < 0) {
+                return null;
+            }
 
-				wordBuf.append(buf[curPos]);
-				++curPos;
-			}
+            return "";
+        }
+    }
 
-			return wordBuf.toString();
-		}
+    private void readNextChunk() {
+        try {
+            readedBytes = randFile.read(buf);
+        }
+        catch (IOException ioEx) {
+            throw new IllegalStateException(ioEx);
+        }
+    }
 
-		// try top read next chunk
-		else {
-			readNextChunk();
-
-			if (readedBytes < 0) {
-				return null;
-			}
-
-			return "";
-		}
-	}
-
-	private void readNextChunk() {
-		try {
-			readedBytes = randFile.read(buf);
-		}
-		catch (IOException ioEx) {
-			throw new IllegalStateException(ioEx);
-		}
-	}
-
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 
 }

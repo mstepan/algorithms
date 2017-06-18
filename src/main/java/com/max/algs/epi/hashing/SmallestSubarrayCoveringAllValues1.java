@@ -11,6 +11,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class SmallestSubarrayCoveringAllValues1 {
 
+    private SmallestSubarrayCoveringAllValues1() throws Exception {
+
+        String textToSearch = "hello the wonderful and beautiful world this world is hello like";
+
+        String[] searchKeywords = {"hello", "world"};
+
+        Subarray res = findShortestDigest(textToSearch, searchKeywords);
+
+        System.out.println(res);
+
+        System.out.printf("SmallestSubarrayCoveringAllValues: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - arr.length
      * M - search.size()
@@ -95,6 +108,15 @@ public final class SmallestSubarrayCoveringAllValues1 {
         }
     }
 
+    public static void main(String[] args) {
+        try {
+            new SmallestSubarrayCoveringAllValues1();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static final class Subarray {
 
         static final Subarray EMPTY = new Subarray(-1, -1);
@@ -116,29 +138,6 @@ public final class SmallestSubarrayCoveringAllValues1 {
         @Override
         public String toString() {
             return String.format("[%d, %d]", from, to);
-        }
-    }
-
-
-    private SmallestSubarrayCoveringAllValues1() throws Exception {
-
-        String textToSearch = "hello the wonderful and beautiful world this world is hello like";
-
-        String[] searchKeywords = {"hello", "world"};
-
-        Subarray res = findShortestDigest(textToSearch, searchKeywords);
-
-        System.out.println(res);
-
-        System.out.printf("SmallestSubarrayCoveringAllValues: java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new SmallestSubarrayCoveringAllValues1();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 }

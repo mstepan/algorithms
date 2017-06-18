@@ -17,13 +17,10 @@ public class ArrayTrie implements Set<String> {
 
     private static final char ZERO = '0';
     private static final char NINE = '9';
-
-    private int size;
-
     private final int alphabetSize;
     private final int offset;
-
     private final ArrayTrieNode root;
+    private int size;
 
     public ArrayTrie(int alphabetSize, int offset) {
         this.alphabetSize = alphabetSize;
@@ -41,6 +38,10 @@ public class ArrayTrie implements Set<String> {
 
     public static ArrayTrie digitsTrie() {
         return new ArrayTrie(NINE - ZERO + 1, ZERO);
+    }
+
+    private static void checkStringNotNull(String value) {
+        checkNotNull(value, "null 'value' can't be added to trie");
     }
 
     @Override
@@ -77,7 +78,6 @@ public class ArrayTrie implements Set<String> {
 
         return false;
     }
-
 
     @Override
     public boolean addAll(Collection<? extends String> col) {
@@ -121,7 +121,6 @@ public class ArrayTrie implements Set<String> {
 
         return res;
     }
-
 
     @Override
     public boolean retainAll(Collection<?> c) {
@@ -172,16 +171,11 @@ public class ArrayTrie implements Set<String> {
         return null;
     }
 
-    private static void checkStringNotNull(String value) {
-        checkNotNull(value, "null 'value' can't be added to trie");
-    }
-
     private static class ArrayTrieNode {
 
         private final ArrayTrieNode[] next;
-        private boolean leaf;
-
         private final int offset;
+        private boolean leaf;
 
         public ArrayTrieNode(int alphabetSize, int offset) {
             this.next = new ArrayTrieNode[alphabetSize];

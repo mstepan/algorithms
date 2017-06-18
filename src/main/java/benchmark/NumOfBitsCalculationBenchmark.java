@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -40,7 +27,138 @@ public class NumOfBitsCalculationBenchmark {
 
     static {
         for (int i = 0; i < BITS_COUNT_PER_BYTE.length; ++i) {
-            BITS_COUNT_PER_BYTE[i] = (short)numOfBitsOptimized(i);
+            BITS_COUNT_PER_BYTE[i] = (short) numOfBitsOptimized(i);
+        }
+    }
+
+    /**
+     * Calculate number of bits using conditional jump.
+     */
+    private static int numOfBitsWithJump(int baseValue) {
+
+        int value = baseValue;
+        int bitsCount = 0;
+
+        while (value != 0) {
+            if ((value & 1) == 1) {
+                ++bitsCount;
+            }
+            value >>>= 1;
+        }
+
+        return bitsCount;
+    }
+
+    /**
+     * Calculate number of bits WITHOUT conditional jump.
+     */
+    private static int numOfBits(int baseValue) {
+
+        int value = baseValue;
+        int bitsCount = 0;
+
+        while (value != 0) {
+            bitsCount += (value & 1);
+            value >>>= 1;
+        }
+
+        return bitsCount;
+    }
+
+    /**
+     * Calculate number of bits algorithmically optimised.
+     */
+    private static int numOfBitsOptimized(int baseValue) {
+
+        int value = baseValue;
+        int bitsCount = 0;
+
+        while (value != 0) {
+            ++bitsCount;
+            value &= (value - 1);
+        }
+
+        return bitsCount;
+    }
+
+    /**
+     * Calculate number of bits converting number to String.
+     */
+    private static int numOfBitsString(int baseValue) {
+
+        String value = Integer.toBinaryString(baseValue);
+        int bitsCount = 0;
+
+        for (int i = 0, length = value.length(); i < length; ++i) {
+            if (value.charAt(i) == '1') {
+                ++bitsCount;
+            }
+        }
+
+        return bitsCount;
+    }
+
+    /**
+     * Calculate number of bits using previously precomputed values for bytes.
+     */
+    private static int numOfBitsPrecomputed(int baseValue) {
+        return BITS_COUNT_PER_BYTE[baseValue & 0xFF] +
+                BITS_COUNT_PER_BYTE[(baseValue >>> 8) & 0xFF] +
+                BITS_COUNT_PER_BYTE[(baseValue >>> 16) & 0xFF] +
+                BITS_COUNT_PER_BYTE[(baseValue >>> 24) & 0xFF];
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(NumOfBitsCalculationBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("numOfBitsWithJump")
+    @GroupThreads(2)
+    public void numOfBitsWithJump(ArrPerThread state) {
+        for (int value : state.arr1) {
+            numOfBitsWithJump(value);
+        }
+    }
+
+    @Benchmark
+    @Group("numOfBits")
+    @GroupThreads(2)
+    public void numOfBits(ArrPerThread state) {
+        for (int value : state.arr2) {
+            numOfBits(value);
+        }
+    }
+
+    @Benchmark
+    @Group("numOfBitsOptimized")
+    @GroupThreads(2)
+    public void numOfBitsOptimized(ArrPerThread state) {
+        for (int value : state.arr3) {
+            numOfBitsOptimized(value);
+        }
+    }
+
+    @Benchmark
+    @Group("numOfBitsString")
+    @GroupThreads(2)
+    public void numOfBitsString(ArrPerThread state) {
+        for (int value : state.arr4) {
+            numOfBitsString(value);
+        }
+    }
+
+    @Benchmark
+    @Group("numOfBitsPrecomputed")
+    @GroupThreads(2)
+    public void numOfBitsPrecomputed(ArrPerThread state) {
+        for (int value : state.arr5) {
+            numOfBitsPrecomputed(value);
         }
     }
 
@@ -70,137 +188,6 @@ public class NumOfBitsCalculationBenchmark {
             arr4 = null;
             arr5 = null;
         }
-    }
-
-    @Benchmark
-    @Group("numOfBitsWithJump")
-    @GroupThreads(2)
-    public void numOfBitsWithJump(ArrPerThread state) {
-        for (int value : state.arr1) {
-            numOfBitsWithJump(value);
-        }
-    }
-
-    /**
-     * Calculate number of bits using conditional jump.
-     */
-    private static int numOfBitsWithJump(int baseValue) {
-
-        int value = baseValue;
-        int bitsCount = 0;
-
-        while (value != 0) {
-            if ((value & 1) == 1) {
-                ++bitsCount;
-            }
-            value >>>= 1;
-        }
-
-        return bitsCount;
-    }
-
-    @Benchmark
-    @Group("numOfBits")
-    @GroupThreads(2)
-    public void numOfBits(ArrPerThread state) {
-        for (int value : state.arr2) {
-            numOfBits(value);
-        }
-    }
-
-    /**
-     * Calculate number of bits WITHOUT conditional jump.
-     */
-    private static int numOfBits(int baseValue) {
-
-        int value = baseValue;
-        int bitsCount = 0;
-
-        while (value != 0) {
-            bitsCount += (value & 1);
-            value >>>= 1;
-        }
-
-        return bitsCount;
-    }
-
-    @Benchmark
-    @Group("numOfBitsOptimized")
-    @GroupThreads(2)
-    public void numOfBitsOptimized(ArrPerThread state) {
-        for (int value : state.arr3) {
-            numOfBitsOptimized(value);
-        }
-    }
-
-    /**
-     * Calculate number of bits algorithmically optimised.
-     */
-    private static int numOfBitsOptimized(int baseValue) {
-
-        int value = baseValue;
-        int bitsCount = 0;
-
-        while (value != 0) {
-            ++bitsCount;
-            value &= (value - 1);
-        }
-
-        return bitsCount;
-    }
-
-    @Benchmark
-    @Group("numOfBitsString")
-    @GroupThreads(2)
-    public void numOfBitsString(ArrPerThread state) {
-        for (int value : state.arr4) {
-            numOfBitsString(value);
-        }
-    }
-
-    /**
-     * Calculate number of bits converting number to String.
-     */
-    private static int numOfBitsString(int baseValue) {
-
-        String value = Integer.toBinaryString(baseValue);
-        int bitsCount = 0;
-
-        for (int i = 0, length = value.length(); i < length; ++i) {
-            if (value.charAt(i) == '1') {
-                ++bitsCount;
-            }
-        }
-
-        return bitsCount;
-    }
-
-    @Benchmark
-    @Group("numOfBitsPrecomputed")
-    @GroupThreads(2)
-    public void numOfBitsPrecomputed(ArrPerThread state) {
-        for (int value : state.arr5) {
-            numOfBitsPrecomputed(value);
-        }
-    }
-
-    /**
-     * Calculate number of bits using previously precomputed values for bytes.
-     */
-    private static int numOfBitsPrecomputed(int baseValue) {
-        return BITS_COUNT_PER_BYTE[baseValue & 0xFF] +
-                BITS_COUNT_PER_BYTE[(baseValue >>> 8) & 0xFF] +
-                BITS_COUNT_PER_BYTE[(baseValue >>> 16) & 0xFF] +
-                BITS_COUNT_PER_BYTE[(baseValue >>> 24) & 0xFF];
-    }
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(NumOfBitsCalculationBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
 }

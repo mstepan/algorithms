@@ -9,6 +9,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FindMinMaxSimultaneously {
 
+    private FindMinMaxSimultaneously() throws Exception {
+
+        int[] arr = {5, 3, 3, 2, 12, 12, 8, 12, -6, -5, -33};
+
+        System.out.println(finMinMax(arr));
+
+        System.out.printf("'FindMinMaxSimultaneously' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N)
      * space: O(1)
@@ -45,15 +54,6 @@ public class FindMinMaxSimultaneously {
         }
 
         return Pair.of(minSoFar, maxSoFar);
-    }
-
-    private FindMinMaxSimultaneously() throws Exception {
-
-        int[] arr = {5, 3, 3, 2, 12, 12, 8, 12, -6, -5, -33};
-
-        System.out.println(finMinMax(arr));
-
-        System.out.printf("'FindMinMaxSimultaneously' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

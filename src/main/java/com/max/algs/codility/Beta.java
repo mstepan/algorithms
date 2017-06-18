@@ -1,8 +1,8 @@
 package com.max.algs.codility;
 
-import java.util.Arrays;
-
 import org.apache.log4j.Logger;
+
+import java.util.Arrays;
 
 /*
 
@@ -43,116 +43,114 @@ import org.apache.log4j.Logger;
  */
 public class Beta {
 
-	private static final Logger LOG = Logger.getLogger(Beta.class);
+    private static final Logger LOG = Logger.getLogger(Beta.class);
 
-	private static final class Range implements Comparable<Range> {
+    public Beta() throws Exception {
+        int[] a = {1, 5, 2, 1, 4, 0};
+        LOG.info(solution(a));
+    }
 
-		@Override
-		public int compareTo(Range other) {
+    public static void main(String[] args) {
+        try {
+            new Beta();
+        }
+        catch (Exception ex) {
+            LOG.error(ex);
+        }
 
-			if (to > other.to) {
-				return 1;
-			}
-			else
-				if (to < other.to) {
-					return -1;
-				}
+    }
 
-			if (from > other.from) {
-				return 1;
-			}
-			else
-				if (from < other.from) {
-					return -1;
-				}
-			return 0;
-		}
+    public int solution(int[] a) {
 
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + from;
-			result = prime * result + to;
-			return result;
-		}
+        Range[] ranges = new Range[a.length];
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Range other = (Range) obj;
-			if (from != other.from)
-				return false;
-			if (to != other.to)
-				return false;
-			return true;
-		}
+        for (int center = 0; center < a.length; center++) {
+            int from = Math.max(0, center - a[center]);
+            int to = center + a[center];
+            ranges[center] = new Range(from, to);
+        }
 
-		final int from;
-		final int to;
+        Arrays.sort(ranges);
 
-		Range(int x, int y) {
-			super();
-			this.from = x;
-			this.to = y;
-		}
+        int intersections = 0;
 
-		@Override
-		public String toString() {
-			return "[" + from + ";" + to + "]";
-		}
+        for (int i = ranges.length - 1; i > 0; i--) {
 
-	}
+            int checkTo = ranges[i].from;
 
-	public int solution(int[] a) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (checkTo > ranges[j].to) {
+                    break;
+                }
 
-		Range[] ranges = new Range[a.length];
+                ++intersections;
+            }
 
-		for (int center = 0; center < a.length; center++) {
-			int from = Math.max(0, center - a[center]);
-			int to = center + a[center];
-			ranges[center] = new Range(from, to);
-		}
+        }
 
-		Arrays.sort(ranges);
+        return intersections;
+    }
 
-		int intersections = 0;
+    private static final class Range implements Comparable<Range> {
 
-		for (int i = ranges.length - 1; i > 0; i--) {
+        final int from;
+        final int to;
 
-			int checkTo = ranges[i].from;
+        Range(int x, int y) {
+            super();
+            this.from = x;
+            this.to = y;
+        }
 
-			for (int j = i - 1; j >= 0; j--) {
-				if (checkTo > ranges[j].to) {
-					break;
-				}
+        @Override
+        public int compareTo(Range other) {
 
-				++intersections;
-			}
+            if (to > other.to) {
+                return 1;
+            }
+            else if (to < other.to) {
+                return -1;
+            }
 
-		}
+            if (from > other.from) {
+                return 1;
+            }
+            else if (from < other.from) {
+                return -1;
+            }
+            return 0;
+        }
 
-		return intersections;
-	}
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + from;
+            result = prime * result + to;
+            return result;
+        }
 
-	public Beta() throws Exception {
-		int[] a = { 1, 5, 2, 1, 4, 0 };
-		LOG.info(solution(a));
-	}
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Range other = (Range) obj;
+            if (from != other.from)
+                return false;
+            if (to != other.to)
+                return false;
+            return true;
+        }
 
-	public static void main(String[] args) {
-		try {
-			new Beta();
-		}
-		catch (Exception ex) {
-			LOG.error(ex);
-		}
+        @Override
+        public String toString() {
+            return "[" + from + ";" + to + "]";
+        }
 
-	}
+    }
 
 }

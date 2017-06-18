@@ -6,19 +6,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class MissedAndDuplicateMain {
 
-    private static final class MissedAndDuplicate {
-        final int missed;
-        final int duplicate;
+    private MissedAndDuplicateMain() throws Exception {
 
-        MissedAndDuplicate(int missed, int duplicate) {
-            this.missed = missed;
-            this.duplicate = duplicate;
-        }
+        int[] arr = new int[]{5, 4, 3, 4, 1, 0};
 
-        @Override
-        public String toString() {
-            return "missed: " + missed + ", duplicate: " + duplicate;
-        }
+        MissedAndDuplicate res = findMissedAndDuplicate(arr);
+
+        System.out.println(res);
+
+        System.out.printf("MissedAndDuplicateMain done: java-%s %n", System.getProperty("java.version"));
     }
 
     /**
@@ -69,23 +65,27 @@ public final class MissedAndDuplicateMain {
         return new MissedAndDuplicate(elem1, elem2);
     }
 
-    private MissedAndDuplicateMain() throws Exception {
-
-        int[] arr = new int[]{5, 4, 3, 4, 1, 0};
-
-        MissedAndDuplicate res = findMissedAndDuplicate(arr);
-
-        System.out.println(res);
-
-        System.out.printf("MissedAndDuplicateMain done: java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new MissedAndDuplicateMain();
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static final class MissedAndDuplicate {
+        final int missed;
+        final int duplicate;
+
+        MissedAndDuplicate(int missed, int duplicate) {
+            this.missed = missed;
+            this.duplicate = duplicate;
+        }
+
+        @Override
+        public String toString() {
+            return "missed: " + missed + ", duplicate: " + duplicate;
         }
     }
 }

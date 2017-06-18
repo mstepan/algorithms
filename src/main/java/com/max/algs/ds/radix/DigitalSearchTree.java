@@ -2,8 +2,6 @@ package com.max.algs.ds.radix;
 
 import java.util.Optional;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 /**
  * Simple implementation of digital (radix) search tree.
  * Key bits processed from most significant (left most) one.
@@ -14,9 +12,42 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class DigitalSearchTree {
 
     private static final int MOST_SIGNIFICANT_BIT = 31;
-
-    private int size;
     private final DigitalNode head = new DigitalNode(0);
+    private int size;
+
+    private static DigitalNode extractLeftmostLeaf(DigitalNode cur) {
+
+        DigitalNode parent = cur;
+
+        while (true) {
+
+            // leaf node found
+            if (cur.isLeaf()) {
+
+                if (parent.left == cur) {
+                    parent.left = null;
+                }
+                else {
+                    parent.right = null;
+                }
+
+                return cur;
+            }
+
+            parent = cur;
+
+            if (cur.left != null) {
+                cur = cur.left;
+            }
+            else {
+                cur = cur.right;
+            }
+        }
+    }
+
+    private static int getBitByIndex(int value, int index) {
+        return (value >> index) & 0x1;
+    }
 
     public boolean add(int value) {
 
@@ -154,40 +185,6 @@ public class DigitalSearchTree {
         }
 
         --size;
-    }
-
-    private static DigitalNode extractLeftmostLeaf(DigitalNode cur) {
-
-        DigitalNode parent = cur;
-
-        while (true) {
-
-            // leaf node found
-            if (cur.isLeaf()) {
-
-                if (parent.left == cur) {
-                    parent.left = null;
-                }
-                else {
-                    parent.right = null;
-                }
-
-                return cur;
-            }
-
-            parent = cur;
-
-            if (cur.left != null) {
-                cur = cur.left;
-            }
-            else {
-                cur = cur.right;
-            }
-        }
-    }
-
-    private static int getBitByIndex(int value, int index) {
-        return (value >> index) & 0x1;
     }
 
     private static final class SearchResult {

@@ -1,10 +1,13 @@
 package com.max.algs.isa;
 
 
+import org.apache.log4j.Logger;
+
 import java.nio.file.Paths;
 
 public final class IndexedSequentialAccessMain {
 
+    private static final Logger LOG = Logger.getLogger(IndexedSequentialAccessMain.class);
 
     private IndexedSequentialAccessMain() throws Exception {
         IpsMasterIndex index = IpsMasterIndex.createFromDataFile(Paths.get("/Users/mstepan/Desktop/ips.txt"),
@@ -23,7 +26,7 @@ public final class IndexedSequentialAccessMain {
             System.out.printf("contains('%s') = %b %n", ipToCheck, indexFromFile.contains(ipToCheck));
         }
 
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+        LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {
@@ -31,7 +34,7 @@ public final class IndexedSequentialAccessMain {
             new IndexedSequentialAccessMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

@@ -20,20 +20,6 @@ public class PalindromeSubstringQuery {
         this.suffix = calculateSuffix(arr);
     }
 
-    public boolean isPalindrome(int from, int to) {
-
-        checkRange(from, to);
-
-        BigInteger prefixHash = hashForRangeFromPrefixArray(prefix, from, to);
-        BigInteger suffixHash = hashForRangeFromSuffixArray(suffix, from, to);
-
-        return prefixHash.equals(suffixHash);
-    }
-
-    private void checkRange(int from, int to) {
-        checkArgument(from >= 0 && to < prefix.length && from <= to);
-    }
-
     private static BigInteger[] calculatePrefix(char[] arr) {
         BigInteger[] prefix = new BigInteger[arr.length];
         prefix[0] = BigInteger.valueOf(arr[0]);
@@ -63,7 +49,6 @@ public class PalindromeSubstringQuery {
         return basePowerValue;
     }
 
-
     private static BigInteger hashForRangeFromPrefixArray(BigInteger[] prefix, int from, int to) {
 
         if (from == 0) {
@@ -80,6 +65,20 @@ public class PalindromeSubstringQuery {
         }
 
         return suffix[from].subtract(suffix[to + 1].multiply(toPower(HASH_BASE, to - from + 1)));
+    }
+
+    public boolean isPalindrome(int from, int to) {
+
+        checkRange(from, to);
+
+        BigInteger prefixHash = hashForRangeFromPrefixArray(prefix, from, to);
+        BigInteger suffixHash = hashForRangeFromSuffixArray(suffix, from, to);
+
+        return prefixHash.equals(suffixHash);
+    }
+
+    private void checkRange(int from, int to) {
+        checkArgument(from >= 0 && to < prefix.length && from <= to);
     }
 
 }

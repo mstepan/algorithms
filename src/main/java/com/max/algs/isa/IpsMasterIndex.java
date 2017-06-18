@@ -19,12 +19,7 @@ final class IpsMasterIndex implements Externalizable {
     private static final long SINGLE_IP_RECORD_SIZE = 16; // in bytes
     private static final long PAGE_SIZE = 4 * 1024; // 4 KB = 4 * 1024 bytes
     static final int IPS_PER_PAGE = (int) (PAGE_SIZE / SINGLE_IP_RECORD_SIZE);
-
-    private List<IpSinglePage> pages;
-    private Path dataFilePath;
-
     private static final Pattern DOT_REGEXP = Pattern.compile("[.]");
-
     private static final Comparator<String> IP_STR_CMP = new Comparator<String>() {
         @Override
         public int compare(String str1, String str2) {
@@ -46,6 +41,8 @@ final class IpsMasterIndex implements Externalizable {
             return 0;
         }
     };
+    private List<IpSinglePage> pages;
+    private Path dataFilePath;
 
     public IpsMasterIndex() {
         dataFilePath = null;

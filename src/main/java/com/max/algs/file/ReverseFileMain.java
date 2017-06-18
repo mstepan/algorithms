@@ -21,7 +21,7 @@ public final class ReverseFileMain {
 
         Path originalPath = Paths.get("/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/file/1.txt");
         Path invertedPath = Paths.get("/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/file/1_inverted" +
-                                              ".txt");
+                ".txt");
 
         reverseFile(originalPath, invertedPath);
 

@@ -7,6 +7,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class RemoveDuplicatesFromSortedArray {
 
+    private RemoveDuplicatesFromSortedArray() throws Exception {
+        int[] arr = {-5, -5, 2, 3, 5, 5, 7, 7, 8, 11, 11, 11, 11, 13, 13};
+
+        System.out.printf("before: %s %n", Arrays.toString(arr));
+
+        int zeroIndex = removeDuplicatesFromSortedArray(arr);
+
+        System.out.printf("after: %s %n", Arrays.toString(arr));
+        System.out.printf("zeroIndex = %d %n", zeroIndex);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Remove duplicates from sorted array.
      * <p>
@@ -44,19 +57,6 @@ public final class RemoveDuplicatesFromSortedArray {
         }
 
         return index;
-    }
-
-    private RemoveDuplicatesFromSortedArray() throws Exception {
-        int[] arr = {-5, -5, 2, 3, 5, 5, 7, 7, 8, 11, 11, 11, 11, 13, 13};
-
-        System.out.printf("before: %s %n", Arrays.toString(arr));
-
-        int zeroIndex = removeDuplicatesFromSortedArray(arr);
-
-        System.out.printf("after: %s %n", Arrays.toString(arr));
-        System.out.printf("zeroIndex = %d %n", zeroIndex);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

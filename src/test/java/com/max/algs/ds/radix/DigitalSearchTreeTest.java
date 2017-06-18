@@ -87,7 +87,7 @@ public class DigitalSearchTreeTest {
             boolean actual = tree.add(value);
 
             assertEquals("value = " + value + " was inserted incorrectly, expected = " +
-                                 expected + ", actual = " + actual, expected, actual);
+                    expected + ", actual = " + actual, expected, actual);
         }
 
         assertEquals(expectedSet.isEmpty(), tree.isEmpty());

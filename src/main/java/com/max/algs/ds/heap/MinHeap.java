@@ -28,7 +28,7 @@ public class MinHeap<T extends Comparable<T>> {
 
     public MinHeap(int arity) {
         checkArgument(arity >= MIN_ARITY && arity <= MAX_ARITY,
-                      "'arity' parameter is incorrect, should be in range [%s, %s], actual = %s", MIN_ARITY, MAX_ARITY, arity);
+                "'arity' parameter is incorrect, should be in range [%s, %s], actual = %s", MIN_ARITY, MAX_ARITY, arity);
         this.arity = arity;
         this.arr = createArray(INITIAL_CAPACITY);
     }

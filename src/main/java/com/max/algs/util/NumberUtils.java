@@ -13,6 +13,10 @@ public final class NumberUtils {
     private static final BigDecimal TWO = new BigDecimal("2");
     private static final BigDecimal MINUS_ONE = new BigDecimal("-1");
 
+    private NumberUtils() {
+        super();
+    }
+
     /**
      * Reconstruct 'float' 32 bit value from raw bit integer representation.
      */
@@ -82,7 +86,7 @@ public final class NumberUtils {
     public static int compareRounded(double first, double second, int decimalPlaces) {
         double scale = Math.pow(10.0, decimalPlaces);
         return Double.compare(Math.round(first * scale),
-                              Math.round(second * scale));
+                Math.round(second * scale));
     }
 
     /**
@@ -120,7 +124,6 @@ public final class NumberUtils {
     public static int sign(int value) {
         return 1 | (value >> Integer.SIZE - 1);
     }
-
 
     /**
      * Returns integer with only one least significant bit set to '1'.
@@ -217,19 +220,16 @@ public final class NumberUtils {
         return NORM_INT - (int) (NORM_DOUBLE - value);
     }
 
-
     public static boolean isPerfectSquare(double value) {
         int squareValue = (int) Math.sqrt(value);
         int intValue = (int) value;
         return intValue == squareValue * squareValue;
     }
 
-
     public static boolean isFibonacci(int x) {
         return isPerfectSquare(5 * x * x + 4) ||
                 isPerfectSquare(5 * x * x - 4);
     }
-
 
     /*
      * Reverse bits representation for 'int' value
@@ -239,7 +239,6 @@ public final class NumberUtils {
         value = swapBytes(value, 1, 2);
         return value;
     }
-
 
     /**
      * Swap bytes in 'int'
@@ -281,7 +280,6 @@ public final class NumberUtils {
 
     }
 
-
     /**
      * Calculate parity of binary representation for integer.
      * <p>
@@ -319,11 +317,9 @@ public final class NumberUtils {
         return value;
     }
 
-
     public static int swapAdjBits(int value) {
         return ((value & 0x55555555) << 1) | ((value & 0xAAAAAAAA) >>> 1);
     }
-
 
     /**
      * Calculate polynom in O(n) time.
@@ -348,7 +344,6 @@ public final class NumberUtils {
 
         return res;
     }
-
 
     /**
      * Number of bits needed to represent 'value'.
@@ -386,11 +381,6 @@ public final class NumberUtils {
         }
 
         return Math.log10(i) / Math.log10(2.0);
-    }
-
-
-    private NumberUtils() {
-        super();
     }
 
 

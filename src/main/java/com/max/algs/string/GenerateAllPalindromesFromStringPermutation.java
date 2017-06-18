@@ -1,17 +1,26 @@
 package com.max.algs.string;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Generate all palindromes from string permutation.
  */
 public class GenerateAllPalindromesFromStringPermutation {
+
+    private GenerateAllPalindromesFromStringPermutation() throws Exception {
+
+        String str = "aabbccc";
+
+        Set<String> allPermutations = generateAllPalindromicPermutations(str);
+
+        for (String perm : allPermutations) {
+            System.out.println(perm);
+        }
+
+        System.out.println(allPermutations.size());
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     private static void generateHalfsOfPermutation(Map<Character, Integer> freq, Set<String> permutations,
                                                    Deque<Character> partialSol,
@@ -46,7 +55,6 @@ public class GenerateAllPalindromesFromStringPermutation {
 
         return buf.toString();
     }
-
 
     private static int countChars(Map<Character, Integer> freq) {
         int count = 0;
@@ -146,21 +154,6 @@ public class GenerateAllPalindromesFromStringPermutation {
             buf.append(str.charAt(i));
         }
         return buf.toString();
-    }
-
-    private GenerateAllPalindromesFromStringPermutation() throws Exception {
-
-        String str = "aabbccc";
-
-        Set<String> allPermutations = generateAllPalindromicPermutations(str);
-
-        for (String perm : allPermutations) {
-            System.out.println(perm);
-        }
-
-        System.out.println(allPermutations.size());
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

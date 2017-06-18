@@ -13,8 +13,16 @@ public class FindFirstAndLastPosition {
 
     private static final Pair<Integer, Integer> NOT_FOUND = new Pair<>(-1, -1);
 
-    private enum Order {
-        FIRST, LAST
+    private FindFirstAndLastPosition() throws Exception {
+
+        int[] arr = {5, 5, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
+
+        Pair<Integer, Integer> indexes = findFirstAndLastIndex(arr, 86);
+
+        System.out.printf("indexes: %s %n", indexes);
+
+
+        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     /**
@@ -69,18 +77,6 @@ public class FindFirstAndLastPosition {
         return index;
     }
 
-    private FindFirstAndLastPosition() throws Exception {
-
-        int[] arr = {5, 5, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
-
-        Pair<Integer, Integer> indexes = findFirstAndLastIndex(arr, 86);
-
-        System.out.printf("indexes: %s %n", indexes);
-
-
-        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
     public static void main(String[] args) {
         try {
             new FindFirstAndLastPosition();
@@ -88,6 +84,10 @@ public class FindFirstAndLastPosition {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private enum Order {
+        FIRST, LAST
     }
 
 }

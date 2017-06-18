@@ -1,22 +1,8 @@
 package com.max.algs.util;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.channels.FileChannel;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -33,6 +19,10 @@ public final class FileUtils {
 
     private static final char[] HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
+
+    private FileUtils() {
+        super();
+    }
 
     /**
      * Generate file with all possible integer values, aka in range [Integer.MIN_VALUE; Integer.MAX_VALUE]
@@ -111,7 +101,7 @@ public final class FileUtils {
         }
 
         return new String[]{fullFileName.substring(0, extensionIndex), fullFileName.substring(extensionIndex + 1,
-                                                                                              fullFileName.length())};
+                fullFileName.length())};
     }
 
     public static String getFileExtension(Path filePath) {
@@ -146,7 +136,6 @@ public final class FileUtils {
 
     }
 
-
     public static String createFileDigest(Path path) {
 
         List<String> words = new ArrayList<>();
@@ -180,7 +169,6 @@ public final class FileUtils {
 
     }
 
-
     public static void removeLineNumbers(Path inPath, Path outPath) {
 
         try {
@@ -208,7 +196,6 @@ public final class FileUtils {
         }
     }
 
-
     public static void deleteFile(File file) {
         if (!file.delete()) {
             throw new IllegalArgumentException("Can't delete file: " + file.getPath());
@@ -220,7 +207,6 @@ public final class FileUtils {
         createNew(path);
         return path;
     }
-
 
     public static void createNew(Path path) {
         try {
@@ -249,11 +235,6 @@ public final class FileUtils {
         catch (IOException ioEx) {
             throw new IllegalArgumentException("Can't generate new file: " + file.getPath(), ioEx);
         }
-    }
-
-
-    private FileUtils() {
-        super();
     }
 
 }

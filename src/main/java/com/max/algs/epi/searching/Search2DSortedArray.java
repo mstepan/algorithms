@@ -10,6 +10,37 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class Search2DSortedArray {
 
 
+    private Search2DSortedArray() throws Exception {
+
+        int[][] arr = {
+                {-1, 2, 4, 4, 6},
+                {1, 5, 5, 9, 21},
+                {3, 6, 6, 9, 22},
+                {3, 6, 8, 10, 24},
+                {6, 8, 9, 12, 25},
+                {8, 10, 12, 13, 40}
+        };
+
+        for (int[] rowArr : arr) {
+            for (int value : rowArr) {
+
+                boolean found = contains(arr, value);
+
+                if (!found) {
+                    throw new IllegalStateException("Not found");
+                }
+            }
+        }
+
+
+        System.out.printf("contains: %b %n", contains(arr, 7));
+        System.out.printf("contains: %b %n", contains(arr, 50));
+        System.out.printf("contains: %b %n", contains(arr, -10));
+        System.out.printf("contains: %b %n", contains(arr, 11));
+
+        System.out.printf("'Search2DSortedArray' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - rows
      * M - cols
@@ -59,37 +90,6 @@ public class Search2DSortedArray {
         for (int row = 1; row < arr.length; ++row) {
             checkArgument(arr[row] != null && arr[row].length == cols, "2D array isn't rectangle");
         }
-    }
-
-    private Search2DSortedArray() throws Exception {
-
-        int[][] arr = {
-                {-1, 2, 4, 4, 6},
-                {1, 5, 5, 9, 21},
-                {3, 6, 6, 9, 22},
-                {3, 6, 8, 10, 24},
-                {6, 8, 9, 12, 25},
-                {8, 10, 12, 13, 40}
-        };
-
-        for (int[] rowArr : arr) {
-            for (int value : rowArr) {
-
-                boolean found = contains(arr, value);
-
-                if (!found) {
-                    throw new IllegalStateException("Not found");
-                }
-            }
-        }
-
-
-        System.out.printf("contains: %b %n", contains(arr, 7));
-        System.out.printf("contains: %b %n", contains(arr, 50));
-        System.out.printf("contains: %b %n", contains(arr, -10));
-        System.out.printf("contains: %b %n", contains(arr, 11));
-
-        System.out.printf("'Search2DSortedArray' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

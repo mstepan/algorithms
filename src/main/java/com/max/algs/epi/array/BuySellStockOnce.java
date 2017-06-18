@@ -51,9 +51,9 @@ public class BuySellStockOnce {
         }
 
         System.out.printf("maxProfit = %d , buy = %d, sell = %d%n",
-                          maxProfit,
-                          maxProfitPair[0],
-                          maxProfitPair[1]);
+                maxProfit,
+                maxProfitPair[0],
+                maxProfitPair[1]);
     }
 
     private static void checkValidStocks(int[] stocks) {
@@ -66,7 +66,7 @@ public class BuySellStockOnce {
 
     /**
      * Variant: fina max subarray with all elements equal.
-     *
+     * <p>
      * time: O(N)
      * space: O(1)
      */

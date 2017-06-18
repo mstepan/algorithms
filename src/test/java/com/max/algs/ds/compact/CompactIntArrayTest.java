@@ -71,8 +71,8 @@ public class CompactIntArrayTest {
 
         for (int i = 0; i < arr.length; ++i) {
             assertEquals("Elements at index = " + i + " are different, arr[i] = " + arr[i] +
-                                 ", compactArr[i] = " + compactArr.get(i),
-                         arr[i], compactArr.get(i));
+                            ", compactArr[i] = " + compactArr.get(i),
+                    arr[i], compactArr.get(i));
         }
 
     }

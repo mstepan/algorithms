@@ -20,6 +20,14 @@ public final class RopeString implements CharSequence {
         this.totalLength = totalLength;
     }
 
+    private static RopeMidNode combineWithRebalancing(RopeNode left, RopeNode right) {
+        RopeMidNode combinedRoot = new RopeMidNode(left, right);
+
+        //TODO: do rebelancing if needed
+
+        return combinedRoot;
+    }
+
     @Override
     public char charAt(int index) {
         checkArgument(index >= 0 && index < totalLength);
@@ -48,13 +56,5 @@ public final class RopeString implements CharSequence {
         RopeMidNode combinedRoot = combineWithRebalancing(this.root, new RopeLeafNode(otherStr));
 
         return new RopeString(combinedRoot, this.totalLength + otherStr.length());
-    }
-
-    private static RopeMidNode combineWithRebalancing(RopeNode left, RopeNode right) {
-        RopeMidNode combinedRoot = new RopeMidNode(left, right);
-
-        //TODO: do rebelancing if needed
-
-        return combinedRoot;
     }
 }

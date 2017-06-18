@@ -1,20 +1,7 @@
 package benchmark.cpu;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -36,26 +23,19 @@ public class WriteReadMemoryDependency1Benchmark {
 
     private static final int ARR_LENGTH = 1_000_000;
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
-
-        public int[] arr1;
-        public int[] arr2;
-        public int[] arr3;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
-            arr2 = Arrays.copyOf(arr1, arr1.length);
-            arr3 = Arrays.copyOf(arr1, arr1.length);
+    private static void copyArray(int[] arr, int src, int dest) {
+        for (; src < arr.length && dest < arr.length; ++src, ++dest) {
+            arr[dest] = arr[src];
         }
+    }
 
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-            arr2 = null;
-            arr3 = null;
-        }
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(WriteReadMemoryDependency1Benchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -79,19 +59,26 @@ public class WriteReadMemoryDependency1Benchmark {
         copyArray(state.arr3, 0, 0);
     }
 
-    private static void copyArray(int[] arr, int src, int dest) {
-        for (; src < arr.length && dest < arr.length; ++src, ++dest) {
-            arr[dest] = arr[src];
+    @State(Scope.Thread)
+    public static class ArrPerThread {
+
+        public int[] arr1;
+        public int[] arr2;
+        public int[] arr3;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
+            arr2 = Arrays.copyOf(arr1, arr1.length);
+            arr3 = Arrays.copyOf(arr1, arr1.length);
         }
-    }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(WriteReadMemoryDependency1Benchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+            arr2 = null;
+            arr3 = null;
+        }
     }
 
 }

@@ -2,15 +2,20 @@ package com.max.algs.util;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for {@link com.max.algs.util.MathUtils}
  */
 public class MathUtilsTest {
 
+
+    /**
+     * This polynom generates prime numbers from 0 till 39.
+     */
+    private static int primePolynom(int n) {
+        return n * n + n + 41;
+    }
 
     @Test
     public void isPrime() {
@@ -21,15 +26,6 @@ public class MathUtilsTest {
         assertFalse("value " + 40 + " marked as not prime, but it's actually prime", MathUtils.isPrime(primePolynom(40)));
         assertFalse("value " + 41 + " marked as not prime, but it's actually prime", MathUtils.isPrime(primePolynom(41)));
     }
-
-
-    /**
-     * This polynom generates prime numbers from 0 till 39.
-     */
-    private static int primePolynom(int n) {
-        return n * n + n + 41;
-    }
-
 
     @Test
     public void addBinary() {

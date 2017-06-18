@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -36,44 +23,6 @@ import java.util.concurrent.TimeUnit;
 public class InstructionLevelParallelismBenchmark {
 
     private static final int ARR_LENGTH = 1 << 20; // 1_048_576
-
-    @State(Scope.Thread)
-    public static class ArrPerThread {
-
-        private static final Random RAND = new Random();
-
-        public double[] arr1;
-        public double[] arr2;
-
-        public double x;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = ArrayUtils.generateDoubleArray(ARR_LENGTH);
-            arr2 = Arrays.copyOf(arr1, arr1.length);
-            x = RAND.nextDouble();
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-            arr2 = null;
-        }
-    }
-
-    @Benchmark
-    @Group("polynom")
-    @GroupThreads(4)
-    public void polynom(ArrPerThread state) {
-        evaluatePolynom(state.arr1, state.x);
-    }
-
-    @Benchmark
-    @Group("polynomHorner")
-    @GroupThreads(4)
-    public void polynomHorner(ArrPerThread state) {
-        evaluatePolynomHorner(state.arr2, state.x);
-    }
 
     private static double evaluatePolynom(double[] coefficients, double x) {
 
@@ -106,6 +55,44 @@ public class InstructionLevelParallelismBenchmark {
                 .build();
 
         new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("polynom")
+    @GroupThreads(4)
+    public void polynom(ArrPerThread state) {
+        evaluatePolynom(state.arr1, state.x);
+    }
+
+    @Benchmark
+    @Group("polynomHorner")
+    @GroupThreads(4)
+    public void polynomHorner(ArrPerThread state) {
+        evaluatePolynomHorner(state.arr2, state.x);
+    }
+
+    @State(Scope.Thread)
+    public static class ArrPerThread {
+
+        private static final Random RAND = new Random();
+
+        public double[] arr1;
+        public double[] arr2;
+
+        public double x;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = ArrayUtils.generateDoubleArray(ARR_LENGTH);
+            arr2 = Arrays.copyOf(arr1, arr1.length);
+            x = RAND.nextDouble();
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+            arr2 = null;
+        }
     }
 
 }

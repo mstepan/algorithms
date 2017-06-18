@@ -13,6 +13,16 @@ import static org.junit.Assert.assertNotNull;
 public class GraphUtilsTest {
 
 
+    private static Set<String> newHashSet(String... data) {
+        Set<String> set = new HashSet<>();
+
+        for (String value : data) {
+            set.add(value);
+        }
+
+        return set;
+    }
+
     @Test
     public void connectedComponents() {
 
@@ -52,17 +62,6 @@ public class GraphUtilsTest {
         assertEquals("1-st connected component is incorrect", firstComponentExpected, components2.get(0));
         assertEquals("2-nd connected component is incorrect", secondComponentExpected, components2.get(1));
     }
-
-    private static Set<String> newHashSet(String... data) {
-        Set<String> set = new HashSet<>();
-
-        for (String value : data) {
-            set.add(value);
-        }
-
-        return set;
-    }
-
 
     @Test(expected = IllegalArgumentException.class)
     public void gamiltonianCyclesNullGraph() {
@@ -108,8 +107,8 @@ public class GraphUtilsTest {
 
         if (expected.length != actual.length) {
             throw new AssertionError("Arrays aren't equals, have different length: " + Arrays.toString(expected) + ", actual:" +
-                                             " " +
-                                             Arrays.toString(actual));
+                    " " +
+                    Arrays.toString(actual));
         }
 
 

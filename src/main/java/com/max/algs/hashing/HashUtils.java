@@ -9,8 +9,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class HashUtils {
 
     private static final Random RAND = ThreadLocalRandom.current();
-
-
+    private static final long FNV_OFFSET_32 = 2_166_136_26L;
+    private static final int FNV_32_OFFSET_BASIS = (int) (FNV_OFFSET_32 ^ (FNV_OFFSET_32 >>> 32));
+    private static final int FNV_32_PRIME = 16_777_619;
+    private static final int MUR_MUR_C1 = 0xCC_9E_2D_51;
+    private static final int MUR_MUR_C2 = 0x1B_87_35_93;
+    private static final int MUR_MUR_R1 = 15;
+    private static final int MUR_MUR_R2 = 13;
+    private static final int MUR_MUR_M = 5;
+    private static final int MUR_MUR_N = 0xE6_54_6B_64;
+    private static final int MUR_MUR_SEED = RAND.nextInt();
     private HashUtils() {
         throw new IllegalStateException("Can't instantiate utility class");
     }
@@ -26,7 +34,6 @@ public final class HashUtils {
         }
         return hash;
     }
-
 
     /**
      * Jenkins one at a time hash.
@@ -49,11 +56,6 @@ public final class HashUtils {
         return hash;
     }
 
-
-    private static final long FNV_OFFSET_32 = 2_166_136_26L;
-    private static final int FNV_32_OFFSET_BASIS = (int) (FNV_OFFSET_32 ^ (FNV_OFFSET_32 >>> 32));
-    private static final int FNV_32_PRIME = 16_777_619;
-
     /**
      * Fowler–Noll–Vo hash function that produces 32 bits hash code.
      * See: http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-source
@@ -69,16 +71,6 @@ public final class HashUtils {
 
         return hash;
     }
-
-
-    private static final int MUR_MUR_C1 = 0xCC_9E_2D_51;
-    private static final int MUR_MUR_C2 = 0x1B_87_35_93;
-    private static final int MUR_MUR_R1 = 15;
-    private static final int MUR_MUR_R2 = 13;
-    private static final int MUR_MUR_M = 5;
-    private static final int MUR_MUR_N = 0xE6_54_6B_64;
-
-    private static final int MUR_MUR_SEED = RAND.nextInt();
 
     /**
      * Murmur 3 hashing algorithm.
@@ -97,19 +89,25 @@ public final class HashUtils {
         int index = blocksCount * 4;
         int k1 = 0;
 
-        switch (key.length() & 3) {
-            case 3:
-                k1 ^= key.charAt(index + 2) << 16;
-            case 2:
-                k1 ^= key.charAt(index + 1) << 8;
-            case 1:
-                k1 ^= key.charAt(index);
+        int maskedLength = key.length() & 3;
 
-                k1 *= MUR_MUR_C1;
-                k1 = (k1 << MUR_MUR_R1) | (k1 >> (32 - MUR_MUR_R1));
-                k1 *= MUR_MUR_C2;
-                hash ^= k1;
+        // apply this transformation to key with length only '3'
+        if (maskedLength == 3) {
+            k1 ^= key.charAt(index + 2) << 16;
         }
+
+        // apply this transformation to key with length '2' or '3'
+        if (maskedLength >= 2) {
+            k1 ^= key.charAt(index + 1) << 8;
+        }
+
+        // apply this transformation to key with length '1', '2' or '3'
+        k1 ^= key.charAt(index);
+
+        k1 *= MUR_MUR_C1;
+        k1 = (k1 << MUR_MUR_R1) | (k1 >> (32 - MUR_MUR_R1));
+        k1 *= MUR_MUR_C2;
+        hash ^= k1;
 
         hash ^= key.length();
         hash ^= (hash >> 16);

@@ -34,113 +34,15 @@ public class BooleanParenthesization {
 
     private static final int MOD = 1003;
 
-    private static final class BooleanExpr {
-        final boolean left;
-        final boolean right;
-        final boolean res;
+    private BooleanParenthesization() throws Exception {
 
-        static BooleanExpr create(String[] str) {
-            return new BooleanExpr(fromZeroOne(str[0]), fromZeroOne(str[1]), fromZeroOne(str[2]));
-        }
+        String expr = "T | T & F ^ T";
+        int res = calculatePossibleTrueValues(expr);
 
-        static boolean fromZeroOne(String val) {
-            return "1".equals(val);
-        }
+        System.out.printf("res = %d %n", res);
 
-        BooleanExpr(boolean left, boolean right, boolean res) {
-            this.left = left;
-            this.right = right;
-            this.res = res;
-        }
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
-
-    private enum Operation {
-
-        OR('|', "0,0,0|0,1,1|1,0,1|1,1,1"),
-        AND('&', "0,0,0|0,1,0|1,0,0|1,1,1"),
-        XOR('^', "0,0,0|0,1,1|1,0,1|1,1,0");
-
-        Operation(char symbol, String booleanTableStr) {
-            this.symbol = symbol;
-            this.table = parseTable(booleanTableStr);
-        }
-
-        final char symbol;
-        final List<BooleanExpr> table;
-
-        static Operation fromChar(char ch) {
-
-            for (Operation op : values()) {
-                if (op.symbol == ch) {
-                    return op;
-                }
-            }
-
-            throw new IllegalArgumentException("Can't find Operation for character: '" + ch + "'");
-        }
-
-        private static List<BooleanExpr> parseTable(String booleanTableStr) {
-
-            List<BooleanExpr> res = new ArrayList<>();
-
-            String[] arr = booleanTableStr.split("[|]");
-
-            for (String singleExpr : arr) {
-                String[] values = singleExpr.split(",");
-                res.add(BooleanExpr.create(values));
-            }
-
-            return res;
-        }
-
-
-    }
-
-    private static final class TFCounter {
-        final int trueCnt;
-        final int falseCnt;
-
-        static TFCounter create(char ch) {
-            if (ch == 'T') {
-                return new TFCounter(1, 0);
-            }
-
-            if (ch == 'F') {
-                return new TFCounter(0, 1);
-            }
-
-            throw new IllegalArgumentException("Unknown true/false character: '" + ch + "'");
-        }
-
-        TFCounter(int trueCnt, int falseCnt) {
-            this.trueCnt = trueCnt;
-            this.falseCnt = falseCnt;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            TFCounter tfCounter = (TFCounter) o;
-            return trueCnt == tfCounter.trueCnt &&
-                    falseCnt == tfCounter.falseCnt;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(trueCnt, falseCnt);
-        }
-
-        @Override
-        public String toString() {
-            return trueCnt + " / " + falseCnt;
-        }
-    }
-
 
     /**
      * N - true/false variables count in 'exprStr'
@@ -233,7 +135,7 @@ public class BooleanParenthesization {
             }
             // 'false' counter
             else {
-                falseCnt = (falseCnt + curCnt) ;
+                falseCnt = (falseCnt + curCnt);
             }
         }
 
@@ -241,23 +143,118 @@ public class BooleanParenthesization {
 
     }
 
-    private BooleanParenthesization() throws Exception {
-
-        String expr = "T | T & F ^ T";
-        int res = calculatePossibleTrueValues(expr);
-
-        System.out.printf("res = %d %n", res);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
-
     public static void main(String[] args) {
         try {
             new BooleanParenthesization();
         }
         catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private enum Operation {
+
+        OR('|', "0,0,0|0,1,1|1,0,1|1,1,1"),
+        AND('&', "0,0,0|0,1,0|1,0,0|1,1,1"),
+        XOR('^', "0,0,0|0,1,1|1,0,1|1,1,0");
+
+        final char symbol;
+        final List<BooleanExpr> table;
+        Operation(char symbol, String booleanTableStr) {
+            this.symbol = symbol;
+            this.table = parseTable(booleanTableStr);
+        }
+
+        static Operation fromChar(char ch) {
+
+            for (Operation op : values()) {
+                if (op.symbol == ch) {
+                    return op;
+                }
+            }
+
+            throw new IllegalArgumentException("Can't find Operation for character: '" + ch + "'");
+        }
+
+        private static List<BooleanExpr> parseTable(String booleanTableStr) {
+
+            List<BooleanExpr> res = new ArrayList<>();
+
+            String[] arr = booleanTableStr.split("[|]");
+
+            for (String singleExpr : arr) {
+                String[] values = singleExpr.split(",");
+                res.add(BooleanExpr.create(values));
+            }
+
+            return res;
+        }
+
+
+    }
+
+    private static final class BooleanExpr {
+        final boolean left;
+        final boolean right;
+        final boolean res;
+
+        BooleanExpr(boolean left, boolean right, boolean res) {
+            this.left = left;
+            this.right = right;
+            this.res = res;
+        }
+
+        static BooleanExpr create(String[] str) {
+            return new BooleanExpr(fromZeroOne(str[0]), fromZeroOne(str[1]), fromZeroOne(str[2]));
+        }
+
+        static boolean fromZeroOne(String val) {
+            return "1".equals(val);
+        }
+    }
+
+    private static final class TFCounter {
+        final int trueCnt;
+        final int falseCnt;
+
+        TFCounter(int trueCnt, int falseCnt) {
+            this.trueCnt = trueCnt;
+            this.falseCnt = falseCnt;
+        }
+
+        static TFCounter create(char ch) {
+            if (ch == 'T') {
+                return new TFCounter(1, 0);
+            }
+
+            if (ch == 'F') {
+                return new TFCounter(0, 1);
+            }
+
+            throw new IllegalArgumentException("Unknown true/false character: '" + ch + "'");
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            TFCounter tfCounter = (TFCounter) o;
+            return trueCnt == tfCounter.trueCnt &&
+                    falseCnt == tfCounter.falseCnt;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(trueCnt, falseCnt);
+        }
+
+        @Override
+        public String toString() {
+            return trueCnt + " / " + falseCnt;
         }
     }
 }

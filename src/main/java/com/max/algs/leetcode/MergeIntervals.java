@@ -1,12 +1,7 @@
 package com.max.algs.leetcode;
 
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 /**
  * See: https://leetcode.com/problems/merge-intervals/
@@ -26,6 +21,19 @@ public class MergeIntervals {
             return Integer.compare(interval1.start, interval2.start);
         }
     };
+
+    public MergeIntervals() throws Exception {
+        List<Interval> intervals = new ArrayList<>();
+
+        intervals.add(new Interval(1, 3));
+        intervals.add(new Interval(2, 6));
+        intervals.add(new Interval(8, 10));
+        intervals.add(new Interval(15, 18));
+
+        List<Interval> mergedList = merge(intervals);
+
+        System.out.println(mergedList);
+    }
 
     private static boolean isIntersect(Interval cur, Interval other) {
 
@@ -51,6 +59,15 @@ public class MergeIntervals {
         }
 
         return new Interval(left.start, Math.max(left.end, right.end));
+    }
+
+    public static void main(String[] args) {
+        try {
+            new MergeIntervals();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -107,30 +124,6 @@ public class MergeIntervals {
         @Override
         public String toString() {
             return "[" + start + "," + end + "]";
-        }
-    }
-
-
-    public MergeIntervals() throws Exception {
-        List<Interval> intervals = new ArrayList<>();
-
-        intervals.add(new Interval(1, 3));
-        intervals.add(new Interval(2, 6));
-        intervals.add(new Interval(8, 10));
-        intervals.add(new Interval(15, 18));
-
-        List<Interval> mergedList = merge(intervals);
-
-        System.out.println(mergedList);
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            new MergeIntervals();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

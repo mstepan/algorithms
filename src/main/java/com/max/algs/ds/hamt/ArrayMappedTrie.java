@@ -45,12 +45,10 @@ public class ArrayMappedTrie {
         String hashedKey = EncodeUtils.hashKey(key);
 
 
-
-
         return false;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 

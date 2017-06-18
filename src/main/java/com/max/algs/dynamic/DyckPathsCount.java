@@ -5,9 +5,8 @@ import java.util.Arrays;
 
 /**
  * See:
- *  https://en.wikipedia.org/wiki/Lattice_path
- *  https://en.wikipedia.org/wiki/Catalan_number
- *
+ * https://en.wikipedia.org/wiki/Lattice_path
+ * https://en.wikipedia.org/wiki/Catalan_number
  */
 public final class DyckPathsCount {
 

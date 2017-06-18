@@ -1,26 +1,19 @@
 package com.max.algs.hashing.cuckoo;
 
 
+import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.util.NumberUtils;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.AbstractSet;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import com.max.algs.hashing.universal.UniversalHashFunction;
-import com.max.algs.util.NumberUtils;
+import java.util.*;
 
 
 /**
  * Cuckoo hash set.
  * Not thread safe.
  * Doesn't allow NULL values.
- *
  */
 public class CuckooHashSet<E> extends AbstractSet<E>
         implements Set<E>, Cloneable, java.io.Serializable {
@@ -41,19 +34,19 @@ public class CuckooHashSet<E> extends AbstractSet<E>
     private long modCount;
 
 
-    public CuckooHashSet(Collection<E> col ){
+    public CuckooHashSet(Collection<E> col) {
         this();
-        addAll( col );
+        addAll(col);
     }
 
     @SuppressWarnings("unchecked")
-    public CuckooHashSet(){
+    public CuckooHashSet() {
         super();
 
         tables = new Object[NUM_OF_TABLES][];
         hashFunctions = new UniversalHashFunction[NUM_OF_TABLES];
 
-        for( int i =0; i < NUM_OF_TABLES; i++ ){
+        for (int i = 0; i < NUM_OF_TABLES; i++) {
             tables[i] = new Object[capacity];
             hashFunctions[i] = UniversalHashFunction.generate();
         }
@@ -66,30 +59,30 @@ public class CuckooHashSet<E> extends AbstractSet<E>
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean remove(Object valueToDelete){
+    public boolean remove(Object valueToDelete) {
 
-        if( valueToDelete == null ){
+        if (valueToDelete == null) {
             return false;
         }
 
-        for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
+        for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
 
 
-            int slot = calculateSlot( (E)valueToDelete, tableIndex);
+            int slot = calculateSlot((E) valueToDelete, tableIndex);
 
-            if( valueToDelete.equals( tables[tableIndex][slot] ) ){
+            if (valueToDelete.equals(tables[tableIndex][slot])) {
                 tables[tableIndex][slot] = null;
                 --size;
                 ++modCount;
@@ -102,13 +95,13 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean add(E baseValue){
+    public boolean add(E baseValue) {
 
-        if( baseValue == null ){
+        if (baseValue == null) {
             throw new IllegalArgumentException("Can't store NULL value");
         }
 
-        if( contains(baseValue) ){
+        if (contains(baseValue)) {
             return false;
         }
 
@@ -120,18 +113,18 @@ public class CuckooHashSet<E> extends AbstractSet<E>
         final int maxLoopIterations = calculateMaxLoopIterations();
 
         MAIN_LOOP:
-        while( iteration < maxLoopIterations ){
+        while (iteration < maxLoopIterations) {
 
-            for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
+            for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
 
                 int slot = calculateSlot(value, tableIndex);
 
-                if( tables[tableIndex][slot] == null ){
+                if (tables[tableIndex][slot] == null) {
                     tables[tableIndex][slot] = value;
                     break MAIN_LOOP;
                 }
 
-                E temp = (E)tables[tableIndex][slot];
+                E temp = (E) tables[tableIndex][slot];
                 tables[tableIndex][slot] = value;
                 value = temp;
             }
@@ -139,7 +132,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
             ++iteration;
         }
 
-        if( iteration >= maxLoopIterations ){
+        if (iteration >= maxLoopIterations) {
             rehash();
             add(value); // 'put' will increment 'size'
         }
@@ -152,15 +145,15 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean contains( Object value ){
+    public boolean contains(Object value) {
 
-        for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
+        for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
 
-            int slot = calculateSlot( (E)value, tableIndex );
+            int slot = calculateSlot((E) value, tableIndex);
 
-            Object[] table  = tables[tableIndex];
+            Object[] table = tables[tableIndex];
 
-            if( value.equals(table[slot]) ){
+            if (value.equals(table[slot])) {
                 return true;
             }
         }
@@ -170,17 +163,16 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
     /**
      * CEIL( 3 * log2(N) )
-     *
      */
-    private int calculateMaxLoopIterations(){
-        return Math.max( 1, (int)Math.ceil(3 * NumberUtils.log2( size ) ) );
+    private int calculateMaxLoopIterations() {
+        return Math.max(1, (int) Math.ceil(3 * NumberUtils.log2(size)));
     }
 
-    private int calculateSlot(E value, int funcIndex){
+    private int calculateSlot(E value, int funcIndex) {
 
-        int slot = hashFunctions[funcIndex].hash( value );
+        int slot = hashFunctions[funcIndex].hash(value);
 
-        if( slot < 0 ){
+        if (slot < 0) {
             slot = -slot;
         }
 
@@ -188,7 +180,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
     }
 
     @SuppressWarnings("unchecked")
-    private void rehash(){
+    private void rehash() {
 
         Object[][] tempTables = tables;
 
@@ -197,11 +189,11 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
         tables = new Object[tables.length][];
 
-        for( int i = 0; i < tempTables.length; i++ ){
+        for (int i = 0; i < tempTables.length; i++) {
             tables[i] = new Object[capacity];
         }
 
-        for( Object[] tempTable : tempTables) {
+        for (Object[] tempTable : tempTables) {
             for (Object value : tempTable) {
                 if (value != null) {
                     add((E) value);
@@ -216,13 +208,13 @@ public class CuckooHashSet<E> extends AbstractSet<E>
     public CuckooHashSet<E> clone() {
         CuckooHashSet<E> result = null;
         try {
-            result = (CuckooHashSet<E>)super.clone();
+            result = (CuckooHashSet<E>) super.clone();
         }
         catch (CloneNotSupportedException e) {
             /** assert false; */
         }
 
-        if( result == null ){
+        if (result == null) {
             throw new IllegalStateException("Clone returned NULL");
         }
 
@@ -232,7 +224,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
         result.hashFunctions = hashFunctions.clone();
         result.tables = tables.clone();
 
-        for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
+        for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
             result.tables[tableIndex] = tables[tableIndex].clone();
         }
 
@@ -240,23 +232,22 @@ public class CuckooHashSet<E> extends AbstractSet<E>
     }
 
 
-
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
 
         out.writeInt(tables.length);
-        out.writeInt( capacity );
-        out.writeInt( size );
+        out.writeInt(capacity);
+        out.writeInt(size);
 
         /** write all stored objects */
-        for( Object value : this ){
-            out.writeObject( value );
+        for (Object value : this) {
+            out.writeObject(value);
         }
     }
 
 
     @SuppressWarnings("unchecked")
-    private void readObject( ObjectInputStream in )   throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
 
         int tablesLength = in.readInt();
@@ -266,13 +257,13 @@ public class CuckooHashSet<E> extends AbstractSet<E>
         tables = new Object[tablesLength][];
         hashFunctions = new UniversalHashFunction[tablesLength];
 
-        for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
+        for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
             tables[tableIndex] = new Object[capacity];
             hashFunctions[tableIndex] = UniversalHashFunction.generate();
         }
 
         /** read all stored objects */
-        for ( int i = 0; i < originalSize; i++){
+        for (int i = 0; i < originalSize; i++) {
             this.add((E) in.readObject());
         }
     }
@@ -294,12 +285,12 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
         CuckooHashSet<?> other = (CuckooHashSet<?>) obj;
 
-        if( tables.length != other.tables.length ){
+        if (tables.length != other.tables.length) {
             return false;
         }
 
-        for( int tableIndex = 0; tableIndex < tables.length; tableIndex++ ){
-            if ( !Arrays.equals(tables[tableIndex], other.tables[tableIndex]) ) {
+        for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
+            if (!Arrays.equals(tables[tableIndex], other.tables[tableIndex])) {
                 return false;
             }
         }
@@ -316,7 +307,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
         int result = 17;
 
-        for( Object[] singleTable : tables ){
+        for (Object[] singleTable : tables) {
             result = 31 * result + (singleTable != null ? Arrays.hashCode(singleTable) : 0);
         }
 
@@ -353,11 +344,11 @@ public class CuckooHashSet<E> extends AbstractSet<E>
         @Override
         public U next() {
 
-            if( storedModCount != modCount ){
+            if (storedModCount != modCount) {
                 throw new ConcurrentModificationException("CuckooHashSet was modified during traversation");
             }
 
-            if( ! hasNext() ){
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
 
@@ -365,15 +356,15 @@ public class CuckooHashSet<E> extends AbstractSet<E>
             Object[] table;
 
             MAIN_LOOP:
-            while( tableIndex < tables.length ){
+            while (tableIndex < tables.length) {
 
                 table = tables[tableIndex];
 
-                while( curIndex < table.length ){
+                while (curIndex < table.length) {
 
-                    if( table[curIndex] != null ){
+                    if (table[curIndex] != null) {
                         ++traversedElemsCount;
-                        retValue = (U)table[curIndex];
+                        retValue = (U) table[curIndex];
                         lastTableIndex = tableIndex;
                         lastIndex = curIndex;
                         ++curIndex;
@@ -393,8 +384,8 @@ public class CuckooHashSet<E> extends AbstractSet<E>
         @Override
         public void remove() {
 
-            if( lastTableIndex < 0 && lastIndex < 0 ){
-                 throw new IllegalStateException("Call next() first");
+            if (lastTableIndex < 0 && lastIndex < 0) {
+                throw new IllegalStateException("Call next() first");
             }
 
             tables[lastTableIndex][lastIndex] = null;
@@ -405,7 +396,6 @@ public class CuckooHashSet<E> extends AbstractSet<E>
             lastIndex = -1;
         }
     }
-
 
 
 }

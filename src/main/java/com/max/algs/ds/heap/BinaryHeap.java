@@ -1,18 +1,11 @@
 package com.max.algs.ds.heap;
 
 
-import java.util.AbstractQueue;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.*;
 
 //import com.max.algs.util.ArrayUtils;
 
 /**
- *
  * Max/min binary heap.
  * Allow duplicate values.
  * Each time heap capacity exceeded, heap doubles.
@@ -21,68 +14,93 @@ import java.util.Queue;
 public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> implements Queue<T>, java.io.Serializable {
 
 
-	private static final long serialVersionUID = 7417235263892357315L;
+    private static final long serialVersionUID = 7417235263892357315L;
 
-	private static final int DEFAULT_CAPACITY = 8;
+    private static final int DEFAULT_CAPACITY = 8;
 
     private final BinaryHeapType type;
 
     private T[] arr;
     private int size;
-    
+
     private transient int modCount = 0;
 
+
+    private BinaryHeap(BinaryHeapType type, int initialCapacity) {
+        this.type = type;
+        this.arr = createArray(initialCapacity);
+    }
+
+    private BinaryHeap(BinaryHeapType type) {
+        this.type = type;
+        this.arr = createArray(DEFAULT_CAPACITY);
+    }
+
+    public static <U extends Comparable<U>> BinaryHeap<U> maxHeap() {
+        return new BinaryHeap<>(BinaryHeapType.MAX);
+    }
+
+    public static <U extends Comparable<U>> BinaryHeap<U> minHeap() {
+        return new BinaryHeap<>(BinaryHeapType.MIN);
+    }
+
+    public static <U extends Comparable<U>> BinaryHeap<U> minHeap(int initialCapacity) {
+        return new BinaryHeap<>(BinaryHeapType.MIN, initialCapacity);
+    }
+
+    public static <U extends Comparable<U>> BinaryHeap<U> maxHeap(int initialCapacity) {
+        return new BinaryHeap<>(BinaryHeapType.MAX, initialCapacity);
+    }
 
     /**
      * Retrieves and removes the head of this queue,
      * or returns <tt>null</tt> if this queue is empty.
      */
-	@Override
-	public T poll() {
-		
-		if( isEmpty() ){
-			return null;
-		}
-		
-		if( size == 0 ){
+    @Override
+    public T poll() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        if (size == 0) {
             throw new IllegalStateException("Can't extract min value from empty Heap");
         }
 
-        T retValue = arr[0]; 
+        T retValue = arr[0];
 
-        arr[0] = arr[size-1];
-        arr[size-1] = null;
+        arr[0] = arr[size - 1];
+        arr[size - 1] = null;
         --size;
         ++modCount;
 
-       
-        fixDown( 0 );
+
+        fixDown(0);
 
         return retValue;
-	}
+    }
 
-	 /**
+    /**
      * Retrieves, but does not remove, the head of this queue,
      * or returns <tt>null</tt> if this queue is empty.
      */
-	@Override
-	public T peek() {		
-		if( isEmpty() ){
-			return null;
-		}
-		
-		return arr[0];
-	}	
+    @Override
+    public T peek() {
+        if (isEmpty()) {
+            return null;
+        }
 
+        return arr[0];
+    }
 
-	@Override
-	public Iterator<T> iterator() {		
-		return new BinaryHeapIterator(modCount);
-	}
+    @Override
+    public Iterator<T> iterator() {
+        return new BinaryHeapIterator(modCount);
+    }
 
-	@Override
-	public boolean offer(T value) {
-		if( size == arr.length ){
+    @Override
+    public boolean offer(T value) {
+        if (size == arr.length) {
             resize();
         }
 
@@ -92,46 +110,18 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> implem
         ++modCount;
 
         return true;
-	}
-    
-
-
-    private BinaryHeap(BinaryHeapType type, int initialCapacity){
-        this.type = type;
-        this.arr = createArray(initialCapacity);
-    }
-    
-    private BinaryHeap(BinaryHeapType type){
-        this.type = type;
-        this.arr = createArray( DEFAULT_CAPACITY );
     }
 
-    public static <U extends Comparable<U>> BinaryHeap<U> maxHeap(){
-        return new BinaryHeap<>(BinaryHeapType.MAX);
-    }
+    public BinaryHeap<T> inverseHeap() {
 
-    public static <U extends Comparable<U>> BinaryHeap<U> minHeap(){
-        return new BinaryHeap<>(BinaryHeapType.MIN);
-    }
-    
-    public static <U extends Comparable<U>> BinaryHeap<U> minHeap( int initialCapacity ){
-    	return new BinaryHeap<>(BinaryHeapType.MIN, initialCapacity);
-    }
-    
-    public static <U extends Comparable<U>> BinaryHeap<U> maxHeap( int initialCapacity ){
-    	return new BinaryHeap<>(BinaryHeapType.MAX, initialCapacity);
-    }
-
-    public BinaryHeap<T> inverseHeap(){
-
-        BinaryHeap<T> newHeap = new BinaryHeap<>( type == BinaryHeapType.MAX ? BinaryHeapType.MIN : BinaryHeapType.MAX );
+        BinaryHeap<T> newHeap = new BinaryHeap<>(type == BinaryHeapType.MAX ? BinaryHeapType.MIN : BinaryHeapType.MAX);
         newHeap.size = size;
-        newHeap.arr = Arrays.copyOf( arr, arr.length );
+        newHeap.arr = Arrays.copyOf(arr, arr.length);
 
-        int firstChildIndex = newHeap.size/2;
+        int firstChildIndex = newHeap.size / 2;
 
         // min heap => max heap
-        if( type == BinaryHeapType.MIN ){
+        if (type == BinaryHeapType.MIN) {
             Arrays.sort(newHeap.arr, firstChildIndex, size);
 
         }
@@ -146,10 +136,10 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> implem
         }
 
         int parentIndex = 0;
-        int childIndex = size-1;
+        int childIndex = size - 1;
 
-        while( parentIndex < firstChildIndex ){
-        	swap(parentIndex, childIndex);
+        while (parentIndex < firstChildIndex) {
+            swap(parentIndex, childIndex);
             parentIndex++;
             childIndex--;
         }
@@ -158,108 +148,105 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> implem
         return newHeap;
     }
 
-    private void swap(int from, int to){
-    	T temp = arr[from];
-    	arr[from] = arr[to];
-    	arr[to] = temp;
+    private void swap(int from, int to) {
+        T temp = arr[from];
+        arr[from] = arr[to];
+        arr[to] = temp;
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
-    
+
     @Override
-    public boolean isEmpty(){
-    	return size == 0;
+    public boolean isEmpty() {
+        return size == 0;
     }
-    
-    public Integer[] toArray(){
-    	Integer[] arrCopy = new Integer[ size ];
-    	
-    	for( int i =0; i < size; i++ ){
-    		arrCopy[i] = Integer.valueOf(String.valueOf(arr[i]));
-    	}
-    	
-    	return arrCopy;
+
+    public Integer[] toArray() {
+        Integer[] arrCopy = new Integer[size];
+
+        for (int i = 0; i < size; i++) {
+            arrCopy[i] = Integer.valueOf(String.valueOf(arr[i]));
+        }
+
+        return arrCopy;
     }
-    
-    
-    
+
+
     @Override
-    public String toString(){
-    	
-    	if( isEmpty() ){
-    		return "{}";
-    	}
-    	
-    	StringBuilder buf = new StringBuilder( 2 * size );
-    	
-    	buf.append("{").append( arr[0] );
-    	
-    	for( int i = 1; i < size; i++ ){
-    		buf.append(",").append( arr[i] );
-    	}
-    	
-    	buf.append("}");
-    	return buf.toString();
+    public String toString() {
+
+        if (isEmpty()) {
+            return "{}";
+        }
+
+        StringBuilder buf = new StringBuilder(2 * size);
+
+        buf.append("{").append(arr[0]);
+
+        for (int i = 1; i < size; i++) {
+            buf.append(",").append(arr[i]);
+        }
+
+        buf.append("}");
+        return buf.toString();
     }
-    
+
     /**
-    *
-    * Double array size.
-    *
-    */
-   @SuppressWarnings("unchecked")
-	private void resize() {
-       T[] tempArrRef = arr;
-       arr = (T[])new Comparable[2 * arr.length];
-       System.arraycopy( tempArrRef, 0, arr, 0, tempArrRef.length );
-   }
-   
-    
-    private int leftChildIndex(int index){
-    	return (index << 1) | 1;
-    }
-    
-    private int rightChildIndex(int index){
-    	return (index << 1) + 2;
-    }
-    
-    
-    private int parentIndex(int index){    
-    	
-
-    	// 'even' index
-    	if( (index & 1) == 0 ){
-    		return (index >>> 1) - 1;
-    	}
-    	
-    	//'odd' index
-    	return index >>> 1;
+     * Double array size.
+     */
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        T[] tempArrRef = arr;
+        arr = (T[]) new Comparable[2 * arr.length];
+        System.arraycopy(tempArrRef, 0, arr, 0, tempArrRef.length);
     }
 
 
-    protected Comparable<T>[] getInternalArray(){
+    private int leftChildIndex(int index) {
+        return (index << 1) | 1;
+    }
+
+    private int rightChildIndex(int index) {
+        return (index << 1) + 2;
+    }
+
+
+    private int parentIndex(int index) {
+
+
+        // 'even' index
+        if ((index & 1) == 0) {
+            return (index >>> 1) - 1;
+        }
+
+        //'odd' index
+        return index >>> 1;
+    }
+
+
+    protected Comparable<T>[] getInternalArray() {
         return arr;
     }
 
 
-    private void fixUp( int index ) {
+    private void fixUp(int index) {
 
         int curIndex = index;
         int parent;
         T temp = null;
 
-        while( curIndex > 0 ) {
+        while (curIndex > 0) {
 
             parent = parentIndex(curIndex);
 
-            if( type == BinaryHeapType.MAX && arr[parent].compareTo( arr[curIndex]) >= 0 ){
+            if (type == BinaryHeapType.MAX && arr[parent].compareTo(arr[curIndex]) >= 0) {
                 break;
             }
 
-            if( type == BinaryHeapType.MIN && arr[parent].compareTo( arr[curIndex]) <= 0 ){
+            if (type == BinaryHeapType.MIN && arr[parent].compareTo(arr[curIndex]) <= 0) {
                 break;
             }
 
@@ -270,98 +257,97 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractQueue<T> implem
             curIndex = parent;
         }
     }
-    
-    private void fixDown( int index ) {    	
-    	
-    	int minIndex = index;   
-    	
-    	while( true ){
-    		    		
-    		int curIndex = minIndex; 
-    		
-    		int left = leftChildIndex(curIndex); 
-    		if( left < size && ( (type == BinaryHeapType.MIN && arr[left].compareTo(arr[minIndex] ) < 0) || (type == BinaryHeapType.MAX && arr[left].compareTo(arr[minIndex] ) > 0) ) ){
-    			minIndex = left;    			
-    		}   
-    		
-    		int right = rightChildIndex(curIndex);
-    		if( right < size && ( (type == BinaryHeapType.MIN && arr[right].compareTo(arr[minIndex] ) < 0) || (type == BinaryHeapType.MAX && arr[left].compareTo(arr[minIndex] ) > 0)) ){
-    			minIndex = right;    			
-    		}
-    		
-    		if( minIndex == curIndex ){
-    			break;
-    		}
-    		
-   			swap(minIndex, curIndex);    		
-    	}   	
+
+    private void fixDown(int index) {
+
+        int minIndex = index;
+
+        while (true) {
+
+            int curIndex = minIndex;
+
+            int left = leftChildIndex(curIndex);
+            if (left < size && ((type == BinaryHeapType.MIN && arr[left].compareTo(arr[minIndex]) < 0) || (type == BinaryHeapType.MAX && arr[left].compareTo(arr[minIndex]) > 0))) {
+                minIndex = left;
+            }
+
+            int right = rightChildIndex(curIndex);
+            if (right < size && ((type == BinaryHeapType.MIN && arr[right].compareTo(arr[minIndex]) < 0) || (type == BinaryHeapType.MAX && arr[left].compareTo(arr[minIndex]) > 0))) {
+                minIndex = right;
+            }
+
+            if (minIndex == curIndex) {
+                break;
+            }
+
+            swap(minIndex, curIndex);
+        }
     }
-    
-    
+
+
     @SuppressWarnings("unchecked")
-    private T[] createArray( int length ){
-    	return (T[])new Comparable[length];
+    private T[] createArray(int length) {
+        return (T[]) new Comparable[length];
     }
-    
-    
-    private void removeAtIndex( int index ){
-    	assert index >= 0 && index < size : "incorrect 'index' passed";
-    	
-    	arr[index] = arr[size-1];
-    	arr[size-1] = null;
-    	--size;
-    	fixUp(index);
-    	fixDown(index);    	
+
+
+    private void removeAtIndex(int index) {
+        assert index >= 0 && index < size : "incorrect 'index' passed";
+
+        arr[index] = arr[size - 1];
+        arr[size - 1] = null;
+        --size;
+        fixUp(index);
+        fixDown(index);
     }
-    
-    
-	private final class BinaryHeapIterator implements Iterator<T> {
 
-		int modCountSnapshot; 
-		int pos;
-		int lastPos;		
-		
-		public BinaryHeapIterator(int modCountSnapshot) {
-			super();
-			this.modCountSnapshot = modCountSnapshot;
-		}
 
-		@Override
-		public boolean hasNext() {
-			return pos < BinaryHeap.this.size;
-		}
+    private final class BinaryHeapIterator implements Iterator<T> {
 
-		@Override
-		public T next() {
-			
-			if( BinaryHeap.this.modCount != modCountSnapshot ){
-				throw new ConcurrentModificationException("Binary heap was modified from another iterator or thread");
-			}
-			
-			if( !hasNext() ){
-				throw new NoSuchElementException();
-			}
-			
-			lastPos = pos;			
-			return BinaryHeap.this.arr[pos++];			
-		}
+        int modCountSnapshot;
+        int pos;
+        int lastPos;
 
-		@Override
-		public void remove() {
-			
-			if( lastPos < 0 ){
-				throw new IllegalStateException("Call 'next' on iterator first");
-			}
-			
-			BinaryHeap.this.removeAtIndex( lastPos );
-			
-			lastPos = -1;
-			++BinaryHeap.this.modCount;
-			++modCountSnapshot;	
-		}
-		
-	}
+        public BinaryHeapIterator(int modCountSnapshot) {
+            super();
+            this.modCountSnapshot = modCountSnapshot;
+        }
 
+        @Override
+        public boolean hasNext() {
+            return pos < BinaryHeap.this.size;
+        }
+
+        @Override
+        public T next() {
+
+            if (BinaryHeap.this.modCount != modCountSnapshot) {
+                throw new ConcurrentModificationException("Binary heap was modified from another iterator or thread");
+            }
+
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            lastPos = pos;
+            return BinaryHeap.this.arr[pos++];
+        }
+
+        @Override
+        public void remove() {
+
+            if (lastPos < 0) {
+                throw new IllegalStateException("Call 'next' on iterator first");
+            }
+
+            BinaryHeap.this.removeAtIndex(lastPos);
+
+            lastPos = -1;
+            ++BinaryHeap.this.modCount;
+            ++modCountSnapshot;
+        }
+
+    }
 
 
 }

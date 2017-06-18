@@ -3,8 +3,6 @@ package com.max.algs.ds.compact;
 
 import com.max.algs.util.MathUtils;
 
-import java.util.List;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CompactIntArray {
@@ -22,6 +20,13 @@ public class CompactIntArray {
     private final int logicalLength;
 
     private final int[] arr;
+
+    public CompactIntArray(int length, int maxValue) {
+        logicalLength = length;
+        bitsPerElem = (int) Math.ceil(MathUtils.log2(maxValue));
+        oneMask = (1 << bitsPerElem) - 1;
+        arr = new int[calculateArrayLength(length, bitsPerElem)];
+    }
 
     public static CompactIntArray create(int[] arr) {
 
@@ -44,13 +49,6 @@ public class CompactIntArray {
         return compactArr;
     }
 
-    public CompactIntArray(int length, int maxValue) {
-        logicalLength = length;
-        bitsPerElem = (int) Math.ceil(MathUtils.log2(maxValue));
-        oneMask = (1 << bitsPerElem) - 1;
-        arr = new int[calculateArrayLength(length, bitsPerElem)];
-    }
-
     private static int calculateArrayLength(int expectedLength, int bitsPerElem) {
         return (int) Math.ceil(((double) (expectedLength * bitsPerElem)) / WORD_SIZE);
     }
@@ -59,7 +57,7 @@ public class CompactIntArray {
 
         checkBoundary(i);
 
-        if( isSpawnBoundary(i) ){
+        if (isSpawnBoundary(i)) {
             int x = 100;
         }
 
@@ -72,14 +70,13 @@ public class CompactIntArray {
         return value;
     }
 
-    private boolean isSpawnBoundary(int i){
+    private boolean isSpawnBoundary(int i) {
 
         int startBucket = (i * bitsPerElem) / WORD_SIZE;
-        int endBucket = (((i+1) * bitsPerElem) - 1) / WORD_SIZE;
+        int endBucket = (((i + 1) * bitsPerElem) - 1) / WORD_SIZE;
 
         return startBucket != endBucket;
     }
-
 
 
     public void set(int i, int value) {

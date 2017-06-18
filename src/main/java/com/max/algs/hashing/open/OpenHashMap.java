@@ -10,13 +10,10 @@ public final class OpenHashMap<K, V> {
 
     private static final int DEFAULT_CAPACITY = 8;
     private static final double DEFAULT_LOAD_FACTOR = 0.5;
-
+    private final ProbingStrategy probingStrategy = new AdvancedQuadraticProbing();
+    private final double loadFactor;
     private Entry<K, V>[] arr;
     private int size;
-
-    private final ProbingStrategy probingStrategy = new AdvancedQuadraticProbing();
-
-    private final double loadFactor;
 
     public OpenHashMap() {
         this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR);
@@ -151,6 +148,10 @@ public final class OpenHashMap<K, V> {
         return (Entry<K, V>[]) Array.newInstance(Entry.class, length);
     }
 
+    private interface ProbingStrategy {
+        int slot(int hash, int i, int m);
+    }
+
     private static class Entry<K, V> {
 
         @SuppressWarnings("rawtypes")
@@ -168,10 +169,6 @@ public final class OpenHashMap<K, V> {
             this.key = key;
             this.value = value;
         }
-    }
-
-    private interface ProbingStrategy {
-        int slot(int hash, int i, int m);
     }
 
     private static class SimpleLinearProbing implements ProbingStrategy {

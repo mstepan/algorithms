@@ -68,12 +68,6 @@ public class AddBinaryStrings {
         }
     }
 
-    @Test
-    public void addBinaryStrings() {
-        assertEquals("10011", addBinaryStrings("0110", "1101"));
-    }
-
-
     public static void main(String[] args) {
         try {
             JUnitCore junit = new JUnitCore();
@@ -86,6 +80,11 @@ public class AddBinaryStrings {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Test
+    public void addBinaryStrings() {
+        assertEquals("10011", addBinaryStrings("0110", "1101"));
     }
 
 }

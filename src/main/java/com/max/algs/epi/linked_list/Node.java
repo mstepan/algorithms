@@ -5,6 +5,15 @@ class Node {
     Node next;
     int value;
 
+    Node(Node next, int value) {
+        this.next = next;
+        this.value = value;
+    }
+
+    Node(int value) {
+        this(null, value);
+    }
+
     static Node createList(Integer... values) {
         if (values.length == 0) {
             return null;
@@ -19,15 +28,6 @@ class Node {
         }
 
         return head;
-    }
-
-    Node(Node next, int value) {
-        this.next = next;
-        this.value = value;
-    }
-
-    Node(int value) {
-        this(null, value);
     }
 
     @Override

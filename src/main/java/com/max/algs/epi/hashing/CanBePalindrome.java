@@ -10,6 +10,20 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class CanBePalindrome {
 
+    private CanBePalindrome() throws Exception {
+
+        String[] arr = {"racecar", "hello, world", "anpna", "anpsna"};
+
+        for (String val : arr) {
+            String str = StringUtils.randomShuffle(val);
+            boolean canBePalindrome = canBeShuffledToPalindrome(str);
+
+            System.out.printf("str: '%s', can be palindrome: %b %n", str, canBePalindrome);
+        }
+
+        System.out.printf("CanBePalindrome: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N)
      * space: O(N)
@@ -51,21 +65,6 @@ public final class CanBePalindrome {
         }
 
         return oddChars;
-    }
-
-
-    private CanBePalindrome() throws Exception {
-
-        String[] arr = {"racecar", "hello, world", "anpna", "anpsna"};
-
-        for (String val : arr) {
-            String str = StringUtils.randomShuffle(val);
-            boolean canBePalindrome = canBeShuffledToPalindrome(str);
-
-            System.out.printf("str: '%s', can be palindrome: %b %n", str, canBePalindrome);
-        }
-
-        System.out.printf("CanBePalindrome: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -19,10 +19,9 @@ public class DelayedIterator implements Iterator<String> {
     private static final String END_MSG = "END";
 
     private static int globalCounter = 0;
-
-    private String curValue;
     private final SynchronousQueue<String> res = new SynchronousQueue<>();
     private final Thread iteratorThread;
+    private String curValue;
 
     public DelayedIterator(String str1, String str2) {
         checkNotNull(str1);
@@ -40,6 +39,12 @@ public class DelayedIterator implements Iterator<String> {
         ++globalCounter;
 
         readNextValue();
+    }
+
+    private static String combineResult(Deque<Character> partialResult) {
+        StringBuilder buf = new StringBuilder(partialResult.size());
+        partialResult.forEach(buf::append);
+        return buf.toString();
     }
 
     private void readNextValue() {
@@ -77,12 +82,6 @@ public class DelayedIterator implements Iterator<String> {
             findRec(str1, i, str2, j + 1, partialResult);
             partialResult.pollLast();
         }
-    }
-
-    private static String combineResult(Deque<Character> partialResult) {
-        StringBuilder buf = new StringBuilder(partialResult.size());
-        partialResult.forEach(buf::append);
-        return buf.toString();
     }
 
     @Override

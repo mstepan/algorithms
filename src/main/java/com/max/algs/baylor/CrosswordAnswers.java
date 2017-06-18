@@ -31,11 +31,6 @@ public final class CrosswordAnswers {
         }
     }
 
-    private enum Direction {
-        ACROSS,
-        DOWN
-    }
-
     private static Map<Direction, List<String>> getAllWords(char[][] data) {
 
         Map<Direction, List<String>> allWords = new EnumMap<>(Direction.class);
@@ -86,7 +81,6 @@ public final class CrosswordAnswers {
         return row == 0 || (row > 0 && data[row - 1][col] == DELIMITER);
     }
 
-
     private static String readHorizontalWord(char[][] data, int curRow, int curCol, int index) {
 
         StringBuilder buf = new StringBuilder().append(index).append(": ");
@@ -118,7 +112,6 @@ public final class CrosswordAnswers {
         return buf.toString();
     }
 
-
     public static void main(String[] args) {
         try {
             new CrosswordAnswers();
@@ -126,5 +119,11 @@ public final class CrosswordAnswers {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+
+    private enum Direction {
+        ACROSS,
+        DOWN
     }
 }

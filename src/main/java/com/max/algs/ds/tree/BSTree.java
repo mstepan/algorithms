@@ -1,12 +1,6 @@
 package com.max.algs.ds.tree;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
@@ -20,11 +14,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class BSTree<K extends Comparable<K>> {
 
     private static final String SEPARATOR = ", ";
-
+    private static final Random RAND = ThreadLocalRandom.current();
     private Node<K> root;
     private int size;
-
-    private static final Random RAND = ThreadLocalRandom.current();
 
     public static BSTree<Integer> createRandomTree(int maxValue, int size) {
 
@@ -271,18 +263,6 @@ public class BSTree<K extends Comparable<K>> {
         return size == 0;
     }
 
-    static class NodeWithRange<U extends Comparable<U>> {
-
-        final int from;
-        final Node<U> node;
-
-        NodeWithRange(int from, Node<U> node) {
-            super();
-            this.from = from;
-            this.node = node;
-        }
-    }
-
     private int subtreeSize(Node<K> cur) {
         if (cur == null) {
             return 0;
@@ -436,14 +416,25 @@ public class BSTree<K extends Comparable<K>> {
 
     }
 
+    static class NodeWithRange<U extends Comparable<U>> {
+
+        final int from;
+        final Node<U> node;
+
+        NodeWithRange(int from, Node<U> node) {
+            super();
+            this.from = from;
+            this.node = node;
+        }
+    }
+
     public static final class Node<U extends Comparable<U>> {
 
-        public U value;
-
-        Node<U> left;
-        Node<U> right;
         @SuppressWarnings("unused")
         final Node<U> parent;
+        public U value;
+        Node<U> left;
+        Node<U> right;
 
         Node(U value, Node<U> parent) {
             this.value = value;

@@ -1,16 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.CompilerControl;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -29,7 +20,23 @@ import java.util.concurrent.TimeUnit;
 @Fork(5)
 public class ForLoopBenchmark {
 
+    static int sum = 0;
     private final int[] elementData = ArrayUtils.generateRandomArray(1000);
+
+    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+//    @CompilerControl(CompilerControl.Mode.INLINE)
+    static void consume(int value) {
+        sum += value;
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(ForLoopBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
 
     @Benchmark
     public void cstyle() {
@@ -51,24 +58,6 @@ public class ForLoopBenchmark {
         for (int value : this.elementData) {
             consume(value);
         }
-    }
-
-    static int sum = 0;
-
-    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-//    @CompilerControl(CompilerControl.Mode.INLINE)
-    static void consume(int value) {
-        sum += value;
-    }
-
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(ForLoopBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
     /*

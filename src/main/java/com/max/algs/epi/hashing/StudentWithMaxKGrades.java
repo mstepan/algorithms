@@ -18,6 +18,25 @@ public final class StudentWithMaxKGrades {
 
     private static final String SPACE = " ";
 
+    private StudentWithMaxKGrades() throws Exception {
+
+        String[] ids = new String[10];
+        for (int i = 0; i < ids.length; ++i) {
+            ids[i] = "A" + (13 + i);
+        }
+
+        int k = 3;
+        String[] data = generateData(ids);
+
+        System.out.println(Arrays.toString(data));
+
+        String bestId = findBestStudent(data, k).orElse("NOT_FOUND");
+
+        System.out.printf("best id = %s %n", bestId);
+
+        System.out.printf("LongestContainedInterval: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - data.length
      * K - top 'k'
@@ -83,7 +102,6 @@ public final class StudentWithMaxKGrades {
         return Optional.ofNullable(maxId);
     }
 
-
     private static String[] generateData(String[] ids) {
 
         Random rand = new Random();
@@ -105,25 +123,6 @@ public final class StudentWithMaxKGrades {
         ArrayUtils.randomShuffle(arr);
 
         return arr;
-    }
-
-    private StudentWithMaxKGrades() throws Exception {
-
-        String[] ids = new String[10];
-        for (int i = 0; i < ids.length; ++i) {
-            ids[i] = "A" + (13 + i);
-        }
-
-        int k = 3;
-        String[] data = generateData(ids);
-
-        System.out.println(Arrays.toString(data));
-
-        String bestId = findBestStudent(data, k).orElse("NOT_FOUND");
-
-        System.out.printf("best id = %s %n", bestId);
-
-        System.out.printf("LongestContainedInterval: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

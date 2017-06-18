@@ -18,7 +18,7 @@ public final class FileIndexerMain {
         try {
             new FileIndexerMain();
         }
-        catch( final Exception ex ){
+        catch (final Exception ex) {
             LOG.error("Exception occurred", ex);
         }
     }

@@ -10,30 +10,16 @@ import java.util.Iterator;
 public class MeasuringWithDefectiveJugs {
 
 
-    private void findSolution(int[] jugs, int minValue, int maxValue, int minReq, int maxReq, Deque<Integer> res) {
+    public MeasuringWithDefectiveJugs() throws Exception {
 
-        if (minValue > maxReq) {
-            return;
-        }
+        int[] jugs = {230, 240, 290, 310, 500, 515};
 
-        if (minValue >= minReq && maxValue <= maxReq) {
-            System.out.println(formatSolution(res, minReq, maxReq));
-            return;
-        }
+        final int minRequired = 2100;
+        final int maxRequired = 2300;
 
-        for (int i = 0; i < jugs.length; i += 2) {
+        findSolution(jugs, 0, 0, minRequired, maxRequired, new ArrayDeque<>());
 
-            int minCur = jugs[i];
-            int maxCur = jugs[i + 1];
-
-            res.add(minCur);
-            res.add(maxCur);
-
-            findSolution(jugs, minValue + minCur, maxValue + maxCur, minReq, maxReq, res);
-
-            res.pollLast();
-            res.pollLast();
-        }
+        System.out.println("Main done...");
     }
 
     private static String formatSolution(Deque<Integer> res, int minReq, int maxReq) {
@@ -65,20 +51,6 @@ public class MeasuringWithDefectiveJugs {
         return buf.toString();
     }
 
-
-    public MeasuringWithDefectiveJugs() throws Exception {
-
-        int[] jugs = {230, 240, 290, 310, 500, 515};
-
-        final int minRequired = 2100;
-        final int maxRequired = 2300;
-
-        findSolution(jugs, 0, 0, minRequired, maxRequired, new ArrayDeque<>());
-
-        System.out.println("Main done...");
-    }
-
-
     public static void main(String[] args) {
         try {
             new MeasuringWithDefectiveJugs();
@@ -87,5 +59,31 @@ public class MeasuringWithDefectiveJugs {
             ex.printStackTrace();
         }
 
+    }
+
+    private void findSolution(int[] jugs, int minValue, int maxValue, int minReq, int maxReq, Deque<Integer> res) {
+
+        if (minValue > maxReq) {
+            return;
+        }
+
+        if (minValue >= minReq && maxValue <= maxReq) {
+            System.out.println(formatSolution(res, minReq, maxReq));
+            return;
+        }
+
+        for (int i = 0; i < jugs.length; i += 2) {
+
+            int minCur = jugs[i];
+            int maxCur = jugs[i + 1];
+
+            res.add(minCur);
+            res.add(maxCur);
+
+            findSolution(jugs, minValue + minCur, maxValue + maxCur, minReq, maxReq, res);
+
+            res.pollLast();
+            res.pollLast();
+        }
     }
 }

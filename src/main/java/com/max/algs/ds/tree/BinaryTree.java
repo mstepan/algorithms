@@ -3,22 +3,8 @@ package com.max.algs.ds.tree;
 import com.google.common.collect.ImmutableList;
 import org.apache.log4j.Logger;
 
-import java.util.AbstractCollection;
+import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -31,13 +17,89 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
     private static final long serialVersionUID = 4665019545884223055L;
 
     private static final Logger LOG = Logger.getLogger(BinaryTree.class);
-
-    private transient Node<T> root;
-
     // Won't contain more then ceil( size/2 ) elements.
     private transient final Queue<Node<T>> emptyNodes = new ArrayDeque<>();
-
+    private transient Node<T> root;
     private int size;
+
+    /**
+     * Do post-order traversation (left-right-parent) and find binary tree diameter.
+     * time: O(N)
+     * space: O(h) => O(N)
+     */
+    private static int findDiameterRec(Node cur, MutableInteger diameter) {
+
+        if (cur == null) {
+            return 0;
+        }
+
+        int leftDepth = findDiameterRec(cur.left, diameter);
+        int rightDepth = findDiameterRec(cur.right, diameter);
+
+        int curDiameter = leftDepth + rightDepth;
+
+        if (curDiameter > diameter.value) {
+            diameter.value = curDiameter;
+        }
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    /**
+     * Convert a given tree to its Sum Tree.
+     * Use iterative approach instead of recursive.
+     * <p>
+     * time: O(N)
+     * space: O(N)
+     */
+    public static void toSumTree(BinaryTree<Integer> tree) {
+
+        if (tree.root == null) {
+            return;
+        }
+
+        Map<Node<Integer>, Integer> handled = new HashMap<>();
+
+        Deque<Node<Integer>> stack = new ArrayDeque<>();
+        stack.push(tree.root);
+
+        while (!stack.isEmpty()) {
+            Node<Integer> cur = stack.pop();
+
+            if (cur.isLeaf()) {
+                handled.put(cur, cur.value);
+                cur.value = 0;
+            }
+            else {
+                if ((cur.left != null && handled.containsKey(cur.left)) ||
+                        (cur.right != null && handled.containsKey(cur.right))) {
+
+                    handled.put(cur, cur.value);
+
+                    if (cur.left != null) {
+                        cur.value = cur.left.value + handled.get(cur.left);
+                    }
+
+                    if (cur.right != null) {
+                        cur.value += cur.right.value + handled.get(cur.right);
+                    }
+
+                }
+                else {
+                    stack.push(cur);
+                    if (cur.right != null) {
+                        stack.push(cur.right);
+                    }
+
+                    if (cur.left != null) {
+                        stack.push(cur.left);
+                    }
+                }
+            }
+
+        }
+
+    }
 
     private SimpleImmutableEntry<Integer, Integer> findMinMaxDistanceFromRoot() {
 
@@ -168,37 +230,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
     }
 
     /**
-     * Do post-order traversation (left-right-parent) and find binary tree diameter.
-     * time: O(N)
-     * space: O(h) => O(N)
-     */
-    private static int findDiameterRec(Node cur, MutableInteger diameter) {
-
-        if (cur == null) {
-            return 0;
-        }
-
-        int leftDepth = findDiameterRec(cur.left, diameter);
-        int rightDepth = findDiameterRec(cur.right, diameter);
-
-        int curDiameter = leftDepth + rightDepth;
-
-        if (curDiameter > diameter.value) {
-            diameter.value = curDiameter;
-        }
-
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    private static final class MutableInteger {
-        int value;
-
-        MutableInteger(int value) {
-            this.value = value;
-        }
-    }
-
-    /**
      * time: O(N)
      * space: O(h) => O(N)
      */
@@ -232,63 +263,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         }
 
         return buf.toString();
-    }
-
-
-    /**
-     * Convert a given tree to its Sum Tree.
-     * Use iterative approach instead of recursive.
-     * <p>
-     * time: O(N)
-     * space: O(N)
-     */
-    public static void toSumTree(BinaryTree<Integer> tree) {
-
-        if (tree.root == null) {
-            return;
-        }
-
-        Map<Node<Integer>, Integer> handled = new HashMap<>();
-
-        Deque<Node<Integer>> stack = new ArrayDeque<>();
-        stack.push(tree.root);
-
-        while (!stack.isEmpty()) {
-            Node<Integer> cur = stack.pop();
-
-            if (cur.isLeaf()) {
-                handled.put(cur, cur.value);
-                cur.value = 0;
-            }
-            else {
-                if ((cur.left != null && handled.containsKey(cur.left)) ||
-                        (cur.right != null && handled.containsKey(cur.right))) {
-
-                    handled.put(cur, cur.value);
-
-                    if (cur.left != null) {
-                        cur.value = cur.left.value + handled.get(cur.left);
-                    }
-
-                    if (cur.right != null) {
-                        cur.value += cur.right.value + handled.get(cur.right);
-                    }
-
-                }
-                else {
-                    stack.push(cur);
-                    if (cur.right != null) {
-                        stack.push(cur.right);
-                    }
-
-                    if (cur.left != null) {
-                        stack.push(cur.left);
-                    }
-                }
-            }
-
-        }
-
     }
 
     /**
@@ -344,7 +318,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
             nodeToDelete.addLast(cur);
         }
     }
-
 
     /**
      * time: O(N) space: O(h)
@@ -551,10 +524,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
 
     }
 
-	/*
-
-     */
-
     /**
      * time: O(N) space: O(h)
      */
@@ -564,6 +533,10 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         }
         return isSymRec(root.left, root.right);
     }
+
+	/*
+
+     */
 
     private boolean isSymRec(Node<T> left, Node<T> right) {
 
@@ -579,7 +552,7 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         return isSymRec(left == null ? null : left.right, right == null ? null
                 : right.left)
                 && isSymRec(left == null ? null : left.left,
-                            right == null ? null : right.right);
+                right == null ? null : right.right);
     }
 
     public int height() {
@@ -654,7 +627,7 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
 
             if (slice.entry.right != null) {
                 stack.add(new VerticalSlice<>(slice.entry.right,
-                                              slice.level + 1));
+                        slice.level + 1));
             }
 
         }
@@ -701,19 +674,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         }
 
         return left + right + (found ? 1 : 0);
-    }
-
-    static class VerticalSlice<K> {
-
-        final Node<K> entry;
-        final int level;
-
-        VerticalSlice(Node<K> entry, int level) {
-            super();
-            this.entry = entry;
-            this.level = level;
-        }
-
     }
 
     public String levelSymTrav() {
@@ -1011,7 +971,7 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
 
         if (value == null) {
             throw new IllegalArgumentException("Can't store 'NULL' value in "
-                                                       + BinaryTree.class.getCanonicalName());
+                    + BinaryTree.class.getCanonicalName());
         }
 
         Node<T> newNode = new Node<>(value);
@@ -1112,26 +1072,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         return findMax(root, comparator);
     }
 
-
-    private static class NodeAndVerLevel<T> {
-
-        final Node<T> node;
-        final int level;
-
-        public NodeAndVerLevel(Node<T> node, int level) {
-            this.node = node;
-            this.level = level;
-        }
-
-
-        @Override
-        public String toString() {
-            return node.value + ", level: " + level;
-        }
-
-    }
-
-
     /**
      * time: O(N)
      * space: O(N)
@@ -1175,7 +1115,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
 
         return visibleValues;
     }
-
 
     /**
      * time: O(N) space: O(lgN)
@@ -1234,6 +1173,48 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
         s.defaultWriteObject();
     }
 
+    public static enum NodeDirection {
+        LEFT, RIGHT;
+    }
+
+    private static final class MutableInteger {
+        int value;
+
+        MutableInteger(int value) {
+            this.value = value;
+        }
+    }
+
+    static class VerticalSlice<K> {
+
+        final Node<K> entry;
+        final int level;
+
+        VerticalSlice(Node<K> entry, int level) {
+            super();
+            this.entry = entry;
+            this.level = level;
+        }
+
+    }
+
+    private static class NodeAndVerLevel<T> {
+
+        final Node<T> node;
+        final int level;
+
+        public NodeAndVerLevel(Node<T> node, int level) {
+            this.node = node;
+            this.level = level;
+        }
+
+
+        @Override
+        public String toString() {
+            return node.value + ", level: " + level;
+        }
+
+    }
 
     static final class Node<U> {
 
@@ -1273,10 +1254,6 @@ public class BinaryTree<T> extends AbstractCollection<T> implements
 
         }
 
-    }
-
-    public static enum NodeDirection {
-        LEFT, RIGHT;
     }
 
 }

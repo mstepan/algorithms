@@ -1,19 +1,6 @@
 package benchmark.memory;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -42,25 +29,13 @@ public class TouchEveryItemAndEveryCacheLineBenchmark {
      * theoretical maximum write speed of 8-12GB/sec according to 2015
      */
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(TouchEveryItemAndEveryCacheLineBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public byte[] arr1;
-        public byte[] arr2;
-
-        public double x;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = new byte[ARR_LENGTH];
-            arr2 = new byte[ARR_LENGTH];
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-            arr2 = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -85,14 +60,25 @@ public class TouchEveryItemAndEveryCacheLineBenchmark {
         }
     }
 
+    @State(Scope.Thread)
+    public static class ArrPerThread {
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(TouchEveryItemAndEveryCacheLineBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+        public byte[] arr1;
+        public byte[] arr2;
 
-        new Runner(opt).run();
+        public double x;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = new byte[ARR_LENGTH];
+            arr2 = new byte[ARR_LENGTH];
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+            arr2 = null;
+        }
     }
 
 }

@@ -2,12 +2,7 @@ package com.max.algs.graph;
 
 import com.google.common.base.Optional;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -49,12 +44,12 @@ public final class EulerTour {
 
             Set<T> adjVertexes = graphCopy.getAdjVertexes(curVer);
 
-            if( adjVertexes.isEmpty() ){
+            if (adjVertexes.isEmpty()) {
                 tour.add(curVer);
 
                 curVer = null;
 
-                if( ! stack.isEmpty() ){
+                if (!stack.isEmpty()) {
                     curVer = stack.pop();
                 }
             }

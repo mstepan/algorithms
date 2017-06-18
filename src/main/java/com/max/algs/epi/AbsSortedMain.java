@@ -8,6 +8,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class AbsSortedMain {
 
+    private AbsSortedMain() throws Exception {
+
+        final int[] arr = {-49, 75, 103, -147, 164, -197, -238, 314, 348, -422};
+//        final int sum = 167;
+        final int sum = -385;
+//        final int sum = 267;
+//        final int sum = 367;
+
+        System.out.println(findPairSum(arr, sum));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     public static SimpleEntry<Integer, Integer> findPairSum(int[] arr, int sum) {
         checkNotNull(arr);
 
@@ -124,20 +137,6 @@ public final class AbsSortedMain {
         return Optional.empty();
 
     }
-
-    private AbsSortedMain() throws Exception {
-
-        final int[] arr = {-49, 75, 103, -147, 164, -197, -238, 314, 348, -422};
-//        final int sum = 167;
-        final int sum = -385;
-//        final int sum = 267;
-//        final int sum = 367;
-
-        System.out.println(findPairSum(arr, sum));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
 
     public static void main(String[] args) {
         try {

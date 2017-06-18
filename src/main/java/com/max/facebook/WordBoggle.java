@@ -19,41 +19,12 @@ public class WordBoggle {
 
     private static final int BASE = 255;
     private static final int BIG_PRIME = 5_383_363;
+    private static int callsCount = 0;
 
     static {
         final long maxHashValuePossible = ((long) BASE) * (BIG_PRIME - 1);
         checkArgument(maxHashValuePossible <= Integer.MAX_VALUE,
-                      "maxHashValuePossible > Integer.MAX_VALUE, %s > %s", maxHashValuePossible, Integer.MAX_VALUE);
-    }
-
-    private static final class Cell {
-        final int row;
-        final int col;
-
-        Cell(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-
-            Cell cell = (Cell) o;
-
-            return Objects.equal(row, cell.row)
-                    && Objects.equal(col, cell.col);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(row, col);
-        }
+                "maxHashValuePossible > Integer.MAX_VALUE, %s > %s", maxHashValuePossible, Integer.MAX_VALUE);
     }
 
     /**
@@ -102,8 +73,6 @@ public class WordBoggle {
         return hash;
     }
 
-    private static int callsCount = 0;
-
     private static void printSolutionRec(int prevHashValue,
                                          Cell cur, StringBuilder res, char[][] arr, Set<String> dic, Set<Integer> dicHash,
                                          Set<Cell> usedCells, int maxWordLength) {
@@ -143,7 +112,7 @@ public class WordBoggle {
 
                 if (nextRow >= 0 && nextCol >= 0 && nextRow < arr.length && nextCol < arr[nextRow].length) {
                     printSolutionRec(hashValue, new Cell(nextRow, nextCol), res, arr, dic, dicHash, usedCells,
-                                     maxWordLength);
+                            maxWordLength);
                 }
             }
         }
@@ -156,6 +125,36 @@ public class WordBoggle {
     private static void cleanCurState(Cell cur, StringBuilder res, Set<Cell> usedCells) {
         res.deleteCharAt(res.length() - 1);
         usedCells.remove(cur);
+    }
+
+    private static final class Cell {
+        final int row;
+        final int col;
+
+        Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Cell cell = (Cell) o;
+
+            return Objects.equal(row, cell.row)
+                    && Objects.equal(col, cell.col);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(row, col);
+        }
     }
 
 

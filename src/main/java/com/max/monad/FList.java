@@ -28,7 +28,7 @@ public class FList<T> implements Functor<T, FList<?>> {
         return new FList<>(newData);
     }
 
-    public List<T> get(){
+    public List<T> get() {
         return data;
     }
 }

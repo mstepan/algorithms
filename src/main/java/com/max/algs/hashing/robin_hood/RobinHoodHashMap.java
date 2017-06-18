@@ -32,6 +32,15 @@ public class RobinHoodHashMap<K, V> extends AbstractMap<K, V> {
         this.data = new Entry[INITIAL_CAPACITY];
     }
 
+    private static int calculateDistance(int initialBucket, int curBucketIndex, int dataCapacity) {
+        if (curBucketIndex >= initialBucket) {
+            return curBucketIndex - initialBucket;
+        }
+
+        // TODO:
+        return dataCapacity - initialBucket + curBucketIndex;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public V get(Object keyObj) {
@@ -106,7 +115,6 @@ public class RobinHoodHashMap<K, V> extends AbstractMap<K, V> {
 
         return null;
     }
-
 
     /**
      * Use backward-shift algorithm.
@@ -207,8 +215,8 @@ public class RobinHoodHashMap<K, V> extends AbstractMap<K, V> {
     private static final class Entry<K, V> {
 
         final K key;
-        V value;
         final int initialBucket;
+        V value;
 
         Entry(K key, V value, int initialBucket) {
             this.key = key;
@@ -227,15 +235,6 @@ public class RobinHoodHashMap<K, V> extends AbstractMap<K, V> {
         public String toString() {
             return String.valueOf(key) + "=" + String.valueOf(value) + "[" + initialBucket + "]";
         }
-    }
-
-    private static int calculateDistance(int initialBucket, int curBucketIndex, int dataCapacity){
-        if (curBucketIndex >= initialBucket) {
-            return curBucketIndex - initialBucket;
-        }
-
-        // TODO:
-        return dataCapacity - initialBucket + curBucketIndex;
     }
 
 }

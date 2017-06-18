@@ -1,20 +1,7 @@
 package benchmark.cpu;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -25,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Benchmark for reassociation technique for instruction level parallelism (ILP).
- *
+ * <p>
  * Benchmark                                              Mode  Cnt      Score      Error  Units
  * ReassociationAndILPBenchmark.product                   avgt   25   1736.120 ± 4405.752  ns/op
  * ReassociationAndILPBenchmark.reassociatedBadlyProduct  avgt   25  15440.504 ± 6915.719  ns/op
@@ -44,23 +31,13 @@ public class ReassociationAndILPBenchmark {
     private static final int TEN_PERCENTS = 10;
     private static final int ONE_HUNDRED_PERCENTS = 100;
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(ReassociationAndILPBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public int[] arr1;
-        public int[] arr2;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
-            arr2 = Arrays.copyOf(arr1, arr1.length);
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-            arr2 = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -112,14 +89,23 @@ public class ReassociationAndILPBenchmark {
         }
     }
 
+    @State(Scope.Thread)
+    public static class ArrPerThread {
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(ReassociationAndILPBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+        public int[] arr1;
+        public int[] arr2;
 
-        new Runner(opt).run();
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
+            arr2 = Arrays.copyOf(arr1, arr1.length);
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+            arr2 = null;
+        }
     }
 
 }

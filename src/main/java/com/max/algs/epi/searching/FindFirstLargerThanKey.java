@@ -10,6 +10,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FindFirstLargerThanKey {
 
 
+    private FindFirstLargerThanKey() throws Exception {
+
+        int[] arr = {5, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
+
+        int index = findFirstGreaterIndex(arr, 2);
+
+        if (index < 0) {
+            System.out.println("Not found");
+        }
+        else {
+            System.out.printf("arr[%d] = %d %n", index, arr[index]);
+        }
+
+        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(lgN)
      * space: O(1)
@@ -37,22 +53,6 @@ public class FindFirstLargerThanKey {
         }
 
         return index;
-    }
-
-    private FindFirstLargerThanKey() throws Exception {
-
-        int[] arr = {5, 7, 12, 23, 45, 86, 86, 86, 86, 113, 115};
-
-        int index = findFirstGreaterIndex(arr, 2);
-
-        if (index < 0) {
-            System.out.println("Not found");
-        }
-        else {
-            System.out.printf("arr[%d] = %d %n", index, arr[index]);
-        }
-
-        System.out.printf("'FindFirstLargerThanKey' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -1,10 +1,6 @@
 package com.max.algs.ds.list;
 
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -22,43 +18,22 @@ public final class SingleLinkedList<T> {
     public SingleLinkedList() {
     }
 
-    /**
-     * Use merge-sort like algorithm.
-     * <p>
-     * Perform the same procedure as merge sort. When merging, instead of selecting an element (one-by-one)
-     * from the two lists in sorted order, flip a coin. Choose whether to pick an element from the first or
-     * from the second list based on the result of the coin flip.
-     * <p>
-     * <p>
-     * time: O(N*lgN)
-     * space: O(1)
-     */
-    public void randomShuffle() {
+    public SingleLinkedList(Collection<T> col) {
+        checkNotNull(col, "Can't construct linked list from 'null' collection");
 
-        Queue<Node<T>> queue = new ArrayDeque<>();
+        if (col.isEmpty()) {
+            return;
+        }
 
+        Iterator<T> it = col.iterator();
+
+        head = new Node<T>(it.next());
         Node cur = head;
 
-        while (cur != null) {
-
-            Node<T> temp = cur.next;
-
-            cur.next = null;
-            queue.add(cur);
-
-            cur = temp;
+        while (it.hasNext()) {
+            cur.next = new Node<>(it.next());
+            cur = cur.next;
         }
-
-        while (queue.size() != 1) {
-            Node<T> first = queue.poll();
-            Node<T> second = queue.poll();
-
-            Node<T> merged = mergeInRandomOrder(first, second);
-
-            queue.add(merged);
-        }
-
-        head = queue.poll();
     }
 
     /**
@@ -104,22 +79,43 @@ public final class SingleLinkedList<T> {
         return mergedHead;
     }
 
-    public SingleLinkedList(Collection<T> col) {
-        checkNotNull(col, "Can't construct linked list from 'null' collection");
+    /**
+     * Use merge-sort like algorithm.
+     * <p>
+     * Perform the same procedure as merge sort. When merging, instead of selecting an element (one-by-one)
+     * from the two lists in sorted order, flip a coin. Choose whether to pick an element from the first or
+     * from the second list based on the result of the coin flip.
+     * <p>
+     * <p>
+     * time: O(N*lgN)
+     * space: O(1)
+     */
+    public void randomShuffle() {
 
-        if (col.isEmpty()) {
-            return;
-        }
+        Queue<Node<T>> queue = new ArrayDeque<>();
 
-        Iterator<T> it = col.iterator();
-
-        head = new Node<T>(it.next());
         Node cur = head;
 
-        while (it.hasNext()) {
-            cur.next = new Node<>(it.next());
-            cur = cur.next;
+        while (cur != null) {
+
+            Node<T> temp = cur.next;
+
+            cur.next = null;
+            queue.add(cur);
+
+            cur = temp;
         }
+
+        while (queue.size() != 1) {
+            Node<T> first = queue.poll();
+            Node<T> second = queue.poll();
+
+            Node<T> merged = mergeInRandomOrder(first, second);
+
+            queue.add(merged);
+        }
+
+        head = queue.poll();
     }
 
     public boolean isEmpty() {
@@ -236,17 +232,16 @@ public final class SingleLinkedList<T> {
 
     private static final class Node<U> {
 
+        final U value;
+        Node<U> next;
+
         Node(U value, Node<U> next) {
             this.value = value;
             this.next = next;
         }
-
         Node(U value) {
             this(value, null);
         }
-
-        final U value;
-        Node<U> next;
 
         @Override
         public int hashCode() {

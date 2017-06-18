@@ -8,9 +8,9 @@ import java.util.Random;
  */
 public class Treap {
 
+    private static final Random RAND = new Random();
     private TreapNode root;
     private int size;
-    private static final Random RAND = new Random();
 
     public boolean add(int value) {
 

@@ -12,12 +12,53 @@ import java.util.Deque;
  */
 public class BracketsMain {
 
+    private BracketsMain() throws Exception {
+
+//        Path path = Paths.get("/Users/mstepan/repo/incubator/algorithms/src/main/java/spoj/brackets/in.txt");
+
+//        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+
+            for (int i = 0; i < 10; ++i) {
+
+                System.out.println("Test " + (i + 1) + ":");
+
+                int bracketsCount = Integer.parseInt(reader.readLine());
+
+                char[] brackets = reader.readLine().toCharArray();
+
+                BracketsTree tree = new BracketsTree(Arrays.copyOf(brackets, bracketsCount));
+
+                int operationsCount = Integer.parseInt(reader.readLine());
+
+                for (int j = 0; j < operationsCount; ++j) {
+                    int invertIndex = Integer.parseInt(reader.readLine());
+
+                    if (invertIndex == 0) {
+                        System.out.println(tree.isBalanced() ? "YES" : "NO");
+                    }
+                    else {
+                        tree.invert(invertIndex - 1);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new BracketsMain();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private static class BracketNode {
 
-        BracketNode parent;
         final BracketNode left;
         final BracketNode right;
-
+        BracketNode parent;
         int openCnt;
         int closedCnt;
 
@@ -131,48 +172,6 @@ public class BracketsMain {
 
         public boolean isBalanced() {
             return root.openCnt == 0 && root.closedCnt == 0;
-        }
-    }
-
-    private BracketsMain() throws Exception {
-
-//        Path path = Paths.get("/Users/mstepan/repo/incubator/algorithms/src/main/java/spoj/brackets/in.txt");
-
-//        try (BufferedReader reader = Files.newBufferedReader(path)) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-
-            for (int i = 0; i < 10; ++i) {
-
-                System.out.println("Test " + (i + 1) + ":");
-
-                int bracketsCount = Integer.parseInt(reader.readLine());
-
-                char[] brackets = reader.readLine().toCharArray();
-
-                BracketsTree tree = new BracketsTree(Arrays.copyOf(brackets, bracketsCount));
-
-                int operationsCount = Integer.parseInt(reader.readLine());
-
-                for (int j = 0; j < operationsCount; ++j) {
-                    int invertIndex = Integer.parseInt(reader.readLine());
-
-                    if (invertIndex == 0) {
-                        System.out.println(tree.isBalanced() ? "YES" : "NO");
-                    }
-                    else {
-                        tree.invert(invertIndex - 1);
-                    }
-                }
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            new BracketsMain();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 }

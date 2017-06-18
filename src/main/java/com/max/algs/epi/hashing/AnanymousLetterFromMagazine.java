@@ -11,6 +11,19 @@ public final class AnanymousLetterFromMagazine {
 
     private static final Integer ONE_INTEGER = 1;
 
+    private AnanymousLetterFromMagazine() throws Exception {
+
+        String letter = "hello world";
+        String[] magazines = {"help at work. helldiver big o", "help at work. helldiver big O"};
+
+        for (String magazine : magazines) {
+            System.out.printf("canConstructLetterFromMagazine: %b %n",
+                    canConstructLetterFromMagazine(letter, magazine));
+        }
+
+        System.out.printf("AnanymousLetterFromMagazine: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * M - letter.length()
      * N - magazine.length()
@@ -52,20 +65,6 @@ public final class AnanymousLetterFromMagazine {
         }
 
         return false;
-    }
-
-
-    private AnanymousLetterFromMagazine() throws Exception {
-
-        String letter = "hello world";
-        String[] magazines = {"help at work. helldiver big o", "help at work. helldiver big O"};
-
-        for (String magazine : magazines) {
-            System.out.printf("canConstructLetterFromMagazine: %b %n",
-                    canConstructLetterFromMagazine(letter, magazine));
-        }
-
-        System.out.printf("AnanymousLetterFromMagazine: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

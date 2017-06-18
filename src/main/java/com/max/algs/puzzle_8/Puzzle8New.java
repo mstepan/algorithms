@@ -2,17 +2,142 @@ package com.max.algs.puzzle_8;
 
 import com.max.algs.ds.Pair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Puzzle 8 solver using A* algorithm and Manhattan distance as heuristic.
  */
 public class Puzzle8New {
 
+
+    private Puzzle8New() throws Exception {
+
+//        int[][] data = {
+//                {5, 6, 2},
+//                {8, 1, 7},
+//                {3, 0, 4}
+//        };
+
+        int[][] data = {
+                {1, 4, 8},
+                {2, 5, 7},
+                {3, 6, 0}
+        };
+
+        solve(data);
+
+        System.out.printf("Puzzle 8 done: java-%s %n", System.getProperty("java.version"));
+    }
+
+    private static List<MoveDirection> possibleMoves(int[][] data) {
+
+        int targetRow = 0;
+        int targetCol = 0;
+
+        MAIN:
+        for (int row = 0; row < data.length; ++row) {
+            for (int col = 0; col < data[row].length; ++col) {
+                if (data[row][col] == 0) {
+                    targetRow = row;
+                    targetCol = col;
+                    break MAIN;
+                }
+            }
+        }
+
+        List<MoveDirection> moves = new ArrayList<>();
+
+        if (targetRow != 0) {
+            moves.add(MoveDirection.UP);
+        }
+
+        if (targetRow != data.length - 1) {
+            moves.add(MoveDirection.DOWN);
+        }
+
+        if (targetCol != 0) {
+            moves.add(MoveDirection.LEFT);
+        }
+
+        if (targetCol != data[0].length - 1) {
+            moves.add(MoveDirection.RIGHT);
+        }
+
+        return moves;
+
+    }
+
+    private static void solve(int[][] data) {
+
+        int inversionCount = countInversions(data);
+
+        // odd inversions count, unsolvable board for 'odd' board size
+        if ((inversionCount & 1) != 0) {
+            throw new IllegalArgumentException("Unsolvable board found, inversions count = " + inversionCount +
+                    ", should be even.");
+        }
+
+        Queue<PartialSol> minQueue = new PriorityQueue<>();
+        minQueue.add(new PartialSol(data));
+
+        while (!minQueue.isEmpty()) {
+            PartialSol partialSolution = minQueue.poll();
+
+            if (partialSolution.isFinal()) {
+                System.out.printf("Solution found in %d moves %n", partialSolution.solutions.size());
+                for (PartialSol singleMoveSolution : partialSolution.solutions) {
+                    System.out.println(singleMoveSolution);
+                }
+                break;
+            }
+
+            List<MoveDirection> moves = possibleMoves(partialSolution.dataCopy);
+            if (partialSolution.curMove != null) {
+                moves.remove(partialSolution.curMove.inverse());
+            }
+
+            for (MoveDirection singleMove : moves) {
+
+                PartialSol newSolution = new PartialSol(partialSolution, singleMove);
+
+                minQueue.add(newSolution);
+            }
+        }
+    }
+
+    private static int countInversions(int[][] data) {
+
+        final int rows = data.length;
+        final int lastIndex = data.length * data.length;
+
+        int inversions = 0;
+
+        for (int index = 0; index < lastIndex - 2; ++index) {
+
+            int value = data[index / rows][index % rows];
+
+            for (int i = index + 1; i < lastIndex; ++i) {
+
+                int curValue = data[i / rows][i % rows];
+
+                if (curValue != 0 && curValue > value) {
+                    ++inversions;
+                }
+            }
+
+        }
+
+        return inversions;
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Puzzle8New();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private enum MoveDirection {
         LEFT {
@@ -91,82 +216,6 @@ public class Puzzle8New {
         }
     }
 
-    private static List<MoveDirection> possibleMoves(int[][] data) {
-
-        int targetRow = 0;
-        int targetCol = 0;
-
-        MAIN:
-        for (int row = 0; row < data.length; ++row) {
-            for (int col = 0; col < data[row].length; ++col) {
-                if (data[row][col] == 0) {
-                    targetRow = row;
-                    targetCol = col;
-                    break MAIN;
-                }
-            }
-        }
-
-        List<MoveDirection> moves = new ArrayList<>();
-
-        if (targetRow != 0) {
-            moves.add(MoveDirection.UP);
-        }
-
-        if (targetRow != data.length - 1) {
-            moves.add(MoveDirection.DOWN);
-        }
-
-        if (targetCol != 0) {
-            moves.add(MoveDirection.LEFT);
-        }
-
-        if (targetCol != data[0].length - 1) {
-            moves.add(MoveDirection.RIGHT);
-        }
-
-        return moves;
-
-    }
-
-    private static void solve(int[][] data) {
-
-        int inversionCount = countInversions(data);
-
-        // odd inversions count, unsolvable board for 'odd' board size
-        if ((inversionCount & 1) != 0) {
-            throw new IllegalArgumentException("Unsolvable board found, inversions count = " + inversionCount +
-                                                       ", should be even.");
-        }
-
-        Queue<PartialSol> minQueue = new PriorityQueue<>();
-        minQueue.add(new PartialSol(data));
-
-        while (!minQueue.isEmpty()) {
-            PartialSol partialSolution = minQueue.poll();
-
-            if (partialSolution.isFinal()) {
-                System.out.printf("Solution found in %d moves %n", partialSolution.solutions.size());
-                for (PartialSol singleMoveSolution : partialSolution.solutions) {
-                    System.out.println(singleMoveSolution);
-                }
-                break;
-            }
-
-            List<MoveDirection> moves = possibleMoves(partialSolution.dataCopy);
-            if (partialSolution.curMove != null) {
-                moves.remove(partialSolution.curMove.inverse());
-            }
-
-            for (MoveDirection singleMove : moves) {
-
-                PartialSol newSolution = new PartialSol(partialSolution, singleMove);
-
-                minQueue.add(newSolution);
-            }
-        }
-    }
-
     private static final class PartialSol implements Comparable<PartialSol> {
 
         private final int originalCost;
@@ -205,6 +254,10 @@ public class Puzzle8New {
 
             this.estimatedCost = manhattanDistance(dataCopy);
             this.curMove = null;
+        }
+
+        private static int manhattanDistance(int[][] data) {
+            return ManhattanDistanceCalculator.calculateDistance(data);
         }
 
         @Override
@@ -248,10 +301,6 @@ public class Puzzle8New {
             return true;
         }
 
-        private static int manhattanDistance(int[][] data) {
-            return ManhattanDistanceCalculator.calculateDistance(data);
-        }
-
 
     }
 
@@ -289,60 +338,6 @@ public class Puzzle8New {
             return distance;
         }
 
-    }
-
-    private static int countInversions(int[][] data) {
-
-        final int rows = data.length;
-        final int lastIndex = data.length * data.length;
-
-        int inversions = 0;
-
-        for (int index = 0; index < lastIndex - 2; ++index) {
-
-            int value = data[index / rows][index % rows];
-
-            for (int i = index + 1; i < lastIndex; ++i) {
-
-                int curValue = data[i / rows][i % rows];
-
-                if (curValue != 0 && curValue > value) {
-                    ++inversions;
-                }
-            }
-
-        }
-
-        return inversions;
-    }
-
-
-    private Puzzle8New() throws Exception {
-
-//        int[][] data = {
-//                {5, 6, 2},
-//                {8, 1, 7},
-//                {3, 0, 4}
-//        };
-
-        int[][] data = {
-                {1, 4, 8},
-                {2, 5, 7},
-                {3, 6, 0}
-        };
-
-        solve(data);
-
-        System.out.printf("Puzzle 8 done: java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new Puzzle8New();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

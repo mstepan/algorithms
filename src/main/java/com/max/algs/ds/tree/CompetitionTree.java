@@ -6,10 +6,8 @@ import java.util.Queue;
 
 
 /**
- *
  * Min integer at 'root' node.
  * Doesn't allow to store Integer.MAX_VALUE.
- *
  */
 public class CompetitionTree {
 
@@ -17,25 +15,24 @@ public class CompetitionTree {
     private ArrayNode root;
 
 
-    public CompetitionTree(int[][] arrays){
-        if( arrays == null ){
+    public CompetitionTree(int[][] arrays) {
+        if (arrays == null) {
             throw new IllegalArgumentException("NULL 'arrays' passed");
         }
 
-        buildTree( arrays );
+        buildTree(arrays);
     }
 
 
-
-    public int extract(){
+    public int extract() {
 
         int retValue = root.value;
 
         ArrayNode cur = root;
 
-        while( cur.isNode() ){
+        while (cur.isNode()) {
 
-            if( cur.left.value == retValue ){
+            if (cur.left.value == retValue) {
                 cur = cur.left;
             }
             else {
@@ -47,8 +44,8 @@ public class CompetitionTree {
 
         ArrayNode parentNode = cur.parent;
 
-        while( parentNode != null ){
-            parentNode.value = Math.min( parentNode.left.value, parentNode.right.value );
+        while (parentNode != null) {
+            parentNode.value = Math.min(parentNode.left.value, parentNode.right.value);
             parentNode = parentNode.parent;
         }
 
@@ -57,37 +54,35 @@ public class CompetitionTree {
     }
 
 
-
-    public boolean hasNext(){
+    public boolean hasNext() {
         return root.value != Integer.MAX_VALUE;
     }
 
 
-
     //==== PRIVATE ====
 
-    private void buildTree( int[][] arrays ){
+    private void buildTree(int[][] arrays) {
 
         Queue<ArrayNode> queue = new ArrayDeque<>();
 
-        for( int[] arr : arrays ){
-            queue.add( new ArrayNode( arr[0], arr ) );
+        for (int[] arr : arrays) {
+            queue.add(new ArrayNode(arr[0], arr));
         }
 
         ArrayNode node1 = null;
         ArrayNode node2 = null;
         ArrayNode newNode = null;
 
-        while( queue.size() > 1 ){
+        while (queue.size() > 1) {
             node1 = queue.poll();
             node2 = queue.poll();
 
-            newNode = new ArrayNode( Math.min(node1.value, node2.value), node1, node2 );
+            newNode = new ArrayNode(Math.min(node1.value, node2.value), node1, node2);
 
             node1.parent = newNode;
             node2.parent = newNode;
 
-            queue.add( newNode );
+            queue.add(newNode);
         }
 
         root = queue.poll();
@@ -98,13 +93,12 @@ public class CompetitionTree {
 
     private static final class ArrayNode {
 
-        private int[] arr;
-        private int index;
-
         int value;
         ArrayNode parent;
         ArrayNode left;
         ArrayNode right;
+        private int[] arr;
+        private int index;
 
         ArrayNode(int value, int[] arr) {
             this.value = value;
@@ -118,17 +112,17 @@ public class CompetitionTree {
         }
 
 
-        boolean isLeaf(){
+        boolean isLeaf() {
             return arr != null;
         }
 
-        boolean isNode(){
-            return ! isLeaf();
+        boolean isNode() {
+            return !isLeaf();
         }
 
-        void moveNext(){
+        void moveNext() {
 
-            if( index < arr.length-1 ){
+            if (index < arr.length - 1) {
                 ++index;
                 value = arr[index];
             }
@@ -139,8 +133,8 @@ public class CompetitionTree {
         }
 
         @Override
-        public String toString(){
-            return String.valueOf( value );
+        public String toString() {
+            return String.valueOf(value);
         }
     }
 

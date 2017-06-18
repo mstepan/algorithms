@@ -1,16 +1,6 @@
 package benchmark;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -34,6 +24,17 @@ public class StampedVsReadWriteLockBenchmark {
     private static final Random RAND1 = new Random();
 
     private static final Random RAND2 = new Random();
+    private static final TwoValuesReadWrite READ_WRITE_DATA = new TwoValuesReadWrite();
+    private static final TwoValuesStamped STAMPED_DATA = new TwoValuesStamped();
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(StampedVsReadWriteLockBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
 
     @Benchmark
     @Group("stampedLockLockRead")
@@ -61,16 +62,6 @@ public class StampedVsReadWriteLockBenchmark {
     @GroupThreads(4)
     public void readWriteLockWrite() {
         READ_WRITE_DATA.writeValues(RAND1.nextInt());
-    }
-
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(StampedVsReadWriteLockBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
     private static final class TwoValuesStamped {
@@ -120,16 +111,13 @@ public class StampedVsReadWriteLockBenchmark {
 
         private final Lock readLock;
         private final Lock writeLock;
-
+        int x;
+        int y;
         TwoValuesReadWrite() {
             lock = new ReentrantReadWriteLock();
             readLock = lock.readLock();
             writeLock = lock.writeLock();
         }
-
-
-        int x;
-        int y;
 
         public void writeValues(int value) {
             writeLock.lock();
@@ -159,10 +147,6 @@ public class StampedVsReadWriteLockBenchmark {
         }
 
     }
-
-    private static final TwoValuesReadWrite READ_WRITE_DATA = new TwoValuesReadWrite();
-
-    private static final TwoValuesStamped STAMPED_DATA = new TwoValuesStamped();
 
 
 }

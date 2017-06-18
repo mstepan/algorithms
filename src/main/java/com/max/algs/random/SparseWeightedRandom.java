@@ -10,10 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 final class SparseWeightedRandom extends java.util.Random {
 
 
+    private static final Random RAND = ThreadLocalRandom.current();
     private final int[] data;
     private final int sum;
-
-    private static final Random RAND = ThreadLocalRandom.current();
 
 
     /**

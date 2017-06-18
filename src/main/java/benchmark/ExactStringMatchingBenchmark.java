@@ -4,20 +4,7 @@ import com.max.algs.epi.string.matching.BoyerMooreStringMatching;
 import com.max.algs.epi.string.matching.KMPStringMatching;
 import com.max.algs.epi.string.matching.RabinKarpStringMatching;
 import com.max.algs.string.StringUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -49,26 +36,13 @@ public class ExactStringMatchingBenchmark {
 
     private static final Random RAND = ThreadLocalRandom.current();
 
-    @State(Scope.Thread)
-    public static class PerThreadData {
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(ExactStringMatchingBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
 
-        public String str;
-        public String pattern;
-
-        @Setup(Level.Iteration)
-        public void setUp() {
-            // generate random DNA string(text)
-            str = StringUtils.generateDNAString(1000 + RAND.nextInt(10_000));
-
-            // generate random DNA sting(pattern)
-            pattern = StringUtils.generateDNAString(500 + RAND.nextInt(500));
-        }
-
-        @TearDown(Level.Iteration)
-        public void tearDown() {
-            str = null;
-            pattern = null;
-        }
+        new Runner(opt).run();
     }
 
     @Benchmark
@@ -115,13 +89,26 @@ public class ExactStringMatchingBenchmark {
         RabinKarpStringMatching.find(data.str, data.pattern);
     }
 
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(ExactStringMatchingBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
+    @State(Scope.Thread)
+    public static class PerThreadData {
 
-        new Runner(opt).run();
+        public String str;
+        public String pattern;
+
+        @Setup(Level.Iteration)
+        public void setUp() {
+            // generate random DNA string(text)
+            str = StringUtils.generateDNAString(1000 + RAND.nextInt(10_000));
+
+            // generate random DNA sting(pattern)
+            pattern = StringUtils.generateDNAString(500 + RAND.nextInt(500));
+        }
+
+        @TearDown(Level.Iteration)
+        public void tearDown() {
+            str = null;
+            pattern = null;
+        }
     }
 
 }

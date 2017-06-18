@@ -37,13 +37,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public final class DiningPhilosophersChandyMisra {
 
-    private static final class Stick {
-        int holderId;
-        boolean dirty;
-        final Lock lock = new ReentrantLock();
-    }
-
-
     private DiningPhilosophersChandyMisra() throws Exception {
 
         final int philosophersCnt = 4;
@@ -108,6 +101,12 @@ public final class DiningPhilosophersChandyMisra {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static final class Stick {
+        final Lock lock = new ReentrantLock();
+        int holderId;
+        boolean dirty;
     }
 
 }

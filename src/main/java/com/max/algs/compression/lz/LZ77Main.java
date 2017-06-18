@@ -1,11 +1,6 @@
 package com.max.algs.compression.lz;
 
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +18,28 @@ public class LZ77Main {
 
     private static final int SEARCH_BUF_SIZE = 2048;
     private static final int LOOK_AHEAD_BUF_SIZE = 128;
+
+    private LZ77Main() throws Exception {
+
+        long startTime = System.nanoTime();
+
+        String inPath =
+                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in-big.txt";
+
+        String archivePath =
+                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/compressed.data";
+
+        compress(inPath, archivePath);
+
+        String decompressedPath =
+                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in2.txt";
+
+        decompress(archivePath, decompressedPath);
+
+        long endTime = System.nanoTime();
+
+        System.out.println("Compression done, time: " + (endTime - startTime) / NANOS_IN_MS + " ms");
+    }
 
     public static void compress(String inPathStr, String outPathStr) throws IOException {
 
@@ -56,7 +73,6 @@ public class LZ77Main {
 
         System.out.println("maxOffset: " + maxOffset + ", maxLength: " + maxLength);
     }
-
 
     public static void decompress(String archiveStr, String outPathStr) throws IOException {
 
@@ -114,28 +130,6 @@ public class LZ77Main {
 
     private static Triple read(DataInputStream in) throws IOException {
         return new Triple(in.readShort(), in.readByte(), in.readChar());
-    }
-
-    private LZ77Main() throws Exception {
-
-        long startTime = System.nanoTime();
-
-        String inPath =
-                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in-big.txt";
-
-        String archivePath =
-                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/compressed.data";
-
-        compress(inPath, archivePath);
-
-        String decompressedPath =
-                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in2.txt";
-
-        decompress(archivePath, decompressedPath);
-
-        long endTime = System.nanoTime();
-
-        System.out.println("Compression done, time: " + (endTime - startTime) / NANOS_IN_MS + " ms");
     }
 
     public static void main(String[] args) {

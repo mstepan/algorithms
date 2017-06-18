@@ -28,11 +28,6 @@ public class WeightedRandom extends java.util.Random {
         }
     }
 
-    @Override
-    public int nextInt() {
-        return impl.nextInt();
-    }
-
     private static boolean checkWeights(int[] weights) {
         for (int singleWeight : weights) {
             checkArgument(singleWeight > 0, "negative weight found '%s', onnly positive weights supported", singleWeight);
@@ -50,5 +45,10 @@ public class WeightedRandom extends java.util.Random {
         }
 
         return true;
+    }
+
+    @Override
+    public int nextInt() {
+        return impl.nextInt();
     }
 }

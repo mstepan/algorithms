@@ -9,6 +9,17 @@ final class ConvertBinaryFractionToDecimal {
 
     private static final Pattern DECIMAL_FRACTION_REGEXP = Pattern.compile("^-?[10]+(\\.[10]+)?$");
 
+    private ConvertBinaryFractionToDecimal() throws Exception {
+
+        String str = "-101.10011";
+
+        double res = convert(str);
+
+        System.out.printf("res = %.5f %n", res);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     private static void checkCorrectFormat(String str) {
         if (!DECIMAL_FRACTION_REGEXP.matcher(str).matches()) {
             throw new IllegalArgumentException("Incorrect string format detected: '" + str + "'");
@@ -79,17 +90,6 @@ final class ConvertBinaryFractionToDecimal {
         }
 
         return res;
-    }
-
-    private ConvertBinaryFractionToDecimal() throws Exception {
-
-        String str = "-101.10011";
-
-        double res = convert(str);
-
-        System.out.printf("res = %.5f %n", res);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

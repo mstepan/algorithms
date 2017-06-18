@@ -30,7 +30,7 @@ final class RopeLeafNode implements RopeNode {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return data + ", length = " + data.length();
     }
 }

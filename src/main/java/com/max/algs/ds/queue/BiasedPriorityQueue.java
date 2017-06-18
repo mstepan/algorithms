@@ -4,175 +4,174 @@ import java.util.Iterator;
 
 /**
  * Max priority queue.
- * 
+ * <p>
  * Implemented as a height-biased leftist tree.
- *
  */
 public class BiasedPriorityQueue<T extends Comparable<T>> implements
-		Iterable<T> {
+        Iterable<T> {
 
-	private Node<T> root;
+    private Node<T> root;
 
-	private int size;
+    private int size;
 
-	public BiasedPriorityQueue() {
-		super();
-	}
+    public BiasedPriorityQueue() {
+        super();
+    }
 
-	public BiasedPriorityQueue(BiasedPriorityQueue<T> other) {
-		super();
+    public BiasedPriorityQueue(BiasedPriorityQueue<T> other) {
+        super();
 
-		for (T value : other) {
-			add(value);
-		}
+        for (T value : other) {
+            add(value);
+        }
 
-	}
+    }
 
-	public int size() {
-		return size;
-	}
+    public int size() {
+        return size;
+    }
 
-	public boolean isEmpty() {
-		return size == 0;
-	}
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-	public void merge(BiasedPriorityQueue<T> other) {
+    public void merge(BiasedPriorityQueue<T> other) {
 
-		if (other == null) {
-			throw new IllegalArgumentException("Can't merge with NULL queue");
-		}
+        if (other == null) {
+            throw new IllegalArgumentException("Can't merge with NULL queue");
+        }
 
-		BiasedPriorityQueue<T> otherCopy = new BiasedPriorityQueue<>(other);
+        BiasedPriorityQueue<T> otherCopy = new BiasedPriorityQueue<>(other);
 
-		root = mergeRec(root, otherCopy.root);
-		size += otherCopy.size;
-	}
+        root = mergeRec(root, otherCopy.root);
+        size += otherCopy.size;
+    }
 
-	public void add(T value) {
+    public void add(T value) {
 
-		if (root == null) {
-			root = new Node<>(value);
-		}
-		else {
-			Node<T> newNode = new Node<>(value);
-			root = mergeRec(root, newNode);
-		}
+        if (root == null) {
+            root = new Node<>(value);
+        }
+        else {
+            Node<T> newNode = new Node<>(value);
+            root = mergeRec(root, newNode);
+        }
 
-		++size;
-	}
+        ++size;
+    }
 
-	public T extractMax() {
+    public T extractMax() {
 
-		if (size == 0) {
-			throw new IndexOutOfBoundsException("Priority queue is empty");
-		}
+        if (size == 0) {
+            throw new IndexOutOfBoundsException("Priority queue is empty");
+        }
 
-		T maxValue = root.value;
+        T maxValue = root.value;
 
-		Node<T> left = root.left;
-		Node<T> right = root.right;
+        Node<T> left = root.left;
+        Node<T> right = root.right;
 
-		root.left = null;
-		root.right = null;
-		root = null;
+        root.left = null;
+        root.right = null;
+        root = null;
 
-		root = mergeRec(left, right);
+        root = mergeRec(left, right);
 
-		--size;
+        --size;
 
-		return maxValue;
-	}
+        return maxValue;
+    }
 
-	private Node<T> mergeRec(Node<T> left, Node<T> right) {
+    private Node<T> mergeRec(Node<T> left, Node<T> right) {
 
-		if (left == null) {
-			return right;
-		}
+        if (left == null) {
+            return right;
+        }
 
-		if (right == null) {
-			return left;
-		}
+        if (right == null) {
+            return left;
+        }
 
-		Node<T> retNode = null;
+        Node<T> retNode = null;
 
-		if (left.value.compareTo(right.value) > 0) {
-			left.right = mergeRec(left.right, right);
-			retNode = left;
-		}
-		else {
-			right.right = mergeRec(left, right.right);
-			retNode = right;
-		}
+        if (left.value.compareTo(right.value) > 0) {
+            left.right = mergeRec(left.right, right);
+            retNode = left;
+        }
+        else {
+            right.right = mergeRec(left, right.right);
+            retNode = right;
+        }
 
-		int leftS = Node.getS(retNode.left);
-		int rightS = Node.getS(retNode.right);
+        int leftS = Node.getS(retNode.left);
+        int rightS = Node.getS(retNode.right);
 
-		if (leftS < rightS) {
-			retNode.changeLeftToRight();
-		}
+        if (leftS < rightS) {
+            retNode.changeLeftToRight();
+        }
 
-		retNode.s = Math.min(leftS, rightS) + 1;
+        retNode.s = Math.min(leftS, rightS) + 1;
 
-		return retNode;
-	}
+        return retNode;
+    }
 
-	@Override
-	public Iterator<T> iterator() {
-		return new PeOrderIterator();
-	}
+    @Override
+    public Iterator<T> iterator() {
+        return new PeOrderIterator();
+    }
 
-	private final class PeOrderIterator implements Iterator<T> {
+    private static final class Node<U extends Comparable<U>> {
 
-		@Override
-		public boolean hasNext() {
-			return false;
-		}
+        final U value;
+        Node<U> left;
+        Node<U> right;
 
-		@Override
-		public T next() {
-			return null;
-		}
+        int s;
 
-		@Override
-		public void remove() {
+        Node(U value) {
+            super();
+            this.value = value;
+            this.s = 1;
+        }
 
-		}
+        static <K extends Comparable<K>> int getS(Node<K> node) {
+            if (node == null) {
+                return 0;
+            }
 
-	}
+            return node.s;
+        }
 
-	private static final class Node<U extends Comparable<U>> {
+        void changeLeftToRight() {
+            Node<U> tempLeft = left;
+            left = right;
+            right = tempLeft;
+        }
 
-		final U value;
-		Node<U> left;
-		Node<U> right;
+        @Override
+        public String toString() {
+            return String.valueOf(value) + ", s: " + s;
+        }
 
-		int s;
+    }
 
-		Node(U value) {
-			super();
-			this.value = value;
-			this.s = 1;
-		}
+    private final class PeOrderIterator implements Iterator<T> {
 
-		void changeLeftToRight() {
-			Node<U> tempLeft = left;
-			left = right;
-			right = tempLeft;
-		}
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
 
-		static <K extends Comparable<K>> int getS(Node<K> node) {
-			if (node == null) {
-				return 0;
-			}
+        @Override
+        public T next() {
+            return null;
+        }
 
-			return node.s;
-		}
+        @Override
+        public void remove() {
 
-		@Override
-		public String toString() {
-			return String.valueOf(value) + ", s: " + s;
-		}
+        }
 
-	}
+    }
 
 }

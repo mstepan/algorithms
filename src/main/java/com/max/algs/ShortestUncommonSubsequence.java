@@ -4,6 +4,18 @@ package com.max.algs;
 public final class ShortestUncommonSubsequence {
 
 
+    private ShortestUncommonSubsequence() throws Exception {
+
+        String s = "babab";
+        String t = "babba";
+
+        int uncommontShortestSubseq = findShortestUncommonSubsequence(s, t);
+
+        System.out.println("Shortest uncommon sub sequence: " + uncommontShortestSubseq);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - s.length()
      * M - t.length()
@@ -58,19 +70,6 @@ public final class ShortestUncommonSubsequence {
         int res = opt[rows - 1][cols - 1];
 
         return res < t.length() ? res : -1;
-    }
-
-
-    private ShortestUncommonSubsequence() throws Exception {
-
-        String s = "babab";
-        String t = "babba";
-
-        int uncommontShortestSubseq = findShortestUncommonSubsequence(s, t);
-
-        System.out.println("Shortest uncommon sub sequence: " + uncommontShortestSubseq);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

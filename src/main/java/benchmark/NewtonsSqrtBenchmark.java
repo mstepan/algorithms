@@ -1,16 +1,6 @@
 package benchmark;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -30,6 +20,36 @@ import java.util.concurrent.TimeUnit;
 public class NewtonsSqrtBenchmark {
 
     private static final int ITERATIONS = 1_000;
+    private static final double PRECISION = 0.00001;
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(NewtonsSqrtBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
+
+    /**
+     * Newton-Rhapsody method to find square root function.
+     */
+    private static double sqrt2(double value, double initialGuess) {
+        double guess = initialGuess;
+
+        double diff;
+
+        while (true) {
+
+            diff = Math.abs(guess * guess - value);
+
+            if (Double.compare(diff, PRECISION) < 0) {
+                return guess;
+            }
+
+            guess = guess - (guess * guess - value) / (2.0 * guess);
+        }
+    }
 
     @Benchmark
     @Group("sqrt1")
@@ -55,38 +75,6 @@ public class NewtonsSqrtBenchmark {
     public void jdkSqrt() {
         for (int i = 0; i < ITERATIONS; ++i) {
             Math.sqrt(i);
-        }
-    }
-
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(NewtonsSqrtBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
-    }
-
-    private static final double PRECISION = 0.00001;
-
-    /**
-     * Newton-Rhapsody method to find square root function.
-     */
-    private static double sqrt2(double value, double initialGuess) {
-        double guess = initialGuess;
-
-        double diff;
-
-        while (true) {
-
-            diff = Math.abs(guess * guess - value);
-
-            if (Double.compare(diff, PRECISION) < 0) {
-                return guess;
-            }
-
-            guess = guess - (guess * guess - value) / (2.0 * guess);
         }
     }
 

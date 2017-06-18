@@ -21,7 +21,8 @@ public class AbsSortedTask {
 
             if (array[minIndex] + array[maxIndex] < p) {
                 minIndex = next(array, minIndex);
-            } else if (array[minIndex] + array[maxIndex] > p) {
+            }
+            else if (array[minIndex] + array[maxIndex] > p) {
                 maxIndex = prev(array, maxIndex);
             }
         }
@@ -37,7 +38,7 @@ public class AbsSortedTask {
 
         int min = Integer.MAX_VALUE;
         int minIndex = array.length - 1;
-        for (int index = array.length - 1; index >=0; index--) {
+        for (int index = array.length - 1; index >= 0; index--) {
             if (array[index] < 0) {
                 return index;
             }
@@ -58,7 +59,7 @@ public class AbsSortedTask {
 
         int max = Integer.MIN_VALUE;
         int maxIndex = array.length - 1;
-        for (int index = array.length - 1; index >=0; index--) {
+        for (int index = array.length - 1; index >= 0; index--) {
             if (array[index] > 0) {
                 return index;
             }
@@ -85,7 +86,7 @@ public class AbsSortedTask {
             nextIndex = 0;
         }
 
-        for (;nextIndex < array.length; nextIndex++) {
+        for (; nextIndex < array.length; nextIndex++) {
             if (array[nextIndex] >= 0) {
                 return nextIndex;
             }
@@ -107,7 +108,7 @@ public class AbsSortedTask {
             nextIndex = 0;
         }
 
-        for (;nextIndex < array.length; nextIndex++) {
+        for (; nextIndex < array.length; nextIndex++) {
             if (array[nextIndex] < 0) {
                 return nextIndex;
             }

@@ -5,10 +5,10 @@ import java.util.NoSuchElementException;
 
 /**
  * Generate binary reflected Gray codes.
- * 
- * 
+ * <p>
+ * <p>
  * example: n = 3
- * 
+ * <p>
  * 000
  * 001
  * 011
@@ -17,78 +17,72 @@ import java.util.NoSuchElementException;
  * 111
  * 101
  * 100
- * 
- * 
  */
 public class BinaryGrayCodesIterator implements Iterator<Integer> {
 
-	private int value = 0;
-	
-	private int generatedValuesCount;
-	private final int totalElemsCount;
-	
-	
-	
-	public BinaryGrayCodesIterator(int elems) {
-		super();
-		this.totalElemsCount = (int)Math.pow(2.0, elems);
-	}
+    private final int totalElemsCount;
+    private int value = 0;
+    private int generatedValuesCount;
 
-	@Override
-	public boolean hasNext() {
-		return generatedValuesCount < totalElemsCount;
-	}
 
-	@Override
-	public Integer next() {
-		
-		if( !hasNext() ){
-			throw new NoSuchElementException();
-		}
-			
-		int res = value;
-		++generatedValuesCount;		
-		
-		generateNext();
+    public BinaryGrayCodesIterator(int elems) {
+        super();
+        this.totalElemsCount = (int) Math.pow(2.0, elems);
+    }
 
-		return res;
-	}
-	
-	private void generateNext(){
-		
-		if( value == 0 ){
-			value = 1;
-			return;
-		}
-		
-		int mask = 1;
-		
-		for(int i = 0; i < 32; i++, mask <<= 1 ) {
-			
-			if( (generatedValuesCount & mask) != 0 ){
-				
-				if( (value & mask) > 0){ 
-					// clear bit
-					value &= ~mask;
-				}
-				else {
-					// set bit
-					value |= mask;
-				}
-				
-				break;
-			}
-		}
-		
-		
-		
-	}
-	
-	
+    @Override
+    public boolean hasNext() {
+        return generatedValuesCount < totalElemsCount;
+    }
 
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public Integer next() {
+
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+
+        int res = value;
+        ++generatedValuesCount;
+
+        generateNext();
+
+        return res;
+    }
+
+    private void generateNext() {
+
+        if (value == 0) {
+            value = 1;
+            return;
+        }
+
+        int mask = 1;
+
+        for (int i = 0; i < 32; i++, mask <<= 1) {
+
+            if ((generatedValuesCount & mask) != 0) {
+
+                if ((value & mask) > 0) {
+                    // clear bit
+                    value &= ~mask;
+                }
+                else {
+                    // set bit
+                    value |= mask;
+                }
+
+                break;
+            }
+        }
+
+
+    }
+
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 
 }

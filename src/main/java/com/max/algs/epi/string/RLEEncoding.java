@@ -5,6 +5,20 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class RLEEncoding {
 
+    private RLEEncoding() throws Exception {
+
+        String str = "aaaabcccaae";
+        System.out.println(str);
+
+        String encoded = encode(str);
+        System.out.println(encoded);
+
+        String original = decode(encoded);
+        System.out.println(original);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 7.12. RLE encoding.
      * <p>
@@ -72,20 +86,6 @@ public class RLEEncoding {
         }
 
         return decodedBuf.toString();
-    }
-
-    private RLEEncoding() throws Exception {
-
-        String str = "aaaabcccaae";
-        System.out.println(str);
-
-        String encoded = encode(str);
-        System.out.println(encoded);
-
-        String original = decode(encoded);
-        System.out.println(original);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

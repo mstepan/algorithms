@@ -1,26 +1,12 @@
 package benchmark;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Group)
@@ -33,6 +19,14 @@ public class CollatzConjectureBenchmark {
 
     private static final int ELEMS_COUNT = 1_000_000;
 
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(CollatzConjectureBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
 
     @Benchmark
     @Group("collatzHashNoResizing")
@@ -87,7 +81,6 @@ public class CollatzConjectureBenchmark {
         return true;
     }
 
-
     private boolean collatzHashSet(int n) {
 
         Set<Integer> solvable = new HashSet<>();
@@ -127,7 +120,6 @@ public class CollatzConjectureBenchmark {
         return true;
     }
 
-
     private boolean collatzHashNoResizing(int n) {
 
         Set<Integer> solvable = new HashSet<>((int) (n / 0.75 + 1));
@@ -165,16 +157,6 @@ public class CollatzConjectureBenchmark {
         }
 
         return true;
-    }
-
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(CollatzConjectureBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
 }

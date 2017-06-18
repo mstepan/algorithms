@@ -19,15 +19,6 @@ public class ByteWatcherSingleThread {
     private static final MBeanServer mBeanServer;
     private static final ObjectName name;
 
-    private final String threadName;
-    private final Thread thread;
-
-    private final Object[] PARAMS;
-    private final AtomicLong allocated = new AtomicLong();
-    private final long MEASURING_COST_IN_BYTES; // usually 336
-    private final long tid;
-    private final boolean checkThreadSafety;
-
     static {
         try {
             name = new ObjectName(ManagementFactory.THREAD_MXBEAN_NAME);
@@ -37,6 +28,14 @@ public class ByteWatcherSingleThread {
             throw new ExceptionInInitializerError(e);
         }
     }
+
+    private final String threadName;
+    private final Thread thread;
+    private final Object[] PARAMS;
+    private final AtomicLong allocated = new AtomicLong();
+    private final long MEASURING_COST_IN_BYTES; // usually 336
+    private final long tid;
+    private final boolean checkThreadSafety;
 
     public ByteWatcherSingleThread() {
         this(Thread.currentThread(), true);
@@ -109,7 +108,7 @@ public class ByteWatcherSingleThread {
     private void checkThreadSafety() {
         if (checkThreadSafety && tid != Thread.currentThread().getId()) {
             throw new IllegalStateException("AllocationMeasure must not be " +
-                            "used over more than 1 thread.");
+                    "used over more than 1 thread.");
         }
     }
 

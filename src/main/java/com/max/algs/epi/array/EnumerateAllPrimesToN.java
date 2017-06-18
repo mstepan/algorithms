@@ -1,10 +1,6 @@
 package com.max.algs.epi.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -12,8 +8,22 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class EnumerateAllPrimesToN {
 
 
-    private static final int  ZERO = 0;
+    private static final int ZERO = 0;
     private static final int TWO = 2;
+
+    private EnumerateAllPrimesToN() throws Exception {
+
+        List<Integer> expectedPrimes =
+                Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
+                        79, 83, 89, 97, 101);
+        System.out.println("expected: " + expectedPrimes);
+
+        int n = 101;
+        List<Integer> actualPrimes = findAllPrimes(n);
+        System.out.println("actual:   " + actualPrimes);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * Get all primes using sieve of Eratosthenes.
@@ -89,22 +99,6 @@ public class EnumerateAllPrimesToN {
     private static int valueToIndex(int value) {
         return value >> 1;
     }
-
-
-    private EnumerateAllPrimesToN() throws Exception {
-
-        List<Integer> expectedPrimes =
-                Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
-                              79, 83, 89, 97, 101);
-        System.out.println("expected: " + expectedPrimes);
-
-        int n = 101;
-        List<Integer> actualPrimes = findAllPrimes(n);
-        System.out.println("actual:   " + actualPrimes);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
 
     public static void main(String[] args) {
         try {

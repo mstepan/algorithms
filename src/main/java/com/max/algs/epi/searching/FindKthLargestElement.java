@@ -13,6 +13,28 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FindKthLargestElement {
 
+    private FindKthLargestElement() throws Exception {
+
+        for (int it = 0; it < 10; ++it) {
+
+            int[] sortedArr = ArrayUtils.generateRandomArrayOfRandomLength(1000);
+            int[] arrCopy = Arrays.copyOf(sortedArr, sortedArr.length);
+
+            Arrays.sort(sortedArr);
+
+            for (int i = 0; i < sortedArr.length; ++i) {
+
+                int k = arrCopy.length - i;
+
+                if (sortedArr[i] != findKthLargest(arrCopy, k)) {
+                    throw new IllegalStateException("Not equals");
+                }
+            }
+        }
+
+        System.out.printf("'FindKthLargestElement' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N)
      * space: O(1)
@@ -69,28 +91,6 @@ public class FindKthLargestElement {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
-    }
-
-    private FindKthLargestElement() throws Exception {
-
-        for (int it = 0; it < 10; ++it) {
-
-            int[] sortedArr = ArrayUtils.generateRandomArrayOfRandomLength(1000);
-            int[] arrCopy = Arrays.copyOf(sortedArr, sortedArr.length);
-
-            Arrays.sort(sortedArr);
-
-            for (int i = 0; i < sortedArr.length; ++i) {
-
-                int k = arrCopy.length - i;
-
-                if (sortedArr[i] != findKthLargest(arrCopy, k)) {
-                    throw new IllegalStateException("Not equals");
-                }
-            }
-        }
-
-        System.out.printf("'FindKthLargestElement' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

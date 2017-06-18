@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -34,6 +21,53 @@ public class MemoryAccessPatternsBenchmark {
     private static final int PAGE_SIZE = 4 * 1024; // 4KB
 
     private static final int ARR_SIZE = PAGE_SIZE * 300;
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(MemoryAccessPatternsBenchmark.class.getSimpleName())
+                .threads(Runtime.getRuntime().availableProcessors())
+                .build();
+
+        new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("sequentialAccess")
+    @GroupThreads(2)
+    public void sequentialAccess(ArrPerThread state) {
+        byte[] data = state.arr1;
+
+        for (int i = 0; i < data.length; ++i) {
+            byte temp = data[i];
+        }
+    }
+
+    @Benchmark
+    @Group("randomWithinPage")
+    @GroupThreads(2)
+    public void randomWithinPage(ArrPerThread state) {
+        byte[] data = state.arr2;
+
+        for (int from = 0; from < data.length; ) {
+
+            for (int index : state.indexesWithinPage) {
+                byte temp = data[from + index];
+            }
+
+            from += state.indexesWithinPage.length;
+        }
+    }
+
+    @Benchmark
+    @Group("randomAccess")
+    @GroupThreads(2)
+    public void randomAccess(ArrPerThread state) {
+        byte[] data = state.arr3;
+
+        for (int randIndex : state.randomIndexes) {
+            byte temp = data[randIndex];
+        }
+    }
 
     @State(Scope.Thread)
     public static class ArrPerThread {
@@ -76,54 +110,6 @@ public class MemoryAccessPatternsBenchmark {
             indexesWithinPage = null;
             randomIndexes = null;
         }
-    }
-
-    @Benchmark
-    @Group("sequentialAccess")
-    @GroupThreads(2)
-    public void sequentialAccess(ArrPerThread state) {
-        byte[] data = state.arr1;
-
-        for (int i = 0; i < data.length; ++i) {
-            byte temp = data[i];
-        }
-    }
-
-    @Benchmark
-    @Group("randomWithinPage")
-    @GroupThreads(2)
-    public void randomWithinPage(ArrPerThread state) {
-        byte[] data = state.arr2;
-
-        for (int from = 0; from < data.length; ) {
-
-            for (int index : state.indexesWithinPage) {
-                byte temp = data[from + index];
-            }
-
-            from += state.indexesWithinPage.length;
-        }
-    }
-
-    @Benchmark
-    @Group("randomAccess")
-    @GroupThreads(2)
-    public void randomAccess(ArrPerThread state) {
-        byte[] data = state.arr3;
-
-        for (int randIndex : state.randomIndexes) {
-            byte temp = data[randIndex];
-        }
-    }
-
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(MemoryAccessPatternsBenchmark.class.getSimpleName())
-                .threads(Runtime.getRuntime().availableProcessors())
-                .build();
-
-        new Runner(opt).run();
     }
 
 }

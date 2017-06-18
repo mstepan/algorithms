@@ -12,6 +12,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class PrefixForSortedArrayOfStrings {
 
 
+    private PrefixForSortedArrayOfStrings() throws Exception {
+
+        String[] arr = {"hell", "hello", "helping", "world"};
+        Arrays.sort(arr);
+
+        String prefix = "help";
+
+        boolean hasPrefix = hasPrefix(arr, prefix);
+
+        System.out.printf("hasPrefix: %s %n", hasPrefix);
+
+
+        System.out.printf("'PrefixForSortedArrayOfStrings' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(lgN * K), N - arr.length, K - p.length
      * space: O(1)
@@ -61,21 +76,6 @@ public class PrefixForSortedArrayOfStrings {
         }
 
         return prefix.length() <= str.length() ? 0 : -1;
-    }
-
-    private PrefixForSortedArrayOfStrings() throws Exception {
-
-        String[] arr = {"hell", "hello", "helping", "world"};
-        Arrays.sort(arr);
-
-        String prefix = "help";
-
-        boolean hasPrefix = hasPrefix(arr, prefix);
-
-        System.out.printf("hasPrefix: %s %n", hasPrefix);
-
-
-        System.out.printf("'PrefixForSortedArrayOfStrings' completed. java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

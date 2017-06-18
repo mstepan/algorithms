@@ -7,6 +7,39 @@ import java.util.Random;
  */
 public class MulOnBits {
 
+    private MulOnBits() throws Exception {
+
+        Random rand = new Random();
+
+        int x, y;
+        long expectedSum, actualSum;
+
+        for (int i = 0; i < 1_000_000; ++i) {
+            x = rand.nextInt();
+            y = rand.nextInt();
+
+            expectedSum = (long) x * y;
+            actualSum = mul(x, y);
+
+            if (expectedSum != actualSum) {
+                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
+                        ", for x = " + x + " and y = " + y);
+            }
+        }
+
+
+        System.out.printf("'MulOnBits' completed. java-%s %n", System.getProperty("java.version"));
+    }
+
+    public static void main(String[] args) {
+        try {
+            new MulOnBits();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     /**
      * Grade school like multiplication.
      * <p>
@@ -55,39 +88,6 @@ public class MulOnBits {
         }
 
         return res;
-    }
-
-    private MulOnBits() throws Exception {
-
-        Random rand = new Random();
-
-        int x, y;
-        long expectedSum, actualSum;
-
-        for (int i = 0; i < 1_000_000; ++i) {
-            x = rand.nextInt();
-            y = rand.nextInt();
-
-            expectedSum = (long) x * y;
-            actualSum = mul(x, y);
-
-            if (expectedSum != actualSum) {
-                throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
-                                                        ", for x = " + x + " and y = " + y);
-            }
-        }
-
-
-        System.out.printf("'MulOnBits' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new MulOnBits();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

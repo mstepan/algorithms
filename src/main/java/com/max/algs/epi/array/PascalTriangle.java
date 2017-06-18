@@ -7,6 +7,17 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class PascalTriangle {
 
+    private PascalTriangle() throws Exception {
+
+        int[][] res = pascalTriangle(7);
+
+        for (int[] line : res) {
+            System.out.println(Arrays.toString(line));
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Calculate N lines of Pascal's triangle.
      * <p>
@@ -38,17 +49,6 @@ public class PascalTriangle {
         }
 
         return res;
-    }
-
-    private PascalTriangle() throws Exception {
-
-        int[][] res = pascalTriangle(7);
-
-        for (int[] line : res) {
-            System.out.println(Arrays.toString(line));
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

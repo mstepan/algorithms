@@ -26,6 +26,12 @@ public class PrimeUtilitiesTest {
         PRIMES_EXPECTED_COUNTERS.put(1_000_000_000, 50_847_534);
     }
 
+    private static void checkCountPrimesFunction(Function<Integer, Integer> primesCalcFunc) {
+        for (Map.Entry<Integer, Integer> entry : PRIMES_EXPECTED_COUNTERS.entrySet()) {
+            assertEquals(entry.getValue(), primesCalcFunc.apply(entry.getKey()));
+        }
+    }
+
     @Test
     public void countPrimesSegmentedWithBoolean() {
         checkCountPrimesFunction(PrimeUtilities::countPrimesSegmentedWithBoolean);
@@ -39,12 +45,6 @@ public class PrimeUtilitiesTest {
     @Test
     public void countPrimes() {
         checkCountPrimesFunction(PrimeUtilities::countPrimes);
-    }
-
-    private static void checkCountPrimesFunction(Function<Integer, Integer> primesCalcFunc) {
-        for (Map.Entry<Integer, Integer> entry : PRIMES_EXPECTED_COUNTERS.entrySet()) {
-            assertEquals(entry.getValue(), primesCalcFunc.apply(entry.getKey()));
-        }
     }
 
 

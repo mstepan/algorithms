@@ -16,11 +16,17 @@ public class NQueens2 {
     private static final char EMPTY = '.';
     private static final String QUEEN_STR = "" + QUEEN;
 
-    private static final class MutableInt {
-        private int value;
+    public NQueens2() throws Exception {
+        int n = 10;
+        System.out.println(totalNQueens(n));
+    }
 
-        void inc() {
-            ++value;
+    public static void main(String[] args) {
+        try {
+            new NQueens2();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -98,18 +104,11 @@ public class NQueens2 {
         }
     }
 
-    public NQueens2() throws Exception {
-        int n = 10;
-        System.out.println(totalNQueens(n));
-    }
+    private static final class MutableInt {
+        private int value;
 
-
-    public static void main(String[] args) {
-        try {
-            new NQueens2();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+        void inc() {
+            ++value;
         }
     }
 

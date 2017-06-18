@@ -1,20 +1,7 @@
 package benchmark.cpu;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -37,79 +24,6 @@ import java.util.concurrent.TimeUnit;
 public class BranchMispredictionBenchmark {
 
     private static final int ARR_LENGTH = 1 << 20; // 1_048_576
-
-    @State(Scope.Thread)
-    public static class ArrPerThread {
-
-        public int[] arr1;
-        public int[] arr2;
-        public int[] arr3;
-        public int[] arr4;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
-            arr2 = Arrays.copyOf(arr1, arr1.length);
-            arr3 = Arrays.copyOf(arr1, arr1.length);
-            arr4 = Arrays.copyOf(arr1, arr1.length);
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-            arr2 = null;
-            arr3 = null;
-            arr4 = null;
-        }
-    }
-
-    @Benchmark
-    @Group("branchMissed")
-    @GroupThreads(4)
-    public void branchMissed(ArrPerThread state) {
-        mergeSort(state.arr1, MergeMethod.STANDARD);
-    }
-
-    /**
-     * On x86 will use 'cmovne' instruction.
-     */
-    @Benchmark
-    @Group("branchConditionalMove")
-    @GroupThreads(4)
-    public void branchConditionalMove(ArrPerThread state) {
-        mergeSort(state.arr2, MergeMethod.CMOV);
-    }
-
-    @Benchmark
-    @Group("branchPredictedOptimized2")
-    @GroupThreads(4)
-    public void branchPredictedOptimized2(ArrPerThread state) {
-        mergeSort(state.arr3, MergeMethod.OPTIMIZED2);
-    }
-
-    @Benchmark
-    @Group("branchPredictedOptimized3")
-    @GroupThreads(4)
-    public void branchPredictedOptimized3(ArrPerThread state) {
-        mergeSort(state.arr4, MergeMethod.OPTIMIZED3);
-    }
-
-    private enum MergeMethod {
-        STANDARD,
-        CMOV,
-        OPTIMIZED2,
-        OPTIMIZED3
-    }
-
-    private static class ArrChunk {
-        final int from;
-        final int to;
-
-        public ArrChunk(int from, int to) {
-            this.from = from;
-            this.to = to;
-        }
-    }
 
     private static void mergeSort(int[] arr, MergeMethod mergeType) {
 
@@ -252,6 +166,79 @@ public class BranchMispredictionBenchmark {
                 .build();
 
         new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("branchMissed")
+    @GroupThreads(4)
+    public void branchMissed(ArrPerThread state) {
+        mergeSort(state.arr1, MergeMethod.STANDARD);
+    }
+
+    /**
+     * On x86 will use 'cmovne' instruction.
+     */
+    @Benchmark
+    @Group("branchConditionalMove")
+    @GroupThreads(4)
+    public void branchConditionalMove(ArrPerThread state) {
+        mergeSort(state.arr2, MergeMethod.CMOV);
+    }
+
+    @Benchmark
+    @Group("branchPredictedOptimized2")
+    @GroupThreads(4)
+    public void branchPredictedOptimized2(ArrPerThread state) {
+        mergeSort(state.arr3, MergeMethod.OPTIMIZED2);
+    }
+
+    @Benchmark
+    @Group("branchPredictedOptimized3")
+    @GroupThreads(4)
+    public void branchPredictedOptimized3(ArrPerThread state) {
+        mergeSort(state.arr4, MergeMethod.OPTIMIZED3);
+    }
+
+    private enum MergeMethod {
+        STANDARD,
+        CMOV,
+        OPTIMIZED2,
+        OPTIMIZED3
+    }
+
+    @State(Scope.Thread)
+    public static class ArrPerThread {
+
+        public int[] arr1;
+        public int[] arr2;
+        public int[] arr3;
+        public int[] arr4;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
+            arr2 = Arrays.copyOf(arr1, arr1.length);
+            arr3 = Arrays.copyOf(arr1, arr1.length);
+            arr4 = Arrays.copyOf(arr1, arr1.length);
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+            arr2 = null;
+            arr3 = null;
+            arr4 = null;
+        }
+    }
+
+    private static class ArrChunk {
+        final int from;
+        final int to;
+
+        public ArrChunk(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
     }
 
 }

@@ -9,6 +9,39 @@ import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class CanFormBinaryTree {
 
+    private CanFormBinaryTree() throws Exception {
+
+        BinaryTreeNode A = new BinaryTreeNode("A", null, null);
+
+        BinaryTreeNode B = new BinaryTreeNode("B", null, null);
+        BinaryTreeNode C = new BinaryTreeNode("C", null, null);
+
+        BinaryTreeNode D = new BinaryTreeNode("D", null, null);
+        BinaryTreeNode E = new BinaryTreeNode("E", null, null);
+
+        A.left = B;
+        A.right = C;
+
+        B.left = D;
+        B.right = E;
+
+        E.right = C;
+
+        BinaryTreeNode[] nodes = {
+                A,
+                B,
+                C,
+                D,
+                E
+        };
+
+        ArrayUtils.shuffle(nodes);
+
+        System.out.printf("balanced: %b %n", canFormTree(nodes));
+
+        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Given an array of binary tree nodes, check if all of this nodes can form a tree.
      * <p>
@@ -50,39 +83,6 @@ public class CanFormBinaryTree {
         }
 
         return possibleRootNodes.size() == 1;
-    }
-
-    private CanFormBinaryTree() throws Exception {
-
-        BinaryTreeNode A = new BinaryTreeNode("A", null, null);
-
-        BinaryTreeNode B = new BinaryTreeNode("B", null, null);
-        BinaryTreeNode C = new BinaryTreeNode("C", null, null);
-
-        BinaryTreeNode D = new BinaryTreeNode("D", null, null);
-        BinaryTreeNode E = new BinaryTreeNode("E", null, null);
-
-        A.left = B;
-        A.right = C;
-
-        B.left = D;
-        B.right = E;
-
-        E.right = C;
-
-        BinaryTreeNode[] nodes = {
-                A,
-                B,
-                C,
-                D,
-                E
-        };
-
-        ArrayUtils.shuffle(nodes);
-
-        System.out.printf("balanced: %b %n", canFormTree(nodes));
-
-        System.out.printf("CheckIfBinaryTreeHeightBalanced done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

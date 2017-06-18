@@ -10,6 +10,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public final class FairWorkload {
 
 
+    private FairWorkload() throws Exception {
+
+        int[] arr = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        int workers = 5;
+
+        int optimalLoad = findOptimalLoad(arr, workers);
+
+        System.out.printf("optimalLoad: %d %n", optimalLoad);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * See https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/
      * and https://community.topcoder.com/stat?c=problem_statement&pm=1901&rd=4650
@@ -68,7 +80,6 @@ public final class FairWorkload {
         return actualCount;
     }
 
-
     private static int sum(int[] arr) {
         int res = 0;
 
@@ -85,19 +96,6 @@ public final class FairWorkload {
             maxSoFar = Math.max(maxSoFar, val);
         }
         return maxSoFar;
-    }
-
-
-    private FairWorkload() throws Exception {
-
-        int[] arr = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-        int workers = 5;
-
-        int optimalLoad = findOptimalLoad(arr, workers);
-
-        System.out.printf("optimalLoad: %d %n", optimalLoad);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

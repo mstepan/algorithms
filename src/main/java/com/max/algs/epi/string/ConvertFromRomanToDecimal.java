@@ -10,6 +10,33 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class ConvertFromRomanToDecimal {
 
     private static final Map<Character, Integer> ROMAN_DIGITS = romanDigits();
+    private static int[] NUMBERS = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+    private static String[] SYMBOLS = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
+
+    private ConvertFromRomanToDecimal() throws Exception {
+        String[] romanNumbers = {
+                "I",
+                "VII",
+                "IX",
+                "IV",
+                "CDM",
+                "IC"
+        };
+
+
+        System.out.println("Roman to decimal.");
+
+        for (String singleRomanNumber : romanNumbers) {
+            System.out.printf("%s: %d %n", singleRomanNumber, toDecimal(singleRomanNumber));
+        }
+
+        System.out.println("Decimal to Roman.");
+        for (int i = 1; i < 101; ++i) {
+            System.out.printf("%d: %s %n", i, toRoman(i));
+        }
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     private static Map<Character, Integer> romanDigits() {
         Map<Character, Integer> map = new HashMap<>();
@@ -54,39 +81,10 @@ public class ConvertFromRomanToDecimal {
         for (int i = 0, strLength = str.length(); i < strLength; ++i) {
             if (!ROMAN_DIGITS.containsKey(str.charAt(i))) {
                 throw new IllegalArgumentException("'" + str + "' is not a valid Roman number, unknown digit '" +
-                                                           str.charAt(i) + "'");
+                        str.charAt(i) + "'");
             }
         }
     }
-
-
-    private ConvertFromRomanToDecimal() throws Exception {
-        String[] romanNumbers = {
-                "I",
-                "VII",
-                "IX",
-                "IV",
-                "CDM",
-                "IC"
-        };
-
-
-        System.out.println("Roman to decimal.");
-
-        for (String singleRomanNumber : romanNumbers) {
-            System.out.printf("%s: %d %n", singleRomanNumber, toDecimal(singleRomanNumber));
-        }
-
-        System.out.println("Decimal to Roman.");
-        for (int i = 1; i < 101; ++i) {
-            System.out.printf("%d: %s %n", i, toRoman(i));
-        }
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
-    private static int[] NUMBERS = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
-    private static String[] SYMBOLS = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
 
     /**
      * Convert decimal value to Roman number string.

@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.string.StringUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -38,32 +25,6 @@ import java.util.concurrent.TimeUnit;
 public class FindFirstUniqueCharacterInStringBenchmark {
 
     private static final int STR_LENGTH = 100;
-
-    @State(Scope.Thread)
-    public static class PerThreadData {
-
-        public String str1;
-        public String str2;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            str1 = StringUtils.generateAsciiString(STR_LENGTH);
-            str2 = new String(str1.toCharArray());
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            str1 = null;
-            str2 = null;
-        }
-    }
-
-    @Benchmark
-    @Group("firstUnique")
-    @GroupThreads(2)
-    public void firstUnique(PerThreadData data) {
-        firstUnique(data.str1);
-    }
 
     private static Optional<Character> firstUnique(String str) {
 
@@ -89,13 +50,6 @@ public class FindFirstUniqueCharacterInStringBenchmark {
         return Optional.of(unique.iterator().next());
     }
 
-    @Benchmark
-    @Group("firstUniqueSmallStr")
-    @GroupThreads(2)
-    public void firstUniqueSmallStr(PerThreadData data) {
-        firstUniqueSmallStr(data.str2);
-    }
-
     private static Character firstUniqueSmallStr(String str) {
 
         final int strLength = str.length();
@@ -116,7 +70,6 @@ public class FindFirstUniqueCharacterInStringBenchmark {
         return null;
     }
 
-
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(FindFirstUniqueCharacterInStringBenchmark.class.getSimpleName())
@@ -124,6 +77,39 @@ public class FindFirstUniqueCharacterInStringBenchmark {
                 .build();
 
         new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("firstUnique")
+    @GroupThreads(2)
+    public void firstUnique(PerThreadData data) {
+        firstUnique(data.str1);
+    }
+
+    @Benchmark
+    @Group("firstUniqueSmallStr")
+    @GroupThreads(2)
+    public void firstUniqueSmallStr(PerThreadData data) {
+        firstUniqueSmallStr(data.str2);
+    }
+
+    @State(Scope.Thread)
+    public static class PerThreadData {
+
+        public String str1;
+        public String str2;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            str1 = StringUtils.generateAsciiString(STR_LENGTH);
+            str2 = new String(str1.toCharArray());
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            str1 = null;
+            str2 = null;
+        }
     }
 
 }

@@ -9,6 +9,36 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class KMPStringMatching {
 
+    private KMPStringMatching() throws Exception {
+
+        Random rand = new Random();
+
+        for (int i = 0; i < 10_000; ++i) {
+            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
+            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
+
+            int actualIndex = find(str, pattern, true);
+            int expectedIndex = str.indexOf(pattern);
+
+//            System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
+
+            if (actualIndex != expectedIndex) {
+                throw new IllegalStateException("actualIndex != expectedIndex");
+            }
+        }
+
+//        int[] lps = longestPrefixSuffix("abxabqabxabrabxabqabxabx");
+//        System.out.printf("lps:    %s %n", Arrays.toString(lps));
+//
+//        int[] lpsOpt = longestPrefixSuffixOptimized("abxabqabxabrabxabqabxabx");
+//        System.out.printf("lpsOpt: %s %n", Arrays.toString(lpsOpt));
+//
+//        int[] lpsOpt2 = longestPrefixSuffixOptimized("abcxabcde");
+//        System.out.printf("lpsOpt2: %s %n", Arrays.toString(lpsOpt2));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * Knuth-Morris-Pratt exact string mathcing algorithm.
      * <p>
@@ -126,36 +156,6 @@ public class KMPStringMatching {
         }
 
         return lps;
-    }
-
-    private KMPStringMatching() throws Exception {
-
-        Random rand = new Random();
-
-        for (int i = 0; i < 10_000; ++i) {
-            String str = StringUtils.generateDNAString(20 + rand.nextInt(5000));
-            String pattern = StringUtils.generateDNAString(3 + rand.nextInt(10));
-
-            int actualIndex = find(str, pattern, true);
-            int expectedIndex = str.indexOf(pattern);
-
-//            System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
-
-            if (actualIndex != expectedIndex) {
-                throw new IllegalStateException("actualIndex != expectedIndex");
-            }
-        }
-
-//        int[] lps = longestPrefixSuffix("abxabqabxabrabxabqabxabx");
-//        System.out.printf("lps:    %s %n", Arrays.toString(lps));
-//
-//        int[] lpsOpt = longestPrefixSuffixOptimized("abxabqabxabrabxabqabxabx");
-//        System.out.printf("lpsOpt: %s %n", Arrays.toString(lpsOpt));
-//
-//        int[] lpsOpt2 = longestPrefixSuffixOptimized("abcxabcde");
-//        System.out.printf("lpsOpt2: %s %n", Arrays.toString(lpsOpt2));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

@@ -1,20 +1,7 @@
 package benchmark;
 
 import com.max.algs.util.ArrayUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -42,32 +29,6 @@ public class BinarySearchFindFirstOccurrenceBenchmark {
 
     private static final Random RAND = ThreadLocalRandom.current();
 
-    @State(Scope.Thread)
-    public static class ArrPerThread {
-
-        private int[] arr1;
-        private int searchElement;
-
-        @Setup(Level.Invocation)
-        public void setUp() {
-            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
-            Arrays.sort(arr1);
-            searchElement = arr1[RAND.nextInt(1000)];
-        }
-
-        @TearDown(Level.Invocation)
-        public void tearDown() {
-            arr1 = null;
-        }
-    }
-
-    @Benchmark
-    @Group("findFirstRec")
-    @GroupThreads(2)
-    public void findFirstRec(ArrPerThread state) {
-        findFirstRec(state.arr1, 0, state.arr1.length - 1, state.searchElement);
-    }
-
     private static int findFirstRec(int[] arr, int lo, int hi, int value) {
 
         if (lo > hi) {
@@ -86,13 +47,6 @@ public class BinarySearchFindFirstOccurrenceBenchmark {
 
         return findFirstRec(arr, mid + 1, hi, value);
 
-    }
-
-    @Benchmark
-    @Group("findFirst")
-    @GroupThreads(2)
-    public void findFirst(ArrPerThread state) {
-        findFirst(state.arr1, state.searchElement);
     }
 
     private static int findFirst(int[] arr, int value) {
@@ -120,14 +74,6 @@ public class BinarySearchFindFirstOccurrenceBenchmark {
         }
 
         return index;
-    }
-
-
-    @Benchmark
-    @Group("findFirstCmove")
-    @GroupThreads(2)
-    public void findFirstCmove(ArrPerThread state) {
-        findFirstCmove(state.arr1, state.searchElement);
     }
 
     private static int findFirstCmove(int[] arr, int value) {
@@ -158,6 +104,46 @@ public class BinarySearchFindFirstOccurrenceBenchmark {
                 .build();
 
         new Runner(opt).run();
+    }
+
+    @Benchmark
+    @Group("findFirstRec")
+    @GroupThreads(2)
+    public void findFirstRec(ArrPerThread state) {
+        findFirstRec(state.arr1, 0, state.arr1.length - 1, state.searchElement);
+    }
+
+    @Benchmark
+    @Group("findFirst")
+    @GroupThreads(2)
+    public void findFirst(ArrPerThread state) {
+        findFirst(state.arr1, state.searchElement);
+    }
+
+    @Benchmark
+    @Group("findFirstCmove")
+    @GroupThreads(2)
+    public void findFirstCmove(ArrPerThread state) {
+        findFirstCmove(state.arr1, state.searchElement);
+    }
+
+    @State(Scope.Thread)
+    public static class ArrPerThread {
+
+        private int[] arr1;
+        private int searchElement;
+
+        @Setup(Level.Invocation)
+        public void setUp() {
+            arr1 = ArrayUtils.generateRandomArray(ARR_LENGTH);
+            Arrays.sort(arr1);
+            searchElement = arr1[RAND.nextInt(1000)];
+        }
+
+        @TearDown(Level.Invocation)
+        public void tearDown() {
+            arr1 = null;
+        }
     }
 
 }

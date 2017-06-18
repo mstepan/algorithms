@@ -9,6 +9,7 @@ public class KMPMatcher {
      * Build prefix table for KMP algorithm.
      * time: O(M)
      * space: O(M)
+     *
      * @param pattern - pattern string with 'M' length
      * @return prefix table
      */

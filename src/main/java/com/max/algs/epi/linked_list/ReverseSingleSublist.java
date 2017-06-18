@@ -6,6 +6,20 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class ReverseSingleSublist {
 
+    private ReverseSingleSublist() throws Exception {
+
+        Node list = Node.createList(11, 7, 5, 3, 2);
+        System.out.println(list);
+
+        final int from = 2;
+        final int to = 4;
+
+        list = reverseSublist(list, from, to);
+        System.out.println(list);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 8.2. Reverse a single sublist.
      * <p>
@@ -71,20 +85,6 @@ public class ReverseSingleSublist {
         }
 
         return false;
-    }
-
-    private ReverseSingleSublist() throws Exception {
-
-        Node list = Node.createList(11, 7, 5, 3, 2);
-        System.out.println(list);
-
-        final int from = 2;
-        final int to = 4;
-
-        list = reverseSublist(list, from, to);
-        System.out.println(list);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

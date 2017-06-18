@@ -7,6 +7,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ReverseKNodes {
 
 
+    private ReverseKNodes() throws Exception {
+
+        Node list = Node.createList(1, 2, 3, 4, 5, 6, 7);
+        int k = 3;
+
+        System.out.println(list);
+
+        list = reverseKNodes(list, k);
+        System.out.println(list);
+
+        System.out.printf("ReverseKNodes done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 8.2. Variant.
      * <p>
@@ -69,20 +82,6 @@ public class ReverseKNodes {
         first.next = cur;
 
         return first;
-    }
-
-
-    private ReverseKNodes() throws Exception {
-
-        Node list = Node.createList(1, 2, 3, 4, 5, 6, 7);
-        int k = 3;
-
-        System.out.println(list);
-
-        list = reverseKNodes(list, k);
-        System.out.println(list);
-
-        System.out.printf("ReverseKNodes done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

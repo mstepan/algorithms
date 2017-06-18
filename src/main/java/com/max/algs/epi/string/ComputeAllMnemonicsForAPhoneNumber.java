@@ -23,6 +23,16 @@ public class ComputeAllMnemonicsForAPhoneNumber {
             {'W', 'X', 'Y', 'Z'}, // 9
     };
 
+    private ComputeAllMnemonicsForAPhoneNumber() throws Exception {
+
+        String phoneNumber = "2276696";
+
+        printAllMnemonicsRecursive(phoneNumber);
+        printAllMnemonicsIterative(phoneNumber);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * N - number.length()
      * <p>
@@ -49,7 +59,7 @@ public class ComputeAllMnemonicsForAPhoneNumber {
             ch = number.charAt(i);
             if (ch < MIN_NO || ch > MAX_NO) {
                 throw new IllegalArgumentException("Not a valid phone number passed for mnemonics: " + number +
-                                                           ", character '" + ch + "' not within range.");
+                        ", character '" + ch + "' not within range.");
             }
         }
     }
@@ -149,17 +159,6 @@ public class ComputeAllMnemonicsForAPhoneNumber {
         }
 
         return mnemonics;
-    }
-
-
-    private ComputeAllMnemonicsForAPhoneNumber() throws Exception {
-
-        String phoneNumber = "2276696";
-
-        printAllMnemonicsRecursive(phoneNumber);
-        printAllMnemonicsIterative(phoneNumber);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

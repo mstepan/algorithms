@@ -8,8 +8,8 @@ import static org.parboiled.common.Preconditions.checkArgument;
 
 public class SelfFetchBuffer {
 
-    private final BufferedReader in;
     final char[] arr;
+    private final BufferedReader in;
     int length;
 
     public SelfFetchBuffer(BufferedReader in, int capacity) {

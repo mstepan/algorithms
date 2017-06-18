@@ -2,70 +2,70 @@ package com.max.algs.string;
 
 public final class PrefixTableCalculator {
 
-	/**
-	 * N - text length M - pattern length
-	 * 
-	 * O(M^2) + O(N+M+1)
-	 * 
-	 * @param pattern
-	 * @param text
-	 * @return
-	 */
-	public static boolean contains(String pattern, String text) {
+    private PrefixTableCalculator() {
+        super();
+    }
 
-		String combined = pattern + "$" + text;
+    /**
+     * N - text length M - pattern length
+     * <p>
+     * O(M^2) + O(N+M+1)
+     *
+     * @param pattern
+     * @param text
+     * @return
+     */
+    public static boolean contains(String pattern, String text) {
 
-		int[] prefixes = prefixTable(combined);
+        String combined = pattern + "$" + text;
 
-		for (int singlePrefix : prefixes) {
-			if (singlePrefix == pattern.length()) {
-				return true;
-			}
-		}
+        int[] prefixes = prefixTable(combined);
 
-		return false;
+        for (int singlePrefix : prefixes) {
+            if (singlePrefix == pattern.length()) {
+                return true;
+            }
+        }
 
-	}
+        return false;
 
-	/**
-	 * time: O(N^2) space: O(1)
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static int[] prefixTable(String str) {
+    }
 
-		if (str == null) {
-			throw new IllegalArgumentException("NULL 'str' parameter passed");
-		}
+    /**
+     * time: O(N^2) space: O(1)
+     *
+     * @param str
+     * @return
+     */
+    public static int[] prefixTable(String str) {
 
-		if (str.length() == 0) {
-			return new int[] {};
-		}
+        if (str == null) {
+            throw new IllegalArgumentException("NULL 'str' parameter passed");
+        }
 
-		final int strLength = str.length();
-		int[] prefixTable = new int[strLength];
-		prefixTable[0] = 0;
+        if (str.length() == 0) {
+            return new int[]{};
+        }
 
-		for (int i = 1; i < str.length(); i++) {
+        final int strLength = str.length();
+        int[] prefixTable = new int[strLength];
+        prefixTable[0] = 0;
 
-			int patternIndex = i;
-			int baseIndex = 0;
+        for (int i = 1; i < str.length(); i++) {
 
-			while (patternIndex < strLength
-					&& str.charAt(baseIndex) == str.charAt(patternIndex)) {
-				++patternIndex;
-				++baseIndex;
-			}
+            int patternIndex = i;
+            int baseIndex = 0;
 
-			prefixTable[i] = baseIndex;
-		}
+            while (patternIndex < strLength
+                    && str.charAt(baseIndex) == str.charAt(patternIndex)) {
+                ++patternIndex;
+                ++baseIndex;
+            }
 
-		return prefixTable;
-	}
+            prefixTable[i] = baseIndex;
+        }
 
-	private PrefixTableCalculator() {
-		super();
-	}
+        return prefixTable;
+    }
 
 }

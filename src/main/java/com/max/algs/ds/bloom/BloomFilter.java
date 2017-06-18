@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * Bloom filter.
  * Not thread safe.
- *
+ * <p>
  * For general idea see: https://en.wikipedia.org/wiki/Bloom_filter
  * For hashing strategy see: https://www.eecs.harvard.edu/~michaelm/postscripts/tr-02-05.pdf
  */
@@ -47,9 +47,9 @@ public class BloomFilter<E> extends AbstractSet<E> implements Set<E>, Cloneable,
         checkArgument(elementsCount > 0, "'elementsCount' can't be negative");
 
         checkArgument(Double.compare(expectedFalsePositiveProbability, MIN_FALSE_POSITIVE_PROBABILITY) >= 0 &&
-                              Double.compare(expectedFalsePositiveProbability, MAX_FALSE_POSITIVE_PROBABILITY) <= 0,
-                      "'expectedFalsePositiveProbability' should be in range [%s; %s], actual = %s",
-                      MIN_FALSE_POSITIVE_PROBABILITY, MAX_FALSE_POSITIVE_PROBABILITY, expectedFalsePositiveProbability);
+                        Double.compare(expectedFalsePositiveProbability, MAX_FALSE_POSITIVE_PROBABILITY) <= 0,
+                "'expectedFalsePositiveProbability' should be in range [%s; %s], actual = %s",
+                MIN_FALSE_POSITIVE_PROBABILITY, MAX_FALSE_POSITIVE_PROBABILITY, expectedFalsePositiveProbability);
 
         int bitsCount = BitUtils.ceil2(elementsCount);
 
@@ -114,7 +114,7 @@ public class BloomFilter<E> extends AbstractSet<E> implements Set<E>, Cloneable,
     @Override
     public Iterator<E> iterator() {
         throw new UnsupportedOperationException(BloomFilter.class.getCanonicalName() +
-                                                        " doesn't store elements, so iterator is not supported");
+                " doesn't store elements, so iterator is not supported");
     }
 
     @Override

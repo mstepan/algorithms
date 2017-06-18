@@ -3,6 +3,45 @@ package com.max.algs.epi.array;
 public class RotateMatrix {
 
 
+    private RotateMatrix() throws Exception {
+
+        int n = 4;
+
+        int[][] m = new int[n][n];
+
+        for (int row = 0, elem = 1; row < n; ++row) {
+            for (int col = 0; col < n; ++col, ++elem) {
+                m[row][col] = elem;
+            }
+        }
+
+        MatrixWrapper mWrapper1 = new MatrixWrapper(m);
+        System.out.println(mWrapper1);
+
+        MatrixWrapper mWrapper2 = mWrapper1.rotate();
+        System.out.println(mWrapper2);
+
+        MatrixWrapper mWrapper3 = mWrapper2.rotate();
+        System.out.println(mWrapper3);
+
+        MatrixWrapper mWrapper4 = mWrapper3.rotate();
+        System.out.println(mWrapper4);
+
+        MatrixWrapper mWrapper5 = mWrapper4.rotate();
+        System.out.println(mWrapper5);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
+    public static void main(String[] args) {
+        try {
+            new RotateMatrix();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     class MatrixWrapperRotated extends MatrixWrapper {
 
         final MatrixWrapper base;
@@ -68,45 +107,6 @@ public class RotateMatrix {
 
 
             return buf.toString();
-        }
-    }
-
-    private RotateMatrix() throws Exception {
-
-        int n = 4;
-
-        int[][] m = new int[n][n];
-
-        for (int row = 0, elem = 1; row < n; ++row) {
-            for (int col = 0; col < n; ++col, ++elem) {
-                m[row][col] = elem;
-            }
-        }
-
-        MatrixWrapper mWrapper1 = new MatrixWrapper(m);
-        System.out.println(mWrapper1);
-
-        MatrixWrapper mWrapper2 = mWrapper1.rotate();
-        System.out.println(mWrapper2);
-
-        MatrixWrapper mWrapper3 = mWrapper2.rotate();
-        System.out.println(mWrapper3);
-
-        MatrixWrapper mWrapper4 = mWrapper3.rotate();
-        System.out.println(mWrapper4);
-
-        MatrixWrapper mWrapper5 = mWrapper4.rotate();
-        System.out.println(mWrapper5);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new RotateMatrix();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

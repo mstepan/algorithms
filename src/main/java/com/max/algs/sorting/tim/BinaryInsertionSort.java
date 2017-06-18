@@ -1,13 +1,13 @@
 package com.max.algs.sorting.tim;
 
 /**
- *
  * Binary insertion sort.
  * This sort is stable.
  */
 final class BinaryInsertionSort {
 
-    private BinaryInsertionSort(){}
+    private BinaryInsertionSort() {
+    }
 
     public static void sort(int[] arr, int baseFrom, int baseTo) {
 

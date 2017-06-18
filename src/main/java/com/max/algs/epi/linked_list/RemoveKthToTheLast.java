@@ -6,6 +6,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class RemoveKthToTheLast {
 
+    private RemoveKthToTheLast() throws Exception {
+
+        Node list = Node.createList(1, 2, 3, 4, 5, 6, 7);
+        int k = 7;
+
+        System.out.println(list);
+
+        list = removeKthToTheLast(list, k);
+        System.out.println(list);
+
+        System.out.printf("RemoveKthToTheLast done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N)
      * space: O(1)
@@ -49,19 +62,6 @@ public final class RemoveKthToTheLast {
         temp.next = null;
 
         return head;
-    }
-
-    private RemoveKthToTheLast() throws Exception {
-
-        Node list = Node.createList(1, 2, 3, 4, 5, 6, 7);
-        int k = 7;
-
-        System.out.println(list);
-
-        list = removeKthToTheLast(list, k);
-        System.out.println(list);
-
-        System.out.printf("RemoveKthToTheLast done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

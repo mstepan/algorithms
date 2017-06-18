@@ -19,48 +19,48 @@ public class UniversalHashFunction<T> {
     }
 
 
-    public static <T> UniversalHashFunction<T> generate(){
-        int a = 1 + RAND.nextInt( BIG_PRIME-1 );  // 'a' in range [1; p-1]
+    public static <T> UniversalHashFunction<T> generate() {
+        int a = 1 + RAND.nextInt(BIG_PRIME - 1);  // 'a' in range [1; p-1]
         int b = RAND.nextInt(BIG_PRIME);          // 'b' in range [0; p-1]
         return new UniversalHashFunction<T>(a, b);
     }
-    
+
     public int getA() {
-		return a;
-	}
-    
-    
+        return a;
+    }
+
+
     public int getB() {
-		return b;
-	}
+        return b;
+    }
 
 
-    public int hash( T value ){
-        return ( a * value.hashCode() + b ) % BIG_PRIME;
+    public int hash(T value) {
+        return (a * value.hashCode() + b) % BIG_PRIME;
     }
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "a = " + a + ", b = " + b + ", prime = " + BIG_PRIME;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
-        	return true;
+            return true;
         }
         if (o == null || getClass() != o.getClass()) {
-        	return false;
+            return false;
         }
 
         UniversalHashFunction<?> that = (UniversalHashFunction<?>) o;
 
-        if (a != that.a){ 
-        	return false;
+        if (a != that.a) {
+            return false;
         }
         if (b != that.b) {
-        	return false;
+            return false;
         }
 
         return true;

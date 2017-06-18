@@ -2,59 +2,12 @@ package com.max.algs.chess;
 
 import com.max.algs.ds.Pair;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Find shortest Knight path from 'start' position till 'end'.
  */
 public final class KnightShortestPathResolver {
-
-    private static class SingleStepSolution {
-        final int row;
-        final int col;
-        final SingleStepSolution prev;
-
-        SingleStepSolution(int row, int col, SingleStepSolution prev) {
-            this.row = row;
-            this.col = col;
-            this.prev = prev;
-        }
-
-        SingleStepSolution(int row, int col) {
-            this(row, col, null);
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder buf = new StringBuilder();
-
-            Deque<SingleStepSolution> stack = new ArrayDeque<>();
-            SingleStepSolution cur = this;
-
-            while (cur != null) {
-                stack.push(cur);
-                cur = cur.prev;
-            }
-
-            while (true) {
-                SingleStepSolution curSol = stack.pop();
-                buf.append("[").append(curSol.row).append("; ").append(curSol.col).append("]");
-
-                if (stack.isEmpty()) {
-                    break;
-                }
-                buf.append(" -> ");
-            }
-
-            return buf.toString();
-        }
-    }
 
     /**
      * 8 possible locations
@@ -120,6 +73,47 @@ public final class KnightShortestPathResolver {
 
         }
 
+    }
+
+    private static class SingleStepSolution {
+        final int row;
+        final int col;
+        final SingleStepSolution prev;
+
+        SingleStepSolution(int row, int col, SingleStepSolution prev) {
+            this.row = row;
+            this.col = col;
+            this.prev = prev;
+        }
+
+        SingleStepSolution(int row, int col) {
+            this(row, col, null);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder buf = new StringBuilder();
+
+            Deque<SingleStepSolution> stack = new ArrayDeque<>();
+            SingleStepSolution cur = this;
+
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.prev;
+            }
+
+            while (true) {
+                SingleStepSolution curSol = stack.pop();
+                buf.append("[").append(curSol.row).append("; ").append(curSol.col).append("]");
+
+                if (stack.isEmpty()) {
+                    break;
+                }
+                buf.append(" -> ");
+            }
+
+            return buf.toString();
+        }
     }
 
 

@@ -1,238 +1,232 @@
 package com.max.algs.ds.tree;
 
+import com.max.algs.util.GeneralUtils;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.max.algs.util.GeneralUtils;
-
 /**
- * 
  * Don't allow NULL values and duplicates.
- * 
  */
 public class RandomBSTree<T extends Comparable<T>> {
 
-	private Node<T> root;
+    private static final Random RAND = ThreadLocalRandom.current();
+    private Node<T> root;
+    private int heigh = -1;
 
-	private int heigh = -1;
+    public boolean add(T newValue) {
 
-	private static final Random RAND = ThreadLocalRandom.current();
+        GeneralUtils.checkForNull(newValue);
 
-	public boolean add(T newValue) {
+        if (contains(newValue)) {
+            return false;
+        }
 
-		GeneralUtils.checkForNull(newValue);
+        if (isEmpty()) {
+            root = new Node<T>(newValue);
+            return true;
+        }
 
-		if (contains(newValue)) {
-			return false;
-		}
+        Node<T> cur = root;
+        Node<T> newNode = new Node<T>(newValue);
 
-		if (isEmpty()) {
-			root = new Node<T>(newValue);
-			return true;
-		}
+        Node<T> rotateTillElem = null;
 
-		Node<T> cur = root;
-		Node<T> newNode = new Node<T>(newValue);
+        while (true) {
 
-		Node<T> rotateTillElem = null;
+            if (rotateTillElem == null) {
 
-		while (true) {
+                boolean insertInRoot = (RAND.nextInt(cur.elemsCount + 1) == 0);
 
-			if (rotateTillElem == null) {
+                if (insertInRoot) {
+                    rotateTillElem = cur;
+                    // LOG.info( "Will insert value: " + newNode.value
+                    // + ", to: " + rotateTillElem.value );
+                }
+            }
 
-				boolean insertInRoot = (RAND.nextInt(cur.elemsCount + 1) == 0);
+            cur.elemsCount += 1;
 
-				if (insertInRoot) {
-					rotateTillElem = cur;
-					// LOG.info( "Will insert value: " + newNode.value
-					// + ", to: " + rotateTillElem.value );
-				}
-			}
+            if (cur.value.compareTo(newNode.value) > 0) {
 
-			cur.elemsCount += 1;
+                if (cur.left == null) {
+                    cur.left = newNode;
+                    newNode.parent = cur;
+                    break;
+                }
+                cur = cur.left;
+            }
+            else {
+                if (cur.right == null) {
+                    cur.right = newNode;
+                    newNode.parent = cur;
+                    break;
+                }
+                cur = cur.right;
+            }
+        }
 
-			if (cur.value.compareTo(newNode.value) > 0) {
+        if (rotateTillElem != null) {
+            rotateTillElement(newNode, rotateTillElem);
+        }
 
-				if (cur.left == null) {
-					cur.left = newNode;
-					newNode.parent = cur;
-					break;
-				}
-				cur = cur.left;
-			}
-			else {
-				if (cur.right == null) {
-					cur.right = newNode;
-					newNode.parent = cur;
-					break;
-				}
-				cur = cur.right;
-			}
-		}
+        heigh = -1;
+        return true;
 
-		if (rotateTillElem != null) {
-			rotateTillElement(newNode, rotateTillElem);
-		}
+    }
 
-		heigh = -1;
-		return true;
+    public boolean delete(T value) {
+        GeneralUtils.checkForNull(value);
 
-	}
+        if (!contains(value)) {
+            return false;
+        }
 
-	public boolean delete(T value) {
-		GeneralUtils.checkForNull(value);
+        heigh = -1;
+        return true;
 
-		if (!contains(value)) {
-			return false;
-		}
+    }
 
-		heigh = -1;
-		return true;
+    public boolean contains(T newValue) {
 
-	}
+        GeneralUtils.checkForNull(newValue);
 
-	public boolean contains(T newValue) {
+        Node<T> cur = root;
 
-		GeneralUtils.checkForNull(newValue);
+        while (cur != null) {
+            int compRes = cur.value.compareTo(newValue);
 
-		Node<T> cur = root;
+            if (compRes == 0) {
+                return true;
+            }
 
-		while (cur != null) {
-			int compRes = cur.value.compareTo(newValue);
+            if (compRes > 0) {
+                cur = cur.left;
+            }
+            else {
+                cur = cur.right;
+            }
+        }
 
-			if (compRes == 0) {
-				return true;
-			}
+        return false;
+    }
 
-			if (compRes > 0) {
-				cur = cur.left;
-			}
-			else {
-				cur = cur.right;
-			}
-		}
+    /**
+     * Should be in range: [lgN; N]
+     * <p>
+     * lgN - best balanced N - worst balanced
+     */
+    public int heigh() {
+        if (heigh < 0) {
 
-		return false;
-	}
+            if (isEmpty()) {
+                heigh = 0;
+            }
 
-	/**
-	 * Should be in range: [lgN; N]
-	 * 
-	 * lgN - best balanced N - worst balanced
-	 * 
-	 */
-	public int heigh() {
-		if (heigh < 0) {
+            heigh = heighRec(root) - 1;
+        }
 
-			if (isEmpty()) {
-				heigh = 0;
-			}
+        return heigh;
+    }
 
-			heigh = heighRec(root) - 1;
-		}
+    private int heighRec(Node<T> cur) {
+        if (cur == null) {
+            return 0;
+        }
 
-		return heigh;
-	}
+        return 1 + Math.max(heighRec(cur.left), heighRec(cur.right));
 
-	private int heighRec(Node<T> cur) {
-		if (cur == null) {
-			return 0;
-		}
+    }
 
-		return 1 + Math.max(heighRec(cur.left), heighRec(cur.right));
+    public int size() {
+        return root == null ? 0 : root.elemsCount;
+    }
 
-	}
+    public boolean isEmpty() {
+        return size() == 0;
+    }
 
-	public int size() {
-		return root == null ? 0 : root.elemsCount;
-	}
+    // ==== PRIVATE ====
 
-	public boolean isEmpty() {
-		return size() == 0;
-	}
+    private void rotateTillElement(Node<T> cur, Node<T> end) {
 
-	// ==== PRIVATE ====
+        while (true) {
 
-	private void rotateTillElement(Node<T> cur, Node<T> end) {
+            Node<T> parent = cur.parent;
 
-		while (true) {
+            if (parent.parent == null) {
+                root = cur;
+            }
+            else if (parent.parent.left == parent) {
+                parent.parent.left = cur;
+            }
+            else {
+                parent.parent.right = cur;
+            }
 
-			Node<T> parent = cur.parent;
+            // rotate right
+            if (parent.right == cur) {
 
-			if (parent.parent == null) {
-				root = cur;
-			}
-			else
-				if (parent.parent.left == parent) {
-					parent.parent.left = cur;
-				}
-				else {
-					parent.parent.right = cur;
-				}
+                parent.right = cur.left;
 
-			// rotate right
-			if (parent.right == cur) {
+                if (cur.left != null) {
+                    cur.left.parent = parent;
+                }
 
-				parent.right = cur.left;
+                cur.left = parent;
+            }
+            // rotate left
+            else {
 
-				if (cur.left != null) {
-					cur.left.parent = parent;
-				}
+                parent.left = cur.right;
 
-				cur.left = parent;
-			}
-			// rotate left
-			else {
+                if (cur.right != null) {
+                    cur.right.parent = parent;
+                }
 
-				parent.left = cur.right;
+                cur.right = parent;
+            }
 
-				if (cur.right != null) {
-					cur.right.parent = parent;
-				}
+            cur.parent = parent.parent;
+            parent.parent = cur;
 
-				cur.right = parent;
-			}
+            parent.recalculateElemsCount();
+            cur.recalculateElemsCount();
 
-			cur.parent = parent.parent;
-			parent.parent = cur;
+            if (parent == end) {
+                break;
+            }
+        }
 
-			parent.recalculateElemsCount();
-			cur.recalculateElemsCount();
+    }
 
-			if (parent == end) {
-				break;
-			}
-		}
+    // ==== NESTED ====
 
-	}
+    private static final class Node<U> {
 
-	// ==== NESTED ====
+        final U value;
+        Node<U> left;
+        Node<U> right;
+        Node<U> parent;
+        int elemsCount;
 
-	private static final class Node<U> {
+        Node(U value) {
+            super();
+            assert value != null : "NULL 'value' passed";
+            this.value = value;
+            this.elemsCount = 1;
+        }
 
-		final U value;
-		Node<U> left;
-		Node<U> right;
-		Node<U> parent;
-		int elemsCount;
+        void recalculateElemsCount() {
+            this.elemsCount = 1 + (left == null ? 0 : left.elemsCount)
+                    + (right == null ? 0 : right.elemsCount);
+        }
 
-		Node(U value) {
-			super();
-			assert value != null : "NULL 'value' passed";
-			this.value = value;
-			this.elemsCount = 1;
-		}
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
 
-		void recalculateElemsCount() {
-			this.elemsCount = 1 + (left == null ? 0 : left.elemsCount)
-					+ (right == null ? 0 : right.elemsCount);
-		}
-
-		@Override
-		public String toString() {
-			return String.valueOf(value);
-		}
-
-	}
+    }
 
 }

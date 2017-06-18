@@ -9,9 +9,13 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public final class MaxSubarrayProduct {
 
+    private MaxSubarrayProduct() {
+        throw new IllegalStateException("Can't create non instantiable class '" + MaxSubarrayProduct.class.getName() + "'");
+    }
+
     /**
      * Bruteforce solution.
-     *
+     * <p>
      * time: O(N^2)
      * space: O(1)
      */
@@ -87,10 +91,6 @@ public final class MaxSubarrayProduct {
 
     private static BigInteger minBig(BigInteger first, BigInteger second) {
         return first.compareTo(second) < 0 ? first : second;
-    }
-
-    private MaxSubarrayProduct() {
-        throw new IllegalStateException("Can't create non instantiable class '" + MaxSubarrayProduct.class.getName() + "'");
     }
 
 }

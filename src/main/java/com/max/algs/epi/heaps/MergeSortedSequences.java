@@ -1,6 +1,8 @@
 package com.max.algs.epi.heaps;
 
+import com.google.common.base.Objects;
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -15,6 +17,34 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class MergeSortedSequences {
 
+    private static final Logger LOG = Logger.getLogger(MergeSortedSequences.class);
+
+    private MergeSortedSequences() throws Exception {
+
+        int[][] sequences = new int[3][];
+
+        for (int i = 0; i < sequences.length; ++i) {
+            int[] arr = ArrayUtils.generateRandomArray(10, 100);
+            Arrays.sort(arr);
+            sequences[i] = arr;
+        }
+
+        Iterator<Integer> it = mergeSortedSequences(sequences);
+
+        // even if we null all the references the iterator is still valid
+        sequences[0] = null;
+        sequences[1] = null;
+        sequences[2] = null;
+
+        while (it.hasNext()) {
+            System.out.print(it.next() + ", ");
+        }
+
+        System.out.println();
+
+
+        System.out.printf("'ClosestIntegerWithSameWeight' completed. java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * time: O(N*lgK)
@@ -34,6 +64,15 @@ public class MergeSortedSequences {
         return new SortedSeqIterator(sequences);
     }
 
+    public static void main(String[] args) {
+        try {
+            new MergeSortedSequences();
+        }
+        catch (Exception ex) {
+            LOG.error(ex.getMessage(), ex);
+        }
+    }
+
     private static final class ArrayEntry implements Comparable<ArrayEntry> {
         final int[] arr;
         int index;
@@ -45,6 +84,24 @@ public class MergeSortedSequences {
         @Override
         public int compareTo(@NotNull ArrayEntry other) {
             return Integer.compare(getValue(), other.getValue());
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null || getClass() != obj.getClass()) {
+                return false;
+            }
+            ArrayEntry that = (ArrayEntry) obj;
+
+            return Objects.equal(getValue(), that.getValue());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(getValue());
         }
 
         @Override
@@ -101,43 +158,6 @@ public class MergeSortedSequences {
             }
 
             return val;
-        }
-    }
-
-
-    private MergeSortedSequences() throws Exception {
-
-        int[][] sequences = new int[3][];
-
-        for (int i = 0; i < sequences.length; ++i) {
-            int[] arr = ArrayUtils.generateRandomArray(10, 100);
-            Arrays.sort(arr);
-            sequences[i] = arr;
-        }
-
-        Iterator<Integer> it = mergeSortedSequences(sequences);
-
-        // even if we null all the references the iterator is still valid
-        sequences[0] = null;
-        sequences[1] = null;
-        sequences[2] = null;
-
-        while (it.hasNext()) {
-            System.out.print(it.next() + ", ");
-        }
-
-        System.out.println();
-
-
-        System.out.printf("'ClosestIntegerWithSameWeight' completed. java-%s %n", System.getProperty("java.version"));
-    }
-
-    public static void main(String[] args) {
-        try {
-            new MergeSortedSequences();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

@@ -25,89 +25,9 @@ public class LocalitySensitiveHashing {
         }
     }
 
-
-    public void add(int[] data) {
-
-        String hash = simhash(data);
-
-        for (LocalityHashBucket bucket : buckets) {
-            bucket.add(hash, data);
-        }
-
-    }
-
-    /**
-     * Find similar value base of specified threshold.
-     *
-     * @param searchData          - search data set
-     * @param similarityThreshold - similarityFromSimhash threshold to be used
-     * @return first data set which satisfies similarityFromSimhash threshold.
-     */
-    public int[] search(int[] searchData, double similarityThreshold) {
-
-        checkArgument(isSimilarityCorrect(similarityThreshold));
-
-        String hash = simhash(searchData);
-
-        for (LocalityHashBucket bucket : buckets) {
-            List<int[]> similarValues = bucket.get(hash);
-
-            if (similarValues != null) {
-
-                for (int[] other : similarValues) {
-
-                    double similarityCoeff = similarityFromSimhash(searchData, other);
-
-                    System.out.println("similarityCoeff = " + similarityCoeff);
-
-                    if (Double.compare(similarityCoeff, similarityThreshold) >= 0) {
-                        System.out.println("used similarityCoeff = " + similarityCoeff);
-                        return other;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
     private static boolean isSimilarityCorrect(double similarity) {
         return Double.compare(similarity, 0.0) >= 0 && Double.compare(similarity, 1.0) <= 0;
     }
-
-
-    /**
-     * Find most similar value.
-     */
-    public int[] search(int[] searchData) {
-
-        String hash = simhash(searchData);
-
-        int[] mostSimilar = null;
-        double maxSimilarityCoeff = 0.0;
-
-        for (LocalityHashBucket bucket : buckets) {
-            List<int[]> similarValues = bucket.get(hash);
-
-            if (similarValues != null) {
-
-                for (int[] other : similarValues) {
-
-                    double similarityCoeff = similarityFromSimhash(searchData, other);
-
-                    System.out.println("similarityCoeff = " + similarityCoeff);
-
-                    if (Double.compare(similarityCoeff, maxSimilarityCoeff) >= 0) {
-                        mostSimilar = other;
-                        maxSimilarityCoeff = similarityCoeff;
-                    }
-                }
-            }
-        }
-
-        return mostSimilar;
-    }
-
 
     /*
     * Simhash algorithm:
@@ -213,6 +133,83 @@ public class LocalitySensitiveHashing {
             }
         }
         return distance;
+    }
+
+    public void add(int[] data) {
+
+        String hash = simhash(data);
+
+        for (LocalityHashBucket bucket : buckets) {
+            bucket.add(hash, data);
+        }
+
+    }
+
+    /**
+     * Find similar value base of specified threshold.
+     *
+     * @param searchData          - search data set
+     * @param similarityThreshold - similarityFromSimhash threshold to be used
+     * @return first data set which satisfies similarityFromSimhash threshold.
+     */
+    public int[] search(int[] searchData, double similarityThreshold) {
+
+        checkArgument(isSimilarityCorrect(similarityThreshold));
+
+        String hash = simhash(searchData);
+
+        for (LocalityHashBucket bucket : buckets) {
+            List<int[]> similarValues = bucket.get(hash);
+
+            if (similarValues != null) {
+
+                for (int[] other : similarValues) {
+
+                    double similarityCoeff = similarityFromSimhash(searchData, other);
+
+                    System.out.println("similarityCoeff = " + similarityCoeff);
+
+                    if (Double.compare(similarityCoeff, similarityThreshold) >= 0) {
+                        System.out.println("used similarityCoeff = " + similarityCoeff);
+                        return other;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Find most similar value.
+     */
+    public int[] search(int[] searchData) {
+
+        String hash = simhash(searchData);
+
+        int[] mostSimilar = null;
+        double maxSimilarityCoeff = 0.0;
+
+        for (LocalityHashBucket bucket : buckets) {
+            List<int[]> similarValues = bucket.get(hash);
+
+            if (similarValues != null) {
+
+                for (int[] other : similarValues) {
+
+                    double similarityCoeff = similarityFromSimhash(searchData, other);
+
+                    System.out.println("similarityCoeff = " + similarityCoeff);
+
+                    if (Double.compare(similarityCoeff, maxSimilarityCoeff) >= 0) {
+                        mostSimilar = other;
+                        maxSimilarityCoeff = similarityCoeff;
+                    }
+                }
+            }
+        }
+
+        return mostSimilar;
     }
 
 

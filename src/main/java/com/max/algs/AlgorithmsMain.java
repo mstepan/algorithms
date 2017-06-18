@@ -1,13 +1,33 @@
 package com.max.algs;
 
 
-import com.max.algs.ds.probabalistic.HyperLogLog;
 import com.max.algs.util.MathUtils;
 
 public final class AlgorithmsMain {
 
     private static final double LN_2 = MathUtils.ln(2.0);
     private static final double LN_2_SQUARED = Math.pow(LN_2, 2.0);
+
+
+    /*
+
+./AgentInstall.sh AGENT_TYPE=cloud_agent AGENT_BASE_DIR=/Users/mstepan/opower/omc_agent AGENT_REGISTRATION_KEY=RDXYB1gURiuw71BkVwszMo59uZ AGENT_PROPERTIES=agent.properties
+
+     */
+
+    private AlgorithmsMain() throws Exception {
+
+        int success = 3;
+        int neg = 1;
+
+        double offset = 1.0 / (success + neg);
+
+        double odds = (success * offset) / (neg * offset);
+
+        System.out.printf("odds = %.2f, log odds = %.2f %n", odds, Math.log10(odds));
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
 
     /**
      * See: https://stackoverflow.com/questions/658439/how-many-hash-functions-does-my-bloom-filter-need
@@ -49,26 +69,6 @@ public final class AlgorithmsMain {
         double pActual = Math.pow(Math.E, (-(m / n) * LN_2_SQUARED));
 
         System.out.printf("pActual = %3f %n", pActual);
-    }
-
-
-    private AlgorithmsMain() throws Exception {
-
-        final int n = 1_000_000;
-
-        HyperLogLog data = new HyperLogLog();
-
-        for (int it = 0; it < 10; ++it) {
-            for (int i = 0; i < n; ++i) {
-                data.add("val-" + i);
-            }
-        }
-
-        System.out.println(data.cardinality());
-
-        System.out.printf("error: %.1f%% %n", Math.abs(100.0 - (data.cardinality() * 100.0 / n)));
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

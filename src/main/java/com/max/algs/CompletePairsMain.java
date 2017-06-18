@@ -7,6 +7,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public final class CompletePairsMain {
 
 
+    private static final int MASK_FOR_26_BITS = 0x03_FF_FF_FF;
+    private static final char FIRST_CH = 'a';
+    private static final char LAST_CH = 'z';
+    private CompletePairsMain() throws Exception {
+
+        String[] s1 = {"abcdefgh", "geeksforgeeks", "lmnopqrst", "abc"};
+        String[] s2 = {"ijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz", "defghijklmnopqrstuvwxyz"};
+
+        int cnt = completePairs(s1, s2);
+
+        System.out.printf("cnt = %d %n", cnt);
+
+        System.out.printf("CompletePairsMain done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * time: O(N^2)
      * space: O(N)
@@ -38,11 +53,6 @@ public final class CompletePairsMain {
         return completePairsCnt;
     }
 
-    private static final int MASK_FOR_26_BITS = 0x03_FF_FF_FF;
-
-    private static final char FIRST_CH = 'a';
-    private static final char LAST_CH = 'z';
-
     private static int[] calculateBitMaps(String[] arr) {
         int[] hashes = new int[arr.length];
 
@@ -61,25 +71,12 @@ public final class CompletePairsMain {
             char ch = str.charAt(i);
 
             checkArgument(ch >= firstCh && ch <= lastCH, "Character '%s' not from alphabet: '%s'...'%s'",
-                          ch, firstCh, lastCH);
+                    ch, firstCh, lastCH);
 
             hash = hash | (1 << (str.charAt(i) - firstCh));
         }
 
         return hash;
-    }
-
-
-    private CompletePairsMain() throws Exception {
-
-        String[] s1 = {"abcdefgh", "geeksforgeeks", "lmnopqrst", "abc"};
-        String[] s2 = {"ijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz", "defghijklmnopqrstuvwxyz"};
-
-        int cnt = completePairs(s1, s2);
-
-        System.out.printf("cnt = %d %n", cnt);
-
-        System.out.printf("CompletePairsMain done: java-%s %n", System.getProperty("java.version"));
     }
 
     public static void main(String[] args) {

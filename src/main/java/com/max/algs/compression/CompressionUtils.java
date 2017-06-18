@@ -7,7 +7,7 @@ public final class CompressionUtils {
 
     private static final int ENTROPY_SCALE = 3;
 
-    private CompressionUtils(){
+    private CompressionUtils() {
         throw new IllegalStateException("Can't instantiate utility class '" + CompressionUtils.class.getName() + "'");
     }
 

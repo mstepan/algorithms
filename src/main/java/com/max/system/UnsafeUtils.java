@@ -1,11 +1,9 @@
 package com.max.system;
 
+import sun.misc.Unsafe;
+
 import java.lang.reflect.Field;
 import java.nio.Buffer;
-import java.nio.ByteBuffer;
-
-
-import sun.misc.*;
 
 public final class UnsafeUtils {
 

@@ -5,63 +5,61 @@ import java.util.List;
 
 public class FormattedText {
 
-	public static final FormattedText EMPTY = new FormattedText(
-			new ArrayList<String>(), 0);
+    public static final FormattedText EMPTY = new FormattedText(
+            new ArrayList<String>(), 0);
+    private static final String LINE_SEPARATOR = System
+            .getProperty("line.separator");
+    private final List<String> lines;
+    private final int cost;
 
-	private final List<String> lines;
-	private final int cost;
+    public FormattedText(String str, List<String> prevLines, int lineSize) {
+        lines = new ArrayList<>();
+        lines.add(str);
+        lines.addAll(prevLines);
+        cost = calculateCost(lines, lineSize);
+    }
 
-	private static final String LINE_SEPARATOR = System
-			.getProperty("line.separator");
+    public FormattedText(List<String> lines, int lineSize) {
+        super();
+        this.lines = lines;
+        this.cost = calculateCost(lines, lineSize);
+    }
 
-	public FormattedText(String str, List<String> prevLines, int lineSize) {
-		lines = new ArrayList<>();
-		lines.add(str);
-		lines.addAll(prevLines);
-		cost = calculateCost(lines, lineSize);
-	}
+    public List<String> getLines() {
+        return lines;
+    }
 
-	public FormattedText(List<String> lines, int lineSize) {
-		super();
-		this.lines = lines;
-		this.cost = calculateCost(lines, lineSize);
-	}
+    public int getCost() {
+        return cost;
+    }
 
-	public List<String> getLines() {
-		return lines;
-	}
+    private int calculateCost(List<String> lines, int lineSize) {
 
-	public int getCost() {
-		return cost;
-	}
+        int newCost = 0;
 
-	private int calculateCost(List<String> lines, int lineSize) {
+        for (String singleLine : lines) {
+            newCost += lineSize - singleLine.length();
+        }
 
-		int newCost = 0;
+        return newCost;
+    }
 
-		for (String singleLine : lines) {
-			newCost += lineSize - singleLine.length();
-		}
+    @Override
+    public String toString() {
 
-		return newCost;
-	}
+        StringBuilder buf = new StringBuilder();
 
-	@Override
-	public String toString() {
+        if (lines.isEmpty()) {
+            return "";
+        }
 
-		StringBuilder buf = new StringBuilder();
+        buf.append(lines.get(0));
 
-		if (lines.isEmpty()) {
-			return "";
-		}
+        for (int i = 1; i < lines.size(); i++) {
+            buf.append(LINE_SEPARATOR).append(lines.get(i));
+        }
 
-		buf.append(lines.get(0));
-
-		for (int i = 1; i < lines.size(); i++) {
-			buf.append(LINE_SEPARATOR).append(lines.get(i));
-		}
-
-		return buf.toString();
-	}
+        return buf.toString();
+    }
 
 }

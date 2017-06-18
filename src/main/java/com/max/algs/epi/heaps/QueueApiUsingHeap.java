@@ -10,14 +10,76 @@ import org.junit.runner.notification.Failure;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertSame;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 /**
  * 11.7. Variant. Implement a queue API using a heap.
  */
 public class QueueApiUsingHeap {
+
+    public static void main(String[] args) {
+        try {
+            JUnitCore junit = new JUnitCore();
+            Result result = junit.run(QueueApiUsingHeap.class);
+
+            for (Failure failure : result.getFailures()) {
+                System.out.println(failure.getTrace());
+            }
+
+            System.out.println("'QueueApiUsingHeap' completed");
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void enqAndDeqWithOverflow() {
+        QueueAdapter queue = new QueueAdapter();
+
+        for (long i = 0; i < (2L * Integer.MAX_VALUE) + 2L; ++i) {
+            queue.add((int) i);
+            queue.poll();
+        }
+    }
+
+    @Test
+    public void enqAndDeq() {
+
+        QueueAdapter queue = new QueueAdapter();
+
+        assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+        assertSame(null, queue.peek());
+
+        queue.add(5);
+        queue.add(7);
+        queue.add(12);
+
+        assertEquals(Integer.valueOf(5), queue.poll());
+        assertEquals(Integer.valueOf(7), queue.poll());
+
+        queue.add(3);
+        queue.add(4);
+        queue.add(10);
+        queue.add(6);
+        queue.add(8);
+
+        assertEquals(Integer.valueOf(12), queue.poll());
+        assertEquals(Integer.valueOf(3), queue.poll());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void pollFromEmptyQueue() {
+        QueueAdapter queue = new QueueAdapter();
+        queue.poll();
+    }
+
+    @Test
+    public void peekFromEmptyQueue() {
+        QueueAdapter queue = new QueueAdapter();
+        assertSame(null, queue.peek());
+    }
 
     private static final class QueueAdapter {
 
@@ -101,70 +163,6 @@ public class QueueApiUsingHeap {
             public int compareTo(@NotNull QueueEntry other) {
                 return Integer.compare(sequence, other.sequence);
             }
-        }
-    }
-
-    @Test
-    public void enqAndDeqWithOverflow() {
-        QueueAdapter queue = new QueueAdapter();
-
-        for (long i = 0; i < (2L * Integer.MAX_VALUE) + 2L; ++i) {
-            queue.add((int) i);
-            queue.poll();
-        }
-    }
-
-    @Test
-    public void enqAndDeq() {
-
-        QueueAdapter queue = new QueueAdapter();
-
-        assertTrue(queue.isEmpty());
-        assertEquals(0, queue.size());
-        assertSame(null, queue.peek());
-
-        queue.add(5);
-        queue.add(7);
-        queue.add(12);
-
-        assertEquals(Integer.valueOf(5), queue.poll());
-        assertEquals(Integer.valueOf(7), queue.poll());
-
-        queue.add(3);
-        queue.add(4);
-        queue.add(10);
-        queue.add(6);
-        queue.add(8);
-
-        assertEquals(Integer.valueOf(12), queue.poll());
-        assertEquals(Integer.valueOf(3), queue.poll());
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void pollFromEmptyQueue() {
-        QueueAdapter queue = new QueueAdapter();
-        queue.poll();
-    }
-
-    @Test
-    public void peekFromEmptyQueue() {
-        QueueAdapter queue = new QueueAdapter();
-        assertSame(null, queue.peek());
-    }
-
-    public static void main(String[] args) {
-        try {
-            JUnitCore junit = new JUnitCore();
-            Result result = junit.run(QueueApiUsingHeap.class);
-
-            for (Failure failure : result.getFailures()) {
-                System.out.println(failure.getTrace());
-            }
-
-            System.out.println("'QueueApiUsingHeap' completed");
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

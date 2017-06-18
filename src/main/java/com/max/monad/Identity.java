@@ -20,6 +20,6 @@ public class Identity<T> implements Functor<T, Identity<?>> {
     @Override
     public String toString() {
         return String.format("value = %s of class '%s'", String.valueOf(value),
-                             value == null ? "null" : value.getClass().getCanonicalName());
+                value == null ? "null" : value.getClass().getCanonicalName());
     }
 }

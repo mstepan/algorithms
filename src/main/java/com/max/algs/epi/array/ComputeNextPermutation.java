@@ -8,6 +8,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ComputeNextPermutation {
 
+    private ComputeNextPermutation() throws Exception {
+
+        int[] arr = {6, 2, 1, 5, 4, 3, 0};
+        System.out.println(Arrays.toString(arr));
+        nextPermutation(arr);
+        System.out.println(Arrays.toString(arr));
+
+//        while (nextPermutation(arr)) {
+//            ++permCount;
+//        }
+
+//        System.out.printf("permCount = %d %n", permCount);
+
+        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    }
+
     /**
      * 6.10. Compute the next permutation.
      * time: O(N)
@@ -73,23 +89,6 @@ public class ComputeNextPermutation {
         arr[from] = arr[to];
         arr[to] = temp;
     }
-
-    private ComputeNextPermutation() throws Exception {
-
-        int[] arr = {6, 2, 1, 5, 4, 3, 0};
-        System.out.println(Arrays.toString(arr));
-        nextPermutation(arr);
-        System.out.println(Arrays.toString(arr));
-
-//        while (nextPermutation(arr)) {
-//            ++permCount;
-//        }
-
-//        System.out.printf("permCount = %d %n", permCount);
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
-    }
-
 
     public static void main(String[] args) {
         try {

@@ -3,13 +3,7 @@ package com.max.algs.util;
 import com.max.algs.ds.heap.BinaryHeap;
 import org.apache.commons.math3.util.Pair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -22,6 +16,10 @@ public final class MatrixUtils {
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
+
+    private MatrixUtils() {
+        super();
+    }
 
     /**
      * Search value in row and columns sorted matrix.
@@ -186,7 +184,6 @@ public final class MatrixUtils {
         return true;
     }
 
-
     /**
      * Rotate matrix by 90 degree.
      * <p>
@@ -214,7 +211,6 @@ public final class MatrixUtils {
             }
         }
     }
-
 
     /**
      * Zero row and column if cell is '0'.
@@ -250,7 +246,6 @@ public final class MatrixUtils {
 
     }
 
-
     public static void sort(int[][] matrix) {
 
         // sort each column
@@ -275,11 +270,9 @@ public final class MatrixUtils {
         }
     }
 
-
     public static boolean bSearch(int[][] matrix, int key) {
         return binarySearchRec(matrix, key, 0, matrix.length - 1, 0, matrix[0].length - 1);
     }
-
 
     /**
      * Sequential search.
@@ -337,7 +330,6 @@ public final class MatrixUtils {
                 binarySearchRec(matrix, key, rowLo, rowMid - 1, colMid, colHi) ||
                 binarySearchRec(matrix, key, rowMid, rowHi, colLo, colMid - 1);
     }
-
 
     /**
      * Generate square matrix with random values.
@@ -462,11 +454,6 @@ public final class MatrixUtils {
 
 
         return buf.toString();
-    }
-
-
-    private MatrixUtils() {
-        super();
     }
 
 

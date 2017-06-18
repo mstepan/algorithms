@@ -51,6 +51,23 @@ public final class TaxicabNumbersFinder {
         return value * value * value;
     }
 
+    public static void main(String[] args) {
+
+        int n = 500;
+
+        TaxicabNumbersFinder.findTaxicab(n);
+
+        // 140^3 + 183^3 = 14^3 + 207^3
+        int a = 140;
+        int b = 183;
+        int c = 14;
+        int d = 207;
+        System.out.println(a * a * a + b * b * b);
+        System.out.println(c * c * c + d * d * d);
+
+        System.out.printf("Main done...");
+    }
+
     private static final class Solution {
 
         private static final Comparator<Solution> DESC_CMP = new Comparator<Solution>() {
@@ -75,22 +92,5 @@ public final class TaxicabNumbersFinder {
         public String toString() {
             return "" + row + "^3 + " + col + "^3";
         }
-    }
-
-    public static void main(String[] args) {
-
-        int n = 500;
-
-        TaxicabNumbersFinder.findTaxicab(n);
-
-        // 140^3 + 183^3 = 14^3 + 207^3
-        int a = 140;
-        int b = 183;
-        int c = 14;
-        int d = 207;
-        System.out.println(a * a * a + b * b * b);
-        System.out.println(c * c * c + d * d * d);
-
-        System.out.printf("Main done...");
     }
 }

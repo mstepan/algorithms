@@ -9,6 +9,9 @@ public final class PrimeUtilities {
     // hw.l1dcachesize: 32768
     private static final int L1D_CACHE_SIZE_IN_BYTES = 32_768;
 
+    private PrimeUtilities() {
+    }
+
     /**
      * Calculate all primes using segmented Sieve of Eratosthenes.
      *
@@ -165,9 +168,5 @@ public final class PrimeUtilities {
     public static int countPrimes(int limit) {
         BitSet primes = calculateBasePrimes(limit);
         return primes.cardinality();
-    }
-
-
-    private PrimeUtilities() {
     }
 }

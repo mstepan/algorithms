@@ -12,10 +12,8 @@ public class TernaryMinHeap<T extends Comparable<T>> {
     private static final Logger LOG = Logger.getLogger(TernaryMinHeap.class);
 
     private static final int DEFAULT_CAPACITY = 8;
-
-    private int size;
-
     protected T[] data;
+    private int size;
 
     public TernaryMinHeap() {
         data = createArray(DEFAULT_CAPACITY);
@@ -36,7 +34,7 @@ public class TernaryMinHeap<T extends Comparable<T>> {
     }
 
 
-    public T min(){
+    public T min() {
         checkNotEmpty();
         return data[0];
     }
@@ -66,7 +64,7 @@ public class TernaryMinHeap<T extends Comparable<T>> {
         return size == 0;
     }
 
-    private void checkNotEmpty(){
+    private void checkNotEmpty() {
         if (size == 0) {
             throw new IllegalStateException("Can't extract element from empty heap");
         }
@@ -84,9 +82,9 @@ public class TernaryMinHeap<T extends Comparable<T>> {
 
     private void shrink() {
 
-        if ( data.length > DEFAULT_CAPACITY && size < (data.length >> 1)) {
+        if (data.length > DEFAULT_CAPACITY && size < (data.length >> 1)) {
             T[] tempData = data;
-            data = createArray(data.length - data.length/4 );
+            data = createArray(data.length - data.length / 4);
             System.arraycopy(tempData, 0, data, 0, size);
 
             LOG.debug("shrinked, old  = " + tempData.length + ", new = " + data.length);
@@ -94,7 +92,7 @@ public class TernaryMinHeap<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    private T[] createArray(int capacity){
+    private T[] createArray(int capacity) {
         return (T[]) new Comparable[capacity];
     }
 

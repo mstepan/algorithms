@@ -21,19 +21,22 @@ import java.util.Map;
  */
 public class MinimumWindowSubstring {
 
-    static class Count {
+    private MinimumWindowSubstring() throws Exception {
 
-        int expected;
-        int actual;
+        String str = "aa";
+        String pattern = "aa";
 
-        public Count(int expected, int actual) {
-            this.expected = expected;
-            this.actual = actual;
+        System.out.println(minWindow(str, pattern));
+
+        System.out.println("MinimumWindowSubstring done...");
+    }
+
+    public static void main(String[] args) {
+        try {
+            new MinimumWindowSubstring();
         }
-
-        @Override
-        public String toString() {
-            return "expected: " + expected + ", actual: " + actual;
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -130,23 +133,19 @@ public class MinimumWindowSubstring {
         return minFrom >= 0 ? s.substring(minFrom, minTo + 1) : "";
     }
 
+    static class Count {
 
-    private MinimumWindowSubstring() throws Exception {
+        int expected;
+        int actual;
 
-        String str = "aa";
-        String pattern = "aa";
-
-        System.out.println(minWindow(str, pattern));
-
-        System.out.println("MinimumWindowSubstring done...");
-    }
-
-    public static void main(String[] args) {
-        try {
-            new MinimumWindowSubstring();
+        public Count(int expected, int actual) {
+            this.expected = expected;
+            this.actual = actual;
         }
-        catch (Exception ex) {
-            ex.printStackTrace();
+
+        @Override
+        public String toString() {
+            return "expected: " + expected + ", actual: " + actual;
         }
     }
 }
