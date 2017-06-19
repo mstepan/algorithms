@@ -3,6 +3,11 @@ package com.max.algs;
 
 import com.max.algs.util.MathUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public final class AlgorithmsMain {
 
     private static final double LN_2 = MathUtils.ln(2.0);
@@ -67,6 +72,12 @@ public final class AlgorithmsMain {
 
         // p = e^(-(m / n) * (ln(2)^2))
         double pActual = Math.pow(Math.E, (-(m / n) * LN_2_SQUARED));
+
+        List<Integer> data = new ArrayList<>();
+
+        data.addAll(Arrays.asList(1,2,3,4,5));
+
+        Collections.sort(data);
 
         System.out.printf("pActual = %3f %n", pActual);
     }
