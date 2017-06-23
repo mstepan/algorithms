@@ -45,8 +45,8 @@ public class SumOfDigitsBenchmark {
 
         checkArgument(digits < 10);
 
-        int first = (int) Math.pow(10, digits - 1);
-        int last = (int) Math.pow(10, digits) - 1;
+        int first = (int) Math.pow(10.0, digits - 1.0);
+        int last = (int) Math.pow(10.0, digits) - 1;
 
         if (sumOfDigits(last) < sum) {
             return 0;

@@ -1,12 +1,10 @@
 package com.max.algs;
 
 
+import com.max.algs.util.DoubleUtils;
 import com.max.algs.util.MathUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public final class AlgorithmsMain {
 
@@ -14,22 +12,21 @@ public final class AlgorithmsMain {
     private static final double LN_2_SQUARED = Math.pow(LN_2, 2.0);
 
 
-    /*
-
-./AgentInstall.sh AGENT_TYPE=cloud_agent AGENT_BASE_DIR=/Users/mstepan/opower/omc_agent AGENT_REGISTRATION_KEY=RDXYB1gURiuw71BkVwszMo59uZ AGENT_PROPERTIES=agent.properties
-
-     */
-
     private AlgorithmsMain() throws Exception {
 
-        int success = 3;
-        int neg = 1;
+        float x = 0.1F;
 
-        double offset = 1.0 / (success + neg);
+        float res1 = 0.0F;
 
-        double odds = (success * offset) / (neg * offset);
+        for (int i = 0; i < 10; ++i) {
+            res1 += x;
+        }
 
-        System.out.printf("odds = %.2f, log odds = %.2f %n", odds, Math.log10(odds));
+        double res2 = x * 10;
+
+        System.out.println(DoubleUtils.isEquals(res1, res2));
+
+        System.out.printf("res1 = %.15f, res2 = %.15f, res3 = %.15f %n", res1, res2, x * 10);
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
     }
@@ -75,7 +72,7 @@ public final class AlgorithmsMain {
 
         List<Integer> data = new ArrayList<>();
 
-        data.addAll(Arrays.asList(1,2,3,4,5));
+        data.addAll(Arrays.asList(1, 2, 3, 4, 5));
 
         Collections.sort(data);
 

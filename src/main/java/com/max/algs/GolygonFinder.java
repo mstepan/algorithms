@@ -1,12 +1,17 @@
 package com.max.algs;
 
+import com.max.algs.util.DoubleUtils;
+import org.apache.log4j.Logger;
+
 import java.util.*;
+
 
 /**
  * https://uva.onlinejudge.org/external/2/225.html
  */
 final class GolygonFinder {
 
+    private static final Logger LOG = Logger.getLogger(GolygonFinder.class);
 
     private GolygonFinder() {
 
@@ -16,7 +21,7 @@ final class GolygonFinder {
 
         findPath(blocks);
 
-        System.out.println("Main done...");
+        LOG.info("Main done...");
     }
 
     public static void main(String[] args) {
@@ -32,7 +37,7 @@ final class GolygonFinder {
 
         if (pathLength == 0) {
             if (XYPair.ZERO.equals(curPoint)) {
-                System.out.println("Found golygon: " + decodeInReverseOrder(result));
+                LOG.info("Found golygon: " + decodeInReverseOrder(result));
             }
 
             return;
@@ -64,7 +69,9 @@ final class GolygonFinder {
     }
 
     private boolean isLyingOnLine(XYPair point, XYPair lineStart, XYPair lineEnd) {
-        return distance(lineStart, point) + distance(point, lineEnd) == distance(lineStart, lineEnd);
+        double dist1 = distance(lineStart, point) + distance(point, lineEnd);
+        double dist2 = distance(lineStart, lineEnd);
+        return DoubleUtils.isEquals(dist1, dist2);
     }
 
     private void tryMoveInDirection(XYPair curPoint, List<XYPair> blocks, Direction direction, Deque<Direction> result,
