@@ -1,5 +1,7 @@
 package com.max.algs.leetcode;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -16,6 +18,8 @@ import java.util.Deque;
  * The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
  */
 public class JumpGame2 {
+
+    private static final Logger LOG = Logger.getLogger(JumpGame2.class);
 
     private JumpGame2() throws Exception {
 
@@ -45,7 +49,7 @@ public class JumpGame2 {
             new JumpGame2();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

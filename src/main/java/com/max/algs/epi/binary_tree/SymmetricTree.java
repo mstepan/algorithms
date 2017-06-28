@@ -1,6 +1,7 @@
 package com.max.algs.epi.binary_tree;
 
 import com.max.algs.ds.Pair;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -13,6 +14,7 @@ import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
  */
 public final class SymmetricTree {
 
+    private static final Logger LOG = Logger.getLogger(SymmetricTree.class);
 
     private SymmetricTree() throws Exception {
 
@@ -84,7 +86,7 @@ public final class SymmetricTree {
             new SymmetricTree();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

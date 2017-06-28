@@ -1,12 +1,16 @@
 package com.max.algs.epi;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class AbsSortedMain {
+
+    private static final Logger LOG = Logger.getLogger(AbsSortedMain.class);
 
     private AbsSortedMain() throws Exception {
 
@@ -143,7 +147,7 @@ public final class AbsSortedMain {
             new AbsSortedMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

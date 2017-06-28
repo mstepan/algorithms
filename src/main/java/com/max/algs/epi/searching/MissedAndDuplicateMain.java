@@ -1,10 +1,14 @@
 package com.max.algs.epi.searching;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class MissedAndDuplicateMain {
+
+    private static final Logger LOG = Logger.getLogger(MissedAndDuplicateMain.class);
 
     private MissedAndDuplicateMain() throws Exception {
 
@@ -70,7 +74,7 @@ public final class MissedAndDuplicateMain {
             new MissedAndDuplicateMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

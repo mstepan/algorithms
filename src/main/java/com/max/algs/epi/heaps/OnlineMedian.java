@@ -1,6 +1,8 @@
 package com.max.algs.epi.heaps;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
@@ -12,6 +14,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Print online median.
  */
 public class OnlineMedian {
+
+    private static final Logger LOG = Logger.getLogger(OnlineMedian.class);
 
 
     private OnlineMedian() throws Exception {
@@ -85,7 +89,7 @@ public class OnlineMedian {
             new OnlineMedian();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

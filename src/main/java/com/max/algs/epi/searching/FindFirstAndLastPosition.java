@@ -2,6 +2,7 @@ package com.max.algs.epi.searching;
 
 
 import com.max.algs.ds.Pair;
+import org.apache.log4j.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -10,6 +11,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Finds first and last index of a key.
  */
 public class FindFirstAndLastPosition {
+
+    private static final Logger LOG = Logger.getLogger(FindFirstAndLastPosition.class);
 
     private static final Pair<Integer, Integer> NOT_FOUND = new Pair<>(-1, -1);
 
@@ -82,7 +85,7 @@ public class FindFirstAndLastPosition {
             new FindFirstAndLastPosition();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

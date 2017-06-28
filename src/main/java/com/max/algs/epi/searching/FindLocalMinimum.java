@@ -1,6 +1,8 @@
 package com.max.algs.epi.searching;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -10,6 +12,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FindLocalMinimum {
 
+    private static final Logger LOG = Logger.getLogger(FindLocalMinimum.class);
 
     private FindLocalMinimum() throws Exception {
 
@@ -83,7 +86,7 @@ public class FindLocalMinimum {
             new FindLocalMinimum();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

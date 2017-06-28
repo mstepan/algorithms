@@ -1,6 +1,8 @@
 package com.max.algs.leetcode;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 /**
@@ -10,6 +12,8 @@ import java.util.*;
  * see: https://leetcode.com/problems/n-queens/
  */
 public class NQueens {
+
+    private static final Logger LOG = Logger.getLogger(NQueens.class);
 
     private static final char QUEEN = 'Q';
     private static final char EMPTY = '.';
@@ -27,7 +31,7 @@ public class NQueens {
             new NQueens();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

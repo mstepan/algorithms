@@ -1,6 +1,9 @@
 package com.max.algs.leetcode;
 
 
+import com.max.algs.AlgorithmsMain;
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 /**
@@ -14,6 +17,8 @@ import java.util.*;
  * return [1,6],[8,10],[15,18].
  */
 public class MergeIntervals {
+
+    private static final Logger LOG = Logger.getLogger(MergeIntervals.class);
 
     private static final Comparator<Interval> START_CMP = new Comparator<Interval>() {
         @Override
@@ -66,7 +71,7 @@ public class MergeIntervals {
             new MergeIntervals();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

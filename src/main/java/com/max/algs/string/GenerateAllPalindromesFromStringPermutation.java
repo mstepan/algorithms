@@ -1,11 +1,15 @@
 package com.max.algs.string;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 /**
  * Generate all palindromes from string permutation.
  */
 public class GenerateAllPalindromesFromStringPermutation {
+
+    private static final Logger LOG = Logger.getLogger(GenerateAllPalindromesFromStringPermutation.class);
 
     private GenerateAllPalindromesFromStringPermutation() throws Exception {
 
@@ -161,7 +165,7 @@ public class GenerateAllPalindromesFromStringPermutation {
             new GenerateAllPalindromesFromStringPermutation();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

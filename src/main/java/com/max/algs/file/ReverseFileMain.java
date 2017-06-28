@@ -1,6 +1,8 @@
 package com.max.algs.file;
 
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -14,6 +16,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public final class ReverseFileMain {
 
+    private static final Logger LOG = Logger.getLogger(ReverseFileMain.class);
 
     private static final int CHUNK_SIZE = 4096;
 
@@ -93,7 +96,7 @@ public final class ReverseFileMain {
             new ReverseFileMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

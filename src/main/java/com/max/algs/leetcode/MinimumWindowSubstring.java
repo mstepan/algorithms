@@ -1,5 +1,7 @@
 package com.max.algs.leetcode;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +23,8 @@ import java.util.Map;
  */
 public class MinimumWindowSubstring {
 
+    private static final Logger LOG = Logger.getLogger(MinimumWindowSubstring.class);
+
     private MinimumWindowSubstring() throws Exception {
 
         String str = "aa";
@@ -36,7 +40,7 @@ public class MinimumWindowSubstring {
             new MinimumWindowSubstring();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

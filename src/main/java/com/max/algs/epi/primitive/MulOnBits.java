@@ -1,11 +1,15 @@
 package com.max.algs.epi.primitive;
 
+import org.apache.log4j.Logger;
+
 import java.util.Random;
 
 /**
  * Compute x * y without arithmetic operations.
  */
 public class MulOnBits {
+
+    private static final Logger LOG = Logger.getLogger(MulOnBits.class);
 
     private MulOnBits() throws Exception {
 
@@ -36,7 +40,7 @@ public class MulOnBits {
             new MulOnBits();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

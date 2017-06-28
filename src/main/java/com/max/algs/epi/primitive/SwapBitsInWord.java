@@ -1,5 +1,7 @@
 package com.max.algs.epi.primitive;
 
+import org.apache.log4j.Logger;
+
 import static org.parboiled.common.Preconditions.checkArgument;
 
 /**
@@ -8,6 +10,7 @@ import static org.parboiled.common.Preconditions.checkArgument;
  */
 public class SwapBitsInWord {
 
+    private static final Logger LOG = Logger.getLogger(SwapBitsInWord.class);
 
     private static final int LSB_INDEX_INT = 0;
     private static final int MSB_INDEX_INT = Integer.SIZE - 1;
@@ -61,7 +64,7 @@ public class SwapBitsInWord {
             new SwapBitsInWord();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

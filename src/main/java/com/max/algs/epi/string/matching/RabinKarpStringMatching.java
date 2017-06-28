@@ -1,6 +1,7 @@
 package com.max.algs.epi.string.matching;
 
 import com.max.algs.string.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Random;
 
@@ -8,6 +9,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class RabinKarpStringMatching {
+
+    private static final Logger LOG = Logger.getLogger(RabinKarpStringMatching.class);
 
     private static final int BASE = 257;
     private static final int BIG_PRIME = 7_368_787;
@@ -148,7 +151,7 @@ public class RabinKarpStringMatching {
             new RabinKarpStringMatching();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.max.algs.epi.heaps;
 
 
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -19,6 +20,8 @@ import static org.junit.Assert.*;
  */
 public class StackApiUsingHeap {
 
+    private static final Logger LOG = Logger.getLogger(StackApiUsingHeap.class);
+
     public static void main(String[] args) {
         try {
             JUnitCore junit = new JUnitCore();
@@ -31,7 +34,7 @@ public class StackApiUsingHeap {
             System.out.println("'StackApiUsingHeap' completed");
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

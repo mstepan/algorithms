@@ -1,9 +1,13 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class LookAndSayProblem {
+
+    private static final Logger LOG = Logger.getLogger(LookAndSayProblem.class);
 
     private static final String INITIAL_NUMBER = "1";
 
@@ -69,7 +73,7 @@ public class LookAndSayProblem {
             new LookAndSayProblem();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -2,10 +2,13 @@ package com.max.algs.puzzle_8;
 
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public final class Puzzle8Main {
+
+    private static final Logger LOG = Logger.getLogger(Puzzle8Main.class);
 
     private static List<MoveDirection> solution = null;
 
@@ -140,7 +143,7 @@ public final class Puzzle8Main {
             new Puzzle8Main();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

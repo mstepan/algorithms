@@ -1,9 +1,13 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 
 public class OnlineSampling {
+
+    private static final Logger LOG = Logger.getLogger(OnlineSampling.class);
 
     private OnlineSampling() throws Exception {
 
@@ -61,7 +65,7 @@ public class OnlineSampling {
             new OnlineSampling();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

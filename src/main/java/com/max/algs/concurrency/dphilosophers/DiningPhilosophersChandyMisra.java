@@ -1,6 +1,8 @@
 package com.max.algs.concurrency.dphilosophers;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +38,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * requested one of the forks, the philosopher that has just finished eating cleans the fork and sends it
  */
 public final class DiningPhilosophersChandyMisra {
+
+    private static final Logger LOG = Logger.getLogger(DiningPhilosophersChandyMisra.class);
 
     private DiningPhilosophersChandyMisra() throws Exception {
 
@@ -99,7 +103,7 @@ public final class DiningPhilosophersChandyMisra {
             new DiningPhilosophersChandyMisra();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

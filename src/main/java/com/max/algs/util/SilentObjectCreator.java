@@ -1,5 +1,6 @@
 package com.max.algs.util;
 
+import org.apache.log4j.Logger;
 import sun.reflect.ReflectionFactory;
 
 import java.lang.reflect.Constructor;
@@ -12,6 +13,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Used inside object deserialization code.
  */
 public final class SilentObjectCreator {
+
+    private static final Logger LOG = Logger.getLogger(SilentObjectCreator.class);
 
     private SilentObjectCreator() {
         throw new IllegalStateException("Utility only class '" + SilentObjectCreator.class.getCanonicalName() +
@@ -43,7 +46,7 @@ public final class SilentObjectCreator {
             System.out.printf("obj.value = %s %n", obj.value);
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

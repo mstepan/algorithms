@@ -1,11 +1,15 @@
 package com.max.algs.epi.binary_tree;
 
+import org.apache.log4j.Logger;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class CheckIfBinaryTreeHeightBalanced {
+
+    private static final Logger LOG = Logger.getLogger(CheckIfBinaryTreeHeightBalanced.class);
 
     private static final Random RAND = ThreadLocalRandom.current();
 
@@ -80,7 +84,7 @@ public class CheckIfBinaryTreeHeightBalanced {
             new CheckIfBinaryTreeHeightBalanced();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

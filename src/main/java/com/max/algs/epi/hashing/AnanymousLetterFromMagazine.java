@@ -1,6 +1,8 @@
 package com.max.algs.epi.hashing;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class AnanymousLetterFromMagazine {
 
+    private static final Logger LOG = Logger.getLogger(AnanymousLetterFromMagazine.class);
 
     private static final Integer ONE_INTEGER = 1;
 
@@ -72,7 +75,7 @@ public final class AnanymousLetterFromMagazine {
             new AnanymousLetterFromMagazine();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

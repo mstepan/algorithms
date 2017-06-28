@@ -3,6 +3,7 @@ package com.max.data_retrieval;
 
 import com.google.common.base.Joiner;
 import com.max.algs.fulltextsearch.SnowballStemmer;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,6 +14,7 @@ import java.util.*;
 
 public final class MainIndexer {
 
+    private static final Logger LOG = Logger.getLogger(MainIndexer.class);
 
     private static final Joiner JOINER = Joiner.on(" ");
 
@@ -98,7 +100,7 @@ public final class MainIndexer {
             new MainIndexer();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
 
     }

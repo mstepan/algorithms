@@ -1,10 +1,14 @@
 package com.max.algs.epi.linked_list;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ReverseSingleSublist {
+
+    private static final Logger LOG = Logger.getLogger(ReverseSingleSublist.class);
 
     private ReverseSingleSublist() throws Exception {
 
@@ -92,7 +96,7 @@ public class ReverseSingleSublist {
             new ReverseSingleSublist();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

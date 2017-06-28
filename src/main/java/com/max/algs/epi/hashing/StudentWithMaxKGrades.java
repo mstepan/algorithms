@@ -2,6 +2,7 @@ package com.max.algs.epi.hashing;
 
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -13,6 +14,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class StudentWithMaxKGrades {
 
+    private static final Logger LOG = Logger.getLogger(StudentWithMaxKGrades.class);
 
     private static final int MAX_GRADE = 100;
 
@@ -130,7 +132,7 @@ public final class StudentWithMaxKGrades {
             new StudentWithMaxKGrades();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

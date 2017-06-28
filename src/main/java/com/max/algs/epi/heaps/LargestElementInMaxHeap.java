@@ -1,6 +1,7 @@
 package com.max.algs.epi.heaps;
 
 
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -16,6 +17,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 11.6. Compute the K largest elements in a max-heap.
  */
 public class LargestElementInMaxHeap {
+
+    private static final Logger LOG = Logger.getLogger(LargestElementInMaxHeap.class);
 
     private static final int[] EMPTY_ARR = new int[0];
 
@@ -106,7 +109,7 @@ public class LargestElementInMaxHeap {
             new LargestElementInMaxHeap();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

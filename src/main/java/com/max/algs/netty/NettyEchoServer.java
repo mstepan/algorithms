@@ -8,11 +8,14 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.CharsetUtil;
+import org.apache.log4j.Logger;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 
 public final class NettyEchoServer {
+
+    private static final Logger LOG = Logger.getLogger(NettyEchoServer.class);
 
     static final int PORT = 7777;
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -53,7 +56,7 @@ public final class NettyEchoServer {
             new NettyEchoServer();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.max.facebook;
 
 import com.google.common.base.Objects;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Return No_of_ways Mod 1003.
  */
 public class BooleanParenthesization {
+
+    private static final Logger LOG = Logger.getLogger(BooleanParenthesization.class);
 
     private static final char TRUE_CH = 'T';
     private static final char FALSE_CH = 'F';
@@ -148,7 +151,7 @@ public class BooleanParenthesization {
             new BooleanParenthesization();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

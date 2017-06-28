@@ -1,6 +1,8 @@
 package com.max.algs.epi.searching;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -9,6 +11,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FindFirstLargerThanKey {
 
+    private static final Logger LOG = Logger.getLogger(FindFirstLargerThanKey.class);
 
     private FindFirstLargerThanKey() throws Exception {
 
@@ -60,7 +63,7 @@ public class FindFirstLargerThanKey {
             new FindFirstLargerThanKey();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

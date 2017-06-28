@@ -1,10 +1,14 @@
 package com.max.algs.epi.binary_tree;
 
+import org.apache.log4j.Logger;
+
 import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PreOrderBinaryTreeTraversal {
+
+    private static final Logger LOG = Logger.getLogger(PreOrderBinaryTreeTraversal.class);
 
     private PreOrderBinaryTreeTraversal() throws Exception {
 
@@ -95,7 +99,7 @@ public class PreOrderBinaryTreeTraversal {
             new PreOrderBinaryTreeTraversal();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

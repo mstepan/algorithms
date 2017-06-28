@@ -1,5 +1,7 @@
 package com.max.algs.baylor;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.Map;
  * Crossword Answers puzzle "From Baylor to Baylor" book.
  */
 public final class CrosswordAnswers {
+
+    private static final Logger LOG = Logger.getLogger(CrosswordAnswers.class);
 
     private static final char DELIMITER = '*';
 
@@ -117,7 +121,7 @@ public final class CrosswordAnswers {
             new CrosswordAnswers();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

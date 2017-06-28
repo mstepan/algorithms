@@ -1,6 +1,7 @@
 package com.max.algs.epi.primitive;
 
 import com.max.algs.util.NumberUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Random;
 
@@ -10,6 +11,8 @@ import static com.google.common.base.Preconditions.checkArgument;
  * Compute power(x, y).
  */
 public class PowerVariable {
+
+    private static final Logger LOG = Logger.getLogger(PowerVariable.class);
 
     private PowerVariable() throws Exception {
 
@@ -109,7 +112,7 @@ public class PowerVariable {
             new PowerVariable();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

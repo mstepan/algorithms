@@ -1,11 +1,14 @@
 package com.max.algs;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class CompletePairsMain {
 
+    private static final Logger LOG = Logger.getLogger(CompletePairsMain.class);
 
     private static final int MASK_FOR_26_BITS = 0x03_FF_FF_FF;
     private static final char FIRST_CH = 'a';
@@ -84,7 +87,7 @@ public final class CompletePairsMain {
             new CompletePairsMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

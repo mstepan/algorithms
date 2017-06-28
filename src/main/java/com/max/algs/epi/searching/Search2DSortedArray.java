@@ -1,6 +1,8 @@
 package com.max.algs.epi.searching;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -9,6 +11,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class Search2DSortedArray {
 
+    private static final Logger LOG = Logger.getLogger(Search2DSortedArray.class);
 
     private Search2DSortedArray() throws Exception {
 
@@ -97,7 +100,7 @@ public class Search2DSortedArray {
             new Search2DSortedArray();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

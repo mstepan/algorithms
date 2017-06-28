@@ -1,5 +1,7 @@
 package com.max.algs.util;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +17,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Use up to 1GB of RAM.
  */
 public final class FileShuffler {
+
+    private static final Logger LOG = Logger.getLogger(FileShuffler.class);
 
     // we can store 250 mln integers in 1GB of RAM
     private static final int INTS_COUNT_IN_GB = 250_000_000;
@@ -123,7 +127,7 @@ public final class FileShuffler {
                 stream.close();
             }
             catch (Exception ex) {
-                ex.printStackTrace();
+                LOG.error(ex.getMessage(), ex);
             }
         }
     }

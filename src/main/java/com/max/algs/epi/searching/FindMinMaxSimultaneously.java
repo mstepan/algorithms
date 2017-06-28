@@ -1,6 +1,7 @@
 package com.max.algs.epi.searching;
 
 import com.max.algs.ds.Pair;
+import org.apache.log4j.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -8,6 +9,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 12.7. Find the min and max simultaneously.
  */
 public class FindMinMaxSimultaneously {
+
+    private static final Logger LOG = Logger.getLogger(FindMinMaxSimultaneously.class);
 
     private FindMinMaxSimultaneously() throws Exception {
 
@@ -61,7 +64,7 @@ public class FindMinMaxSimultaneously {
             new FindMinMaxSimultaneously();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

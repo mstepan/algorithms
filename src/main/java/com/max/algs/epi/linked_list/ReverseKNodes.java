@@ -1,11 +1,14 @@
 package com.max.algs.epi.linked_list;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ReverseKNodes {
 
+    private static final Logger LOG = Logger.getLogger(ReverseKNodes.class);
 
     private ReverseKNodes() throws Exception {
 
@@ -89,7 +92,7 @@ public class ReverseKNodes {
             new ReverseKNodes();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

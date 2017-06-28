@@ -1,6 +1,8 @@
 package com.max.algs.epi.searching;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -11,6 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class PrefixForSortedArrayOfStrings {
 
+    private static final Logger LOG = Logger.getLogger(PrefixForSortedArrayOfStrings.class);
 
     private PrefixForSortedArrayOfStrings() throws Exception {
 
@@ -83,7 +86,7 @@ public class PrefixForSortedArrayOfStrings {
             new PrefixForSortedArrayOfStrings();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

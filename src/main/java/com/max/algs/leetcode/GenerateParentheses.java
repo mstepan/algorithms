@@ -1,5 +1,7 @@
 package com.max.algs.leetcode;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -8,6 +10,7 @@ import java.util.List;
 
 public class GenerateParentheses {
 
+    private static final Logger LOG = Logger.getLogger(GenerateParentheses.class);
 
     private GenerateParentheses() throws Exception {
 
@@ -26,7 +29,7 @@ public class GenerateParentheses {
             new GenerateParentheses();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

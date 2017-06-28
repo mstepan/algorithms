@@ -1,6 +1,7 @@
 package com.max.algs.puzzle_8;
 
 import com.max.algs.ds.Pair;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -8,6 +9,8 @@ import java.util.*;
  * Puzzle 8 solver using A* algorithm and Manhattan distance as heuristic.
  */
 public class Puzzle8New {
+
+    private static final Logger LOG = Logger.getLogger(Puzzle8New.class);
 
 
     private Puzzle8New() throws Exception {
@@ -135,7 +138,7 @@ public class Puzzle8New {
             new Puzzle8New();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

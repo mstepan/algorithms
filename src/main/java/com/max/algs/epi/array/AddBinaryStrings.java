@@ -1,5 +1,6 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -10,6 +11,8 @@ import static org.junit.Assert.assertEquals;
 
 
 public class AddBinaryStrings {
+
+    private static final Logger LOG = Logger.getLogger(AddBinaryStrings.class);
 
     private static char ZERO_CHAR = '0';
     private static char ONE_CHAR = '1';
@@ -78,7 +81,7 @@ public class AddBinaryStrings {
             }
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

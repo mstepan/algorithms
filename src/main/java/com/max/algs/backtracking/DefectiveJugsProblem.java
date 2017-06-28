@@ -1,5 +1,7 @@
 package com.max.algs.backtracking;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -7,6 +9,8 @@ import java.util.Queue;
  * Created by mstepan on 6/21/16.
  */
 public class DefectiveJugsProblem {
+
+    private static final Logger LOG = Logger.getLogger(DefectiveJugsProblem.class);
 
     private DefectiveJugsProblem() throws Exception {
 
@@ -55,7 +59,7 @@ public class DefectiveJugsProblem {
             new DefectiveJugsProblem();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

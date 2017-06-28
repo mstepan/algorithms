@@ -1,8 +1,11 @@
 package com.max.algs;
 
 
+import org.apache.log4j.Logger;
+
 public final class ShortestUncommonSubsequence {
 
+    private static final Logger LOG = Logger.getLogger(ShortestUncommonSubsequence.class);
 
     private ShortestUncommonSubsequence() throws Exception {
 
@@ -77,7 +80,7 @@ public final class ShortestUncommonSubsequence {
             new ShortestUncommonSubsequence();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

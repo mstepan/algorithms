@@ -1,6 +1,8 @@
 package com.max.algs.math;
 
 
+import org.apache.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -9,6 +11,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class EstimatePi {
+
+    private static final Logger LOG = Logger.getLogger(EstimatePi.class);
 
     private EstimatePi() throws Exception {
 
@@ -110,7 +114,7 @@ public final class EstimatePi {
                 totalHitCount += future.get();
             }
             catch (Exception ex) {
-                ex.printStackTrace();
+                LOG.error(ex.getMessage(), ex);
             }
         }
 
@@ -128,7 +132,7 @@ public final class EstimatePi {
             new EstimatePi();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

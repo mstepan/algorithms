@@ -1,6 +1,7 @@
 package com.max.algs.epi.binary_tree;
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -8,6 +9,8 @@ import java.util.Map;
 import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class CanFormBinaryTree {
+
+    private static final Logger LOG = Logger.getLogger(CanFormBinaryTree.class);
 
     private CanFormBinaryTree() throws Exception {
 
@@ -90,7 +93,7 @@ public class CanFormBinaryTree {
             new CanFormBinaryTree();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

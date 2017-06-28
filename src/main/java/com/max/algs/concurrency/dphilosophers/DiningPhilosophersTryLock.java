@@ -1,6 +1,8 @@
 package com.max.algs.concurrency.dphilosophers;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * Try lock solution to dining philosophers problem.
  */
 public final class DiningPhilosophersTryLock {
+
+    private static final Logger LOG = Logger.getLogger(DiningPhilosophersTryLock.class);
 
     private DiningPhilosophersTryLock() throws Exception {
 
@@ -92,7 +96,7 @@ public final class DiningPhilosophersTryLock {
             new DiningPhilosophersTryLock();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,11 +1,15 @@
 package com.max.algs.string;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 public class FacebookStringDecoderProblem {
+
+    private static final Logger LOG = Logger.getLogger(FacebookStringDecoderProblem.class);
 
     private FacebookStringDecoderProblem() throws Exception {
 
@@ -148,7 +152,7 @@ public class FacebookStringDecoderProblem {
             new FacebookStringDecoderProblem();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.max.algs.backtracking;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
@@ -8,6 +10,8 @@ import java.util.Iterator;
  * See "Elements of programming interviews" 17.4
  */
 public class MeasuringWithDefectiveJugs {
+
+    private static final Logger LOG = Logger.getLogger(MeasuringWithDefectiveJugs.class);
 
 
     public MeasuringWithDefectiveJugs() throws Exception {
@@ -56,7 +60,7 @@ public class MeasuringWithDefectiveJugs {
             new MeasuringWithDefectiveJugs();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
 
     }

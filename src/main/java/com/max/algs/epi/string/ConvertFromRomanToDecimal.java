@@ -1,5 +1,7 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ConvertFromRomanToDecimal {
+
+    private static final Logger LOG = Logger.getLogger(ConvertFromRomanToDecimal.class);
 
     private static final Map<Character, Integer> ROMAN_DIGITS = romanDigits();
     private static int[] NUMBERS = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
@@ -119,7 +123,7 @@ public class ConvertFromRomanToDecimal {
             new ConvertFromRomanToDecimal();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

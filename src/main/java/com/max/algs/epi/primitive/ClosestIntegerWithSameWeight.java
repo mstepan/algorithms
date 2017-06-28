@@ -1,11 +1,17 @@
 package com.max.algs.epi.primitive;
 
+import com.max.algs.AlgorithmsMain;
+import org.apache.log4j.Logger;
+
+
 import static org.parboiled.common.Preconditions.checkArgument;
 
 /**
  * Find a closest integer with the same weight.
  */
 public class ClosestIntegerWithSameWeight {
+
+    private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
     private ClosestIntegerWithSameWeight() throws Exception {
         int value = 7;
@@ -52,7 +58,7 @@ public class ClosestIntegerWithSameWeight {
             new ClosestIntegerWithSameWeight();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

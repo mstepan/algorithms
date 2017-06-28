@@ -1,6 +1,7 @@
 package com.max.algs.graph;
 
 import com.google.common.collect.ImmutableSet;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -8,6 +9,8 @@ import java.util.*;
  * Find clique of max size in undirected graph.
  */
 public final class CliqueFinder {
+
+    private static final Logger LOG = Logger.getLogger(CliqueFinder.class);
 
     private CliqueFinder() {
         throw new AssertionError("Can't instantiate utility class");
@@ -94,7 +97,7 @@ public final class CliqueFinder {
             System.out.println("Max clique: " + clique);
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

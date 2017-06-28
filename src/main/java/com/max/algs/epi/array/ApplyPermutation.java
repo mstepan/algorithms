@@ -1,11 +1,15 @@
 package com.max.algs.epi.array;
 
+import akka.japi.pf.FI;
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
 
 public class ApplyPermutation {
+
+    private static final Logger LOG = Logger.getLogger(ApplyPermutation.class);
 
     private ApplyPermutation() throws Exception {
 
@@ -53,7 +57,7 @@ public class ApplyPermutation {
             new ApplyPermutation();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

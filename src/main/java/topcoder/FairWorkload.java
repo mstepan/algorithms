@@ -1,6 +1,8 @@
 package topcoder;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class FairWorkload {
 
+    private static final Logger LOG = Logger.getLogger(FairWorkload.class);
 
     private FairWorkload() throws Exception {
 
@@ -103,7 +106,7 @@ public final class FairWorkload {
             new FairWorkload();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

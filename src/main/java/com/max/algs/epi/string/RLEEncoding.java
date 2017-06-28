@@ -1,9 +1,13 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class RLEEncoding {
+
+    private static final Logger LOG = Logger.getLogger(RLEEncoding.class);
 
     private RLEEncoding() throws Exception {
 
@@ -93,7 +97,7 @@ public class RLEEncoding {
             new RLEEncoding();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,11 +1,15 @@
 package com.max.algs.geeksforgeeks.string;
 
+import org.apache.log4j.Logger;
+
 import java.util.regex.Pattern;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 final class ConvertBinaryFractionToDecimal {
+
+    private static final Logger LOG = Logger.getLogger(ConvertBinaryFractionToDecimal.class);
 
     private static final Pattern DECIMAL_FRACTION_REGEXP = Pattern.compile("^-?[10]+(\\.[10]+)?$");
 
@@ -97,7 +101,7 @@ final class ConvertBinaryFractionToDecimal {
             new ConvertBinaryFractionToDecimal();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

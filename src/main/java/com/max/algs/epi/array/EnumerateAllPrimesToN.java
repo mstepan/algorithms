@@ -1,5 +1,7 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -7,6 +9,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class EnumerateAllPrimesToN {
 
+    private static final Logger LOG = Logger.getLogger(EnumerateAllPrimesToN.class);
 
     private static final int ZERO = 0;
     private static final int TWO = 2;
@@ -105,7 +108,7 @@ public class EnumerateAllPrimesToN {
             new EnumerateAllPrimesToN();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

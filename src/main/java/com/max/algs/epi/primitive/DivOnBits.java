@@ -1,11 +1,15 @@
 package com.max.algs.epi.primitive;
 
+import org.apache.log4j.Logger;
+
 import java.util.Random;
 
 /**
  * Compute x * y without arithmetic operations.
  */
 public class DivOnBits {
+
+    private static final Logger LOG = Logger.getLogger(DivOnBits.class);
 
     private static final int SIGN_BIT = Integer.SIZE - 1;
 
@@ -45,7 +49,7 @@ public class DivOnBits {
             new DivOnBits();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

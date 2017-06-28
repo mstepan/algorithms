@@ -1,6 +1,7 @@
 package com.max.algs.backtracking;
 
 import com.max.algs.util.MathUtils;
+import org.apache.log4j.Logger;
 
 import java.math.BigInteger;
 import java.util.ArrayDeque;
@@ -13,6 +14,8 @@ import java.util.Deque;
  * http://mathforum.org/wagon/current_solutions/s1171.html
  */
 public class MathSequenceMain {
+
+    private static final Logger LOG = Logger.getLogger(MathSequenceMain.class);
 
     private static final double INITIAL_VALUE = 4.0;
     private static final double UPPER_THRESHOLD = Long.MAX_VALUE;
@@ -29,7 +32,7 @@ public class MathSequenceMain {
             new MathSequenceMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

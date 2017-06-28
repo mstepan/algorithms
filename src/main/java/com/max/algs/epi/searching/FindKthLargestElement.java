@@ -2,6 +2,7 @@ package com.max.algs.epi.searching;
 
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
@@ -12,6 +13,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 12.7. Find K-th largest element in an unsorted array.
  */
 public class FindKthLargestElement {
+
+    private static final Logger LOG = Logger.getLogger(FindKthLargestElement.class);
 
     private FindKthLargestElement() throws Exception {
 
@@ -98,7 +101,7 @@ public class FindKthLargestElement {
             new FindKthLargestElement();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

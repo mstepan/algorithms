@@ -2,6 +2,7 @@ package com.max.algs.epi.hashing;
 
 
 import com.max.algs.string.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class CanBePalindrome {
+
+    private static final Logger LOG = Logger.getLogger(CanBePalindrome.class);
 
     private CanBePalindrome() throws Exception {
 
@@ -72,7 +75,7 @@ public final class CanBePalindrome {
             new CanBePalindrome();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

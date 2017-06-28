@@ -1,9 +1,13 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ComputeAllValidIPAddresses {
+
+    private static final Logger LOG = Logger.getLogger(ComputeAllValidIPAddresses.class);
 
     private static final int IP4_OCTETS_COUNT = 4;
     private static final int MAX_IP4_OCTET_VALUE = 255;
@@ -92,7 +96,7 @@ public class ComputeAllValidIPAddresses {
             new ComputeAllValidIPAddresses();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,11 +1,15 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * 7.7. Compute all menmonics for a phone number.
  */
 public class ComputeAllMnemonicsForAPhoneNumber {
+
+    private static final Logger LOG = Logger.getLogger(ComputeAllMnemonicsForAPhoneNumber.class);
 
     private static final char MIN_NO = '2';
     private static final char MAX_NO = '9';
@@ -166,7 +170,7 @@ public class ComputeAllMnemonicsForAPhoneNumber {
             new ComputeAllMnemonicsForAPhoneNumber();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

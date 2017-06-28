@@ -1,5 +1,7 @@
 package com.max.algs.leetcode;
 
+import org.apache.log4j.Logger;
+
 /**
  * Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
  * <p>
@@ -20,6 +22,8 @@ package com.max.algs.leetcode;
  */
 public class ReverseNodesInKGroup {
 
+    private static final Logger LOG = Logger.getLogger(ReverseNodesInKGroup.class);
+
     public ReverseNodesInKGroup() throws Exception {
 
         ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
@@ -38,7 +42,7 @@ public class ReverseNodesInKGroup {
             new ReverseNodesInKGroup();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

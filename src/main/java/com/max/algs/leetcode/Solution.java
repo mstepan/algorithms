@@ -1,9 +1,13 @@
 package com.max.algs.leetcode;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 public class Solution {
+
+    private static final Logger LOG = Logger.getLogger(Solution.class);
 
     public Solution() throws Exception {
 
@@ -24,7 +28,7 @@ public class Solution {
             new Solution();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

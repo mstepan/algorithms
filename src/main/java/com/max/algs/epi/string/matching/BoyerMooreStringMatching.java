@@ -1,6 +1,7 @@
 package com.max.algs.epi.string.matching;
 
 import com.max.algs.string.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,6 +10,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class BoyerMooreStringMatching {
+
+    private static final Logger LOG = Logger.getLogger(BoyerMooreStringMatching.class);
 
     private BoyerMooreStringMatching() throws Exception {
 
@@ -187,7 +190,7 @@ public class BoyerMooreStringMatching {
             new BoyerMooreStringMatching();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

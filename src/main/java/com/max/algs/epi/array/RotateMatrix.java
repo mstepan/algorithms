@@ -1,7 +1,10 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
+
 public class RotateMatrix {
 
+    private static final Logger LOG = Logger.getLogger(RotateMatrix.class);
 
     private RotateMatrix() throws Exception {
 
@@ -38,7 +41,7 @@ public class RotateMatrix {
             new RotateMatrix();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

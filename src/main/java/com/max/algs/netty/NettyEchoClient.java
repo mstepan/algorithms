@@ -9,10 +9,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.CharsetUtil;
+import org.apache.log4j.Logger;
 
 import java.net.InetSocketAddress;
 
 public final class NettyEchoClient {
+
+    private static final Logger LOG = Logger.getLogger(NettyEchoClient.class);
 
     private NettyEchoClient() throws Exception {
 
@@ -47,7 +50,7 @@ public final class NettyEchoClient {
             new NettyEchoClient();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

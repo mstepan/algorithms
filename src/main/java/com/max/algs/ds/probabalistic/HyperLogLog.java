@@ -2,6 +2,7 @@ package com.max.algs.ds.probabalistic;
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
 import com.max.algs.util.MathUtils;
+import org.apache.log4j.Logger;
 
 /**
  * This code is not as described in HyperLogLog paper, so can be very INACCURATE.
@@ -11,6 +12,8 @@ import com.max.algs.util.MathUtils;
  * HyperLogLog: expected error rate = 1.05 / sqrt(buckets) = 1.05 / sqrt(1024) = 0.032 (aka 3.2%)
  */
 public class HyperLogLog {
+
+    private static final Logger LOG = Logger.getLogger(HyperLogLog.class);
 
     private static final int BUCKETS_COUNT = 1024;
     private static final int BITS_FOR_BUCKET = (int) MathUtils.log2(BUCKETS_COUNT);
@@ -82,7 +85,7 @@ public class HyperLogLog {
             System.out.printf("HyperLogLog done: java-%s %n", System.getProperty("java.version"));
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

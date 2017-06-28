@@ -1,6 +1,8 @@
 package com.max.algs.epi.hashing;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -10,6 +12,8 @@ import static com.max.algs.epi.hashing.SmallestSubarrayCoveringAllValues1.Subarr
  * 13.7. Find the smallest subarray covering all values.
  */
 public final class SmallestSubarrayCoveringAllValues2 {
+
+    private static final Logger LOG = Logger.getLogger(SmallestSubarrayCoveringAllValues2.class);
 
     private SmallestSubarrayCoveringAllValues2() throws Exception {
 
@@ -45,7 +49,7 @@ public final class SmallestSubarrayCoveringAllValues2 {
             new SmallestSubarrayCoveringAllValues2();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

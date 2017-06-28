@@ -1,12 +1,15 @@
 package com.max.algs.sorting.tim;
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Random;
 
 
 public final class TimSorterMain {
+
+    private static final Logger LOG = Logger.getLogger(TimSorterMain.class);
 
     private TimSorterMain() throws Exception {
 
@@ -44,7 +47,7 @@ public final class TimSorterMain {
             new TimSorterMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

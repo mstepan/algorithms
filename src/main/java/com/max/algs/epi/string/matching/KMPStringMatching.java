@@ -1,6 +1,7 @@
 package com.max.algs.epi.string.matching;
 
 import com.max.algs.string.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Random;
 
@@ -8,6 +9,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class KMPStringMatching {
+
+    private static final Logger LOG = Logger.getLogger(KMPStringMatching.class);
 
     private KMPStringMatching() throws Exception {
 
@@ -163,7 +166,7 @@ public class KMPStringMatching {
             new KMPStringMatching();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

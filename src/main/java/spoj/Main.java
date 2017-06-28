@@ -1,6 +1,8 @@
 package spoj;
 
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -10,6 +12,7 @@ import java.io.InputStreamReader;
  */
 public class Main {
 
+    private static final Logger LOG = Logger.getLogger(Main.class);
 
     private Main() throws Exception {
 
@@ -26,7 +29,7 @@ public class Main {
             new Main();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

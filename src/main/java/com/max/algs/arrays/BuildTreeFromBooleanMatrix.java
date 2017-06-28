@@ -1,5 +1,7 @@
 package com.max.algs.arrays;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -10,6 +12,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * if 'i'-th node is a parent for 'j'-th node.
  */
 public class BuildTreeFromBooleanMatrix {
+
+    private static final Logger LOG = Logger.getLogger(BuildTreeFromBooleanMatrix.class);
 
     private BuildTreeFromBooleanMatrix() throws Exception {
 
@@ -117,7 +121,7 @@ public class BuildTreeFromBooleanMatrix {
             new BuildTreeFromBooleanMatrix();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

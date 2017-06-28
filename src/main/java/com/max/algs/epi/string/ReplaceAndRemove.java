@@ -1,11 +1,15 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ReplaceAndRemove {
+
+    private static final Logger LOG = Logger.getLogger(ReplaceAndRemove.class);
 
     private ReplaceAndRemove() throws Exception {
 
@@ -139,7 +143,7 @@ public class ReplaceAndRemove {
             new ReplaceAndRemove();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.max.algs.concurrency.dphilosophers;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * unrelated by order will ever be used by a single unit of work at the same time.
  */
 public final class DiningPhilosophersClassic {
+
+    private static final Logger LOG = Logger.getLogger(DiningPhilosophersClassic.class);
 
     private DiningPhilosophersClassic() throws Exception {
 
@@ -100,7 +104,7 @@ public final class DiningPhilosophersClassic {
             new DiningPhilosophersClassic();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

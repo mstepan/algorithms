@@ -1,5 +1,7 @@
 package com.max.algs.leetcode;
 
+import org.apache.log4j.Logger;
+
 /**
  * Implement wildcard pattern matching with support for '?' and '*'.
  * <p/>
@@ -24,6 +26,8 @@ package com.max.algs.leetcode;
  * See: https://leetcode.com/problems/wildcard-matching/
  */
 public class WildcardMatching {
+
+    private static final Logger LOG = Logger.getLogger(WildcardMatching.class);
 
     private WildcardMatching() throws Exception {
 
@@ -56,7 +60,7 @@ public class WildcardMatching {
             new WildcardMatching();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,6 +1,8 @@
 package com.max.algs.epi.hashing;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +12,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 13.6. Find the nearest repeated entries in an array.
  */
 public final class NearestRepeatedEntries {
+
+    private static final Logger LOG = Logger.getLogger(NearestRepeatedEntries.class);
 
     private NearestRepeatedEntries() throws Exception {
 
@@ -57,7 +61,7 @@ public final class NearestRepeatedEntries {
             new NearestRepeatedEntries();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -7,6 +9,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class ComputeNextPermutation {
+
+    private static final Logger LOG = Logger.getLogger(ComputeNextPermutation.class);
 
     private ComputeNextPermutation() throws Exception {
 
@@ -95,7 +99,7 @@ public class ComputeNextPermutation {
             new ComputeNextPermutation();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

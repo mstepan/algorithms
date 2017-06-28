@@ -1,6 +1,8 @@
 package spoj.brackets;
 
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
@@ -11,6 +13,8 @@ import java.util.Deque;
  * http://www.spoj.com/problems/BRCKTS/
  */
 public class BracketsMain {
+
+    private static final Logger LOG = Logger.getLogger(BracketsMain.class);
 
     private BracketsMain() throws Exception {
 
@@ -50,7 +54,7 @@ public class BracketsMain {
             new BracketsMain();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

@@ -1,9 +1,13 @@
 package com.max.algs.epi.string;
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class WriteStringSinusoidally {
+
+    private static final Logger LOG = Logger.getLogger(WriteStringSinusoidally.class);
 
     private WriteStringSinusoidally() throws Exception {
 
@@ -44,7 +48,7 @@ public class WriteStringSinusoidally {
             new WriteStringSinusoidally();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

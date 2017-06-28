@@ -1,6 +1,9 @@
 package com.max.algs.epi.hashing;
 
 
+import com.max.algs.epi.heaps.LargestElementInMaxHeap;
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +13,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 13.10. Find the length of a longest contained interval.
  */
 public final class LongestContainedInterval {
+
+    private static final Logger LOG = Logger.getLogger(LongestContainedInterval.class);
 
     private LongestContainedInterval() throws Exception {
 
@@ -89,7 +94,7 @@ public final class LongestContainedInterval {
             new LongestContainedInterval();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

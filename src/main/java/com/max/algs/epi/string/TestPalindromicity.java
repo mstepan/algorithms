@@ -1,9 +1,13 @@
 package com.max.algs.epi.string;
 
 
+import org.apache.log4j.Logger;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 public class TestPalindromicity {
+
+    private static final Logger LOG = Logger.getLogger(TestPalindromicity.class);
 
     private TestPalindromicity() throws Exception {
 
@@ -54,7 +58,7 @@ public class TestPalindromicity {
             new TestPalindromicity();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

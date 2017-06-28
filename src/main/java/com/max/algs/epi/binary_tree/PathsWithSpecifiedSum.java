@@ -1,5 +1,7 @@
 package com.max.algs.epi.binary_tree;
 
+import org.apache.log4j.Logger;
+
 import java.math.BigInteger;
 import java.util.*;
 
@@ -7,6 +9,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.max.algs.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class PathsWithSpecifiedSum {
+
+    private static final Logger LOG = Logger.getLogger(PathsWithSpecifiedSum.class);
 
     private PathsWithSpecifiedSum() throws Exception {
 
@@ -111,7 +115,7 @@ public class PathsWithSpecifiedSum {
             new PathsWithSpecifiedSum();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

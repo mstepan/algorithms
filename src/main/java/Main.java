@@ -1,8 +1,12 @@
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 
 public class Main {
+
+    private static final Logger LOG = Logger.getLogger(Main.class);
 
 
     private static int countPairs(int[] arr) {
@@ -71,7 +75,7 @@ public class Main {
             System.out.println(countPairs(arr));
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

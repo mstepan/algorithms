@@ -1,11 +1,15 @@
 package com.max.algs.epi.array;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public final class RemoveDuplicatesFromSortedArray {
+
+    private static final Logger LOG = Logger.getLogger(RemoveDuplicatesFromSortedArray.class);
 
     private RemoveDuplicatesFromSortedArray() throws Exception {
         int[] arr = {-5, -5, 2, 3, 5, 5, 7, 7, 8, 11, 11, 11, 11, 13, 13};
@@ -64,7 +68,7 @@ public final class RemoveDuplicatesFromSortedArray {
             new RemoveDuplicatesFromSortedArray();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 }

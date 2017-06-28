@@ -1,5 +1,7 @@
 package com.max.algs.compression.lz;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +15,8 @@ import java.util.Iterator;
  * -agentlib:hprof=cpu=times,file=/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/java.hprof.txt
  */
 public class LZ77Main {
+
+    private static final Logger LOG = Logger.getLogger(LZ77Main.class);
 
     private static final int NANOS_IN_MS = 1_000_000;
 
@@ -137,7 +141,7 @@ public class LZ77Main {
             new LZ77Main();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 

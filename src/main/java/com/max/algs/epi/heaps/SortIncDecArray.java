@@ -2,6 +2,7 @@ package com.max.algs.epi.heaps;
 
 
 import com.max.algs.util.ArrayUtils;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -12,6 +13,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Sort increased-decreased array.
  */
 public class SortIncDecArray {
+
+    private static final Logger LOG = Logger.getLogger(SortIncDecArray.class);
 
     private SortIncDecArray() throws Exception {
 
@@ -132,7 +135,7 @@ public class SortIncDecArray {
             new SortIncDecArray();
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.error(ex.getMessage(), ex);
         }
     }
 
