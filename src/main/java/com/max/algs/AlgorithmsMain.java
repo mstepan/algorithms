@@ -10,10 +10,6 @@ public final class AlgorithmsMain {
 
     private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
-    private static final class User {
-
-    }
-
     private AlgorithmsMain() {
 
         Queue<User> q = new PriorityQueue<>();
@@ -30,6 +26,10 @@ public final class AlgorithmsMain {
         catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
         }
+    }
+
+    private static final class User {
+
     }
 }
 

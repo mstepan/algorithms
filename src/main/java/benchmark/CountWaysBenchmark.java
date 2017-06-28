@@ -46,7 +46,7 @@ public class CountWaysBenchmark {
 
         for (int first = 0; first <= boundary; first++) {
 
-            int other = (int) Math.sqrt((double)value - (first * first));
+            int other = (int) Math.sqrt((double) value - (first * first));
 
             if (first <= other && value == (first * first + other * other)) {
                 ++cnt;

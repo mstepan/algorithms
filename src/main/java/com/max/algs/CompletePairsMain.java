@@ -13,6 +13,7 @@ public final class CompletePairsMain {
     private static final int MASK_FOR_26_BITS = 0x03_FF_FF_FF;
     private static final char FIRST_CH = 'a';
     private static final char LAST_CH = 'z';
+
     private CompletePairsMain() throws Exception {
 
         String[] s1 = {"abcdefgh", "geeksforgeeks", "lmnopqrst", "abc"};

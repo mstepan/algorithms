@@ -26,10 +26,10 @@ public class QueueApiUsingHeap {
             Result result = junit.run(QueueApiUsingHeap.class);
 
             for (Failure failure : result.getFailures()) {
-                System.out.println(failure.getTrace());
+                LOG.info(failure.getTrace());
             }
 
-            System.out.println("'QueueApiUsingHeap' completed");
+            LOG.info("'QueueApiUsingHeap' completed");
         }
         catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
@@ -106,7 +106,7 @@ public class QueueApiUsingHeap {
                     minHeap.add(new QueueEntry(oldMinHeap.poll().value, sequenceNo));
                 }
 
-                System.out.println("Reinsert completed");
+                LOG.info("Reinsert completed");
             }
 
             minHeap.add(new QueueEntry(value, sequenceNo));
@@ -160,6 +160,21 @@ public class QueueApiUsingHeap {
             QueueEntry(int value, int sequence) {
                 this.value = value;
                 this.sequence = sequence;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                QueueEntry that = (QueueEntry) o;
+
+                return sequence == that.sequence;
+            }
+
+            @Override
+            public int hashCode() {
+                return sequence;
             }
 
             @Override

@@ -1,7 +1,6 @@
 package com.max.algs.leetcode;
 
 
-import com.max.algs.AlgorithmsMain;
 import org.apache.log4j.Logger;
 
 import java.util.*;

@@ -5,14 +5,12 @@ import org.apache.log4j.Logger;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-/**
- * Created by mstepan on 6/21/16.
- */
+
 public class DefectiveJugsProblem {
 
     private static final Logger LOG = Logger.getLogger(DefectiveJugsProblem.class);
 
-    private DefectiveJugsProblem() throws Exception {
+    private DefectiveJugsProblem() {
 
         Range[] arr = {
                 new Range(230, 240),
@@ -23,7 +21,7 @@ public class DefectiveJugsProblem {
         Range res = new Range(2100, 2300);
         findSol(res, arr);
 
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+        LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
 
     private static void findSol(Range res, Range[] arr) {
@@ -36,8 +34,8 @@ public class DefectiveJugsProblem {
         Range combined = new Range(from, to);
         // found solution
         if (res.contains(combined)) {
-            System.out.println("solution: " + partial);
-            System.out.println("combined: " + combined);
+            LOG.info("solution: " + partial);
+            LOG.info("combined: " + combined);
             return;
         }
         int cmp = combined.compareTo(res);
@@ -67,7 +65,7 @@ public class DefectiveJugsProblem {
         final int from;
         final int to;
 
-        public Range(int from, int to) {
+        Range(int from, int to) {
             this.from = from;
             this.to = to;
         }
@@ -97,6 +95,22 @@ public class DefectiveJugsProblem {
             }
 
             return 0;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Range range = (Range) o;
+
+            if (from != range.from) return false;
+            return to == range.to;
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * from + to;
         }
 
         public boolean contains(Range other) {

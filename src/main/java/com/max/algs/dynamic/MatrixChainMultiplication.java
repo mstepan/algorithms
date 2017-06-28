@@ -104,6 +104,7 @@ public final class MatrixChainMultiplication {
 
         private final MulSolution left;
         private final MulSolution right;
+
         ComplexMulSolution(MulSolution left, MulSolution right) {
             super();
             this.left = left;

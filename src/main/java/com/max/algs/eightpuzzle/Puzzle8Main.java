@@ -1,4 +1,4 @@
-package com.max.algs.puzzle_8;
+package com.max.algs.eightpuzzle;
 
 
 import com.max.algs.util.ArrayUtils;

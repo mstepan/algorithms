@@ -15,10 +15,8 @@ import java.nio.charset.Charset;
 
 public final class NettyEchoServer {
 
-    private static final Logger LOG = Logger.getLogger(NettyEchoServer.class);
-
     static final int PORT = 7777;
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    private static final Logger LOG = Logger.getLogger(NettyEchoServer.class);
 
 
     private NettyEchoServer() throws Exception {
@@ -42,7 +40,7 @@ public final class NettyEchoServer {
 
             ChannelFuture f = boot.bind().sync();
 
-            System.out.println("Server started at port " + PORT);
+            LOG.info("Server started at port " + PORT);
 
             f.channel().closeFuture().sync();
         }
@@ -66,7 +64,7 @@ public final class NettyEchoServer {
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             ByteBuf in = (ByteBuf) msg;
             String msgStr = in.toString(CharsetUtil.UTF_8);
-            System.out.printf("Received from client: %s", msgStr);
+            LOG.info("Received from client: " + msgStr);
             ctx.writeAndFlush(Unpooled.copiedBuffer("Response: " + msgStr, Charset.defaultCharset()));
         }
 
@@ -77,7 +75,7 @@ public final class NettyEchoServer {
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            cause.printStackTrace();
+            LOG.error(cause.getMessage(), cause);
             ctx.close();
         }
     }

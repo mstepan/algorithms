@@ -14,16 +14,22 @@ public final class ThreadPerRequestServer {
     private static final Logger LOG = Logger.getLogger(ThreadPerRequestServer.class);
     private static final int PORT = 7777;
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
     private ThreadPerRequestServer() throws Exception {
 
         ServerSocket serverSock = new ServerSocket(PORT);
 
-        System.out.printf("'ServerNettyMain' started at port %d %n", PORT);
+        try {
+            LOG.info("'ServerNettyMain' started at port " + PORT);
 
-        while (!Thread.currentThread().isInterrupted()) {
-            Socket sock = serverSock.accept();
-            System.out.println("Connection from client accepted");
-            new Thread(new SessionHandler(sock)).start();
+            while (!Thread.currentThread().isInterrupted()) {
+                Socket sock = serverSock.accept();
+                System.out.println("Connection from client accepted");
+                new Thread(new SessionHandler(sock)).start();
+            }
+        }
+        finally {
+            serverSock.close();
         }
 
         System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
@@ -53,12 +59,12 @@ public final class ThreadPerRequestServer {
         @Override
         public void run() {
 
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            try (InputStreamReader inStream = new InputStreamReader(sock.getInputStream());
+                 BufferedReader reader = new BufferedReader(inStream)) {
 
                 try (PrintWriter out = new PrintWriter(sock.getOutputStream(), true)) {
 
-                    String request, response;
+                    String request;
 
                     while ((request = reader.readLine()) != null) {
 
@@ -66,7 +72,7 @@ public final class ThreadPerRequestServer {
                             break;
                         }
 
-                        response = handleResponse(request);
+                        String response = handleResponse(request);
 
                         out.write(response);
                         out.flush();

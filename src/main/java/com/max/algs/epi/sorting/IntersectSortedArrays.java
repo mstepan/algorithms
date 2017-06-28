@@ -12,6 +12,16 @@ public final class IntersectSortedArrays {
 
     private static final Logger LOG = Logger.getLogger(IntersectSortedArrays.class);
 
+    private IntersectSortedArrays() throws Exception {
+
+        int[] arr1 = {3, 5, 5, 7, 10, 12};
+        int[] arr2 = {2, 5, 5, 5, 8, 10, 14, 19, 22, 33};
+
+        Set<Integer> res = intersection(arr1, arr2);
+
+        LOG.info(res);
+    }
+
     /**
      * N - arr1.length
      * M - arr2.length
@@ -21,7 +31,6 @@ public final class IntersectSortedArrays {
      * <p>
      * time: O(N+M)
      * space: O(K)
-     *
      */
     public static Set<Integer> intersection(int[] arr1, int[] arr2) {
         checkNotNull(arr1);
@@ -50,16 +59,6 @@ public final class IntersectSortedArrays {
         }
 
         return res;
-    }
-
-    private IntersectSortedArrays() throws Exception {
-
-        int[] arr1 = {3, 5, 5, 7, 10, 12};
-        int[] arr2 = {2, 5, 5, 5, 8, 10, 14, 19, 22, 33};
-
-        Set<Integer> res = intersection(arr1, arr2);
-
-        LOG.info(res);
     }
 
     public static void main(String[] args) {

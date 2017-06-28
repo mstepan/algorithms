@@ -7,6 +7,7 @@ public final class DateUtils {
 
     private static final int DEGREES_PER_CLOCK_DIVISION = 6;
     private static final int MINUTES_DIVISIONS_PER_HOUR = 5;
+
     private DateUtils() {
         throw new IllegalStateException("Can't instantiate utility class " + DateUtils.class.getCanonicalName());
     }

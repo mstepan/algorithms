@@ -16,29 +16,22 @@ public class SortIncDecArray {
 
     private static final Logger LOG = Logger.getLogger(SortIncDecArray.class);
 
-    private SortIncDecArray() throws Exception {
+    private SortIncDecArray() {
 
-        Random rand = new Random();
-
-        int[] arr = ArrayUtils.generateRandomArrayOfRandomLength(1_000_000); //{5, 8, 10, 12, 6, 3, 2, 18, 22, 25, 30, 10, 5, 1};
+        int[] arr = ArrayUtils.generateRandomArrayOfRandomLength(1_000_000);
 
         int[] arr2 = Arrays.copyOf(arr, arr.length);
         Arrays.sort(arr2);
 
-//        System.out.println(Arrays.toString(arr));
-
         sort(arr);
 
-//        System.out.println(Arrays.toString(arr2));
-//        System.out.println(Arrays.toString(arr));
-
-        System.out.println(arr.length);
+        LOG.info(arr.length);
 
         if (!Arrays.equals(arr, arr2)) {
             throw new IllegalStateException("'arr' content is different from 'arr2' content");
         }
 
-        System.out.printf("'SortIncDecArray' completed. java-%s %n", System.getProperty("java.version"));
+        LOG.info("'SortIncDecArray' completed. java-" + System.getProperty("java.version"));
     }
 
     private static List<ArrayChunk> createChunks(int[] arr) {
@@ -83,19 +76,6 @@ public class SortIncDecArray {
         return ChunkType.DEC;
     }
 
-    private static void reverse(int[] arr, int from, int to) {
-        assert from <= to;
-
-        while (from <= to) {
-            int temp = arr[from];
-
-            arr[from] = arr[to];
-            arr[to] = temp;
-            ++from;
-            --to;
-        }
-
-    }
 
     /**
      * N - number of elements in 'arr'
@@ -170,9 +150,41 @@ public class SortIncDecArray {
             return new ArrayChunk(arr, from, to);
         }
 
+        private static void reverse(int[] arr, int originalFrom, int originalTo) {
+            assert originalFrom <= originalTo;
+
+            int from = originalFrom;
+            int to = originalTo;
+
+            while (from <= to) {
+                int temp = arr[from];
+
+                arr[from] = arr[to];
+                arr[to] = temp;
+                ++from;
+                --to;
+            }
+
+        }
+
         @Override
         public int compareTo(@NotNull ArrayChunk other) {
             return Integer.compare(getValue(), other.getValue());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ArrayChunk that = (ArrayChunk) o;
+
+            return getValue() == that.getValue();
+        }
+
+        @Override
+        public int hashCode() {
+            return getValue();
         }
 
         int getValue() {

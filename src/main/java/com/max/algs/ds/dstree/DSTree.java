@@ -206,6 +206,7 @@ public class DSTree<K extends Digitazable, V> {
         Entry<K, V> left;
         Entry<K, V> right;
         Entry<K, V> parent;
+
         Entry(K key, V value, Entry<K, V> parent) {
             super();
             this.key = key;

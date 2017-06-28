@@ -1,4 +1,4 @@
-package com.max.algs.puzzle_8;
+package com.max.algs.eightpuzzle;
 
 import com.max.algs.ds.Pair;
 import org.apache.log4j.Logger;
@@ -13,13 +13,7 @@ public class Puzzle8New {
     private static final Logger LOG = Logger.getLogger(Puzzle8New.class);
 
 
-    private Puzzle8New() throws Exception {
-
-//        int[][] data = {
-//                {5, 6, 2},
-//                {8, 1, 7},
-//                {3, 0, 4}
-//        };
+    private Puzzle8New() {
 
         int[][] data = {
                 {1, 4, 8},
@@ -29,24 +23,27 @@ public class Puzzle8New {
 
         solve(data);
 
-        System.out.printf("Puzzle 8 done: java-%s %n", System.getProperty("java.version"));
+        LOG.info("Puzzle 8 done: java-" + System.getProperty("java.version"));
+    }
+
+    private static Pair<Integer, Integer> findRowAndCol(int[][] data) {
+        for (int row = 0; row < data.length; ++row) {
+            for (int col = 0; col < data[row].length; ++col) {
+                if (data[row][col] == 0) {
+                    return new Pair<>(row, col);
+                }
+            }
+        }
+
+        return null;
     }
 
     private static List<MoveDirection> possibleMoves(int[][] data) {
 
-        int targetRow = 0;
-        int targetCol = 0;
+        Pair<Integer, Integer> targetRowColPair = findRowAndCol(data);
 
-        MAIN:
-        for (int row = 0; row < data.length; ++row) {
-            for (int col = 0; col < data[row].length; ++col) {
-                if (data[row][col] == 0) {
-                    targetRow = row;
-                    targetCol = col;
-                    break MAIN;
-                }
-            }
-        }
+        int targetRow = targetRowColPair == null ? 0 : targetRowColPair.getFirst();
+        int targetCol = targetRowColPair == null ? 0 : targetRowColPair.getSecond();
 
         List<MoveDirection> moves = new ArrayList<>();
 
@@ -87,9 +84,9 @@ public class Puzzle8New {
             PartialSol partialSolution = minQueue.poll();
 
             if (partialSolution.isFinal()) {
-                System.out.printf("Solution found in %d moves %n", partialSolution.solutions.size());
+                LOG.info("Solution found in " + partialSolution.solutions.size() + " moves");
                 for (PartialSol singleMoveSolution : partialSolution.solutions) {
-                    System.out.println(singleMoveSolution);
+                    LOG.info(singleMoveSolution);
                 }
                 break;
             }
@@ -166,7 +163,7 @@ public class Puzzle8New {
                     data[row][col] = temp;
                 }
                 catch (ArrayIndexOutOfBoundsException ex) {
-                    int x = 133;
+                    LOG.error(ex.getMessage(), ex);
                 }
             }
 
@@ -259,13 +256,32 @@ public class Puzzle8New {
             this.curMove = null;
         }
 
+        private int calculateCost() {
+            return originalCost + estimatedCost;
+        }
+
         private static int manhattanDistance(int[][] data) {
             return ManhattanDistanceCalculator.calculateDistance(data);
         }
 
         @Override
         public int compareTo(PartialSol other) {
-            return Integer.compare(originalCost + estimatedCost, other.originalCost + other.estimatedCost);
+            return Integer.compare(calculateCost(), other.calculateCost());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PartialSol that = (PartialSol) o;
+
+            return calculateCost() == that.calculateCost();
+        }
+
+        @Override
+        public int hashCode() {
+            return calculateCost();
         }
 
         @Override
@@ -309,16 +325,20 @@ public class Puzzle8New {
 
     private static class ManhattanDistanceCalculator {
 
+        private ManhattanDistanceCalculator() {
+
+        }
+
         private static final Pair<Integer, Integer>[] EXPECTED_POS = (Pair[]) new Pair[9]; // [0;7]
 
         static {
 
-            final int ROWS = 3;
+            final int rows = 3;
 
             for (int i = 1; i < 9; ++i) {
 
                 int index = i - 1;
-                EXPECTED_POS[i] = new Pair<>(index / ROWS, index % ROWS);
+                EXPECTED_POS[i] = new Pair<>(index / rows, index % rows);
             }
         }
 

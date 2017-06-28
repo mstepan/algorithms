@@ -5,10 +5,7 @@ import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -22,7 +19,7 @@ public class LargestElementInMaxHeap {
 
     private static final int[] EMPTY_ARR = new int[0];
 
-    private LargestElementInMaxHeap() throws Exception {
+    private LargestElementInMaxHeap() {
 
         Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
@@ -43,26 +40,32 @@ public class LargestElementInMaxHeap {
         maxHeap.add(6);
         maxHeap.add(5);
 
-        /*
-         * Access array field for PriorityQueue using reflection, otherwise
-         * we need to use 'maxHeap.toArray(new Integer[0])', but this will add space complexity O(N).
-        */
-        Field arrField = PriorityQueue.class.getDeclaredField("queue");
-        arrField.setAccessible(true);
 
-        int k = 5;
-        int[] arr = getLargestElements((Object[]) arrField.get(maxHeap), maxHeap.size(), k);
+        try {
+            /*
+             * Access array field for PriorityQueue using reflection, otherwise
+             * we need to use 'maxHeap.toArray(new Integer[0])', but this will add space complexity O(N).
+            */
+            Field arrField = PriorityQueue.class.getDeclaredField("queue");
+            arrField.setAccessible(true);
 
-        System.out.println(Arrays.toString(arr));
+            int k = 5;
+            int[] arr = getLargestElements((Object[]) arrField.get(maxHeap), maxHeap.size(), k);
 
-        System.out.printf("'OnlineMedian' completed. java-%s %n", System.getProperty("java.version"));
+            LOG.info(Arrays.toString(arr));
+        }
+        catch (IllegalAccessException | NoSuchFieldException ex) {
+            LOG.error(ex.getMessage(), ex);
+        }
+
+        LOG.info("'OnlineMedian' completed. java-" + System.getProperty("java.version"));
     }
 
     /**
      * time: O(K*lgK)
      * space: O(K)
      */
-    public static int[] getLargestElements(Object[] maxHeapArr, int totalElementsCount, int k) {
+    private static int[] getLargestElements(Object[] maxHeapArr, int totalElementsCount, int k) {
         checkNotNull(maxHeapArr);
         checkArgument(totalElementsCount <= maxHeapArr.length);
         checkArgument(k >= 0);
@@ -134,6 +137,21 @@ public class LargestElementInMaxHeap {
         @Override
         public int compareTo(@NotNull HeapEntry other) {
             return getValue().compareTo(other.getValue());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            HeapEntry heapEntry = (HeapEntry) o;
+
+            return Objects.equals(getValue(), heapEntry.getValue());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(getValue());
         }
 
         @Override

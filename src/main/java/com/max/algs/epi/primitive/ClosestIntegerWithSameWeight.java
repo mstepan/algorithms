@@ -3,7 +3,6 @@ package com.max.algs.epi.primitive;
 import com.max.algs.AlgorithmsMain;
 import org.apache.log4j.Logger;
 
-
 import static org.parboiled.common.Preconditions.checkArgument;
 
 /**

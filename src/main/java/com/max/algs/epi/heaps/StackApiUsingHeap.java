@@ -28,10 +28,10 @@ public class StackApiUsingHeap {
             Result result = junit.run(StackApiUsingHeap.class);
 
             for (Failure failure : result.getFailures()) {
-                System.out.println(failure.getTrace());
+                LOG.error(failure.getTrace());
             }
 
-            System.out.println("'StackApiUsingHeap' completed");
+            LOG.info("'StackApiUsingHeap' completed");
         }
         catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
@@ -154,6 +154,21 @@ public class StackApiUsingHeap {
             @Override
             public int compareTo(@NotNull StackEntry other) {
                 return Integer.compare(sequence, other.sequence);
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                StackEntry that = (StackEntry) o;
+
+                return sequence == that.sequence;
+            }
+
+            @Override
+            public int hashCode() {
+                return sequence;
             }
         }
     }

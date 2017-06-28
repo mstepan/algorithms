@@ -113,6 +113,7 @@ public class StampedVsReadWriteLockBenchmark {
         private final Lock writeLock;
         int x;
         int y;
+
         TwoValuesReadWrite() {
             lock = new ReentrantReadWriteLock();
             readLock = lock.readLock();

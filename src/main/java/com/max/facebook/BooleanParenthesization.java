@@ -163,6 +163,7 @@ public class BooleanParenthesization {
 
         final char symbol;
         final List<BooleanExpr> table;
+
         Operation(char symbol, String booleanTableStr) {
             this.symbol = symbol;
             this.table = parseTable(booleanTableStr);

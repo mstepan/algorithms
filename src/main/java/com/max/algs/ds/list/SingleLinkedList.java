@@ -239,6 +239,7 @@ public final class SingleLinkedList<T> {
             this.value = value;
             this.next = next;
         }
+
         Node(U value) {
             this(value, null);
         }

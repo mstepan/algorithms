@@ -15,6 +15,7 @@ public enum SessionsHolder {
     private final Thread CLEANER_THREAD = new Thread(new SessionsCleaner());
     private final BlockingQueue<UserSesssion> sessions = new DelayQueue<>();
     private final ConcurrentMap<String, UserSesssion> sessionsMap = new ConcurrentHashMap<>();
+
     private SessionsHolder() {
         new Thread(new SessionsCleaner()).start();
     }

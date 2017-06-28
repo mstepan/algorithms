@@ -25,7 +25,7 @@ public class ConcurrentStack {
     private final Exchanger<Integer>[] exchangers = new Exchanger[16];
 
 
-//	private static final Integer EMPTY = Integer.valueOf(0);
+    //	private static final Integer EMPTY = Integer.valueOf(0);
     private final boolean useElimination;
 
     public ConcurrentStack(boolean useElimination) {

@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 public class CuckooHashtableTest {
 
@@ -17,7 +17,7 @@ public class CuckooHashtableTest {
     public void testClone() {
 
         CuckooHashSet<String> table =
-                new CuckooHashSet<>(Arrays.asList(new String[]{"max", "olesia", "zorro", "kotia", "cat in boots", "shrek"}));
+                new CuckooHashSet<>(Arrays.asList("max", "olesia", "zorro", "kotia", "cat in boots", "shrek"));
 
         CuckooHashSet<String> clonedTable = table.clone();
 
@@ -57,7 +57,7 @@ public class CuckooHashtableTest {
     @Test(expected = IllegalStateException.class)
     public void testIteratorRemoveWithoutNext() {
         CuckooHashSet<String> table =
-                new CuckooHashSet<>(Arrays.asList(new String[]{"max", "olesia", "zorro", "kotia", "cat in boots", "shrek"}));
+                new CuckooHashSet<>(Arrays.asList("max", "olesia", "zorro", "kotia", "cat in boots", "shrek"));
 
         Iterator<String> it = table.iterator();
 
@@ -67,7 +67,7 @@ public class CuckooHashtableTest {
     @Test(expected = IllegalStateException.class)
     public void testIteratorRemoveTwiceWithOneNext() {
         CuckooHashSet<String> table =
-                new CuckooHashSet<>(Arrays.asList(new String[]{"max", "olesia", "zorro", "kotia", "cat in boots", "shrek"}));
+                new CuckooHashSet<>(Arrays.asList("max", "olesia", "zorro", "kotia", "cat in boots", "shrek"));
 
         Iterator<String> it = table.iterator();
 
@@ -82,7 +82,7 @@ public class CuckooHashtableTest {
     public void testIteratorRemove() {
 
         CuckooHashSet<String> table =
-                new CuckooHashSet<>(Arrays.asList(new String[]{"max", "olesia", "zorro", "kotia", "cat in boots", "shrek"}));
+                new CuckooHashSet<>(Arrays.asList("max", "olesia", "zorro", "kotia", "cat in boots", "shrek"));
 
         Iterator<String> it = table.iterator();
 
@@ -114,7 +114,7 @@ public class CuckooHashtableTest {
     public void testIteratorModificationException() {
 
         CuckooHashSet<String> table =
-                new CuckooHashSet<>(Arrays.asList(new String[]{"max", "olesia", "zorro", "kotia", "cat in boots", "shrek"}));
+                new CuckooHashSet<>(Arrays.asList("max", "olesia", "zorro", "kotia", "cat in boots", "shrek"));
         Iterator<String> it = table.iterator();
 
         it.next();
@@ -229,7 +229,7 @@ public class CuckooHashtableTest {
         Set<Integer> values = new HashSet<>();
 
         for (int i = 0; i < 100_000; i++) {
-            Integer value = Integer.valueOf(rand.nextInt());
+            Integer value = rand.nextInt();
             values.add(value);
             hashTable.add(value);
         }

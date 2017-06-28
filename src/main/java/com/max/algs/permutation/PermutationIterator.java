@@ -7,11 +7,15 @@ import java.util.*;
  */
 public class PermutationIterator<T extends Comparable<T>> implements Iterator<List<T>> {
 
+    private final List<T> EMPTY_LIST = Collections.emptyList();
+
     private final ElementWithDirection<T>[] arr;
 
     private List<T> curPermutation;
 
+    @SuppressWarnings("unchecked")
     public PermutationIterator(List<T> elements) {
+
         arr = new ElementWithDirection[elements.size()];
 
         for (int i = 0; i < elements.size(); i++) {
@@ -23,6 +27,7 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
         curPermutation = constructPermutation();
     }
 
+    @SuppressWarnings("unchecked")
     public PermutationIterator(T[] elements) {
         arr = new ElementWithDirection[elements.length];
 
@@ -37,7 +42,7 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
 
     @Override
     public boolean hasNext() {
-        return curPermutation != null;
+        return curPermutation != EMPTY_LIST;
     }
 
     @Override
@@ -100,7 +105,7 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
         }
 
 
-        return null;
+        return EMPTY_LIST;
     }
 
     private void swap(int from, int to) {
@@ -126,7 +131,7 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
 
     }
 
-    private static enum Direction {
+    private enum Direction {
         LEFT("<-"),
         RIGHT("->");
 
@@ -159,9 +164,24 @@ public class PermutationIterator<T extends Comparable<T>> implements Iterator<Li
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ElementWithDirection<?> that = (ElementWithDirection<?>) o;
+
+            return Objects.equals(value, that.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(value);
+        }
+
+        @Override
         public String toString() {
             assert direction != null && value != null;
-            return String.valueOf(direction.symbol) + ":" + String.valueOf(value);
+            return String.valueOf(direction.symbol) + ":" + value;
         }
     }
 

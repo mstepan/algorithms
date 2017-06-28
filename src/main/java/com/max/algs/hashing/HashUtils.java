@@ -19,6 +19,7 @@ public final class HashUtils {
     private static final int MUR_MUR_M = 5;
     private static final int MUR_MUR_N = 0xE6_54_6B_64;
     private static final int MUR_MUR_SEED = RAND.nextInt();
+
     private HashUtils() {
         throw new IllegalStateException("Can't instantiate utility class");
     }
