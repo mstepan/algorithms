@@ -14,13 +14,40 @@
         <quasar.version>0.7.3</quasar.version>
         <akka.actor.version>2.4.8</akka.actor.version>
         <rxjava.version>1.2.5</rxjava.version>
+        <jdepend.version>2.9.1</jdepend.version>
+        <enforcer.api.version>1.4.1</enforcer.api.version>
     </properties>
 
     <build>
-
-
-
         <plugins>
+
+            <!-- custom plugin which checks package cycles using JDepend -->
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.max</groupId>
+                        <artifactId>algorithms</artifactId>
+                        <version>1.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>enforce-no-package-cycles</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>verify</phase> <!-- use a phase after compile! -->
+                        <configuration>
+                            <rules>
+                                <NoPackageCyclesRule
+                                        implementation="maven.plugin.NoPackageCyclesRule"/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Java compile plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -70,6 +97,37 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.apache.maven.enforcer</groupId>
+            <artifactId>enforcer-api</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-project</artifactId>
+            <version>3.0-alpha-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jdepend</groupId>
+            <artifactId>jdepend</artifactId>
+            <version>${jdepend.version}</version>
+        </dependency>
 
         <!-- Akka actors -->
         <dependency>
