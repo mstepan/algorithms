@@ -1,20 +1,26 @@
 package com.max.algs;
 
 
+import com.max.algs.it.BaseAllValuesIterator;
 import org.apache.log4j.Logger;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Iterator;
 
 public final class AlgorithmsMain {
 
     private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
+
     private AlgorithmsMain() {
 
-        Queue<User> q = new PriorityQueue<>();
+        int base = 3;
+        int length = 5;
 
-        q.remove(new User());
+        Iterator<String> it = new BaseAllValuesIterator(base, length);
+
+        while (it.hasNext()) {
+            LOG.info(it.next());
+        }
 
         LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
@@ -26,10 +32,6 @@ public final class AlgorithmsMain {
         catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
         }
-    }
-
-    private static final class User {
-
     }
 }
 
