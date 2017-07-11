@@ -1,6 +1,7 @@
 package com.max.algs.compression.lz;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.parboiled.common.Preconditions.checkArgument;
 
@@ -103,6 +104,11 @@ public class SearchBuffer {
 
         @Override
         public Character next() {
+
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
             char res = arr[index];
             index = (index + 1) % arr.length;
             return res;

@@ -37,14 +37,14 @@ public class BooleanParenthesization {
 
     private static final int MOD = 1003;
 
-    private BooleanParenthesization() throws Exception {
+    private BooleanParenthesization() {
 
         String expr = "T | T & F ^ T";
         int res = calculatePossibleTrueValues(expr);
 
-        System.out.printf("res = %d %n", res);
+        LOG.info("res = " + res);
 
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+        LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
 
     /**

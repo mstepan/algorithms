@@ -21,10 +21,10 @@ public class MathSequenceMain {
     private static final double UPPER_THRESHOLD = Long.MAX_VALUE;
 
 
-    private MathSequenceMain() throws Exception {
+    private MathSequenceMain() {
         findSolution(26);
 
-        System.out.println("Main done...");
+        LOG.info("Main done...");
     }
 
     public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class MathSequenceMain {
     private void findSolutionRec(int searchValue, Deque<String> operations, double curValue) {
 
         if (Double.compare(curValue, searchValue) == 0) {
-            System.out.println("Solution for " + searchValue + ": " + operations);
+            LOG.info("Solution for " + searchValue + ": " + operations);
             return;
         }
 
@@ -66,12 +66,12 @@ public class MathSequenceMain {
         // floor
         if (!isIntegerValue(curValue)) {
             operations.addLast("floor");
-            findSolutionRec(searchValue, operations, Math.floor(searchValue));
+            findSolutionRec(searchValue, operations, searchValue);
             operations.pollLast();
         }
     }
 
     private boolean isIntegerValue(double value) {
-        return Math.floor(value) == Math.ceil(value);
+        return Double.compare(Math.floor(value), Math.ceil(value)) == 0;
     }
 }

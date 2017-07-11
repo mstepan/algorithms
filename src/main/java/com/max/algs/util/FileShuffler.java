@@ -3,7 +3,6 @@ package com.max.algs.util;
 import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
@@ -31,7 +30,7 @@ public final class FileShuffler {
     public FileShuffler(Path inPath, Path outPath) {
         checkNotNull(inPath);
         checkNotNull(outPath);
-        checkArgument(Files.exists(inPath), "File not exists with path: '%s'", inPath.toString());
+        checkArgument(inPath.toFile().exists(), "File not exists with path: '%s'", inPath.toString());
         this.inFile = inPath.toFile();
         this.outFile = outPath.toFile();
     }
@@ -40,7 +39,7 @@ public final class FileShuffler {
      * Shuffle inFile content in-memory using Fisher-Yates shuffling.
      */
     private static void shuffleInMemoryAndWriteToOutputFile(File singleFile, File fileToAppend) {
-        System.out.println("shuffleInMemory and append: " + singleFile.getPath());
+        LOG.info("shuffleInMemory and append: " + singleFile.getPath());
 
         int[] data = readIntsFromFile(singleFile);
 
@@ -50,7 +49,8 @@ public final class FileShuffler {
     }
 
     private static void randomShuffleArray(int[] data) {
-        int swapIndex, temp;
+        int swapIndex;
+        int temp;
         for (int i = 0; i < data.length - 1; ++i) {
             swapIndex = i + RAND.nextInt(data.length - i);
 
@@ -69,14 +69,9 @@ public final class FileShuffler {
              DataInputStream dataIn = new DataInputStream(bufIn)) {
 
             int index = 0;
-            while (true) {
-                try {
-                    data[index] = dataIn.readInt();
-                    ++index;
-                }
-                catch (EOFException eofEx) {
-                    break;
-                }
+            while (dataIn.available() >= Integer.BYTES) {
+                data[index] = dataIn.readInt();
+                ++index;
             }
         }
         catch (IOException ioEx) {
@@ -101,7 +96,7 @@ public final class FileShuffler {
     private static File createTempFile(int index) {
         try {
             File file = File.createTempFile("random-shuffle-" + index + "-chunk", ".tmp");
-            System.out.println(file.getAbsolutePath());
+            LOG.info(file.getAbsolutePath());
             return file;
         }
         catch (IOException ioEx) {
@@ -144,7 +139,7 @@ public final class FileShuffler {
         FileShuffler shuffler = new FileShuffler(inFile, outFile);
         shuffler.shuffle();
 
-        System.out.printf("FileShuffler done: java-%s %n", System.getProperty("java.version"));
+        LOG.info("FileShuffler done: java-" + System.getProperty("java.version"));
     }
 
     /**
@@ -154,7 +149,7 @@ public final class FileShuffler {
 
         int temporaryFilesCount = calculateTempFilesCount();
 
-        System.out.println("temporaryFilesCount: " + temporaryFilesCount);
+        LOG.info("temporaryFilesCount: " + temporaryFilesCount);
 
         File[] tempFiles = createTempFiles(temporaryFilesCount);
 
@@ -174,13 +169,8 @@ public final class FileShuffler {
                      BufferedInputStream bufferedIn = new BufferedInputStream(inStream);
                      DataInputStream dataStream = new DataInputStream(bufferedIn)) {
 
-                    while (true) {
-                        try {
-                            streams[RAND.nextInt(streams.length)].writeInt(dataStream.readInt());
-                        }
-                        catch (EOFException ex) {
-                            break;
-                        }
+                    while (dataStream.available() >= Integer.BYTES) {
+                        streams[RAND.nextInt(streams.length)].writeInt(dataStream.readInt());
                     }
                 }
             }

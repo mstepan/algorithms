@@ -10,7 +10,7 @@ public final class UnsafeUtils {
     private static final int JVM_32 = 4;
     private static final int JVM_64 = 8;
 
-    private static long BYTE_BUFFER_ADDRESS_FILD_OFFSET;
+    private static long byteBufferAddressFildOffset;
 
 
     private UnsafeUtils() {
@@ -24,7 +24,7 @@ public final class UnsafeUtils {
             Field instanceField = Unsafe.class.getDeclaredField("theUnsafe");
             instanceField.setAccessible(true);
             Unsafe inst = (Unsafe) instanceField.get(null);
-            BYTE_BUFFER_ADDRESS_FILD_OFFSET = inst.objectFieldOffset(Buffer.class.getDeclaredField("address"));
+            byteBufferAddressFildOffset = inst.objectFieldOffset(Buffer.class.getDeclaredField("address"));
             return inst;
 
         }
@@ -35,7 +35,7 @@ public final class UnsafeUtils {
 
 
     public static long getBufferAddress(Buffer buf) {
-        return getUnsafe().getLong(buf, BYTE_BUFFER_ADDRESS_FILD_OFFSET);
+        return getUnsafe().getLong(buf, byteBufferAddressFildOffset);
     }
 
     /**
@@ -45,6 +45,7 @@ public final class UnsafeUtils {
      * This method can be useful when you need to skip object initialization phase or bypass security checks
      * in constructor or you want instance of that class but don't have any public constructor.
      */
+    @SuppressWarnings("unchecked")
     public static <T> T newInstance(Class<T> clazz) {
         try {
             return (T) getUnsafe().allocateInstance(clazz);
@@ -90,6 +91,7 @@ public final class UnsafeUtils {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T getElementByAddress(long address) {
 
         if (address == 0L) {

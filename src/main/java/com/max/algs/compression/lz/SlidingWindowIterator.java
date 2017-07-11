@@ -35,7 +35,7 @@ class SlidingWindowIterator implements Iterator<Triple> {
             throw new NoSuchElementException();
         }
 
-        Triple res = triple.get();
+        Triple res = triple.orElse(null);
 
         triple = nextTriple();
 

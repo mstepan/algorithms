@@ -692,6 +692,19 @@ public final class StringUtils {
         return buf.toString();
     }
 
+    public static String generateDigitsString(int length) {
+
+        checkArgument(length >= 0, "Negative length passed");
+
+        char[] buf = new char[length];
+
+        for (int i = 0; i < length; ++i) {
+            buf[i] = (char) ('0' + RAND.nextInt(10));
+        }
+
+        return new String(buf);
+    }
+
     /**
      * Generate random string with printable ASCII characters.
      * <p>

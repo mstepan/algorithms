@@ -23,7 +23,7 @@ public class LZ77Main {
     private static final int SEARCH_BUF_SIZE = 2048;
     private static final int LOOK_AHEAD_BUF_SIZE = 128;
 
-    private LZ77Main() throws Exception {
+    private LZ77Main() throws IOException {
 
         long startTime = System.nanoTime();
 
@@ -42,7 +42,7 @@ public class LZ77Main {
 
         long endTime = System.nanoTime();
 
-        System.out.println("Compression done, time: " + (endTime - startTime) / NANOS_IN_MS + " ms");
+        LOG.info("Compression done, time: " + (endTime - startTime) / NANOS_IN_MS + " ms");
     }
 
     public static void compress(String inPathStr, String outPathStr) throws IOException {
@@ -75,7 +75,7 @@ public class LZ77Main {
             }
         }
 
-        System.out.println("maxOffset: " + maxOffset + ", maxLength: " + maxLength);
+        LOG.info("maxOffset: " + maxOffset + ", maxLength: " + maxLength);
     }
 
     public static void decompress(String archiveStr, String outPathStr) throws IOException {
@@ -95,10 +95,9 @@ public class LZ77Main {
         try (DataInputStream in = new DataInputStream(Files.newInputStream(inFile.toPath()));
              BufferedWriter out = Files.newBufferedWriter(outPath)) {
 
-            while (true) {
+            while (in.available() != 0) {
 
                 try {
-
                     Triple triple = read(in);
 
                     if (triple.offset != 0) {

@@ -62,8 +62,8 @@ final class GolygonFinder {
 
     private double distance(XYPair p1, XYPair p2) {
 
-        double dx = p1.x - p2.x;
-        double dy = p1.y - p2.y;
+        double dx = (double)p1.x - p2.x;
+        double dy = (double)p1.y - p2.y;
 
         return Math.sqrt(dx * dx + dy * dy);
     }
@@ -102,7 +102,7 @@ final class GolygonFinder {
     }
 
 
-    private static enum Direction {
+    private enum Direction {
         NORTH("n") {
             @Override
             XYPair nextPoint(XYPair basePoint, int length) {

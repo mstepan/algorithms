@@ -26,7 +26,7 @@ public final class NoPackageCyclesRule implements EnforcerRule {
             File targetDir = new File((String) helper.evaluate("${project.build.directory}"));
             File classesDir = new File(targetDir, "classes");
 
-            if (project.getPackaging().equalsIgnoreCase("jar") && classesDir.exists()) {
+            if ("jar".equalsIgnoreCase(project.getPackaging()) && classesDir.exists()) {
                 JDepend jdepend = new JDepend();
                 jdepend.addDirectory(classesDir.getAbsolutePath());
                 jdepend.analyze();

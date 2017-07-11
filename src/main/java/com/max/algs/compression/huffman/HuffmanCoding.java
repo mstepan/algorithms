@@ -116,7 +116,7 @@ public class HuffmanCoding {
 
     private Map<Character, PrefixCode> createCodingMap() {
 
-        Map<Character, PrefixCode> codingMap = new HashMap<Character, PrefixCode>();
+        Map<Character, PrefixCode> codingMap = new HashMap<>();
 
         visitRec(root, 0, codingMap, 0);
 
@@ -193,7 +193,7 @@ public class HuffmanCoding {
 
             HuffmanNode cur = root;
 
-            while (true) {
+            while (in.available() != 0) {
 
                 if (cur.isLeaf()) {
                     out.write(cur.ch);
@@ -208,12 +208,7 @@ public class HuffmanCoding {
                 else {
                     cur = cur.right;
                 }
-
             }
-
-        }
-        catch (EOFException eofEx) {
-            // do nothing here stream completed
         }
         catch (IOException ioEx) {
             LOG.error(ioEx);

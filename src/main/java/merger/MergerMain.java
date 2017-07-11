@@ -10,7 +10,7 @@ public final class MergerMain {
 
     private static final Logger LOG = Logger.getLogger(MergerMain.class);
 
-    private MergerMain() throws Exception {
+    private MergerMain() {
 
         Path[] paths = new Path[]{
                 Paths.get("/home/max/repo/out/1.txt"),
