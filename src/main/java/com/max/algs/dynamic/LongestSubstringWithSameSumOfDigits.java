@@ -13,6 +13,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class LongestSubstringWithSameSumOfDigits {
 
+    private static final String MAX_SUB = "maxSub: ";
+
     private static final Logger LOG = Logger.getLogger(LongestSubstringWithSameSumOfDigits.class);
 
     /**
@@ -156,9 +158,9 @@ public final class LongestSubstringWithSameSumOfDigits {
 
         LOG.info("str: " + str);
 
-        LOG.info("maxSub: " + findMaxSubstringBruteforce(str));
-        LOG.info("maxSub: " + findMaxSubstring(str));
-        LOG.info("maxSub: " + findMaxSubstringOptimal(str));
+        LOG.info(MAX_SUB + findMaxSubstringBruteforce(str));
+        LOG.info(MAX_SUB + findMaxSubstring(str));
+        LOG.info(MAX_SUB + findMaxSubstringOptimal(str));
 
         LOG.info("LongestSubstringWithSameSumOfDigits: java-" + System.getProperty("java.version"));
     }
