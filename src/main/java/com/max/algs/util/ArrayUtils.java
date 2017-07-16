@@ -1124,23 +1124,34 @@ public final class ArrayUtils {
     }
 
 
-    public static int[] generateRandomArray(int length, final int minValue, final int maxValue) {
+    public static int[] generateRandomArray(int length, int minValue, int maxValue) {
 
-        if (length < 0) {
-            throw new IllegalArgumentException("negative 'length': " + length);
-        }
+        checkArgument(length >= 0, "Negative length detected");
+        checkArgument(maxValue != 0, "'maxValue' is zero");
+        checkArgument(minValue != 0, "'minValue' is zero");
+        checkArgument(minValue <= maxValue, "minValue > maxValue");
 
-        final int[] arr = new int[length];
+        int[] arr = new int[length];
 
         Arrays.parallelSetAll(arr, index -> {
 
             int value = RAND.nextInt();
 
-            if (value > maxValue) {
-                return value % maxValue;
+            if( value == 0 ){
+                int x = 10;
             }
 
-            return value % minValue;
+            if (value > maxValue) {
+                int v =  value % maxValue;
+                return v;
+            }
+
+            if(value < minValue ){
+                int v =  value % minValue;
+                return v;
+            }
+
+            return value;
         });
 
         return arr;

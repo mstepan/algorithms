@@ -10,10 +10,8 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() {
 
-
         LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
-
 
     public static void main(String[] args) {
         try {
@@ -24,4 +22,3 @@ public final class AlgorithmsMain {
         }
     }
 }
-

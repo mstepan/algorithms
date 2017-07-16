@@ -17,6 +17,30 @@ public final class NumberUtils {
         super();
     }
 
+
+    /**
+     * Add two values, throwing ArithmeticException if overflow/underflow occurred.
+     */
+    public static int safeAdd(int x, int y) {
+        int res = x + y;
+
+        /*
+         * Works correctly even for Integer.MAX_VALUE + Integer.MAX_VALUE = -2
+         */
+        if (x > 0 && y > 0 && res < 0) {
+            throw new ArithmeticException("Overflow: " + x + " + " + y + " = " + res);
+        }
+
+        /**
+         * Works fine even for Integer.MIN_VALUE + Integer.MIN_VALUE = 0, so res >= 0
+         */
+        if (x < 0 && y < 0 && res >= 0) {
+            throw new ArithmeticException("Underflow: " + x + " + " + y + " = " + res);
+        }
+
+        return res;
+    }
+
     /**
      * Reconstruct 'float' 32 bit value from raw bit integer representation.
      */
