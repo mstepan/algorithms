@@ -62,8 +62,12 @@ public class LongestIncreasedSubsequence {
             }
         }
 
+        return reconstructSolutionFromIndex(sol, arr, maxIndex);
+    }
+
+    public static List<Integer> reconstructSolutionFromIndex(int[] sol, int[] arr, int initialIndex) {
         List<Integer> seq = new ArrayList<>();
-        int index = maxIndex;
+        int index = initialIndex;
 
         while (index >= 0) {
 
@@ -83,7 +87,6 @@ public class LongestIncreasedSubsequence {
         }
 
         Collections.reverse(seq);
-
         return seq;
     }
 
