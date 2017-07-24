@@ -11,6 +11,7 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() {
 
+
         LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
 
@@ -23,3 +24,6 @@ public final class AlgorithmsMain {
         }
     }
 }
+
+
+
