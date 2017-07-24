@@ -9,8 +9,8 @@ public final class AlgorithmsMain {
 
     private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
-    private AlgorithmsMain() {
 
+    private AlgorithmsMain() {
 
         LOG.info("Main done: java-" + System.getProperty("java.version"));
     }
