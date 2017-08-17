@@ -140,6 +140,10 @@ public class Graph<T> {
         return directed;
     }
 
+    public boolean isUndirected() {
+        return !directed;
+    }
+
     /**
      * Check if graph is bipartite.
      * <p>

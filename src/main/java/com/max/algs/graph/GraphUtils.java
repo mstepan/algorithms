@@ -98,53 +98,106 @@ public final class GraphUtils {
         return msTree;
     }
 
+    /**
+     * Works for directed and undirected graphs.
+     */
     public static <T> boolean hasCycle(Graph<T> graph) {
 
         if (graph.isEmpty()) {
             return false;
         }
 
+        if (graph.isUndirected()) {
+            return hasCycleInUndirectedGraph(graph);
+        }
+
+
+        return hasCycleInDirectedGraph(graph);
+    }
+
+    /**
+     * Detect cycle in a directed graph using topological sorting.
+     */
+    private static <T> boolean hasCycleInDirectedGraph(Graph<T> graph) {
+
+        List<T> vertexes = graph.getVertexes();
+        int vertexesCount = vertexes.size();
+
+        Map<T, Integer> inDegree = new HashMap<>();
+
+        for (T vertex : vertexes) {
+            inDegree.put(vertex, 0);
+        }
+
+        for (Edge<T> edge : graph.getAllEdges()) {
+            inDegree.compute(edge.dest, (key, val) -> val + 1);
+        }
+
+        Deque<T> freeVertexes = new ArrayDeque<>();
+
+        for (Map.Entry<T, Integer> entry : inDegree.entrySet()) {
+            if (entry.getValue() == 0) {
+                freeVertexes.add(entry.getKey());
+            }
+        }
+
+        while (!freeVertexes.isEmpty()) {
+            T vertex = freeVertexes.poll();
+            --vertexesCount;
+
+            for (T adjVer : graph.getAdjVertexes(vertex)) {
+                inDegree.compute(adjVer, (key, val) -> val - 1);
+
+                if (inDegree.get(adjVer) == 0) {
+                    freeVertexes.add(adjVer);
+                }
+            }
+
+        }
+
+        return vertexesCount != 0;
+    }
+
+    /**
+     * Detect cycle in undirected graph using DFS.
+     */
+    private static <T> boolean hasCycleInUndirectedGraph(Graph<T> graph) {
 
         T firstVertex = graph.getVertexes().iterator().next();
 
-        if (!graph.isDirected()) {
+        Map<T, T> parents = new HashMap<>();
+        Set<T> visited = new HashSet<>();
+        Set<T> marked = new HashSet<>();
 
-            // detect cycle in undirected graph using DFS
-            Map<T, T> parents = new HashMap<>();
-            Set<T> visited = new HashSet<>();
-            Set<T> marked = new HashSet<>();
+        marked.add(firstVertex);
 
-            marked.add(firstVertex);
+        Deque<T> queue = new ArrayDeque<>();
+        queue.add(firstVertex);
 
-            Deque<T> queue = new ArrayDeque<>();
-            queue.add(firstVertex);
+        while (!queue.isEmpty()) {
+            T vertex = queue.poll();
 
-            while (!queue.isEmpty()) {
-                T vertex = queue.poll();
+            Set<T> neighbours = graph.getAdjVertexes(vertex);
 
-                Set<T> neighbours = graph.getAdjVertexes(vertex);
+            for (T singleNeighbour : neighbours) {
 
-                for (T singleNeighbour : neighbours) {
+                if (visited.contains(singleNeighbour)) {
 
-                    if (visited.contains(singleNeighbour)) {
-
-                        T curParent = parents.get(vertex);
-                        if (curParent != singleNeighbour) {
-                            return true;
-                        }
-                    }
-
-                    else if (!marked.contains(singleNeighbour)) {
-                        queue.add(singleNeighbour);
-                        marked.add(singleNeighbour);
-                        parents.put(singleNeighbour, vertex);
+                    T curParent = parents.get(vertex);
+                    if (!curParent.equals(singleNeighbour)) {
+                        return true;
                     }
                 }
 
-                marked.remove(vertex);
-                visited.add(vertex);
+                else if (!marked.contains(singleNeighbour)) {
+                    queue.add(singleNeighbour);
+                    marked.add(singleNeighbour);
+                    parents.put(singleNeighbour, vertex);
+                }
             }
 
+            marked.remove(vertex);
+            visited.add(vertex);
         }
 
         return false;
