@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by mstepan on 8/17/17.
+ * Deadlock detector thread.
  */
 public final class LockDetector extends Thread {
 
@@ -37,21 +37,35 @@ public final class LockDetector extends Thread {
 
         LOG.info("LockDetector started");
 
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+        ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
 
         while (!Thread.currentThread().isInterrupted()) {
+
+            /*
+            long[] deadlockedThreads = mxBean.findDeadlockedThreads();
+
+            if( deadlockedThreads != null ){
+                LOG.info("findDeadlockedThreads detected");
+            }
+
+            long[] monitorDeadlockedThreads = mxBean.findMonitorDeadlockedThreads();
+
+            if( monitorDeadlockedThreads != null ){
+                LOG.info("findMonitorDeadlockedThreads detected");
+            }
+            */
 
             Graph<String> lockDependencyGraph = Graph.createDirectedGraph();
 
             try {
 
-                ThreadInfo[] allThreadsInfo = bean.getThreadInfo(bean.getAllThreadIds(), true, true);
+                ThreadInfo[] allThreadsInfo = mxBean.getThreadInfo(mxBean.getAllThreadIds(), true, true);
 
                 for (ThreadInfo threadInfo : allThreadsInfo) {
 
                     String threadName = threadInfo.getThreadName();
 
-                    if( SKIP_THREADS.contains(threadName) ){
+                    if (SKIP_THREADS.contains(threadName)) {
                         continue;
                     }
 
