@@ -8,12 +8,9 @@ import java.lang.invoke.MethodHandles;
 
 public final class AlgorithmsMain {
 
-
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
-
     private AlgorithmsMain() {
-
 
         LOG.info("AlgorithmsMain done...");
     }

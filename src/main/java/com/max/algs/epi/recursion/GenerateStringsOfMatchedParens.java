@@ -19,12 +19,6 @@ public final class GenerateStringsOfMatchedParens {
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
 
-    /**
-     * Generate strings of matched parens.
-     * <p>
-     * time: O(2^N)
-     * space: O(2*N)
-     */
     private static List<String> generateMatchedParens(int n) {
         checkArgument(n >= 0);
 
