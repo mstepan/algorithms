@@ -42,6 +42,36 @@ public final class StringUtils {
     }
 
     /**
+     * Check is any character sequence, such as 'String' or 'StringBuilder' is palindrome.
+     * <p>
+     * time: O(N), N - buf.length()
+     * space: O(1)
+     */
+    public static boolean isPalindrome(CharSequence buf) {
+
+        checkNotNull(buf, "null 'buf' passed");
+        if (buf.length() < 2) {
+            return true;
+        }
+
+        int left = 0;
+        int right = buf.length() - 1;
+
+        while (left < right) {
+
+            if (buf.charAt(left) != buf.charAt(right)) {
+                return false;
+            }
+
+            ++left;
+            --right;
+        }
+
+        return true;
+    }
+
+
+    /**
      * time: O(N)
      * space: O(N)
      */

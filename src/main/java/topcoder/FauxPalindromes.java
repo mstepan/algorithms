@@ -1,5 +1,7 @@
 package topcoder;
 
+import com.max.algs.string.StringUtils;
+
 /*
 *
 * URL: http://community.topcoder.com/stat?c=problem_statement&pm=12325
@@ -14,13 +16,13 @@ public final class FauxPalindromes {
      */
     public static String classifyIt(String word) {
 
-        if (isPalindrome(word)) {
+        if (StringUtils.isPalindrome(word)) {
             return "PALINDROME";
         }
 
         word = replaceRepeatedCharsWithOne(word);
 
-        if (isPalindrome(word)) {
+        if (StringUtils.isPalindrome(word)) {
             return "FAUX";
         }
 
@@ -42,22 +44,4 @@ public final class FauxPalindromes {
         return buf.toString();
     }
 
-
-    private static boolean isPalindrome(String str) {
-        int i = 0;
-        int j = str.length() - 1;
-
-
-        while (i < j) {
-
-            if (str.charAt(i) != str.charAt(j)) {
-                return false;
-            }
-
-            ++i;
-            --j;
-        }
-
-        return true;
-    }
 }
