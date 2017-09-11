@@ -2,8 +2,7 @@ package com.max.huffman;
 
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,8 +20,11 @@ final class HuffmanEncoder {
 
         private static final Comparator<TreeNode> FREQ_ASC_CMP = Comparator.comparingInt(first -> first.value);
 
+        private static final TreeNode ZERO_NODE = TreeNode.createLeaf(Character.MIN_VALUE, 0);
+
         TreeNode left;
         TreeNode right;
+        int size;
 
         char ch;
         int value;
@@ -31,6 +33,7 @@ final class HuffmanEncoder {
             TreeNode node = new TreeNode();
             node.ch = ch;
             node.value = freq;
+            node.size = 1;
             return node;
         }
 
@@ -39,11 +42,34 @@ final class HuffmanEncoder {
             node.left = left;
             node.right = right;
             node.value = left.value + right.value;
+            node.size = left.size + right.size + 1;
             return node;
         }
 
         boolean isLeaf() {
             return left == null && right == null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            TreeNode treeNode = (TreeNode) o;
+
+            if (ch != treeNode.ch) return false;
+            if (value != treeNode.value) return false;
+            if (left != null ? !left.equals(treeNode.left) : treeNode.left != null) return false;
+            return right != null ? right.equals(treeNode.right) : treeNode.right == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = left != null ? left.hashCode() : 0;
+            result = 31 * result + (right != null ? right.hashCode() : 0);
+            result = 31 * result + (int) ch;
+            result = 31 * result + value;
+            return result;
         }
 
         @Override
@@ -54,6 +80,18 @@ final class HuffmanEncoder {
 
 
     static void encode(Path inPath, Path outPath) {
+        Map<Character, Integer> freq = calculateCharsFrequency(inPath);
+
+        TreeNode root = buildEncodingTree(freq);
+
+        writeEncodingTreeToFile(root, outPath);
+
+//        printCharsEncodings(root, "", freq);
+
+        //TODO:
+    }
+
+    private static Map<Character, Integer> calculateCharsFrequency(Path inPath) {
         Map<Character, Integer> freq = new HashMap<>();
 
         try (BufferedReader reader = Files.newBufferedReader(inPath)) {
@@ -72,7 +110,13 @@ final class HuffmanEncoder {
             throw new IllegalStateException("Can't properly read file", ioEx);
         }
 
+        return freq;
+    }
+
+    private static TreeNode buildEncodingTree(Map<Character, Integer> freq) {
         PriorityQueue<TreeNode> minHeap = new PriorityQueue<>(TreeNode.FREQ_ASC_CMP);
+
+        minHeap.add(TreeNode.ZERO_NODE);
 
         for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
             minHeap.add(TreeNode.createLeaf(entry.getKey(), entry.getValue()));
@@ -87,8 +131,35 @@ final class HuffmanEncoder {
             minHeap.add(combinedNode);
         }
 
-        TreeNode root = minHeap.poll();
-        printCharsEncodings(root, "", freq);
+        return minHeap.poll();
+    }
+
+    private static void writeEncodingTreeToFile(TreeNode root, Path outPath) {
+        try {
+            try (OutputStream fileOutStream = Files.newOutputStream(outPath);
+                 BufferedOutputStream bufferedOutStream = new BufferedOutputStream(fileOutStream);
+                 DataOutputStream dataOut = new DataOutputStream(bufferedOutStream)) {
+
+                dataOut.writeInt(root.size);
+
+                writeNodeRec(root, dataOut);
+            }
+        }
+        catch (IOException ioEx) {
+            LOG.error("Can't write encoding tree", ioEx);
+        }
+    }
+
+    private static void writeNodeRec(TreeNode node, DataOutputStream dataOut) throws IOException {
+
+        assert node != null : "null 'node' detected";
+
+        dataOut.writeChar(node.ch);
+
+        if (!node.isLeaf()) {
+            writeNodeRec(node.left, dataOut);
+            writeNodeRec(node.right, dataOut);
+        }
     }
 
     private static void printCharsEncodings(TreeNode node, String code, Map<Character, Integer> freq) {

@@ -12,8 +12,10 @@ import java.nio.file.Paths;
 
 public final class HuffmanMain {
 
+
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
+    
     private HuffmanMain() throws IOException {
 
         Path inPath = Paths.get("/Users/mstepan/repo/algorithms/src/main/java/com/max/huffman/in.txt");

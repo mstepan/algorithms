@@ -14,10 +14,20 @@ public final class AlgorithmsMain {
 
 
     private AlgorithmsMain() {
+        double[] probabilities = {
+                99.0 / 100.0,
+                1.0 / 100.0
+        };
 
-        int bitsCount = (int) Math.ceil(MathUtils.log2(6.0));
-        int charsCount = 100_000;
-        LOG.info("total bits: " + (bitsCount * charsCount));
+        double entrophy = 0.0;
+
+        for (double p : probabilities) {
+            entrophy += p * MathUtils.log2(p);
+        }
+
+        entrophy = -entrophy;
+
+        LOG.info("Entrophy: " + entrophy);
 
         LOG.info("AlgorithmsMain done...");
     }
