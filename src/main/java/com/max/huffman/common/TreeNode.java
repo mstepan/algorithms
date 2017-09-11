@@ -1,22 +1,22 @@
-package com.max.huffman.encoder;
+package com.max.huffman.common;
 
 import java.util.Comparator;
 
 
-final class TreeNode {
+public final class TreeNode {
 
     public static final Comparator<TreeNode> FREQ_ASC_CMP = Comparator.comparingInt(first -> first.value);
 
     public static final TreeNode ZERO_NODE = TreeNode.createLeaf(Character.MIN_VALUE, 0);
 
-    TreeNode left;
-    TreeNode right;
-    int size;
+    public TreeNode left;
+    public TreeNode right;
+    public int size;
 
-    char ch;
-    int value;
+    public char ch;
+    public int value;
 
-    static TreeNode createLeaf(char ch, int freq) {
+    public static TreeNode createLeaf(char ch, int freq) {
         TreeNode node = new TreeNode();
         node.ch = ch;
         node.value = freq;
@@ -24,7 +24,7 @@ final class TreeNode {
         return node;
     }
 
-    static TreeNode createNode(TreeNode left, TreeNode right) {
+    public static TreeNode createNode(TreeNode left, TreeNode right) {
         TreeNode node = new TreeNode();
         node.left = left;
         node.right = right;
@@ -33,7 +33,11 @@ final class TreeNode {
         return node;
     }
 
-    boolean isLeaf() {
+    public int size(){
+        return size;
+    }
+
+    public boolean isLeaf() {
         return left == null && right == null;
     }
 
@@ -42,7 +46,7 @@ final class TreeNode {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-       TreeNode treeNode = (TreeNode) o;
+        TreeNode treeNode = (TreeNode) o;
 
         if (ch != treeNode.ch) return false;
         if (value != treeNode.value) return false;

@@ -4,21 +4,28 @@ package com.max.huffman.encoder;
 final class PrefixCode {
 
     private final int value;
-    private final int count;
-
+    private final int bitsCount;
 
     PrefixCode(int value, int count) {
         this.value = value;
-        this.count = count;
+        this.bitsCount = count;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public int getBitsCount() {
+        return bitsCount;
     }
 
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder(count);
+        StringBuilder buf = new StringBuilder(bitsCount);
 
         int bitsMask = value;
 
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < bitsCount; ++i) {
             buf.append(bitsMask & 1);
             bitsMask >>= 1;
         }

@@ -10,7 +10,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Maksym Stepanenko.
  */
-public class BitOutputStream extends OutputStream {
+public class BitOutputStream extends OutputStream implements AutoCloseable {
 
     /**
      * If we treat byte is unsigned the possible range value: [0;255].
@@ -46,13 +46,13 @@ public class BitOutputStream extends OutputStream {
 
         addBitToCurrentByte(bitValue);
 
-        /** current byte filled */
+        /* current byte filled */
         if (bitsInCurrentByteCount == Byte.SIZE) {
 
             bitsInCurrentByteCount = 0;
             ++chunkIndex;
 
-            /** Chunk fully filled. Write to source stream */
+            /* Chunk fully filled. Write to source stream */
             if (chunkIndex == chunk.length) {
                 writeInMemoryData();
             }
@@ -82,10 +82,10 @@ public class BitOutputStream extends OutputStream {
 
     private void writeInMemoryData() throws IOException {
 
-        /** write bits count in chunk */
+        /* write bits count in chunk */
         out.write(totalBitsInChunk);
 
-        /** write chunk of bytes itself */
+        /* write chunk of bytes itself */
         out.write(chunk, 0, chunkIndex < chunk.length ? chunkIndex + 1 : chunkIndex);
         out.flush();
 

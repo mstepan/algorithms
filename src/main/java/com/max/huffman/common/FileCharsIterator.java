@@ -1,4 +1,4 @@
-package com.max.huffman;
+package com.max.huffman.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;
