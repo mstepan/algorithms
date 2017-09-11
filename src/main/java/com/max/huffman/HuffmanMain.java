@@ -1,6 +1,7 @@
 package com.max.huffman;
 
 
+import com.max.huffman.encoder.HuffmanEncoder;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
