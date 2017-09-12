@@ -31,10 +31,6 @@ public final class HuffmanEncoder {
     public static void encode(Path inPath, Path outPath) {
         Map<Character, Integer> freq = calculateCharsFrequency(inPath);
 
-        // -1 to remove 'END character marker' from counting
-        int uniqueCharsCount = freq.size() - 1;
-        LOG.info("Unique chars count (compression): " + uniqueCharsCount);
-
         TreeNode root = buildEncodingTree(freq);
 
         TreeNodeFileUtil.writeEncodingTreeToFile(root, outPath);
@@ -48,7 +44,7 @@ public final class HuffmanEncoder {
         Map<Character, Integer> freq = new HashMap<>();
 
         // add END character marker
-        freq.put(Character.MIN_VALUE, 0);
+        freq.put(TreeNodeFileUtil.END_MARKER, 0);
 
         try (FileCharsIterator it = new FileCharsIterator(inPath)) {
             while (it.hasNext()) {
@@ -62,8 +58,6 @@ public final class HuffmanEncoder {
 
     private static TreeNode buildEncodingTree(Map<Character, Integer> freq) {
         PriorityQueue<TreeNode> minHeap = new PriorityQueue<>(TreeNode.FREQ_ASC_CMP);
-
-        minHeap.add(TreeNode.ZERO_NODE);
 
         for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
             minHeap.add(TreeNode.createLeaf(entry.getKey(), entry.getValue()));
@@ -118,7 +112,8 @@ public final class HuffmanEncoder {
                     bitOutStream.write(code.getValue(), code.getBitsCount());
                 }
 
-                PrefixCode endCode = encodingMap.get(Character.MIN_VALUE);
+                // END marker written back to a file
+                PrefixCode endCode = encodingMap.get(TreeNodeFileUtil.END_MARKER);
                 bitOutStream.write(endCode.getValue(), endCode.getBitsCount());
             }
             catch (IOException ioEx) {

@@ -7,8 +7,6 @@ public final class TreeNode {
 
     public static final Comparator<TreeNode> FREQ_ASC_CMP = Comparator.comparingInt(first -> first.value);
 
-    public static final TreeNode ZERO_NODE = TreeNode.createLeaf(Character.MIN_VALUE, 0);
-
     public TreeNode left;
     public TreeNode right;
     public int size;

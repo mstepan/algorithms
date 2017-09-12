@@ -11,6 +11,8 @@ import java.util.Deque;
 
 public final class TreeNodeFileUtil {
 
+    public static final char END_MARKER = Character.MAX_VALUE;
+
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
     private TreeNodeFileUtil() {
@@ -39,11 +41,14 @@ public final class TreeNodeFileUtil {
         dataOut.writeChar(node.ch);
 
         if (!node.isLeaf()) {
+
+            assert node.left != null : "node.left == null";
+            assert node.right != null : "node.right == null";
+
             writeNodeRec(node.left, dataOut);
             writeNodeRec(node.right, dataOut);
         }
     }
-
 
     public static TreeNode readEncodingTreeFromFile(Path outPath) {
         try {
@@ -52,7 +57,6 @@ public final class TreeNodeFileUtil {
                  DataInputStream dataOut = new DataInputStream(bufInStream)) {
 
                 int treeSize = dataOut.readInt();
-                int charsCount = 0;
 
                 Deque<TreeNode> stack = new ArrayDeque<>();
 
@@ -63,15 +67,30 @@ public final class TreeNodeFileUtil {
 
                     char ch = dataOut.readChar();
 
-                    if (ch != Character.MIN_VALUE) {
-                        ++charsCount;
+                    TreeNode curNode = TreeNode.createLeaf(ch, 0);
+                    TreeNode stackTopNode = stack.peekFirst();
+
+                    if (stackTopNode.left == null) {
+                        stackTopNode.left = curNode;
+                    }
+                    else if (stackTopNode.right == null) {
+                        stackTopNode.right = curNode;
+
+                        TreeNode completedNode = stack.pop();
+
+                        assert completedNode.left != null && completedNode.right != null : "node not completed";
+                    }
+                    else {
+                        assert true : "should never happen";
                     }
 
-
-
+                    // push only non leaf nodes
+                    if (ch == Character.MIN_VALUE) {
+                        stack.push(curNode);
+                    }
                 }
 
-                LOG.info("Unique chars count (de-compression): " + charsCount);
+                assert stack.isEmpty() : "stack not empty";
 
                 return root;
             }

@@ -28,7 +28,7 @@ public class LZ77Main {
         long startTime = System.nanoTime();
 
         String inPath =
-                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in-big.txt";
+                "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/in.txt";
 
         String archivePath =
                 "/Users/mstepan/repo/incubator/algorithms/src/main/java/com/max/algs/compression/lz/compressed.data";
