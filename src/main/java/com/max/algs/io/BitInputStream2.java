@@ -3,13 +3,14 @@ package com.max.algs.io;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public class BitInputStream extends InputStream {
+public class BitInputStream2 extends InputStream {
 
-    private final InputStream inStream;
+    private final RandomAccessFile inStream;
 
     private final StringBuilder traceBuf;
 
@@ -17,13 +18,12 @@ public class BitInputStream extends InputStream {
     private int value;
 
     // offset within byte value [0;7]
-    private int offset;
+    private int offset = Byte.SIZE;
 
-    public BitInputStream(InputStream in) {
+    public BitInputStream2(RandomAccessFile in) {
         checkNotNull(in);
         this.inStream = in;
         this.traceBuf = new StringBuilder();
-        readNextByte();
     }
 
     @Override

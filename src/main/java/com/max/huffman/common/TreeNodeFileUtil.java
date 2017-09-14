@@ -50,50 +50,48 @@ public final class TreeNodeFileUtil {
         }
     }
 
-    public static TreeNode readEncodingTreeFromFile(Path outPath) {
+    public static TreeNode readEncodingTreeFromFile(RandomAccessFile encodedFileRandom) {
         try {
-            try (InputStream fileInStream = Files.newInputStream(outPath);
-                 BufferedInputStream bufInStream = new BufferedInputStream(fileInStream);
-                 DataInputStream dataOut = new DataInputStream(bufInStream)) {
 
-                int treeSize = dataOut.readInt();
+            int readedBytesCount = 0;
 
-                Deque<TreeNode> stack = new ArrayDeque<>();
+            int treeSize = encodedFileRandom.readInt();
 
-                TreeNode root = TreeNode.createLeaf(dataOut.readChar(), 0);
-                stack.push(root);
+            Deque<TreeNode> stack = new ArrayDeque<>();
 
-                for (int i = 0; i < treeSize - 1; ++i) {
+            TreeNode root = TreeNode.createLeaf(encodedFileRandom.readChar(), 0);
+            stack.push(root);
 
-                    char ch = dataOut.readChar();
+            for (int i = 0; i < treeSize - 1; ++i) {
 
-                    TreeNode curNode = TreeNode.createLeaf(ch, 0);
-                    TreeNode stackTopNode = stack.peekFirst();
+                char ch = encodedFileRandom.readChar();
 
-                    if (stackTopNode.left == null) {
-                        stackTopNode.left = curNode;
-                    }
-                    else if (stackTopNode.right == null) {
-                        stackTopNode.right = curNode;
+                TreeNode curNode = TreeNode.createLeaf(ch, 0);
+                TreeNode stackTopNode = stack.peekFirst();
 
-                        TreeNode completedNode = stack.pop();
+                if (stackTopNode.left == null) {
+                    stackTopNode.left = curNode;
+                }
+                else if (stackTopNode.right == null) {
+                    stackTopNode.right = curNode;
 
-                        assert completedNode.left != null && completedNode.right != null : "node not completed";
-                    }
-                    else {
-                        assert true : "should never happen";
-                    }
+                    TreeNode completedNode = stack.pop();
 
-                    // push only non leaf nodes
-                    if (ch == Character.MIN_VALUE) {
-                        stack.push(curNode);
-                    }
+                    assert completedNode.left != null && completedNode.right != null : "node not completed";
+                }
+                else {
+                    assert true : "should never happen";
                 }
 
-                assert stack.isEmpty() : "stack not empty";
-
-                return root;
+                // push only non leaf nodes
+                if (ch == Character.MIN_VALUE) {
+                    stack.push(curNode);
+                }
             }
+
+            assert stack.isEmpty() : "stack not empty";
+
+            return root;
         }
         catch (IOException ioEx) {
             throw new IllegalStateException("Can't read encoding tree from compressed file", ioEx);

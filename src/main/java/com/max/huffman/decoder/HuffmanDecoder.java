@@ -1,10 +1,15 @@
 package com.max.huffman.decoder;
 
-import com.max.algs.io.BitInputStream;
+import com.max.algs.io.BitInputStream2;
 import com.max.huffman.common.TreeNode;
 import com.max.huffman.common.TreeNodeFileUtil;
+import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -13,48 +18,60 @@ import java.nio.file.Path;
  */
 public final class HuffmanDecoder {
 
+    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+
     private HuffmanDecoder() {
     }
 
     public static void decode(Path encodedPath, Path decodedPath) {
 
-        TreeNode root = TreeNodeFileUtil.readEncodingTreeFromFile(encodedPath);
+        try (RandomAccessFile encodedFileRandom = new RandomAccessFile(encodedPath.toFile().toString(), "r")) {
 
-        try (InputStream inStream = Files.newInputStream(encodedPath);
-             BufferedInputStream bufInStream = new BufferedInputStream(inStream);
-             BitInputStream bitInStream = new BitInputStream(bufInStream)) {
+            TreeNode root = TreeNodeFileUtil.readEncodingTreeFromFile(encodedFileRandom);
 
-            try (OutputStream out = Files.newOutputStream(decodedPath);
-                 DataOutputStream dataOut = new DataOutputStream(out)) {
-                while (true) {
+//            int byte1 = encodedFileRandom.read();
+//            int byte2 = encodedFileRandom.read();
 
-                    TreeNode cur = root;
+            try (BitInputStream2 bitInStream = new BitInputStream2(encodedFileRandom)) {
 
-                    while (!cur.isLeaf()) {
+                try (OutputStream out = Files.newOutputStream(decodedPath);
+                     DataOutputStream decodedDataOut = new DataOutputStream(out)) {
+                    while (true) {
 
-                        int bitValue = bitInStream.read();
+                        TreeNode cur = root;
 
-                        // go left
-                        if (bitValue == 0) {
-                            cur = cur.left;
+                        while (!cur.isLeaf()) {
+
+                            int bitValue = bitInStream.read();
+
+                            if (bitValue == -1) {
+                                throw new IllegalStateException("Stream ended unexpectedly");
+                            }
+
+                            // go left
+                            if (bitValue == 0) {
+                                cur = cur.left;
+                            }
+                            // go right
+                            else {
+                                cur = cur.right;
+                            }
                         }
-                        // go right
-                        else {
-                            cur = cur.right;
+
+                        if (cur.ch == TreeNodeFileUtil.END_MARKER) {
+                            break;
                         }
-                    }
 
-                    if (cur.ch == TreeNodeFileUtil.END_MARKER) {
-                        break;
+                        decodedDataOut.writeChar(cur.ch);
                     }
-
-                    dataOut.writeChar(cur.ch);
                 }
+
+                LOG.info(bitInStream);
+
             }
         }
         catch (IOException ioEx) {
             throw new IllegalStateException(ioEx);
         }
     }
-
 }

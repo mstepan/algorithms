@@ -31,7 +31,7 @@ public final class TreeNode {
         return node;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
@@ -63,6 +63,10 @@ public final class TreeNode {
 
     @Override
     public String toString() {
+        if (ch == Character.MAX_VALUE) {
+            return "END";
+        }
+
         return String.valueOf(ch) + ": " + value;
     }
 }

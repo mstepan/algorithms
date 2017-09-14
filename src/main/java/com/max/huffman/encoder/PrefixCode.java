@@ -19,6 +19,21 @@ final class PrefixCode {
         return bitsCount;
     }
 
+    public int reverseValue() {
+
+        int reversed = 0;
+
+        int baseValue = value;
+
+        for (int i = 0; i < bitsCount; ++i) {
+            reversed <<= 1;
+            reversed = reversed | (baseValue & 1);
+            baseValue >>>= 1;
+        }
+
+        return reversed;
+    }
+
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder(bitsCount);

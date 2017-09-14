@@ -1,6 +1,6 @@
 package com.max.huffman.encoder;
 
-import com.max.algs.io.BitOutputStream;
+import com.max.algs.io.BitOutputStream2;
 import com.max.huffman.common.FileCharsIterator;
 import com.max.huffman.common.TreeNode;
 import com.max.huffman.common.TreeNodeFileUtil;
@@ -99,26 +99,44 @@ public final class HuffmanEncoder {
     }
 
     private static void writeMainContent(Path inPath, Map<Character, PrefixCode> encodingMap, Path outPath) {
+
         try (FileCharsIterator it = new FileCharsIterator(inPath)) {
 
             try (OutputStream outStream = Files.newOutputStream(outPath, StandardOpenOption.APPEND);
                  BufferedOutputStream bufOutStream = new BufferedOutputStream(outStream);
-                 BitOutputStream bitOutStream = new BitOutputStream(bufOutStream)) {
+                 BitOutputStream2 bitOutStream = new BitOutputStream2(bufOutStream)) {
 
                 while (it.hasNext()) {
 
-                    PrefixCode code = encodingMap.get(it.next());
+                    char ch = it.next();
 
-                    bitOutStream.write(code.getValue(), code.getBitsCount());
+                    PrefixCode code = encodingMap.get(ch);
+
+                    writePrefixCode(code, bitOutStream);
                 }
 
                 // END marker written back to a file
                 PrefixCode endCode = encodingMap.get(TreeNodeFileUtil.END_MARKER);
-                bitOutStream.write(endCode.getValue(), endCode.getBitsCount());
+                writePrefixCode(endCode, bitOutStream);
+
+                LOG.info(bitOutStream);
             }
             catch (IOException ioEx) {
                 throw new IllegalStateException("Can't properly open '" + outPath + "'", ioEx);
             }
+        }
+    }
+
+    /**
+     * We should write prefix code in reverse order.
+     */
+    private static void writePrefixCode(PrefixCode code, BitOutputStream2 bitOutStream) throws IOException {
+
+        int value = code.reverseValue();
+
+        for (int i = 0; i < code.getBitsCount(); ++i) {
+            bitOutStream.write(value & 1);
+            value >>>= 1;
         }
     }
 

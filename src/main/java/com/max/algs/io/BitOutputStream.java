@@ -21,6 +21,8 @@ public class BitOutputStream extends OutputStream implements AutoCloseable {
     private final OutputStream out;
     private final byte[] chunk = new byte[CHUNK_SIZE];
 
+    private final StringBuilder traceBuf;
+
     private int chunkIndex;
 
     private int bitsInCurrentByteCount;
@@ -30,6 +32,7 @@ public class BitOutputStream extends OutputStream implements AutoCloseable {
     public BitOutputStream(OutputStream out) {
         checkNotNull(out);
         this.out = out;
+        this.traceBuf = new StringBuilder();
     }
 
 
@@ -43,6 +46,8 @@ public class BitOutputStream extends OutputStream implements AutoCloseable {
 
     @Override
     public void write(int bitValue) throws IOException {
+
+        traceBuf.append(bitValue & 1);
 
         addBitToCurrentByte(bitValue);
 
@@ -97,6 +102,11 @@ public class BitOutputStream extends OutputStream implements AutoCloseable {
     public void close() throws IOException {
         writeInMemoryData();
         out.close();
+    }
+
+    @Override
+    public String toString(){
+        return traceBuf.toString();
     }
 
 }
