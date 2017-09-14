@@ -6,9 +6,7 @@ import java.io.OutputStream;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Write single bit to output stream.
- *
- * @author Maksym Stepanenko.
+ * Write single bit to an output stream.
  */
 public class BitOutputStream2 extends OutputStream implements AutoCloseable {
 
@@ -27,12 +25,11 @@ public class BitOutputStream2 extends OutputStream implements AutoCloseable {
 
     @Override
     public void write(int bitValue) throws IOException {
+        int curBit = bitValue & 1;
 
-        traceBuf.append(bitValue & 1);
+        traceBuf.append(curBit);
 
-        value <<= 1;
-        value |= (bitValue & 1);
-
+        value |= (curBit << bitsCount);
         ++bitsCount;
 
         if (bitsCount == Byte.SIZE) {

@@ -29,9 +29,6 @@ public final class HuffmanDecoder {
 
             TreeNode root = TreeNodeFileUtil.readEncodingTreeFromFile(encodedFileRandom);
 
-//            int byte1 = encodedFileRandom.read();
-//            int byte2 = encodedFileRandom.read();
-
             try (BitInputStream2 bitInStream = new BitInputStream2(encodedFileRandom)) {
 
                 try (OutputStream out = Files.newOutputStream(decodedPath);
@@ -62,7 +59,7 @@ public final class HuffmanDecoder {
                             break;
                         }
 
-                        decodedDataOut.writeChar(cur.ch);
+                        decodedDataOut.writeByte(cur.ch);
                     }
                 }
 

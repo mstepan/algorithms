@@ -60,6 +60,11 @@ public final class FileCharsIterator implements Iterator<Character>, AutoCloseab
         try {
             line = reader.readLine();
 
+            // TODO: dirty temporary solution
+            if (line != null) {
+                line = line + System.getProperty("line.separator");
+            }
+
             // no new lines, file ended
             if (line == null) {
                 value = Character.MIN_VALUE;
