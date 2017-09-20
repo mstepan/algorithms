@@ -109,8 +109,9 @@ public class SudokuRecursiveSolver {
 
     /**
      * N x N - board size (N rows and N columns)
+     * K - empty cells (cells with 0 values)
      * <p>
-     * time: O(9^n)
+     * time: O(10^K)
      * space: O(N)
      */
     private static boolean solveBoard(int[][] board) {
