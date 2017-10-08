@@ -448,6 +448,23 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- AutoValue (immutable class)-->
+        <dependency>
+            <groupId>com.google.auto.value</groupId>
+            <artifactId>auto-value</artifactId>
+            <version>1.5.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Vert.x -->
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
