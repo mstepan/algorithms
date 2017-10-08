@@ -21,7 +21,7 @@ public final class InterleavingOfStrings {
      * M - s2.length()
      * <p>
      * time: O(N*M)
-     * space: O(N*M) => can be reduced to O(min(N, M))
+     * space: O(min(N, M))
      */
     private static boolean isInterleaving(String base, String s1, String s2) {
         checkNotNull(base);
@@ -40,34 +40,42 @@ public final class InterleavingOfStrings {
             return base.equals(s1);
         }
 
-        final int rows = s1.length() + 1;
-        final int cols = s2.length() + 1;
+        String minStr = s1;
+        String otherStr = s2;
 
-        boolean[][] sol = new boolean[rows][cols];
-        sol[0][0] = true;
+        if (s2.length() < s1.length()) {
+            minStr = s2;
+            otherStr = s1;
+        }
 
+        final int rows = otherStr.length() + 1;
+        final int cols = minStr.length() + 1;
+
+        boolean[] prev = new boolean[cols];
+        prev[0] = true;
 
         // fill 1st row
         for (int col = 1; col < cols; ++col) {
-            sol[0][col] = sol[0][col - 1] && (base.charAt(col - 1) == s2.charAt(col - 1));
+            prev[col] = prev[col - 1] && (base.charAt(col - 1) == minStr.charAt(col - 1));
         }
 
         for (int row = 1; row < rows; ++row) {
 
-            sol[row][0] = sol[row - 1][0] && (base.charAt(row - 1) == s1.charAt(row - 1));
+            boolean[] cur = new boolean[cols];
+            cur[0] = prev[0] && (base.charAt(row - 1) == otherStr.charAt(row - 1));
 
-            boolean lastRowCombinedOrValue = sol[row][0];
+            boolean lastRowCombinedOrValue = cur[0];
 
             for (int col = 1; col < cols; ++col) {
 
                 char baseCh = base.charAt(row + col - 1);
-                char s1Ch = s1.charAt(row - 1);
-                char s2Ch = s2.charAt(col - 1);
+                char otherCh = otherStr.charAt(row - 1);
+                char minCh = minStr.charAt(col - 1);
 
-                sol[row][col] = (s1Ch == baseCh && sol[row - 1][col]) ||
-                        (s2Ch == baseCh && sol[row][col - 1]);
+                cur[col] = (otherCh == baseCh && prev[col]) ||
+                        (minCh == baseCh && cur[col - 1]);
 
-                lastRowCombinedOrValue = lastRowCombinedOrValue || sol[row][col];
+                lastRowCombinedOrValue = lastRowCombinedOrValue || cur[col];
             }
 
             // last row was fully 'false',
@@ -75,9 +83,11 @@ public final class InterleavingOfStrings {
             if (!lastRowCombinedOrValue) {
                 return false;
             }
+
+            prev = cur;
         }
 
-        return sol[rows - 1][cols - 1];
+        return prev[cols - 1];
     }
 
     private InterleavingOfStrings() {
