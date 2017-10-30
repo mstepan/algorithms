@@ -1,6 +1,5 @@
 package com.max.algs.string;
 
-import com.max.algs.annotations.ThreadSafe;
 import com.max.algs.util.ArrayUtils;
 import org.apache.log4j.Logger;
 
@@ -13,10 +12,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Stateless utility class.
- *
- * @author mstepanenko
+ * Thread safe.
  */
-@ThreadSafe(stateless = true)
 public final class StringUtils {
 
 

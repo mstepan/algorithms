@@ -1,6 +1,7 @@
 package com.max.algs.hashing.perfect;
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.hashing.universal.UniversalHashes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,10 @@ class HashBucket<U> {
     HashBucket(int capacity) {
         super();
         if (capacity <= 1) {
-            function = new UniversalHashFunction<>(0, 0);
+            function = UniversalHashes.generate();
         }
         else {
-            function = UniversalHashFunction.generate();
+            function = UniversalHashes.generate();
         }
         table = (U[]) new Object[capacity];
     }
@@ -48,7 +49,7 @@ class HashBucket<U> {
                 return false;
             }
 
-            function = UniversalHashFunction.generate();
+            function = UniversalHashes.generate();
 
             List<U> prevValues = new ArrayList<>(table.length);
 

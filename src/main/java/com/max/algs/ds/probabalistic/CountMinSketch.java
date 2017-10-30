@@ -1,6 +1,7 @@
 package com.max.algs.ds.probabalistic;
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.hashing.universal.UniversalHashes;
 import com.max.algs.util.MathUtils;
 
 /**
@@ -52,7 +53,7 @@ public class CountMinSketch {
         hashFunctions = new UniversalHashFunction[counters.length];
 
         for (int i = 0; i < hashFunctions.length; ++i) {
-            hashFunctions[i] = UniversalHashFunction.generate();
+            hashFunctions[i] = UniversalHashes.generate();
         }
     }
 

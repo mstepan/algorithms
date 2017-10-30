@@ -32,15 +32,16 @@ public final class NoPackageCyclesRule implements EnforcerRule {
                 jdepend.analyze();
 
                 if (jdepend.containsCycles()) {
+                    //TODO: show cyclic dependency here
                     throw new EnforcerRuleException("There are package cycles");
                 }
             }
             else {
-                log.warn("Skipping jdepend analysis as " + classesDir + " does not exist.");
+                log.warn("Skipping jdepend analysis as a '" + classesDir + "' does not exist.");
             }
         }
-        catch (ExpressionEvaluationException e) {
-            throw new EnforcerRuleException("Unable to lookup an expression " + e.getLocalizedMessage(), e);
+        catch (ExpressionEvaluationException expEx) {
+            throw new EnforcerRuleException("Unable to lookup an expression " + expEx.getLocalizedMessage(), expEx);
         }
         catch (IOException ioEx) {
             throw new EnforcerRuleException("Unable to access target directory " + ioEx.getLocalizedMessage(), ioEx);

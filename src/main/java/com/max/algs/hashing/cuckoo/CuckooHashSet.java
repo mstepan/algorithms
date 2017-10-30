@@ -2,6 +2,7 @@ package com.max.algs.hashing.cuckoo;
 
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.hashing.universal.UniversalHashes;
 import com.max.algs.util.NumberUtils;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
         for (int i = 0; i < NUM_OF_TABLES; i++) {
             tables[i] = new Object[capacity];
-            hashFunctions[i] = UniversalHashFunction.generate();
+            hashFunctions[i] = UniversalHashes.generate();
         }
     }
 
@@ -259,7 +260,7 @@ public class CuckooHashSet<E> extends AbstractSet<E>
 
         for (int tableIndex = 0; tableIndex < tables.length; tableIndex++) {
             tables[tableIndex] = new Object[capacity];
-            hashFunctions[tableIndex] = UniversalHashFunction.generate();
+            hashFunctions[tableIndex] = UniversalHashes.generate();
         }
 
         /** read all stored objects */

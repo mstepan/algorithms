@@ -1,6 +1,7 @@
 package com.max.algs.hashing.perfect;
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.hashing.universal.UniversalHashes;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,7 @@ public class PerfectHashSet<T> {
     @SuppressWarnings("unchecked")
     public PerfectHashSet(Collection<T> values) {
         table = new HashBucket[values.size()];
-        mainHashFunction = UniversalHashFunction.generate();
+        mainHashFunction = UniversalHashes.generate();
         initBuckets(values);
         putValues(values);
     }

@@ -21,9 +21,11 @@
     <build>
         <plugins>
 
-            <!-- custom plugin which checks package cycles using JDepend -->
+            <!-- Custom plugin which checks package cycles using JDepend -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M1</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.max</groupId>
@@ -42,11 +44,16 @@
                             <rules>
                                 <NoPackageCyclesRule
                                         implementation="maven.plugin.NoPackageCyclesRule"/>
+                                <DistanceFromMainSequenceRule
+                                        implementation="maven.plugin.DistanceFromMainSequenceRule">
+                                    <distanceThreshold>0.5</distanceThreshold>
+                                </DistanceFromMainSequenceRule>
                             </rules>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
 
             <!-- Java compile plugin -->
             <plugin>

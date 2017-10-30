@@ -1,6 +1,7 @@
 package com.max.algs.ds.probabalistic;
 
 import com.max.algs.hashing.universal.UniversalHashFunction;
+import com.max.algs.hashing.universal.UniversalHashes;
 import com.max.algs.util.MathUtils;
 import org.apache.log4j.Logger;
 
@@ -23,7 +24,7 @@ public class HyperLogLog {
 
     private final byte[] buckets = new byte[BUCKETS_COUNT];
 
-    private final UniversalHashFunction<String> hashFunc = UniversalHashFunction.generate();
+    private final UniversalHashFunction<String> hashFunc = UniversalHashes.generate();
 
     private static int countTrailingZeros(int baseValue) {
 
