@@ -13,14 +13,23 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
 
 public final class DistanceFromMainSequenceRule implements EnforcerRule {
 
-    private double distanceThreshold;
+    private String skipPackages;
 
     @Override
     public void execute(@Nonnull EnforcerRuleHelper helper) throws EnforcerRuleException {
+
+        String[] skipPackagesArr = skipPackages.trim().split(",");
+
+        Set<String> skipPackagesSet = new HashSet<>();
+
+        for (String packageToSkip : skipPackagesArr) {
+            skipPackagesSet.add(packageToSkip.trim());
+        }
 
         Log log = helper.getLog();
 
@@ -35,14 +44,20 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
                 jdepend.addDirectory(classesDir.getAbsolutePath());
                 jdepend.analyze();
 
-                for (Object pckg : jdepend.getPackages()) {
-                    JavaPackage singleJavaPackage = (JavaPackage) pckg;
+                List<JavaPackage> projectPackagesOnly = filter(jdepend.getPackages(), groupId, skipPackagesSet);
 
+                final double standardDeviation = distanceStandardDeviation(projectPackagesOnly);
+                final double threshold = 2 * standardDeviation;
+
+                log.info("standardDeviation: " + standardDeviation + ", threshold: " + threshold);
+
+                for (JavaPackage singleJavaPackage : projectPackagesOnly) {
                     if (singleJavaPackage.getName().startsWith(groupId)) {
                         double distanceFromMain = singleJavaPackage.distance();
 
-                        if (Double.compare(distanceFromMain, distanceThreshold) >= 0) {
-                            log.info(describePackageProblem(singleJavaPackage));
+                        // distance is greater than 2 standard deviations
+                        if (Double.compare(distanceFromMain, threshold) > 0) {
+                            log.warn(describePackageProblem(singleJavaPackage));
                             // throw new EnforcerRuleException("DistanceFromMainSequenceRule violated");
                         }
                     }
@@ -58,6 +73,43 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
         catch (IOException ioEx) {
             throw new EnforcerRuleException("Unable to access target directory " + ioEx.getLocalizedMessage(), ioEx);
         }
+    }
+
+    private static List<JavaPackage> filter(Collection allPackages, String groupId, Set<String> skipPackagesSet) {
+        List<JavaPackage> res = new ArrayList<>();
+
+        for (Object pckg : allPackages) {
+            JavaPackage singleJavaPackage = (JavaPackage) pckg;
+
+            // skip not project packages and utility packages
+            if (singleJavaPackage.getName().startsWith(groupId) &&
+                    !(skipPackagesSet.contains(singleJavaPackage.getName()))) {
+                res.add(singleJavaPackage);
+            }
+        }
+        return res;
+    }
+
+    private static double distanceStandardDeviation(List<JavaPackage> packagesList) {
+
+        final int n = packagesList.size();
+
+        double sum = 0.0;
+
+        for (JavaPackage singleJavaPackage : packagesList) {
+            sum += singleJavaPackage.distance();
+        }
+
+        double avg = sum / n;
+
+        double deviation = 0.0;
+
+        for (JavaPackage singleJavaPackage : packagesList) {
+            double diff = (singleJavaPackage.distance() - avg);
+            deviation += (diff * diff);
+        }
+
+        return Math.sqrt(deviation / n);
     }
 
     private static String describePackageProblem(JavaPackage singleJavaPackage) {

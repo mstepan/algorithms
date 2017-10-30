@@ -46,7 +46,13 @@
                                         implementation="maven.plugin.NoPackageCyclesRule"/>
                                 <DistanceFromMainSequenceRule
                                         implementation="maven.plugin.DistanceFromMainSequenceRule">
-                                    <distanceThreshold>0.5</distanceThreshold>
+                                    <skipPackages>
+                                        com.max.algs.util,
+                                        com.max.algs.dto,
+                                        com.max.algs.string,
+                                        com.max.system,
+                                        com.max.algs.ds
+                                    </skipPackages>
                                 </DistanceFromMainSequenceRule>
                             </rules>
                         </configuration>
