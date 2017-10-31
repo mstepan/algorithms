@@ -18,7 +18,10 @@ import java.util.*;
 
 public final class DistanceFromMainSequenceRule implements EnforcerRule {
 
+    private double threshold = 0.5;
+    private String mainPackage;
     private String skipPackages;
+    private boolean failOnError;
 
     @Override
     public void execute(@Nonnull EnforcerRuleHelper helper) throws EnforcerRuleException {
@@ -30,7 +33,6 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
         try {
             final MavenProject project = (MavenProject) helper.evaluate("${project}");
             final File targetDir = new File((String) helper.evaluate("${project.build.directory}"));
-            final String groupId = (String) helper.evaluate("${project.groupId}");
             final File classesDir = new File(targetDir, "classes");
 
             if ("jar".equalsIgnoreCase(project.getPackaging()) && classesDir.exists()) {
@@ -38,27 +40,32 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
                 jdepend.addDirectory(classesDir.getAbsolutePath());
                 jdepend.analyze();
 
-                List<JavaPackage> projectPackagesOnly = filter(jdepend.getPackages(), groupId, skipPackagesSet);
+                List<JavaPackage> projectPackagesOnly =
+                        JDependUtil.filter(jdepend.getPackages(), mainPackage, skipPackagesSet);
 
-                final double standardDeviation = distanceStandardDeviation(projectPackagesOnly);
-                final double threshold = 2 * standardDeviation;
-
-                log.info("standardDeviation: " + standardDeviation + ", threshold: " + threshold);
+                log.info(String.format("standardDeviation: %.2f, threshold: %.2f",
+                        distanceStandardDeviation(projectPackagesOnly),
+                        threshold));
 
                 for (JavaPackage singleJavaPackage : projectPackagesOnly) {
-                    if (singleJavaPackage.getName().startsWith(groupId)) {
-                        double distanceFromMain = singleJavaPackage.distance();
+                    double distanceFromMain = singleJavaPackage.distance();
 
-                        // distance is greater than 2 standard deviations
-                        if (Double.compare(distanceFromMain, threshold) > 0) {
-                            log.warn(describePackageProblem(singleJavaPackage));
-                            // throw new EnforcerRuleException("DistanceFromMainSequenceRule violated");
+                    // distance is greater than 2 standard deviations
+                    if (Double.compare(distanceFromMain, threshold) >= 0) {
+
+                        String problemDesc = describePackageProblem(singleJavaPackage);
+
+                        if (failOnError) {
+                            throw new EnforcerRuleException(problemDesc);
+                        }
+                        else {
+                            log.warn(problemDesc);
                         }
                     }
                 }
             }
             else {
-                log.warn("Skipping jdepend analysis as a '" + classesDir + "' does not exist.");
+                log.warn("Skipping JDepend analysis as a '" + classesDir + "' does not exist.");
             }
         }
         catch (ExpressionEvaluationException expEx) {
@@ -69,9 +76,9 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
         }
     }
 
-    private static Set<String> createSkippedPackagesSet(String skipPackages){
+    private static Set<String> createSkippedPackagesSet(String skipPackages) {
 
-        if( skipPackages == null ){
+        if (skipPackages == null) {
             return Collections.emptySet();
         }
 
@@ -86,20 +93,7 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
         return skipPackagesSet;
     }
 
-    private static List<JavaPackage> filter(Collection allPackages, String groupId, Set<String> skipPackagesSet) {
-        List<JavaPackage> res = new ArrayList<>();
 
-        for (Object pckg : allPackages) {
-            JavaPackage singleJavaPackage = (JavaPackage) pckg;
-
-            // skip not project packages and utility packages
-            if (singleJavaPackage.getName().startsWith(groupId) &&
-                    !(skipPackagesSet.contains(singleJavaPackage.getName()))) {
-                res.add(singleJavaPackage);
-            }
-        }
-        return res;
-    }
 
     private static double distanceStandardDeviation(List<JavaPackage> packagesList) {
 
@@ -125,18 +119,28 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
 
     private static String describePackageProblem(JavaPackage singleJavaPackage) {
         if (Float.compare(singleJavaPackage.abstractness(), 0.5F) >= 0) {
-            return "'" + singleJavaPackage.getName() +
-                    "', is too abstract and is not used a lot [just remove]" +
-                    "[D = " + singleJavaPackage.distance() +
-                    ", A = " + singleJavaPackage.abstractness() +
-                    ", I = " + singleJavaPackage.instability() + "].";
+
+            return String.format("'%s', is too abstract [%d/%d] and is not used a lot [%d] [just remove]" +
+                            "[D = %.2f, A = %.2f, I = %.2f].",
+                    singleJavaPackage.getName(),
+                    singleJavaPackage.getAbstractClassCount(),
+                    singleJavaPackage.getClassCount(),
+                    singleJavaPackage.afferentCoupling(),
+                    singleJavaPackage.distance(),
+                    singleJavaPackage.abstractness(),
+                    singleJavaPackage.instability());
         }
 
-        return "'" + singleJavaPackage.getName() +
-                "', is very concrete and lot's of packages depends on it [make more abstract or reduce dependants]" +
-                "[D = " + singleJavaPackage.distance() +
-                ", A = " + singleJavaPackage.abstractness() +
-                ", I = " + singleJavaPackage.instability() + "].";
+        return String.format("'%s', is very concrete [%d/%d] and lot's of packages depends on it [%d] " +
+                        "[make more abstract or reduce dependants]" +
+                        "[D = %.2f, A = %.2f, I = %.2f].",
+                singleJavaPackage.getName(),
+                singleJavaPackage.getConcreteClassCount(),
+                singleJavaPackage.getClassCount(),
+                singleJavaPackage.afferentCoupling(),
+                singleJavaPackage.distance(),
+                singleJavaPackage.abstractness(),
+                singleJavaPackage.instability());
     }
 
     @Override

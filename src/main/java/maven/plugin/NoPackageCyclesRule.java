@@ -1,6 +1,7 @@
 package maven.plugin;
 
 import jdepend.framework.JDepend;
+import jdepend.framework.JavaPackage;
 import org.apache.maven.enforcer.rule.api.EnforcerRule;
 import org.apache.maven.enforcer.rule.api.EnforcerRuleException;
 import org.apache.maven.enforcer.rule.api.EnforcerRuleHelper;
@@ -12,9 +13,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 
 public final class NoPackageCyclesRule implements EnforcerRule {
+
+    private String mainPackage;
+    private boolean failOnError;
 
     @Override
     public void execute(@Nonnull EnforcerRuleHelper helper) throws EnforcerRuleException {
@@ -32,8 +39,24 @@ public final class NoPackageCyclesRule implements EnforcerRule {
                 jdepend.analyze();
 
                 if (jdepend.containsCycles()) {
-                    //TODO: show cyclic dependency here
-                    throw new EnforcerRuleException("There are package cycles");
+
+                    List<JavaPackage> projectPackagesOnly =
+                            JDependUtil.filter(jdepend.getPackages(), mainPackage, new HashSet<>());
+
+                    for (JavaPackage singleJavaPackage : projectPackagesOnly) {
+
+                        if (singleJavaPackage.containsCycle()) {
+                            List cycles = new ArrayList();
+                            singleJavaPackage.collectCycle(cycles);
+                            log.warn(String.format("Cycle detected for '%s': %s",
+                                    singleJavaPackage.getName(),
+                                    cycles));
+                        }
+                    }
+
+                    if (failOnError) {
+                        throw new EnforcerRuleException("Cycles detected");
+                    }
                 }
             }
             else {

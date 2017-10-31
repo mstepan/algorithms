@@ -14,7 +14,7 @@
         <quasar.version>0.7.3</quasar.version>
         <akka.actor.version>2.4.8</akka.actor.version>
         <rxjava.version>1.2.5</rxjava.version>
-        <jdepend.version>2.9.1</jdepend.version>
+        <jdepend.version>2.9.5</jdepend.version>
         <enforcer.api.version>1.4.1</enforcer.api.version>
     </properties>
 
@@ -43,9 +43,13 @@
                         <configuration>
                             <rules>
                                 <NoPackageCyclesRule
-                                        implementation="maven.plugin.NoPackageCyclesRule"/>
+                                        implementation="maven.plugin.NoPackageCyclesRule">
+                                    <mainPackage>com.max</mainPackage>
+                                </NoPackageCyclesRule>
                                 <DistanceFromMainSequenceRule
                                         implementation="maven.plugin.DistanceFromMainSequenceRule">
+                                    <mainPackage>com.max</mainPackage>
+                                    <threshold>0.5</threshold>
                                     <skipPackages>
                                         com.max.algs.util,
                                         com.max.algs.dto,
@@ -167,11 +171,14 @@
             <artifactId>maven-plugin-api</artifactId>
             <version>3.5.0</version>
         </dependency>
+
+        <!-- Fork of official JDepend version which support java 8 -->
         <dependency>
-            <groupId>jdepend</groupId>
+            <groupId>guru.nidi</groupId>
             <artifactId>jdepend</artifactId>
             <version>${jdepend.version}</version>
         </dependency>
+
 
         <!-- Akka actors -->
         <dependency>
