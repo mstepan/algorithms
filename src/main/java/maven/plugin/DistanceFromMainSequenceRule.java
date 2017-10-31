@@ -23,13 +23,7 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
     @Override
     public void execute(@Nonnull EnforcerRuleHelper helper) throws EnforcerRuleException {
 
-        String[] skipPackagesArr = skipPackages.trim().split(",");
-
-        Set<String> skipPackagesSet = new HashSet<>();
-
-        for (String packageToSkip : skipPackagesArr) {
-            skipPackagesSet.add(packageToSkip.trim());
-        }
+        Set<String> skipPackagesSet = createSkippedPackagesSet(skipPackages);
 
         Log log = helper.getLog();
 
@@ -73,6 +67,23 @@ public final class DistanceFromMainSequenceRule implements EnforcerRule {
         catch (IOException ioEx) {
             throw new EnforcerRuleException("Unable to access target directory " + ioEx.getLocalizedMessage(), ioEx);
         }
+    }
+
+    private static Set<String> createSkippedPackagesSet(String skipPackages){
+
+        if( skipPackages == null ){
+            return Collections.emptySet();
+        }
+
+        String[] skipPackagesArr = skipPackages.trim().split(",");
+
+        Set<String> skipPackagesSet = new HashSet<>();
+
+        for (String packageToSkip : skipPackagesArr) {
+            skipPackagesSet.add(packageToSkip.trim());
+        }
+
+        return skipPackagesSet;
     }
 
     private static List<JavaPackage> filter(Collection allPackages, String groupId, Set<String> skipPackagesSet) {
