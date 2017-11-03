@@ -43,6 +43,8 @@ public final class NoPackageCyclesRule implements EnforcerRule {
                     List<JavaPackage> projectPackagesOnly =
                             JDependUtil.filter(jdepend.getPackages(), mainPackage, new HashSet<>());
 
+                    log.warn("Total cycles count: " + countCyclesCount(projectPackagesOnly));
+
                     for (JavaPackage singleJavaPackage : projectPackagesOnly) {
 
                         if (singleJavaPackage.containsCycle()) {
@@ -51,6 +53,7 @@ public final class NoPackageCyclesRule implements EnforcerRule {
                             log.warn(String.format("Cycle detected for '%s': %s",
                                     singleJavaPackage.getName(),
                                     cycles));
+
                         }
                     }
 
@@ -69,6 +72,18 @@ public final class NoPackageCyclesRule implements EnforcerRule {
         catch (IOException ioEx) {
             throw new EnforcerRuleException("Unable to access target directory " + ioEx.getLocalizedMessage(), ioEx);
         }
+    }
+
+    private static int countCyclesCount(List<JavaPackage> packages) {
+        int packagesCnt = 0;
+        for (JavaPackage singleJavaPackage : packages) {
+
+            if (singleJavaPackage.containsCycle()) {
+                ++packagesCnt;
+            }
+        }
+
+        return packagesCnt;
     }
 
     @Override
