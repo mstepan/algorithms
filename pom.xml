@@ -52,6 +52,12 @@
                                     <mainPackage>com.max</mainPackage>
                                     <threshold>0.5</threshold>
                                 </DistanceFromMainSequenceRule>
+
+                                <StableDependencyRule
+                                        implementation="com.max.maven.design.checker.StableDependencyRule">
+                                    <mainPackage>com.max</mainPackage>
+                                </StableDependencyRule>
+
                             </rules>
                         </configuration>
                     </execution>
