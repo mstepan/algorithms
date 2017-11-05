@@ -7,6 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <google.guava.version>21.0</google.guava.version>
         <log4j.version>1.2.17</log4j.version>
         <jetty.version>7.2.0.v20101020</jetty.version>
@@ -29,13 +30,13 @@
                 <dependencies>
                     <dependency>
                         <groupId>com.max</groupId>
-                        <artifactId>algorithms</artifactId>
+                        <artifactId>maven-design-checker</artifactId>
                         <version>1.0.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
                 <executions>
                     <execution>
-                        <id>enforce-no-package-cycles</id>
+                        <id>maven-design-checker</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
@@ -43,26 +44,20 @@
                         <configuration>
                             <rules>
                                 <NoPackageCyclesRule
-                                        implementation="maven.plugin.NoPackageCyclesRule">
+                                        implementation="com.max.maven.design.checker.NoPackageCyclesRule">
                                     <mainPackage>com.max</mainPackage>
                                 </NoPackageCyclesRule>
                                 <DistanceFromMainSequenceRule
-                                        implementation="maven.plugin.DistanceFromMainSequenceRule">
+                                        implementation="com.max.maven.design.checker.DistanceFromMainSequenceRule">
                                     <mainPackage>com.max</mainPackage>
                                     <threshold>0.5</threshold>
-                                    <skipPackages>
-                                        com.max.algs.util,
-                                        com.max.algs.dto,
-                                        com.max.algs.string,
-                                        com.max.system,
-                                        com.max.algs.ds
-                                    </skipPackages>
                                 </DistanceFromMainSequenceRule>
                             </rules>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
 
 
             <!-- Java compile plugin -->
@@ -146,39 +141,12 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.apache.maven.enforcer</groupId>
-            <artifactId>enforcer-api</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-project</artifactId>
-            <version>3.0-alpha-2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-            <version>3.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-            <version>3.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
-            <version>3.5.0</version>
-        </dependency>
-
         <!-- Fork of official JDepend version which support java 8 -->
         <dependency>
             <groupId>guru.nidi</groupId>
             <artifactId>jdepend</artifactId>
             <version>${jdepend.version}</version>
         </dependency>
-
 
         <!-- Akka actors -->
         <dependency>
