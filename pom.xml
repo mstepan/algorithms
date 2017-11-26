@@ -459,6 +459,14 @@
             <version>3.4.2</version>
         </dependency>
 
+        <!-- EqualsTester -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-testlib</artifactId>
+            <version>23.5-jre</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <repositories>
