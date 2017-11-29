@@ -63,9 +63,10 @@ public class BinarySearchBenchmark {
         int hi = arr.length - 1;
         int mid;
 
-        while ((hi - lo + 1) > 2) {
+        while (lo != hi) {
 
-            mid = (lo + hi) >>> 1;
+            // mid = ceil( (lo + hi)/ 2 )
+            mid = ((lo + hi) >>> 1) + ((lo + hi) & 1);
 
             if (arr[mid] > value) {
                 hi = mid - 1;
@@ -78,10 +79,6 @@ public class BinarySearchBenchmark {
 
         if (arr[lo] == value) {
             return lo;
-        }
-
-        if (arr[hi] == value) {
-            return hi;
         }
 
         return -1;
@@ -124,8 +121,8 @@ public class BinarySearchBenchmark {
 
             arr2 = Arrays.copyOf(arr1, arr1.length);
 
-            // select any element randomly from index [0; 999]
-            searchElement = arr1[RAND.nextInt(1000)];
+            // select any element randomly from index [0; 9_999]
+            searchElement = arr1[RAND.nextInt(ARR_LENGTH)];
         }
 
         @TearDown(Level.Invocation)
