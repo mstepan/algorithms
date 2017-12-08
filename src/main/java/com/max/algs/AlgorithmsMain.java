@@ -12,6 +12,7 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() {
 
+
         LOG.info("AlgorithmsMain done...");
     }
 
