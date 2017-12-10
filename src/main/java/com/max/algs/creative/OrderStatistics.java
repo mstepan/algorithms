@@ -16,6 +16,33 @@ final class OrderStatistics {
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
     /**
+     * N - arr.length
+     * K - order
+     * <p>
+     * time: O(K*N)
+     * space: O(1)
+     */
+    private static int orderStatisticsBruteforce(int[] arr, int order) {
+        checkNotNull(arr);
+        checkArgument(order >= 0 && order < arr.length);
+
+        for (int i = 0; i <= order; ++i) {
+
+            int minIndex = i;
+
+            for (int j = i + 1; j < arr.length; ++j) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            ArrayUtils.swap(arr, minIndex, i);
+        }
+
+        return arr[order];
+    }
+
+    /**
      * time: O(N)
      * space: O(1)
      */
@@ -78,14 +105,17 @@ final class OrderStatistics {
     private OrderStatistics() {
 
         for (int it = 0; it < 10; ++it) {
-            final int[] arr1 = ArrayUtils.generateRandomArray(10_000);
+            final int[] arr1 = ArrayUtils.generateRandomArray(1000);
             final int[] arr2 = Arrays.copyOf(arr1, arr1.length);
+            final int[] arr3 = Arrays.copyOf(arr1, arr1.length);
             Arrays.sort(arr2);
 
             for (int k = 0; k < arr1.length; ++k) {
                 int value = orderStatistics(arr1, k);
 
-                if (value != arr2[k]) {
+                int value1 = orderStatisticsBruteforce(arr3, k);
+
+                if (value != arr2[k] || value1 != arr2[k]) {
                     throw new AssertionError("Incorrect order statistics returned: expected = " +
                             arr2[k] + ", actual = " + value);
                 }

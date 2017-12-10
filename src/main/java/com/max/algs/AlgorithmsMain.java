@@ -12,6 +12,14 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() {
 
+        String base = "hello wonderful world";
+        String pattern = "wonder";
+
+        int index = base.indexOf(pattern);
+
+        base.contains(pattern);
+
+        LOG.info("index = " + index);
 
         LOG.info("AlgorithmsMain done...");
     }
