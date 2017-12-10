@@ -10,16 +10,9 @@ public final class AlgorithmsMain {
 
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
 
+
     private AlgorithmsMain() {
 
-        String base = "hello wonderful world";
-        String pattern = "wonder";
-
-        int index = base.indexOf(pattern);
-
-        base.contains(pattern);
-
-        LOG.info("index = " + index);
 
         LOG.info("AlgorithmsMain done...");
     }
