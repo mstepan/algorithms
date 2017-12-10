@@ -5,6 +5,7 @@ import com.max.algs.string.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public final class BoyerMooreMatching {
             return base.equals(pattern) ? 0 : -1;
         }
 
-        Map<Character, Integer> offset = calculateOffsets(pattern);
+        final Map<Character, Integer> offset = calculateOffsets(pattern);
 
         final int patternLength = pattern.length();
         final int last = patternLength - 1;
@@ -44,26 +45,28 @@ public final class BoyerMooreMatching {
         int j = last;
 
         while (i < base.length()) {
+
             if (base.charAt(i) == pattern.charAt(j)) {
+
+                if (j == 0) {
+                    return i;
+                }
+
                 --i;
                 --j;
-
-                if (j < 0) {
-                    return i + 1;
-                }
             }
             else {
-                int index = offset.getOrDefault(base.charAt(j), -1);
+                int index = offset.getOrDefault(base.charAt(i), -1);
 
-                // not found
+                // base[i] not found, shift a whole pattern
                 if (index == -1) {
                     i += patternLength;
-                    j = last;
                 }
                 else {
-                    i += (index < j) ? (patternLength - index - 1) : patternLength;
-                    j = last;
+                    i += (index < j) ? (last - index) : (last - j + 1);
                 }
+
+                j = last;
             }
         }
 
@@ -80,7 +83,7 @@ public final class BoyerMooreMatching {
             offsets.put(pattern.charAt(i), i);
         }
 
-        return offsets;
+        return Collections.unmodifiableMap(offsets);
     }
 
 
@@ -96,9 +99,14 @@ public final class BoyerMooreMatching {
             if (expectedIndex != actualIndex) {
                 throw new AssertionError("expected = " + expectedIndex + ", actual = " + actualIndex);
             }
-
-            LOG.info("passed: " + expectedIndex);
         }
+
+//
+//        String base = "xyxxyxxyyxyxyxyyxyxyxx";
+//        String pattern = "xyxyyxyxyxx";
+//
+//        int index = indexOf(base, pattern);
+//        LOG.info("expected = " + base.indexOf(pattern) + ", actual = " + index);
 
         LOG.info("BoyerMooreMatching done...");
     }
