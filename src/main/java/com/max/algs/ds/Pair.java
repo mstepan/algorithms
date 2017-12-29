@@ -29,7 +29,6 @@ public class Pair<K, V> implements Serializable {
     private int hash;
 
     public Pair(K first, V second) {
-        super();
         this.first = first;
         this.second = second;
     }
