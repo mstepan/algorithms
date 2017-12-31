@@ -47,19 +47,44 @@ public final class ShortestPathInGraphMain {
 
     private ShortestPathInGraphMain() {
 
-        String[] labels = generateVertexesLabels(10_000);
+        for (int it = 0; it < 100; ++it) {
+            String[] labels = generateVertexesLabels(10_000);
 
-        DirectAcyclicGraph graph = DagGenerator.generate(labels);
+            DirectAcyclicGraph graph = DagGenerator.generate(labels);
 
-        if (!graph.isConnected()) {
-            throw new IllegalStateException("DAG not connected");
+            if (!graph.isConnected()) {
+                throw new IllegalStateException("DAG not connected");
+            }
+
+            String src = labels[0];
+            String dest = labels[labels.length - 1];
+
+            int simpleShortestPath = graph.shortestPath(src, dest);
+            int dijkstraShortestPath = graph.shortestPathDijkstra(src, dest);
+
+            if( simpleShortestPath != dijkstraShortestPath ){
+                throw new IllegalStateException("Paths aren't equals: simple = " + simpleShortestPath +
+                        ", dijkstra = " + dijkstraShortestPath);
+            }
         }
 
-        String src = labels[0];
-        String dest = labels[labels.length - 1];
-
-        LOG.info("pathWeight: " + graph.shortestPath(src, dest));
-        LOG.info("pathDijkstra: " + graph.shortestPathDijkstra(src, dest));
+//        String src = "A";
+//        String dest = "E";
+//
+//        DirectAcyclicGraph graph = new DirectAcyclicGraph();
+//
+//        graph.addVertex("A");
+//        graph.addVertex("B");
+//        graph.addVertex("C");
+//        graph.addVertex("D");
+//        graph.addVertex("E");
+//
+//        graph.addEdge("A", "B", 1);
+//        graph.addEdge("A", "C", 2);
+//        graph.addEdge("B", "D", 5);
+//        graph.addEdge("C", "D", 1);
+//        graph.addEdge("D", "E", 1);
+//        graph.addEdge("C", "E", 8);
 
 
         LOG.info("ShortestPathInGraphMain done...");

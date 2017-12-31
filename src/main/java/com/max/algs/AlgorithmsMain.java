@@ -4,6 +4,7 @@ package com.max.algs;
 import org.apache.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
 
 
 public final class AlgorithmsMain {
@@ -12,6 +13,7 @@ public final class AlgorithmsMain {
 
 
     private AlgorithmsMain() {
+
 
         LOG.info("AlgorithmsMain done...");
     }

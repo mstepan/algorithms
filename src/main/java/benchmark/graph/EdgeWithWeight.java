@@ -1,11 +1,8 @@
 package benchmark.graph;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 final class EdgeWithWeight {
-
-    static Comparator<EdgeWithWeight> WEIGHT_ASC_CMP = Comparator.comparingInt(val -> val.weight);
 
     final String dest;
     final int weight;
