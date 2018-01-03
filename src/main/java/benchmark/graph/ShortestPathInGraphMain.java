@@ -12,8 +12,8 @@ public final class ShortestPathInGraphMain {
 
     private ShortestPathInGraphMain() {
 
-        for (int it = 0; it < 100; ++it) {
-            String[] labels = ShortestPathInGraphBenchmark.generateVertexesLabels(10_000);
+        for (int it = 0; it < 10; ++it) {
+            String[] labels = ShortestPathInGraphBenchmark.generateVertexesLabels(1000);
 
             DirectAcyclicGraph graph = DagGenerator.generate(labels);
 
@@ -26,10 +26,15 @@ public final class ShortestPathInGraphMain {
 
             int simpleShortestPath = graph.shortestPath(src, dest);
             int dijkstraShortestPath = graph.shortestPathDijkstra(src, dest);
+            int allPairsShortestPath = graph.shortestPathAllPairs(src, dest);
 
-            if (simpleShortestPath != dijkstraShortestPath) {
+            if (simpleShortestPath != dijkstraShortestPath || simpleShortestPath != allPairsShortestPath) {
                 throw new IllegalStateException("Paths aren't equals: simple = " + simpleShortestPath +
-                        ", dijkstra = " + dijkstraShortestPath);
+                        ", dijkstra = " + dijkstraShortestPath + ", allPairs: " + allPairsShortestPath);
+            }
+            else {
+                LOG.info("simple = " + simpleShortestPath +
+                        ", dijkstra = " + dijkstraShortestPath + ", allPairs: " + allPairsShortestPath);
             }
         }
 

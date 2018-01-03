@@ -33,6 +33,9 @@ final class DirectAcyclicGraph {
         return marked.size() == adjList.size();
     }
 
+    int shortestPathAllPairs(String src, String dest) {
+        return FloydWarshallAllPairsPath.calculateShortestPath(src, dest, adjList);
+    }
 
     int shortestPathDijkstra(String src, String dest) {
         return DijkstraShortestPath.shortestPath(src, dest, adjList);

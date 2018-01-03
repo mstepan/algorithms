@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Fork(5)
 public class ShortestPathInGraphBenchmark {
 
-    private static final int GRAPH_VERTEXES_COUNT = 10_000;
+    private static final int GRAPH_VERTEXES_COUNT = 1000;
 
     private static final Random RAND = ThreadLocalRandom.current();
 
@@ -37,6 +37,13 @@ public class ShortestPathInGraphBenchmark {
     @GroupThreads(4)
     public void dijkstra(RandomDag state) {
         state.graph.shortestPathDijkstra(state.src, state.dest);
+    }
+
+    @Benchmark
+    @Group("floydWarshall")
+    @GroupThreads(4)
+    public void floydWarshall(RandomDag state) {
+        state.graph.shortestPathAllPairs(state.src, state.dest);
     }
 
     @State(Scope.Thread)
