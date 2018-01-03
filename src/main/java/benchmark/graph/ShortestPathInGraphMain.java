@@ -32,10 +32,6 @@ public final class ShortestPathInGraphMain {
                 throw new IllegalStateException("Paths aren't equals: simple = " + simpleShortestPath +
                         ", dijkstra = " + dijkstraShortestPath + ", allPairs: " + allPairsShortestPath);
             }
-            else {
-                LOG.info("simple = " + simpleShortestPath +
-                        ", dijkstra = " + dijkstraShortestPath + ", allPairs: " + allPairsShortestPath);
-            }
         }
 
 //        String src = "A";

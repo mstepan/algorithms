@@ -1,7 +1,7 @@
 package benchmark.graph;
 
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,22 +10,25 @@ final class FloydWarshallAllPairsPath {
     private FloydWarshallAllPairsPath() {
         throw new AssertionError("Can't instantiate utility only class");
     }
-
-
+    
     /**
      * All pairs shortest path using Floyd-Warshall.
+     * <p>
+     * time: O(V^3)
+     * space: O(V^2)
      */
-    static int calculateShortestPath(String src, String dest,
-                                     Map<String, List<EdgeWithWeight>> adjList) {
+    static int calculateShortestPath(String src, String dest, Map<String, List<EdgeWithWeight>> adjList) {
 
-        String[] vertexes = vertexesArr(adjList);
+        final int vertexesCount = adjList.size();
 
-        int[][] allPaths = initialPathsArray(vertexes, adjList);
+        Map<String, Integer> vertexToIndexMap = createVertexToIndexMap(adjList);
 
-        for (int m = 0; m < vertexes.length; ++m) {
+        int[][] allPaths = initialPathsArray(adjList, vertexToIndexMap);
 
-            for (int i = 0; i < vertexes.length; ++i) {
-                for (int j = 0; j < vertexes.length; ++j) {
+        for (int m = 0; m < vertexesCount; ++m) {
+
+            for (int i = 0; i < vertexesCount; ++i) {
+                for (int j = 0; j < vertexesCount; ++j) {
 
                     if (allPaths[i][m] != Integer.MAX_VALUE && allPaths[m][j] != Integer.MAX_VALUE) {
                         int newPath = allPaths[i][m] + allPaths[m][j];
@@ -38,72 +41,44 @@ final class FloydWarshallAllPairsPath {
             }
         }
 
-        int srcIndex = 0;
-        int destIndex = 0;
-
-        for (int i = 0; i < vertexes.length; ++i) {
-            if (vertexes[i].equals(src)) {
-                srcIndex = i;
-            }
-            else if (vertexes[i].equals(dest)) {
-                destIndex = i;
-            }
-        }
-
-        return allPaths[srcIndex][destIndex];
+        return allPaths[vertexToIndexMap.get(src)][vertexToIndexMap.get(dest)];
     }
 
-    private static int[][] initialPathsArray(String[] vertexes, Map<String, List<EdgeWithWeight>> adjList) {
-        int[][] allPaths = new int[vertexes.length][vertexes.length];
+    private static int[][] initialPathsArray(Map<String, List<EdgeWithWeight>> adjList,
+                                             Map<String, Integer> vertexToIndexMap) {
+        int[][] allPaths = new int[vertexToIndexMap.size()][vertexToIndexMap.size()];
 
         for (int i = 0; i < allPaths.length; ++i) {
             Arrays.fill(allPaths[i], Integer.MAX_VALUE);
+            allPaths[i][i] = 0;
         }
 
-        for (int i = 0; i < vertexes.length; ++i) {
-            for (int j = 0; j < vertexes.length; ++j) {
-                if (i == j) {
-                    allPaths[i][j] = 0;
-                }
-                else {
-                    EdgeWithWeight edge = getEdgeWeight(vertexes[i], vertexes[j], adjList);
+        for (Map.Entry<String, List<EdgeWithWeight>> entry : adjList.entrySet()) {
+            for (EdgeWithWeight singleEdge : entry.getValue()) {
 
-                    if (edge != null) {
-                        allPaths[i][j] = edge.weight;
-                    }
-                }
+                int srcIndex = vertexToIndexMap.get(entry.getKey());
+                int destIndex = vertexToIndexMap.get(singleEdge.dest);
+
+                allPaths[srcIndex][destIndex] = singleEdge.weight;
             }
         }
+
 
         return allPaths;
     }
 
-    private static EdgeWithWeight getEdgeWeight(String src, String dest,
-                                                Map<String, List<EdgeWithWeight>> adjList) {
+    private static Map<String, Integer> createVertexToIndexMap(Map<String, List<EdgeWithWeight>> adjList) {
 
-        List<EdgeWithWeight> edges = adjList.get(src);
+        Map<String, Integer> vertexToIndexMap = new HashMap<>();
 
-        for (EdgeWithWeight singleEdge : edges) {
-            if (singleEdge.dest.equals(dest)) {
-                return singleEdge;
-            }
+        int index = 0;
+
+        for (String ver : adjList.keySet()) {
+            vertexToIndexMap.put(ver, index);
+            ++index;
         }
 
-        return null;
-    }
-
-
-    private static String[] vertexesArr(Map<String, List<EdgeWithWeight>> adjList) {
-        String[] vertexes = new String[adjList.size()];
-
-        Iterator<String> it = adjList.keySet().iterator();
-
-        for (int i = 0; i < vertexes.length; ++i) {
-            assert it.hasNext();
-            vertexes[i] = it.next();
-        }
-
-        return vertexes;
+        return vertexToIndexMap;
     }
 
 
