@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit;
  * Micro benchmark for shortest path in DAG using topological sorting and Dijkstra algorithms.
  */
 @State(Scope.Group)
-@OutputTimeUnit(TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.MILLISECONDS)
 @Fork(5)
 public class ShortestPathInGraphBenchmark {
 
-    private static final int GRAPH_VERTEXES_COUNT = 1000;
+    private static final int GRAPH_VERTEXES_COUNT = 100;
 
     private static final Random RAND = ThreadLocalRandom.current();
 

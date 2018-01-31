@@ -12,8 +12,15 @@ public final class ShortestPathInGraphMain {
 
     private ShortestPathInGraphMain() {
 
-        for (int it = 0; it < 10; ++it) {
-            String[] labels = ShortestPathInGraphBenchmark.generateVertexesLabels(1000);
+        /*
+
+        opower x-web x-web-dependencies communications libraries x-web-widgets x-web-themes eng-main eng
+        points-and-rewards batch thermostats x-web-infrastructure smb inbound x-web-sdk csr-advisor otf inside tips
+
+         */
+
+        for (int it = 0; it < 1; ++it) {
+            String[] labels = ShortestPathInGraphBenchmark.generateVertexesLabels(10_000);
 
             DirectAcyclicGraph graph = DagGenerator.generate(labels);
 

@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-final class FloydWarshallAllPairsPath {
+final class AllPairsShortestPath {
 
-    private FloydWarshallAllPairsPath() {
+    private AllPairsShortestPath() {
         throw new AssertionError("Can't instantiate utility only class");
     }
-    
+
     /**
      * All pairs shortest path using Floyd-Warshall.
      * <p>
@@ -80,6 +80,5 @@ final class FloydWarshallAllPairsPath {
 
         return vertexToIndexMap;
     }
-
 
 }
