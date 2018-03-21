@@ -98,8 +98,9 @@ public final class PartitionSetUtils {
         }
 
         while (queue.size() > 1) {
-            int dif = queue.poll() - queue.poll();
-            queue.add(dif);
+            final int first = queue.poll();
+            final int second = queue.poll();
+            queue.add(first - second);
         }
 
         return queue.poll();

@@ -22,8 +22,8 @@ public final class NewShiftAndMatcher {
      */
     public static int find(String pattern, String text) {
 
-        checkArgument(pattern != null, "null 'pattern' passed");
-        checkNotNull(text != null, "null 'text' passed");
+        checkNotNull(pattern, "null 'pattern' passed");
+        checkNotNull(text, "null 'text' passed");
         checkArgument(pattern.length() <= MAX_PATTERN_LENGTH);
 
         int patternMask = 1 << (pattern.length() - 1);

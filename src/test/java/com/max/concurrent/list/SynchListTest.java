@@ -88,7 +88,7 @@ public class SynchListTest {
                                 }
                             }
 
-                            assertTrue(1 == 2);
+                            assertTrue(false);
 
                             for (Integer key : uniqueElems.keySet()) {
                                 assertTrue(list.contains(key));

@@ -39,7 +39,7 @@ final class RopeMidNode implements RopeNode {
     @Override
     public char getChar(int index) {
         if (index < length) {
-            checkNotNull(left != null);
+            checkNotNull(left);
             return left.getChar(index);
         }
 

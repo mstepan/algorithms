@@ -48,7 +48,7 @@ public final class DiningPhilosophersChandyMisra {
         ExecutorService pool = Executors.newFixedThreadPool(philosophersCnt);
 
         Lock[] forks = new ReentrantLock[philosophersCnt];
-        Arrays.fill(forks, new Stick());
+        Arrays.fill(forks, new ReentrantLock());
 
         List<Future<Integer>> futures = new ArrayList<>();
 
