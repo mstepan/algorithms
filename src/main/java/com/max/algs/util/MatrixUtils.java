@@ -1,7 +1,7 @@
 package com.max.algs.util;
 
+import com.max.algs.ds.Pair;
 import com.max.algs.ds.heap.BinaryHeap;
-import org.apache.commons.math3.util.Pair;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;

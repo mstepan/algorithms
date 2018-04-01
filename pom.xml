@@ -11,7 +11,6 @@
         <google.guava.version>21.0</google.guava.version>
         <log4j.version>1.2.17</log4j.version>
         <jetty.version>7.2.0.v20101020</jetty.version>
-        <jmh.version>1.17.3</jmh.version>
         <quasar.version>0.7.3</quasar.version>
         <akka.actor.version>2.4.8</akka.actor.version>
         <rxjava.version>1.2.5</rxjava.version>
@@ -233,29 +232,6 @@
             <groupId>co.paralleluniverse</groupId>
             <artifactId>quasar-reactive-streams</artifactId>
             <version>${quasar.version}</version>
-        </dependency>
-
-        <!-- Java microbenchmark harness -->
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>${jmh.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>${jmh.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <!-- java object layout
-        see: http://openjdk.java.net/projects/code-tools/jol/
-        -->
-        <dependency>
-            <groupId>org.openjdk.jol</groupId>
-            <artifactId>jol-core</artifactId>
-            <version>0.4-SNAPSHOT</version>
         </dependency>
 
         <!-- Contract annotations -->
