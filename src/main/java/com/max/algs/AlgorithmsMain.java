@@ -1,36 +1,28 @@
 package com.max.algs;
 
 
-import java.lang.invoke.MethodHandles;
-
 import org.apache.log4j.Logger;
-
 
 public final class AlgorithmsMain {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
 
-    private AlgorithmsMain() {
+    private AlgorithmsMain() throws Exception {
 
+        Treap data = new Treap();
 
-        LOG.info("AlgorithmsMain done...");
-    }
-
-    private static void reverse(int[] arr) {
-        int left = 0;
-        int right = arr.length - 1;
-
-        while (left < right) {
-            int temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
-
-            ++left;
-            --right;
+        for (int i = 0; i < 10; ++i) {
+            data.add(i);
         }
-    }
 
+        for (int i = 0; i < 20; ++i) {
+            LOG.info("data.contains(" + i + "): " + data.contains(i));
+        }
+
+        LOG.info("Main completed.");
+
+    }
 
     public static void main(String[] args) {
         try {
@@ -40,4 +32,5 @@ public final class AlgorithmsMain {
             LOG.error(ex.getMessage(), ex);
         }
     }
+
 }
