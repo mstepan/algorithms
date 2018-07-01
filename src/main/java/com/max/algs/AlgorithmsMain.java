@@ -10,15 +10,6 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() throws Exception {
 
-        Treap data = new Treap();
-
-        for (int i = 0; i < 10; ++i) {
-            data.add(i);
-        }
-
-        for (int i = 0; i < 20; ++i) {
-            LOG.info("data.contains(" + i + "): " + data.contains(i));
-        }
 
         LOG.info("Main completed.");
 

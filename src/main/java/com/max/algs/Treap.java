@@ -5,30 +5,30 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static com.google.common.base.Preconditions.checkState;
 
-public final class Treap {
+public final class Treap<T extends Comparable<T>> {
 
     private static final Random RAND = ThreadLocalRandom.current();
 
     // TODO: use sentinel here,new Node(0, Integer.MAX_VALUE);
-    private Node root;
+    private Node<T> root;
 
     private int size;
 
-    public boolean add(int value) {
+    public boolean add(T value) {
         if (root == null) {
-            root = new Node(value, RAND.nextInt());
+            root = new Node<>(value, RAND.nextInt());
         }
         else {
-            Node nodeOrParent = findNodeOrParent(value);
+            Node<T> nodeOrParent = findNodeOrParent(value);
 
             if (nodeOrParent.value == value) {
                 return false;
             }
 
-            Node newNode = new Node(value, RAND.nextInt());
+            Node<T> newNode = new Node<>(value, RAND.nextInt());
             newNode.parent = nodeOrParent;
 
-            if (value < nodeOrParent.value) {
+            if (value.compareTo(nodeOrParent.value) < 0) {
                 nodeOrParent.left = newNode;
             }
             else {
@@ -42,8 +42,8 @@ public final class Treap {
         return true;
     }
 
-    public boolean contains(int value) {
-        return findNodeOrParent(value).value == value;
+    public boolean contains(T value) {
+        return findNodeOrParent(value).value.compareTo(value) == 0;
     }
 
     public int size() {
@@ -54,44 +54,45 @@ public final class Treap {
         return size == 0;
     }
 
-    private Node findNodeOrParent(int value) {
+    private Node<T> findNodeOrParent(T value) {
 
-        Node parent = null;
-        Node cur = root;
+        Node<T> parent = null;
+        Node<T> cur = root;
 
         while (cur != null) {
 
-            if (cur.value == value) {
+            if (cur.value.compareTo(value) == 0) {
                 return cur;
             }
 
             parent = cur;
 
-            cur = (value < cur.value) ? cur.left : cur.right;
+            cur = (value.compareTo(cur.value) < 0) ? cur.left : cur.right;
         }
 
+        checkState(parent != null);
         return parent;
     }
 
     /**
      * Rotate current node till max heap property satisfied.
      */
-    private void rotateToSatisfyHeapConstraint(Node cur) {
+    private void rotateToSatisfyHeapConstraint(Node<T> cur) {
         while (cur.parent != null && cur.parent.priority < cur.priority) {
             moveUp(cur);
         }
 
-        if( cur.parent == null ){
+        if (cur.parent == null) {
             root = cur;
         }
     }
 
-    private void moveUp(Node cur) {
+    private void moveUp(Node<T> cur) {
 
         checkState(cur.parent != null);
 
-        Node upNode = cur.parent;
-        Node parent = upNode.parent;
+        Node<T> upNode = cur.parent;
+        Node<T> parent = upNode.parent;
 
         if (parent == null) {
             root = cur;
@@ -128,15 +129,15 @@ public final class Treap {
         }
     }
 
-    private static class Node {
-        Node left;
-        Node right;
-        Node parent;
+    private static class Node<U extends Comparable<U>> {
+        Node<U> left;
+        Node<U> right;
+        Node<U> parent;
 
-        final int value;
+        final U value;
         final int priority;
 
-        Node(int value, int priority) {
+        Node(U value, int priority) {
             this.value = value;
             this.priority = priority;
         }
