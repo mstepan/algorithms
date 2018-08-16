@@ -1,28 +1,30 @@
 package com.max.algs;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class TreapTest {
+class TreapTest {
 
     @Test
-    public void addRandomData() {
+    @DisplayName("Add random values to a treap")
+    void addRandomData() {
 
-        final Random rand = ThreadLocalRandom.current();
+        Random rand = ThreadLocalRandom.current();
 
         for (int it = 0; it < 10; ++it) {
 
-            final Set<Integer> expected = new HashSet<>();
-            final Treap<Integer> actual = new Treap<>();
+            Set<Integer> expected = new HashSet<>();
+            Treap<Integer> actual = new Treap<>();
 
             for (int i = 0; i < 1000; ++i) {
                 int randValue = rand.nextInt();

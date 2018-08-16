@@ -1,21 +1,22 @@
 package com.max.algs.util;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BitUtilsTest {
 
+class BitUtilsTest {
 
     @Test
-    public void msb() {
-        final Random rand = new Random();
+    void msb() {
+        Random rand = new Random();
 
-        for (int i = 0; i < 1_000_000; i++) {
+        for (int it = 0; it < 1_000_000; ++it) {
 
             int value = rand.nextInt();
             String binaryValue = Integer.toBinaryString(value);
@@ -27,7 +28,7 @@ public class BitUtilsTest {
     }
 
     @Test
-    public void nextWithSameNoOfBitsSet() {
+    void nextWithSameNoOfBitsSet() {
         assertEquals(0, BitUtils.nextWithSameNoOfBitsSet(0));
         assertNextWithSameNoOfBitsSet(1);
         assertNextWithSameNoOfBitsSet(2);
@@ -35,7 +36,6 @@ public class BitUtilsTest {
         assertNextWithSameNoOfBitsSet(4);
         assertNextWithSameNoOfBitsSet(5);
     }
-
 
     private void assertNextWithSameNoOfBitsSet(int bitsSetCount) {
 
