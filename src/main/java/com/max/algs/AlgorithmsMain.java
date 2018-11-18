@@ -2,137 +2,178 @@ package com.max.algs;
 
 
 import org.apache.log4j.Logger;
+import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.IntUnaryOperator;
 
 public final class AlgorithmsMain {
 
     private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
-
     private AlgorithmsMain() throws Exception {
 
-        int[] scores = {100, 100, 50, 40, 40, 20, 10};
-        int[] alice = {5, 25, 50, 120};
+        final Random rand = new Random();
 
-        Thread th1 = new Thread(() -> {
-            int[] res = climbingLeaderboard(scores, alice);
-            System.out.println(Arrays.toString(res));
-        });
+        final Class<?> clazz = org.eclipse.collections.impl.set.mutable.primitive.IntHashSet.class;
 
-        Thread th2 = new Thread(() -> {
-            sleep(1L);
-            scores[0] = -100;
-            alice[0] = 155;
-        });
+        LOG.info(clazz + " loaded");
 
-        th1.start();
-        th2.start();
+        for (int it = 0; it < 1000; ++it) {
+            int a = rand.nextInt(1_000_000_000);
+            int b = rand.nextInt(1_000_000_000);
+            int m = rand.nextInt(1_000_000_000);
+            int x0 = rand.nextInt(1_000_000_000);
 
-        th1.join();
-        th2.join();
+            IntUnaryOperator func = x -> (((a % m) * (x % m)) % m + (b % m)) % m;
+//        IntUnaryOperator func = x -> (a * x + b) % m;
 
-        LOG.info("Main completed.");
-    }
+            FunctionCycle floydsCycle = findCycleWithFloyds(func, x0);
 
-    private static void sleep(long seconds) {
-        try {
-            TimeUnit.SECONDS.sleep(seconds);
+            FunctionCycle hashCycle = findCycleWithHashing(func, x0);
+
+            FunctionCycle brentsCycle = findCycleWithBrents(func, x0);
+
+            if (!(floydsCycle.equals(hashCycle) && floydsCycle.equals(brentsCycle) && hashCycle.equals(brentsCycle))) {
+                throw new IllegalStateException("Bug detected. hashCycle:  " + hashCycle +
+                        ", floydsCycle: " + floydsCycle +
+                        ", brentsCycle: " + brentsCycle);
+            }
         }
-        catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-            throw new IllegalStateException("Thread interrupted", ex);
-        }
+
+        LOG.info("Main done... java-" + System.getProperty("java.version"));
     }
 
     /**
-     * N = scores.length
-     * M = alice.length
-     * <p>
-     * time: O(M*lgN)
-     * space:O(M+N)
+     * Find function cycle using Brent's cycle detection algorithm.
      */
-    static int[] climbingLeaderboard(int[] scoresOriginal, int[] aliceOriginal) {
+    private static FunctionCycle findCycleWithBrents(IntUnaryOperator func, int x0) {
 
-        checkArgument(scoresOriginal != null, "null scores passed");
-        checkArgument(aliceOriginal != null, "null alice passed");
+        int power = 1;
+        int lam = 1;
 
-        final int[] scores = scoresOriginal; //Arrays.copyOf(scoresOriginal, scoresOriginal.length);
-        final int[] alice = aliceOriginal; //Arrays.copyOf(aliceOriginal, aliceOriginal.length);
+        int t = x0;
+        int h = func.applyAsInt(x0);
 
-        sleep(2);
+        // 'lam' will be equal to cycle length at the end of iteration
+        while (t != h) {
+            if (power == lam) {
+                t = h;
+                power <<= 1;
+                lam = 0;
+            }
 
-        int[] ranks = new int[scores.length];
-        ranks[0] = 1;
-
-        for (int i = 1; i < ranks.length; ++i) {
-            checkState(scores[i] <= scores[i - 1], "Not a decreased array detected");
-            ranks[i] = (scores[i] == scores[i - 1] ? ranks[i - 1] : ranks[i - 1] + 1);
+            h = func.applyAsInt(h);
+            ++lam;
         }
 
-        int[] aliceRanks = new int[alice.length];
+        final int cycleLength = lam;
 
-        for (int i = 0; i < alice.length; ++i) {
-            int curScore = alice[i];
+        t = x0;
+        h = x0;
 
-            int index = find(scores, curScore);
-
-            // curScore is the biggest element so far
-            if (index == -1) {
-                aliceRanks[i] = 1;
-            }
-            // curScore is the smallest
-            else if (index == scores.length) {
-                aliceRanks[i] = ranks[ranks.length - 1] + 1;
-            }
-            // we found curScore in array of scores or
-            // we found the first bigger element index
-            else {
-                aliceRanks[i] = curScore == scores[index] ? ranks[index] : ranks[index] + 1;
-            }
+        // find star point for cycle
+        for (int i = 0; i < lam; ++i) {
+            h = func.applyAsInt(h);
         }
 
-        return aliceRanks;
+        while (t != h) {
+            t = func.applyAsInt(t);
+            h = func.applyAsInt(h);
+        }
+
+        return new FunctionCycle(t, cycleLength);
     }
 
-    private static int find(int[] arr, int searchValue) {
+    /**
+     * Find function cycle using HashSet
+     */
+    private static FunctionCycle findCycleWithHashing(IntUnaryOperator func, int x0) {
 
-        if (searchValue > arr[0]) {
-            return -1;
+        IntHashSet detectedValues = new IntHashSet();
+        int curValue = x0;
+
+        while (!detectedValues.contains(curValue)) {
+            detectedValues.add(curValue);
+            curValue = func.applyAsInt(curValue);
         }
 
-        if (searchValue < arr[arr.length - 1]) {
-            return arr.length;
+        final int startPoint = curValue;
+
+        curValue = func.applyAsInt(curValue);
+        int length = 1;
+
+        while (curValue != startPoint) {
+            curValue = func.applyAsInt(curValue);
+            ++length;
         }
 
-        int from = 0;
-        int to = arr.length - 1;
+        return new FunctionCycle(startPoint, length);
+    }
 
-        int lastIndex = 0;
+    /**
+     * Find function cycle using Floyd's cycle detection algorithm.
+     */
+    private static FunctionCycle findCycleWithFloyds(IntUnaryOperator func, int x0) {
 
-        while (from <= to) {
-            int mid = from + (to - from) / 2;
+        int t = func.applyAsInt(x0);
+        int h = func.applyAsInt(t);
 
-            if (arr[mid] == searchValue) {
-                return mid;
-            }
-
-            if (arr[mid] > searchValue) {
-                lastIndex = mid;
-                from = mid + 1;
-            }
-            else {
-                to = mid - 1;
-            }
+        // find point inside the cycle
+        while (t != h) {
+            t = func.applyAsInt(t);
+            h = func.applyAsInt(func.applyAsInt(h));
         }
 
-        checkState(lastIndex >= 0 && lastIndex < arr.length);
+        h = x0;
 
-        return lastIndex;
+        while (h != t) {
+            t = func.applyAsInt(t);
+            h = func.applyAsInt(h);
+        }
+
+        final int startPoint = t;
+        int length = 1;
+        h = func.applyAsInt(h);
+
+        while (t != h) {
+            h = func.applyAsInt(h);
+            ++length;
+        }
+
+        return new FunctionCycle(startPoint, length);
+    }
+
+    private static final class FunctionCycle {
+        final int startPoint;
+        final int length;
+
+        FunctionCycle(int startPoint, int length) {
+            this.startPoint = startPoint;
+            this.length = length;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+
+            FunctionCycle other = (FunctionCycle) obj;
+
+            return Objects.equals(startPoint, other.startPoint) &&
+                    Objects.equals(length, other.length);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(startPoint, length);
+        }
+
+        @Override
+        public String toString() {
+            return "startPoint: " + startPoint + ", length: " + length;
+        }
     }
 
     public static void main(String[] args) {

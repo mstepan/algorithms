@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
@@ -32,6 +35,75 @@ public final class MathUtils {
     // Suppresses default constructor, ensuring non-instantiability.
     private MathUtils() {
         throw new IllegalStateException("Non instantiable class '" + MathUtils.class + "' constructor called");
+    }
+
+    private static final double FIVE_SQRT = Math.sqrt(5.0);
+    private static final double GOLDEN_RATIO = (1.0 + FIVE_SQRT) / 2.0;
+
+
+    /**
+     * Prime factorization algorithm.
+     */
+    public static List<Integer> findPrimeFactors(int initialValue) {
+
+        int[] primes = findPrimes(initialValue);
+
+        int value = initialValue;
+
+        List<Integer> factors = new ArrayList<>();
+
+        for (int i = 0; i < primes.length; ++i) {
+            int singlePrime = primes[i];
+
+            if (singlePrime * singlePrime > value) {
+                break;
+            }
+
+            while ((value % singlePrime) == 0) {
+                value /= singlePrime;
+                factors.add(singlePrime);
+            }
+        }
+
+        // value is prime in itself
+        if (value != 1) {
+            factors.add(value);
+        }
+
+        return factors;
+    }
+
+    private static int[] findPrimes(int n) {
+
+        BitSet primes = new BitSet(n + 1);
+        primes.set(2, n);
+
+        for (int p = primes.nextSetBit(2); p >= 0 && p * p <= n; p = primes.nextSetBit(p + 1)) {
+            for (long val = ((long) p) * p; val <= n; val += p) {
+                primes.clear((int) val);
+            }
+        }
+
+        int[] primesArr = new int[primes.cardinality()];
+
+        for (int p = primes.nextSetBit(2), index = 0; p >= 0; p = primes.nextSetBit(p + 1), ++index) {
+            primesArr[index] = p;
+        }
+
+        return primesArr;
+    }
+
+
+    /**
+     * Calculate n-th fibonacci number using approximation algorithm with golden ratio (Binet’s formula).
+     * <p>
+     * First few fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 55, 89, ...
+     * <p>
+     * <p>
+     * Correct up to 72-nd fibonacci number.
+     */
+    public static long fibApproximation(int n) {
+        return (long) ((Math.pow(GOLDEN_RATIO, n) - Math.pow(-GOLDEN_RATIO, -n)) / FIVE_SQRT);
     }
 
     /**
@@ -81,6 +153,57 @@ public final class MathUtils {
 
         return true;
     }
+
+    /**
+     * Rabin-Miller algorithm to check if number is prime.
+     */
+    public static boolean isProbablePrime(int n, int k) {
+
+        checkArgument(n >= 0);
+
+        if (n == 2 || n == 3) {
+            return true;
+        }
+
+        if (n == 0 || n == 1 || (n & 1) == 0) {
+            return false;
+        }
+
+        // write n − 1 as 2^r*d with d odd by factoring powers of 2 from n − 1
+        int d = n - 1;
+        int r = 0;
+
+        while ((d & 1) == 0) {
+            d >>= 1;
+            ++r;
+        }
+
+        MAIN:
+        for (int it = 0; it < k; ++it) {
+
+            // pick a random integer 'a' in the range [2, n − 2]
+            int a = 2 + RAND.nextInt(n - 3);
+
+            // x = a ^ d % n
+            int x = modularExponentiation(a, d, n);
+
+            if (x == 1 || x == n - 1) {
+                continue;
+            }
+
+            for (int round = 0; round < r - 1; ++round) {
+                x = (x * x) % n;
+
+                if (x == n - 1) {
+                    continue MAIN;
+                }
+            }
+
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Check if number is prime using Ferma's little theorem.
@@ -348,8 +471,15 @@ public final class MathUtils {
 
     /**
      * Calculate great common divisor using Euclidean method (see: http://en.wikipedia.org/wiki/Euclidean_algorithm).
+     * <p>
+     * time: O(lgN)
+     * space: O(1)
      */
     public static int gcd(int x, int y) {
+
+        checkArgument(x != Integer.MIN_VALUE, "'x' is equals to Integer.MIN_VALUE");
+        checkArgument(y != Integer.MIN_VALUE, "'y' is equals to Integer.MIN_VALUE");
+
         int a = Math.abs(x);
         int b = Math.abs(y);
 
@@ -360,6 +490,16 @@ public final class MathUtils {
         }
 
         return a;
+    }
+
+    /**
+     * Calculate least common multiple.
+     *
+     * time: O(lgN)
+     * space: O(1)
+     */
+    public static int lcm(int x, int y) {
+        return x * (y / gcd(x, y));
     }
 
 
