@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" width="1200" height="726" onload="init(evt)" viewBox="0 0 1200 726" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg version="1.1" width="1200" height="678" onload="init(evt)" viewBox="0 0 1200 678" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 	text { font-family:Verdana; font-size:12px; fill:black; }
 	.func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
@@ -324,1164 +324,1264 @@
 </script>
 <rect x="0" y="0" width="100%" height="100%" fill="rgb(240,240,220)"/>
 <text x="600" y="24" text-anchor="middle" style="font-size:17px">Flame Graph</text>
-<text x="10" y="709" id="details"> </text>
+<text x="10" y="661" id="details"> </text>
 <text x="10" y="24" id="unzoom" onclick="unzoom()" style="opacity:0.0;cursor:pointer">Reset Zoom</text>
 <text x="1090" y="24" id="search" onmouseover="searchover()" onmouseout="searchout()" onclick="search_prompt()" style="opacity:0.1;cursor:pointer">Search</text>
-<text x="1090" y="709" id="matched"> </text>
+<text x="1090" y="661" id="matched"> </text>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>all (27 samples, 100.00%)</title><rect x="10.0" y="675.0" width="1180.0" height="15" fill="#c83232" rx="2" ry="2"/>
-<text x="13.0" y="686.0">all</text>
+<title>all (29 samples, 100.00%)</title><rect x="10.0" y="627.0" width="1180.0" height="15" fill="#c83232" rx="2" ry="2"/>
+<text x="13.0" y="638.0">all</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/intellij/rt/execution/application/AppMainV2$1.run (3 samples, 11.11%)</title><rect x="10.0" y="659.0" width="131.1" height="15" fill="#39cf39" rx="2" ry="2"/>
-<text x="13.0" y="670.0">com/intellij/rt/..</text>
+<title>com/intellij/rt/execution/application/AppMainV2$1.run (4 samples, 13.79%)</title><rect x="10.0" y="611.0" width="162.8" height="15" fill="#39cf39" rx="2" ry="2"/>
+<text x="13.0" y="622.0">com/intellij/rt/execu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/Socket.&lt;init&gt; (3 samples, 11.11%)</title><rect x="10.0" y="643.0" width="131.1" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="13.0" y="654.0">java/net/Socket...</text>
+<title>java/net/Socket.&lt;init&gt; (4 samples, 13.79%)</title><rect x="10.0" y="595.0" width="162.8" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="13.0" y="606.0">java/net/Socket.&lt;init&gt;</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/InetSocketAddress.&lt;init&gt; (1 samples, 3.70%)</title><rect x="10.0" y="627.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="13.0" y="638.0">java..</text>
+<title>java/net/InetSocketAddress.&lt;init&gt; (1 samples, 3.45%)</title><rect x="10.0" y="579.0" width="40.7" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="13.0" y="590.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/InetAddress.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="10.0" y="611.0" width="43.7" height="15" fill="#51e551" rx="2" ry="2"/>
-<text x="13.0" y="622.0">java..</text>
+<title>java/net/InetAddress.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="10.0" y="563.0" width="40.7" height="15" fill="#51e551" rx="2" ry="2"/>
+<text x="13.0" y="574.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/InetAddressImplFactory.create (1 samples, 3.70%)</title><rect x="10.0" y="595.0" width="43.7" height="15" fill="#3fd43f" rx="2" ry="2"/>
-<text x="13.0" y="606.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="10.0" y="547.0" width="40.7" height="15" fill="#3fd43f" rx="2" ry="2"/>
+<text x="13.0" y="558.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/InetAddressImplFactory.isIPv6Supported (1 samples, 3.70%)</title><rect x="10.0" y="579.0" width="43.7" height="15" fill="#34ca34" rx="2" ry="2"/>
-<text x="13.0" y="590.0">java..</text>
+<title>java/net/InetAddress$1.run (1 samples, 3.45%)</title><rect x="10.0" y="531.0" width="40.7" height="15" fill="#34ca34" rx="2" ry="2"/>
+<text x="13.0" y="542.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.findNative (1 samples, 3.70%)</title><rect x="10.0" y="563.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="13.0" y="574.0">java..</text>
+<title>java/net/InetAddress$1.run (1 samples, 3.45%)</title><rect x="10.0" y="515.0" width="40.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="13.0" y="526.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader$NativeLibrary.find (1 samples, 3.70%)</title><rect x="10.0" y="547.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="13.0" y="558.0">java..</text>
+<title>java/lang/System.loadLibrary (1 samples, 3.45%)</title><rect x="10.0" y="499.0" width="40.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="13.0" y="510.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/Socket.&lt;init&gt; (2 samples, 7.41%)</title><rect x="53.7" y="627.0" width="87.4" height="15" fill="#6afb6a" rx="2" ry="2"/>
-<text x="56.7" y="638.0">java/net/S..</text>
+<title>java/lang/Runtime.loadLibrary0 (1 samples, 3.45%)</title><rect x="10.0" y="483.0" width="40.7" height="15" fill="#6afb6a" rx="2" ry="2"/>
+<text x="13.0" y="494.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/Socket.connect (2 samples, 7.41%)</title><rect x="53.7" y="611.0" width="87.4" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="56.7" y="622.0">java/net/S..</text>
+<title>java/lang/ClassLoader.loadLibrary (1 samples, 3.45%)</title><rect x="10.0" y="467.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="13.0" y="478.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/Socket.connect (2 samples, 7.41%)</title><rect x="53.7" y="595.0" width="87.4" height="15" fill="#51e451" rx="2" ry="2"/>
-<text x="56.7" y="606.0">java/net/S..</text>
+<title>java/lang/ClassLoader.loadLibrary0 (1 samples, 3.45%)</title><rect x="10.0" y="451.0" width="40.7" height="15" fill="#51e451" rx="2" ry="2"/>
+<text x="13.0" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/SocksSocketImpl.connect (2 samples, 7.41%)</title><rect x="53.7" y="579.0" width="87.4" height="15" fill="#63f563" rx="2" ry="2"/>
-<text x="56.7" y="590.0">java/net/S..</text>
+<title>java/lang/ClassLoader.findBuiltinLib (1 samples, 3.45%)</title><rect x="10.0" y="435.0" width="40.7" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="13.0" y="446.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/AbstractPlainSocketImpl.connect (1 samples, 3.70%)</title><rect x="53.7" y="563.0" width="43.7" height="15" fill="#34c934" rx="2" ry="2"/>
-<text x="56.7" y="574.0">java..</text>
+<title>java/net/Socket.&lt;init&gt; (3 samples, 10.34%)</title><rect x="50.7" y="579.0" width="122.1" height="15" fill="#34c934" rx="2" ry="2"/>
+<text x="53.7" y="590.0">java/net/Socket..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/AbstractPlainSocketImpl.connectToAddress (1 samples, 3.70%)</title><rect x="53.7" y="547.0" width="43.7" height="15" fill="#35ca35" rx="2" ry="2"/>
-<text x="56.7" y="558.0">java..</text>
+<title>java/net/Socket.connect (3 samples, 10.34%)</title><rect x="50.7" y="563.0" width="122.1" height="15" fill="#35ca35" rx="2" ry="2"/>
+<text x="53.7" y="574.0">java/net/Socket..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/AbstractPlainSocketImpl.doConnect (1 samples, 3.70%)</title><rect x="53.7" y="531.0" width="43.7" height="15" fill="#51e551" rx="2" ry="2"/>
-<text x="56.7" y="542.0">java..</text>
+<title>java/net/Socket.connect (3 samples, 10.34%)</title><rect x="50.7" y="547.0" width="122.1" height="15" fill="#51e551" rx="2" ry="2"/>
+<text x="53.7" y="558.0">java/net/Socket..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/PlainSocketImpl.socketConnect (1 samples, 3.70%)</title><rect x="53.7" y="515.0" width="43.7" height="15" fill="#5aec5a" rx="2" ry="2"/>
-<text x="56.7" y="526.0">java..</text>
+<title>java/net/SocksSocketImpl.connect (3 samples, 10.34%)</title><rect x="50.7" y="531.0" width="122.1" height="15" fill="#5aec5a" rx="2" ry="2"/>
+<text x="53.7" y="542.0">java/net/SocksS..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/NetworkInterface.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="53.7" y="499.0" width="43.7" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="56.7" y="510.0">java..</text>
+<title>java/net/AbstractPlainSocketImpl.connect (1 samples, 3.45%)</title><rect x="50.7" y="515.0" width="40.7" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="53.7" y="526.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/DefaultInterface.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="53.7" y="483.0" width="43.7" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="56.7" y="494.0">java..</text>
+<title>java/net/AbstractPlainSocketImpl.connectToAddress (1 samples, 3.45%)</title><rect x="50.7" y="499.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="53.7" y="510.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/DefaultInterface.chooseDefaultInterface (1 samples, 3.70%)</title><rect x="53.7" y="467.0" width="43.7" height="15" fill="#36cb36" rx="2" ry="2"/>
-<text x="56.7" y="478.0">java..</text>
+<title>java/net/AbstractPlainSocketImpl.doConnect (1 samples, 3.45%)</title><rect x="50.7" y="483.0" width="40.7" height="15" fill="#36cb36" rx="2" ry="2"/>
+<text x="53.7" y="494.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/NetworkInterface.isUp (1 samples, 3.70%)</title><rect x="53.7" y="451.0" width="43.7" height="15" fill="#4bde4b" rx="2" ry="2"/>
-<text x="56.7" y="462.0">java..</text>
+<title>java/net/PlainSocketImpl.socketConnect (1 samples, 3.45%)</title><rect x="50.7" y="467.0" width="40.7" height="15" fill="#4bde4b" rx="2" ry="2"/>
+<text x="53.7" y="478.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/NetworkInterface.isUp0 (1 samples, 3.70%)</title><rect x="53.7" y="435.0" width="43.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
-<text x="56.7" y="446.0">java..</text>
+<title>java/net/NetworkInterface.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="50.7" y="451.0" width="40.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
+<text x="53.7" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.findNative (1 samples, 3.70%)</title><rect x="53.7" y="419.0" width="43.7" height="15" fill="#55e855" rx="2" ry="2"/>
-<text x="56.7" y="430.0">java..</text>
+<title>java/net/DefaultInterface.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="50.7" y="435.0" width="40.7" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="53.7" y="446.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader$NativeLibrary.find (1 samples, 3.70%)</title><rect x="53.7" y="403.0" width="43.7" height="15" fill="#69fb69" rx="2" ry="2"/>
-<text x="56.7" y="414.0">java..</text>
+<title>java/net/DefaultInterface.chooseDefaultInterface (1 samples, 3.45%)</title><rect x="50.7" y="419.0" width="40.7" height="15" fill="#69fb69" rx="2" ry="2"/>
+<text x="53.7" y="430.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/net/spi/DefaultProxySelector.select (1 samples, 3.70%)</title><rect x="97.4" y="563.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="100.4" y="574.0">sun/..</text>
+<title>java/net/NetworkInterface.isUp (1 samples, 3.45%)</title><rect x="50.7" y="403.0" width="40.7" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="53.7" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/max/algs/AlgorithmsMain.&lt;clinit&gt; (8 samples, 29.63%)</title><rect x="141.1" y="659.0" width="349.6" height="15" fill="#51e451" rx="2" ry="2"/>
-<text x="144.1" y="670.0">com/max/algs/AlgorithmsMain.&lt;clinit&gt;</text>
+<title>java/net/NetworkInterface.isUp0 (1 samples, 3.45%)</title><rect x="50.7" y="387.0" width="40.7" height="15" fill="#51e451" rx="2" ry="2"/>
+<text x="53.7" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="141.1" y="643.0" width="43.7" height="15" fill="#37cd37" rx="2" ry="2"/>
-<text x="144.1" y="654.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="91.4" y="515.0" width="40.7" height="15" fill="#37cd37" rx="2" ry="2"/>
+<text x="94.4" y="526.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.70%)</title><rect x="141.1" y="627.0" width="43.7" height="15" fill="#59eb59" rx="2" ry="2"/>
-<text x="144.1" y="638.0">sun/..</text>
+<title>java/net/SocksSocketImpl$3.run (1 samples, 3.45%)</title><rect x="91.4" y="499.0" width="40.7" height="15" fill="#59eb59" rx="2" ry="2"/>
+<text x="94.4" y="510.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="141.1" y="611.0" width="43.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="144.1" y="622.0">java..</text>
+<title>java/net/SocksSocketImpl$3.run (1 samples, 3.45%)</title><rect x="91.4" y="483.0" width="40.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="94.4" y="494.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="141.1" y="595.0" width="43.7" height="15" fill="#5cee5c" rx="2" ry="2"/>
-<text x="144.1" y="606.0">java..</text>
+<title>java/net/ProxySelector.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="91.4" y="467.0" width="40.7" height="15" fill="#5cee5c" rx="2" ry="2"/>
+<text x="94.4" y="478.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="141.1" y="579.0" width="43.7" height="15" fill="#68fa68" rx="2" ry="2"/>
-<text x="144.1" y="590.0">java..</text>
+<title>java/lang/Class.forName (1 samples, 3.45%)</title><rect x="91.4" y="451.0" width="40.7" height="15" fill="#68fa68" rx="2" ry="2"/>
+<text x="94.4" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="141.1" y="563.0" width="43.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="144.1" y="574.0">java..</text>
+<title>java/lang/Class.forName0 (1 samples, 3.45%)</title><rect x="91.4" y="435.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="94.4" y="446.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="141.1" y="547.0" width="43.7" height="15" fill="#41d641" rx="2" ry="2"/>
-<text x="144.1" y="558.0">java..</text>
+<title>sun/net/spi/DefaultProxySelector.select (1 samples, 3.45%)</title><rect x="132.1" y="515.0" width="40.7" height="15" fill="#41d641" rx="2" ry="2"/>
+<text x="135.1" y="526.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.access$100 (1 samples, 3.70%)</title><rect x="141.1" y="531.0" width="43.7" height="15" fill="#34ca34" rx="2" ry="2"/>
-<text x="144.1" y="542.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="132.1" y="499.0" width="40.7" height="15" fill="#34ca34" rx="2" ry="2"/>
+<text x="135.1" y="510.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.defineClass (1 samples, 3.70%)</title><rect x="141.1" y="515.0" width="43.7" height="15" fill="#5ef05e" rx="2" ry="2"/>
-<text x="144.1" y="526.0">java..</text>
+<title>sun/net/spi/DefaultProxySelector$3.run (1 samples, 3.45%)</title><rect x="132.1" y="483.0" width="40.7" height="15" fill="#5ef05e" rx="2" ry="2"/>
+<text x="135.1" y="494.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.getByteBuffer (1 samples, 3.70%)</title><rect x="141.1" y="499.0" width="43.7" height="15" fill="#45da45" rx="2" ry="2"/>
-<text x="144.1" y="510.0">sun/..</text>
+<title>sun/net/spi/DefaultProxySelector$3.run (1 samples, 3.45%)</title><rect x="132.1" y="467.0" width="40.7" height="15" fill="#45da45" rx="2" ry="2"/>
+<text x="135.1" y="478.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.cachedInputStream (1 samples, 3.70%)</title><rect x="141.1" y="483.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="144.1" y="494.0">sun/..</text>
+<title>java/net/Proxy.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="132.1" y="451.0" width="40.7" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="135.1" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$2.getInputStream (1 samples, 3.70%)</title><rect x="141.1" y="467.0" width="43.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="144.1" y="478.0">sun/..</text>
+<title>java/net/Proxy.&lt;init&gt; (1 samples, 3.45%)</title><rect x="132.1" y="435.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="135.1" y="446.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getInputStream (1 samples, 3.70%)</title><rect x="141.1" y="451.0" width="43.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="144.1" y="462.0">java..</text>
+<title>com/max/algs/AlgorithmsMain.&lt;clinit&gt; (12 samples, 41.38%)</title><rect x="172.8" y="611.0" width="488.2" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="175.8" y="622.0">com/max/algs/AlgorithmsMain.&lt;clinit&gt;</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getInputStream (1 samples, 3.70%)</title><rect x="141.1" y="435.0" width="43.7" height="15" fill="#47dc47" rx="2" ry="2"/>
-<text x="144.1" y="446.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (2 samples, 6.90%)</title><rect x="172.8" y="595.0" width="81.3" height="15" fill="#47dc47" rx="2" ry="2"/>
+<text x="175.8" y="606.0">java/lang..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntrySize (1 samples, 3.70%)</title><rect x="141.1" y="419.0" width="43.7" height="15" fill="#40d540" rx="2" ry="2"/>
-<text x="144.1" y="430.0">java..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (2 samples, 6.90%)</title><rect x="172.8" y="579.0" width="81.3" height="15" fill="#40d540" rx="2" ry="2"/>
+<text x="175.8" y="590.0">sun/misc/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/Logger.getLogger (7 samples, 25.93%)</title><rect x="184.8" y="643.0" width="305.9" height="15" fill="#6cfe6c" rx="2" ry="2"/>
-<text x="187.8" y="654.0">org/apache/log4j/Logger.getLogger</text>
+<title>java/lang/ClassLoader.loadClass (2 samples, 6.90%)</title><rect x="172.8" y="563.0" width="81.3" height="15" fill="#6cfe6c" rx="2" ry="2"/>
+<text x="175.8" y="574.0">java/lang..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/LogManager.&lt;clinit&gt; (7 samples, 25.93%)</title><rect x="184.8" y="627.0" width="305.9" height="15" fill="#5def5d" rx="2" ry="2"/>
-<text x="187.8" y="638.0">org/apache/log4j/LogManager.&lt;clinit&gt;</text>
+<title>java/net/URLClassLoader.findClass (2 samples, 6.90%)</title><rect x="172.8" y="547.0" width="81.3" height="15" fill="#5def5d" rx="2" ry="2"/>
+<text x="175.8" y="558.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="184.8" y="611.0" width="43.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="187.8" y="622.0">java..</text>
+<title>java/security/AccessController.doPrivileged (2 samples, 6.90%)</title><rect x="172.8" y="531.0" width="81.3" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="175.8" y="542.0">java/secu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.70%)</title><rect x="184.8" y="595.0" width="43.7" height="15" fill="#59eb59" rx="2" ry="2"/>
-<text x="187.8" y="606.0">sun/..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="172.8" y="515.0" width="81.3" height="15" fill="#59eb59" rx="2" ry="2"/>
+<text x="175.8" y="526.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="184.8" y="579.0" width="43.7" height="15" fill="#36cb36" rx="2" ry="2"/>
-<text x="187.8" y="590.0">java..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="172.8" y="499.0" width="81.3" height="15" fill="#36cb36" rx="2" ry="2"/>
+<text x="175.8" y="510.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="184.8" y="563.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="187.8" y="574.0">java..</text>
+<title>sun/misc/URLClassPath.getResource (2 samples, 6.90%)</title><rect x="172.8" y="483.0" width="81.3" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="175.8" y="494.0">sun/misc/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="184.8" y="547.0" width="43.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="187.8" y="558.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.getResource (2 samples, 6.90%)</title><rect x="172.8" y="467.0" width="81.3" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="175.8" y="478.0">sun/misc/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="184.8" y="531.0" width="43.7" height="15" fill="#42d642" rx="2" ry="2"/>
-<text x="187.8" y="542.0">java..</text>
+<title>java/util/jar/JarFile.getJarEntry (2 samples, 6.90%)</title><rect x="172.8" y="451.0" width="81.3" height="15" fill="#42d642" rx="2" ry="2"/>
+<text x="175.8" y="462.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="184.8" y="515.0" width="43.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
-<text x="187.8" y="526.0">java..</text>
+<title>java/util/jar/JarFile.getEntry (2 samples, 6.90%)</title><rect x="172.8" y="435.0" width="81.3" height="15" fill="#4ce04c" rx="2" ry="2"/>
+<text x="175.8" y="446.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="184.8" y="499.0" width="43.7" height="15" fill="#5ff25f" rx="2" ry="2"/>
-<text x="187.8" y="510.0">java..</text>
+<title>java/util/zip/ZipFile.getEntry (2 samples, 6.90%)</title><rect x="172.8" y="419.0" width="81.3" height="15" fill="#5ff25f" rx="2" ry="2"/>
+<text x="175.8" y="430.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (1 samples, 3.70%)</title><rect x="184.8" y="483.0" width="43.7" height="15" fill="#4ee24e" rx="2" ry="2"/>
-<text x="187.8" y="494.0">sun/..</text>
+<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.45%)</title><rect x="172.8" y="403.0" width="40.6" height="15" fill="#4ee24e" rx="2" ry="2"/>
+<text x="175.8" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.70%)</title><rect x="184.8" y="467.0" width="43.7" height="15" fill="#40d540" rx="2" ry="2"/>
-<text x="187.8" y="478.0">sun/..</text>
+<title>java/util/Arrays.copyOf (1 samples, 3.45%)</title><rect x="172.8" y="387.0" width="40.6" height="15" fill="#40d540" rx="2" ry="2"/>
+<text x="175.8" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.70%)</title><rect x="184.8" y="451.0" width="43.7" height="15" fill="#42d742" rx="2" ry="2"/>
-<text x="187.8" y="462.0">java..</text>
+<title>java/util/zip/ZipFile.getEntry (1 samples, 3.45%)</title><rect x="213.4" y="403.0" width="40.7" height="15" fill="#42d742" rx="2" ry="2"/>
+<text x="216.4" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getEntry (1 samples, 3.70%)</title><rect x="184.8" y="435.0" width="43.7" height="15" fill="#47db47" rx="2" ry="2"/>
-<text x="187.8" y="446.0">java..</text>
+<title>org/apache/log4j/Logger.getLogger (10 samples, 34.48%)</title><rect x="254.1" y="595.0" width="406.9" height="15" fill="#47db47" rx="2" ry="2"/>
+<text x="257.1" y="606.0">org/apache/log4j/Logger.getLogger</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntry (1 samples, 3.70%)</title><rect x="184.8" y="419.0" width="43.7" height="15" fill="#3bd13b" rx="2" ry="2"/>
-<text x="187.8" y="430.0">java..</text>
+<title>org/apache/log4j/LogManager.&lt;clinit&gt; (10 samples, 34.48%)</title><rect x="254.1" y="579.0" width="406.9" height="15" fill="#3bd13b" rx="2" ry="2"/>
+<text x="257.1" y="590.0">org/apache/log4j/LogManager.&lt;clinit&gt;</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.70%)</title><rect x="184.8" y="403.0" width="43.7" height="15" fill="#4fe24f" rx="2" ry="2"/>
-<text x="187.8" y="414.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (3 samples, 10.34%)</title><rect x="294.8" y="563.0" width="122.1" height="15" fill="#4fe24f" rx="2" ry="2"/>
+<text x="297.8" y="574.0">java/lang/Class..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/String.toCharArray (1 samples, 3.70%)</title><rect x="184.8" y="387.0" width="43.7" height="15" fill="#67f967" rx="2" ry="2"/>
-<text x="187.8" y="398.0">java..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (3 samples, 10.34%)</title><rect x="294.8" y="547.0" width="122.1" height="15" fill="#67f967" rx="2" ry="2"/>
+<text x="297.8" y="558.0">sun/misc/Launch..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/helpers/OptionConverter.selectAndConfigure (6 samples, 22.22%)</title><rect x="228.5" y="611.0" width="262.2" height="15" fill="#68fa68" rx="2" ry="2"/>
-<text x="231.5" y="622.0">org/apache/log4j/helpers/OptionConv..</text>
+<title>java/lang/ClassLoader.loadClass (3 samples, 10.34%)</title><rect x="294.8" y="531.0" width="122.1" height="15" fill="#68fa68" rx="2" ry="2"/>
+<text x="297.8" y="542.0">java/lang/Class..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PropertyConfigurator.doConfigure (6 samples, 22.22%)</title><rect x="228.5" y="595.0" width="262.2" height="15" fill="#35cb35" rx="2" ry="2"/>
-<text x="231.5" y="606.0">org/apache/log4j/PropertyConfigurat..</text>
+<title>java/lang/System.nanoTime (1 samples, 3.45%)</title><rect x="294.8" y="515.0" width="40.7" height="15" fill="#35cb35" rx="2" ry="2"/>
+<text x="297.8" y="526.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PropertyConfigurator.doConfigure (6 samples, 22.22%)</title><rect x="228.5" y="579.0" width="262.2" height="15" fill="#68f968" rx="2" ry="2"/>
-<text x="231.5" y="590.0">org/apache/log4j/PropertyConfigurat..</text>
+<title>java/net/URLClassLoader.findClass (2 samples, 6.90%)</title><rect x="335.5" y="515.0" width="81.4" height="15" fill="#68f968" rx="2" ry="2"/>
+<text x="338.5" y="526.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PropertyConfigurator.configureRootCategory (6 samples, 22.22%)</title><rect x="228.5" y="563.0" width="262.2" height="15" fill="#50e350" rx="2" ry="2"/>
-<text x="231.5" y="574.0">org/apache/log4j/PropertyConfigurat..</text>
+<title>java/security/AccessController.doPrivileged (2 samples, 6.90%)</title><rect x="335.5" y="499.0" width="81.4" height="15" fill="#50e350" rx="2" ry="2"/>
+<text x="338.5" y="510.0">java/secu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PropertyConfigurator.parseCategory (6 samples, 22.22%)</title><rect x="228.5" y="547.0" width="262.2" height="15" fill="#50e450" rx="2" ry="2"/>
-<text x="231.5" y="558.0">org/apache/log4j/PropertyConfigurat..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="335.5" y="483.0" width="81.4" height="15" fill="#50e450" rx="2" ry="2"/>
+<text x="338.5" y="494.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PropertyConfigurator.parseAppender (6 samples, 22.22%)</title><rect x="228.5" y="531.0" width="262.2" height="15" fill="#45d945" rx="2" ry="2"/>
-<text x="231.5" y="542.0">org/apache/log4j/PropertyConfigurat..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="335.5" y="467.0" width="81.4" height="15" fill="#45d945" rx="2" ry="2"/>
+<text x="338.5" y="478.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/config/PropertySetter.setProperties (3 samples, 11.11%)</title><rect x="228.5" y="515.0" width="131.1" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="231.5" y="526.0">org/apache/log4j..</text>
+<title>java/net/URLClassLoader.access$100 (1 samples, 3.45%)</title><rect x="335.5" y="451.0" width="40.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="338.5" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/config/PropertySetter.setProperties (3 samples, 11.11%)</title><rect x="228.5" y="499.0" width="131.1" height="15" fill="#4fe34f" rx="2" ry="2"/>
-<text x="231.5" y="510.0">org/apache/log4j..</text>
+<title>java/net/URLClassLoader.defineClass (1 samples, 3.45%)</title><rect x="335.5" y="435.0" width="40.7" height="15" fill="#4fe34f" rx="2" ry="2"/>
+<text x="338.5" y="446.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/config/PropertySetter.getPropertyDescriptor (3 samples, 11.11%)</title><rect x="228.5" y="483.0" width="131.1" height="15" fill="#41d641" rx="2" ry="2"/>
-<text x="231.5" y="494.0">org/apache/log4j..</text>
+<title>java/security/SecureClassLoader.defineClass (1 samples, 3.45%)</title><rect x="335.5" y="419.0" width="40.7" height="15" fill="#41d641" rx="2" ry="2"/>
+<text x="338.5" y="430.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/config/PropertySetter.introspect (3 samples, 11.11%)</title><rect x="228.5" y="467.0" width="131.1" height="15" fill="#37cc37" rx="2" ry="2"/>
-<text x="231.5" y="478.0">org/apache/log4j..</text>
+<title>java/lang/ClassLoader.defineClass (1 samples, 3.45%)</title><rect x="335.5" y="403.0" width="40.7" height="15" fill="#37cc37" rx="2" ry="2"/>
+<text x="338.5" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (3 samples, 11.11%)</title><rect x="228.5" y="451.0" width="131.1" height="15" fill="#6afc6a" rx="2" ry="2"/>
-<text x="231.5" y="462.0">java/beans/Intro..</text>
+<title>java/lang/ClassLoader.defineClass1 (1 samples, 3.45%)</title><rect x="335.5" y="387.0" width="40.7" height="15" fill="#6afc6a" rx="2" ry="2"/>
+<text x="338.5" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.&lt;init&gt; (3 samples, 11.11%)</title><rect x="228.5" y="435.0" width="131.1" height="15" fill="#36cc36" rx="2" ry="2"/>
-<text x="231.5" y="446.0">java/beans/Intro..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="335.5" y="371.0" width="40.7" height="15" fill="#36cc36" rx="2" ry="2"/>
+<text x="338.5" y="382.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (3 samples, 11.11%)</title><rect x="228.5" y="419.0" width="131.1" height="15" fill="#50e350" rx="2" ry="2"/>
-<text x="231.5" y="430.0">java/beans/Intro..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.45%)</title><rect x="335.5" y="355.0" width="40.7" height="15" fill="#50e350" rx="2" ry="2"/>
+<text x="338.5" y="366.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (3 samples, 11.11%)</title><rect x="228.5" y="403.0" width="131.1" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="231.5" y="414.0">java/beans/Intro..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="335.5" y="339.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="338.5" y="350.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.&lt;init&gt; (3 samples, 11.11%)</title><rect x="228.5" y="387.0" width="131.1" height="15" fill="#42d742" rx="2" ry="2"/>
-<text x="231.5" y="398.0">java/beans/Intro..</text>
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="335.5" y="323.0" width="40.7" height="15" fill="#42d742" rx="2" ry="2"/>
+<text x="338.5" y="334.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.findExplicitBeanInfo (1 samples, 3.70%)</title><rect x="228.5" y="371.0" width="43.7" height="15" fill="#68fa68" rx="2" ry="2"/>
-<text x="231.5" y="382.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="335.5" y="307.0" width="40.7" height="15" fill="#68fa68" rx="2" ry="2"/>
+<text x="338.5" y="318.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/sun/beans/finder/InstanceFinder.find (1 samples, 3.70%)</title><rect x="228.5" y="355.0" width="43.7" height="15" fill="#51e551" rx="2" ry="2"/>
-<text x="231.5" y="366.0">com/..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="335.5" y="291.0" width="40.7" height="15" fill="#51e551" rx="2" ry="2"/>
+<text x="338.5" y="302.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/sun/beans/finder/InstanceFinder.instantiate (1 samples, 3.70%)</title><rect x="228.5" y="339.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="231.5" y="350.0">com/..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="335.5" y="275.0" width="40.7" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="338.5" y="286.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/sun/beans/finder/ClassFinder.findClass (1 samples, 3.70%)</title><rect x="228.5" y="323.0" width="43.7" height="15" fill="#6afb6a" rx="2" ry="2"/>
-<text x="231.5" y="334.0">com/..</text>
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="335.5" y="259.0" width="40.7" height="15" fill="#6afb6a" rx="2" ry="2"/>
+<text x="338.5" y="270.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Class.forName (1 samples, 3.70%)</title><rect x="228.5" y="307.0" width="43.7" height="15" fill="#35ca35" rx="2" ry="2"/>
-<text x="231.5" y="318.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.45%)</title><rect x="335.5" y="243.0" width="40.7" height="15" fill="#35ca35" rx="2" ry="2"/>
+<text x="338.5" y="254.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Class.forName0 (1 samples, 3.70%)</title><rect x="228.5" y="291.0" width="43.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="231.5" y="302.0">java..</text>
+<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.45%)</title><rect x="335.5" y="227.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="338.5" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="228.5" y="275.0" width="43.7" height="15" fill="#60f260" rx="2" ry="2"/>
-<text x="231.5" y="286.0">java..</text>
+<title>java/util/jar/JarFile.getEntry (1 samples, 3.45%)</title><rect x="335.5" y="211.0" width="40.7" height="15" fill="#60f260" rx="2" ry="2"/>
+<text x="338.5" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.70%)</title><rect x="228.5" y="259.0" width="43.7" height="15" fill="#63f563" rx="2" ry="2"/>
-<text x="231.5" y="270.0">sun/..</text>
+<title>java/util/zip/ZipFile.getEntry (1 samples, 3.45%)</title><rect x="335.5" y="195.0" width="40.7" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="338.5" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="228.5" y="243.0" width="43.7" height="15" fill="#39ce39" rx="2" ry="2"/>
-<text x="231.5" y="254.0">java..</text>
+<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.45%)</title><rect x="335.5" y="179.0" width="40.7" height="15" fill="#39ce39" rx="2" ry="2"/>
+<text x="338.5" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="228.5" y="227.0" width="43.7" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="231.5" y="238.0">java..</text>
+<title>java/util/Arrays.copyOf (1 samples, 3.45%)</title><rect x="335.5" y="163.0" width="40.7" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="338.5" y="174.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="228.5" y="211.0" width="43.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
-<text x="231.5" y="222.0">java..</text>
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="376.2" y="451.0" width="40.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
+<text x="379.2" y="462.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="228.5" y="195.0" width="43.7" height="15" fill="#66f766" rx="2" ry="2"/>
-<text x="231.5" y="206.0">java..</text>
+<title>sun/misc/URLClassPath$FileLoader.getResource (1 samples, 3.45%)</title><rect x="376.2" y="435.0" width="40.7" height="15" fill="#66f766" rx="2" ry="2"/>
+<text x="379.2" y="446.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="228.5" y="179.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="231.5" y="190.0">java..</text>
+<title>java/io/File.exists (1 samples, 3.45%)</title><rect x="376.2" y="419.0" width="40.7" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="379.2" y="430.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (1 samples, 3.70%)</title><rect x="228.5" y="163.0" width="43.7" height="15" fill="#5ef05e" rx="2" ry="2"/>
-<text x="231.5" y="174.0">sun/..</text>
+<title>java/io/UnixFileSystem.getBooleanAttributes (1 samples, 3.45%)</title><rect x="376.2" y="403.0" width="40.7" height="15" fill="#5ef05e" rx="2" ry="2"/>
+<text x="379.2" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.70%)</title><rect x="228.5" y="147.0" width="43.7" height="15" fill="#5def5d" rx="2" ry="2"/>
-<text x="231.5" y="158.0">sun/..</text>
+<title>java/io/UnixFileSystem.getBooleanAttributes0 (1 samples, 3.45%)</title><rect x="376.2" y="387.0" width="40.7" height="15" fill="#5def5d" rx="2" ry="2"/>
+<text x="379.2" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.70%)</title><rect x="228.5" y="131.0" width="43.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="231.5" y="142.0">java..</text>
+<title>org/apache/log4j/helpers/OptionConverter.selectAndConfigure (6 samples, 20.69%)</title><rect x="416.9" y="563.0" width="244.1" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="419.9" y="574.0">org/apache/log4j/helpers/OptionC..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getEntry (1 samples, 3.70%)</title><rect x="228.5" y="115.0" width="43.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="231.5" y="126.0">java..</text>
+<title>org/apache/log4j/PropertyConfigurator.doConfigure (6 samples, 20.69%)</title><rect x="416.9" y="547.0" width="244.1" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="419.9" y="558.0">org/apache/log4j/PropertyConfigu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntry (1 samples, 3.70%)</title><rect x="228.5" y="99.0" width="43.7" height="15" fill="#3fd43f" rx="2" ry="2"/>
-<text x="231.5" y="110.0">java..</text>
+<title>org/apache/log4j/PropertyConfigurator.doConfigure (6 samples, 20.69%)</title><rect x="416.9" y="531.0" width="244.1" height="15" fill="#3fd43f" rx="2" ry="2"/>
+<text x="419.9" y="542.0">org/apache/log4j/PropertyConfigu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.70%)</title><rect x="228.5" y="83.0" width="43.7" height="15" fill="#44d844" rx="2" ry="2"/>
-<text x="231.5" y="94.0">java..</text>
+<title>org/apache/log4j/PropertyConfigurator.configureRootCategory (6 samples, 20.69%)</title><rect x="416.9" y="515.0" width="244.1" height="15" fill="#44d844" rx="2" ry="2"/>
+<text x="419.9" y="526.0">org/apache/log4j/PropertyConfigu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (2 samples, 7.41%)</title><rect x="272.2" y="371.0" width="87.4" height="15" fill="#47db47" rx="2" ry="2"/>
-<text x="275.2" y="382.0">java/beans..</text>
+<title>org/apache/log4j/PropertyConfigurator.parseCategory (6 samples, 20.69%)</title><rect x="416.9" y="499.0" width="244.1" height="15" fill="#47db47" rx="2" ry="2"/>
+<text x="419.9" y="510.0">org/apache/log4j/PropertyConfigu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (2 samples, 7.41%)</title><rect x="272.2" y="355.0" width="87.4" height="15" fill="#50e450" rx="2" ry="2"/>
-<text x="275.2" y="366.0">java/beans..</text>
+<title>org/apache/log4j/PropertyConfigurator.parseAppender (6 samples, 20.69%)</title><rect x="416.9" y="483.0" width="244.1" height="15" fill="#50e450" rx="2" ry="2"/>
+<text x="419.9" y="494.0">org/apache/log4j/PropertyConfigu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getBeanInfo (2 samples, 7.41%)</title><rect x="272.2" y="339.0" width="87.4" height="15" fill="#55e855" rx="2" ry="2"/>
-<text x="275.2" y="350.0">java/beans..</text>
+<title>org/apache/log4j/config/PropertySetter.setProperties (2 samples, 6.90%)</title><rect x="416.9" y="467.0" width="81.4" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="419.9" y="478.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getTargetMethodInfo (1 samples, 3.70%)</title><rect x="272.2" y="323.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="275.2" y="334.0">java..</text>
+<title>org/apache/log4j/config/PropertySetter.setProperties (2 samples, 6.90%)</title><rect x="416.9" y="451.0" width="81.4" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="419.9" y="462.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/MethodDescriptor.&lt;init&gt; (1 samples, 3.70%)</title><rect x="272.2" y="307.0" width="43.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="275.2" y="318.0">java..</text>
+<title>org/apache/log4j/config/PropertySetter.getPropertyDescriptor (2 samples, 6.90%)</title><rect x="416.9" y="435.0" width="81.4" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="419.9" y="446.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/MethodDescriptor.&lt;init&gt; (1 samples, 3.70%)</title><rect x="272.2" y="291.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="275.2" y="302.0">java..</text>
+<title>org/apache/log4j/config/PropertySetter.introspect (2 samples, 6.90%)</title><rect x="416.9" y="419.0" width="81.4" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="419.9" y="430.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/MethodDescriptor.setMethod (1 samples, 3.70%)</title><rect x="272.2" y="275.0" width="43.7" height="15" fill="#42d642" rx="2" ry="2"/>
-<text x="275.2" y="286.0">java..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="403.0" width="81.4" height="15" fill="#42d642" rx="2" ry="2"/>
+<text x="419.9" y="414.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/FeatureDescriptor.getParameterTypes (1 samples, 3.70%)</title><rect x="272.2" y="259.0" width="43.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="275.2" y="270.0">java..</text>
+<title>java/beans/Introspector.&lt;init&gt; (2 samples, 6.90%)</title><rect x="416.9" y="387.0" width="81.4" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="419.9" y="398.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/sun/beans/TypeResolver.resolveInClass (1 samples, 3.70%)</title><rect x="272.2" y="243.0" width="43.7" height="15" fill="#52e552" rx="2" ry="2"/>
-<text x="275.2" y="254.0">com/..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="371.0" width="81.4" height="15" fill="#52e552" rx="2" ry="2"/>
+<text x="419.9" y="382.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>com/sun/beans/TypeResolver.getActualType (1 samples, 3.70%)</title><rect x="272.2" y="227.0" width="43.7" height="15" fill="#4ee14e" rx="2" ry="2"/>
-<text x="275.2" y="238.0">com/..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="355.0" width="81.4" height="15" fill="#4ee14e" rx="2" ry="2"/>
+<text x="419.9" y="366.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Class.getTypeParameters (1 samples, 3.70%)</title><rect x="272.2" y="211.0" width="43.7" height="15" fill="#43d743" rx="2" ry="2"/>
-<text x="275.2" y="222.0">java..</text>
+<title>java/beans/Introspector.&lt;init&gt; (2 samples, 6.90%)</title><rect x="416.9" y="339.0" width="81.4" height="15" fill="#43d743" rx="2" ry="2"/>
+<text x="419.9" y="350.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Class.getGenericInfo (1 samples, 3.70%)</title><rect x="272.2" y="195.0" width="43.7" height="15" fill="#3cd13c" rx="2" ry="2"/>
-<text x="275.2" y="206.0">java..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="323.0" width="81.4" height="15" fill="#3cd13c" rx="2" ry="2"/>
+<text x="419.9" y="334.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/ClassRepository.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="272.2" y="179.0" width="43.7" height="15" fill="#3bd03b" rx="2" ry="2"/>
-<text x="275.2" y="190.0">sun/..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="307.0" width="81.4" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="419.9" y="318.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/ClassRepository.make (1 samples, 3.70%)</title><rect x="272.2" y="163.0" width="43.7" height="15" fill="#54e754" rx="2" ry="2"/>
-<text x="275.2" y="174.0">sun/..</text>
+<title>java/beans/Introspector.getBeanInfo (2 samples, 6.90%)</title><rect x="416.9" y="291.0" width="81.4" height="15" fill="#54e754" rx="2" ry="2"/>
+<text x="419.9" y="302.0">java/bean..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/ClassRepository.&lt;init&gt; (1 samples, 3.70%)</title><rect x="272.2" y="147.0" width="43.7" height="15" fill="#62f462" rx="2" ry="2"/>
-<text x="275.2" y="158.0">sun/..</text>
+<title>java/beans/Introspector.getTargetMethodInfo (1 samples, 3.45%)</title><rect x="416.9" y="275.0" width="40.7" height="15" fill="#62f462" rx="2" ry="2"/>
+<text x="419.9" y="286.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/GenericDeclRepository.&lt;init&gt; (1 samples, 3.70%)</title><rect x="272.2" y="131.0" width="43.7" height="15" fill="#33c933" rx="2" ry="2"/>
-<text x="275.2" y="142.0">sun/..</text>
+<title>java/beans/Introspector.getTargetPropertyInfo (1 samples, 3.45%)</title><rect x="457.6" y="275.0" width="40.7" height="15" fill="#33c933" rx="2" ry="2"/>
+<text x="460.6" y="286.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/AbstractRepository.&lt;init&gt; (1 samples, 3.70%)</title><rect x="272.2" y="115.0" width="43.7" height="15" fill="#52e552" rx="2" ry="2"/>
-<text x="275.2" y="126.0">sun/..</text>
+<title>java/beans/PropertyDescriptor.&lt;init&gt; (1 samples, 3.45%)</title><rect x="457.6" y="259.0" width="40.7" height="15" fill="#52e552" rx="2" ry="2"/>
+<text x="460.6" y="270.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/ClassRepository.parse (1 samples, 3.70%)</title><rect x="272.2" y="99.0" width="43.7" height="15" fill="#4fe34f" rx="2" ry="2"/>
-<text x="275.2" y="110.0">sun/..</text>
+<title>java/beans/PropertyDescriptor.setReadMethod (1 samples, 3.45%)</title><rect x="457.6" y="243.0" width="40.7" height="15" fill="#4fe34f" rx="2" ry="2"/>
+<text x="460.6" y="254.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/repository/ClassRepository.parse (1 samples, 3.70%)</title><rect x="272.2" y="83.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="275.2" y="94.0">sun/..</text>
+<title>org/apache/log4j/helpers/OptionConverter.instantiateByKey (4 samples, 13.79%)</title><rect x="498.3" y="467.0" width="162.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="501.3" y="478.0">org/apache/log4j/help..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/parser/SignatureParser.parseClassSig (1 samples, 3.70%)</title><rect x="272.2" y="67.0" width="43.7" height="15" fill="#5ef15e" rx="2" ry="2"/>
-<text x="275.2" y="78.0">sun/..</text>
+<title>org/apache/log4j/helpers/OptionConverter.instantiateByClassName (4 samples, 13.79%)</title><rect x="498.3" y="451.0" width="162.7" height="15" fill="#5ef15e" rx="2" ry="2"/>
+<text x="501.3" y="462.0">org/apache/log4j/help..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/parser/SignatureParser.parseClassSignature (1 samples, 3.70%)</title><rect x="272.2" y="51.0" width="43.7" height="15" fill="#53e653" rx="2" ry="2"/>
-<text x="275.2" y="62.0">sun/..</text>
+<title>java/lang/Class.newInstance (3 samples, 10.34%)</title><rect x="498.3" y="435.0" width="122.0" height="15" fill="#53e653" rx="2" ry="2"/>
+<text x="501.3" y="446.0">java/lang/Class..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/generics/parser/SignatureParser.parseZeroOrMoreFormalTypeParameters (1 samples, 3.70%)</title><rect x="272.2" y="35.0" width="43.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="275.2" y="46.0">sun/..</text>
+<title>java/lang/Class.getConstructor0 (1 samples, 3.45%)</title><rect x="498.3" y="419.0" width="40.7" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="501.3" y="430.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.getTargetPropertyInfo (1 samples, 3.70%)</title><rect x="315.9" y="323.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="318.9" y="334.0">java..</text>
+<title>java/lang/Class.privateGetDeclaredConstructors (1 samples, 3.45%)</title><rect x="498.3" y="403.0" width="40.7" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="501.3" y="414.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/beans/Introspector.addPropertyDescriptor (1 samples, 3.70%)</title><rect x="315.9" y="307.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="318.9" y="318.0">java..</text>
+<title>java/lang/Class.getDeclaredConstructors0 (1 samples, 3.45%)</title><rect x="498.3" y="387.0" width="40.7" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="501.3" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/ArrayList.add (1 samples, 3.70%)</title><rect x="315.9" y="291.0" width="43.7" height="15" fill="#3bd03b" rx="2" ry="2"/>
-<text x="318.9" y="302.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="498.3" y="371.0" width="40.7" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="501.3" y="382.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/ArrayList.ensureCapacityInternal (1 samples, 3.70%)</title><rect x="315.9" y="275.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="318.9" y="286.0">java..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.45%)</title><rect x="498.3" y="355.0" width="40.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="501.3" y="366.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/ArrayList.ensureExplicitCapacity (1 samples, 3.70%)</title><rect x="315.9" y="259.0" width="43.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
-<text x="318.9" y="270.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="498.3" y="339.0" width="40.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
+<text x="501.3" y="350.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/ArrayList.grow (1 samples, 3.70%)</title><rect x="315.9" y="243.0" width="43.7" height="15" fill="#39cf39" rx="2" ry="2"/>
-<text x="318.9" y="254.0">java..</text>
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="498.3" y="323.0" width="40.7" height="15" fill="#39cf39" rx="2" ry="2"/>
+<text x="501.3" y="334.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/Arrays.copyOf (1 samples, 3.70%)</title><rect x="315.9" y="227.0" width="43.7" height="15" fill="#37cd37" rx="2" ry="2"/>
-<text x="318.9" y="238.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="498.3" y="307.0" width="40.7" height="15" fill="#37cd37" rx="2" ry="2"/>
+<text x="501.3" y="318.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/Arrays.copyOf (1 samples, 3.70%)</title><rect x="315.9" y="211.0" width="43.7" height="15" fill="#42d742" rx="2" ry="2"/>
-<text x="318.9" y="222.0">java..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="498.3" y="291.0" width="40.7" height="15" fill="#42d742" rx="2" ry="2"/>
+<text x="501.3" y="302.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/helpers/OptionConverter.instantiateByKey (3 samples, 11.11%)</title><rect x="359.6" y="515.0" width="131.1" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="362.6" y="526.0">org/apache/log4j..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="498.3" y="275.0" width="40.7" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="501.3" y="286.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/helpers/OptionConverter.instantiateByClassName (3 samples, 11.11%)</title><rect x="359.6" y="499.0" width="131.1" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="362.6" y="510.0">org/apache/log4j..</text>
+<title>java/net/URLClassLoader.access$100 (1 samples, 3.45%)</title><rect x="498.3" y="259.0" width="40.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="501.3" y="270.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Class.newInstance (3 samples, 11.11%)</title><rect x="359.6" y="483.0" width="131.1" height="15" fill="#33c933" rx="2" ry="2"/>
-<text x="362.6" y="494.0">java/lang/Class...</text>
+<title>java/net/URLClassLoader.defineClass (1 samples, 3.45%)</title><rect x="498.3" y="243.0" width="40.7" height="15" fill="#33c933" rx="2" ry="2"/>
+<text x="501.3" y="254.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/reflect/Constructor.newInstance (3 samples, 11.11%)</title><rect x="359.6" y="467.0" width="131.1" height="15" fill="#5cef5c" rx="2" ry="2"/>
-<text x="362.6" y="478.0">java/lang/reflec..</text>
+<title>java/security/SecureClassLoader.defineClass (1 samples, 3.45%)</title><rect x="498.3" y="227.0" width="40.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
+<text x="501.3" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/DelegatingConstructorAccessorImpl.newInstance (3 samples, 11.11%)</title><rect x="359.6" y="451.0" width="131.1" height="15" fill="#6afb6a" rx="2" ry="2"/>
-<text x="362.6" y="462.0">sun/reflect/Dele..</text>
+<title>java/lang/ClassLoader.defineClass (1 samples, 3.45%)</title><rect x="498.3" y="211.0" width="40.7" height="15" fill="#6afb6a" rx="2" ry="2"/>
+<text x="501.3" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/NativeConstructorAccessorImpl.newInstance (3 samples, 11.11%)</title><rect x="359.6" y="435.0" width="131.1" height="15" fill="#40d540" rx="2" ry="2"/>
-<text x="362.6" y="446.0">sun/reflect/Nati..</text>
+<title>java/lang/ClassLoader.defineClass1 (1 samples, 3.45%)</title><rect x="498.3" y="195.0" width="40.7" height="15" fill="#40d540" rx="2" ry="2"/>
+<text x="501.3" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/reflect/NativeConstructorAccessorImpl.newInstance0 (3 samples, 11.11%)</title><rect x="359.6" y="419.0" width="131.1" height="15" fill="#3cd13c" rx="2" ry="2"/>
-<text x="362.6" y="430.0">sun/reflect/Nati..</text>
+<title>java/lang/reflect/Constructor.newInstance (2 samples, 6.90%)</title><rect x="539.0" y="419.0" width="81.3" height="15" fill="#3cd13c" rx="2" ry="2"/>
+<text x="542.0" y="430.0">java/lang..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PatternLayout.&lt;init&gt; (3 samples, 11.11%)</title><rect x="359.6" y="403.0" width="131.1" height="15" fill="#45d945" rx="2" ry="2"/>
-<text x="362.6" y="414.0">org/apache/log4j..</text>
+<title>sun/reflect/DelegatingConstructorAccessorImpl.newInstance (2 samples, 6.90%)</title><rect x="539.0" y="403.0" width="81.3" height="15" fill="#45d945" rx="2" ry="2"/>
+<text x="542.0" y="414.0">sun/refle..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PatternLayout.&lt;init&gt; (3 samples, 11.11%)</title><rect x="359.6" y="387.0" width="131.1" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="362.6" y="398.0">org/apache/log4j..</text>
+<title>sun/reflect/NativeConstructorAccessorImpl.newInstance (2 samples, 6.90%)</title><rect x="539.0" y="387.0" width="81.3" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="542.0" y="398.0">sun/refle..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/PatternLayout.createPatternParser (3 samples, 11.11%)</title><rect x="359.6" y="371.0" width="131.1" height="15" fill="#59eb59" rx="2" ry="2"/>
-<text x="362.6" y="382.0">org/apache/log4j..</text>
+<title>sun/reflect/NativeConstructorAccessorImpl.newInstance0 (2 samples, 6.90%)</title><rect x="539.0" y="371.0" width="81.3" height="15" fill="#59eb59" rx="2" ry="2"/>
+<text x="542.0" y="382.0">sun/refle..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (2 samples, 7.41%)</title><rect x="359.6" y="355.0" width="87.4" height="15" fill="#3bd03b" rx="2" ry="2"/>
-<text x="362.6" y="366.0">java/lang/..</text>
+<title>org/apache/log4j/PatternLayout.&lt;init&gt; (2 samples, 6.90%)</title><rect x="539.0" y="355.0" width="81.3" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="542.0" y="366.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (2 samples, 7.41%)</title><rect x="359.6" y="339.0" width="87.4" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="362.6" y="350.0">sun/misc/L..</text>
+<title>org/apache/log4j/PatternLayout.&lt;init&gt; (2 samples, 6.90%)</title><rect x="539.0" y="339.0" width="81.3" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="542.0" y="350.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (2 samples, 7.41%)</title><rect x="359.6" y="323.0" width="87.4" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="362.6" y="334.0">java/lang/..</text>
+<title>org/apache/log4j/PatternLayout.createPatternParser (2 samples, 6.90%)</title><rect x="539.0" y="323.0" width="81.3" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="542.0" y="334.0">org/apach..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (2 samples, 7.41%)</title><rect x="359.6" y="307.0" width="87.4" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="362.6" y="318.0">java/net/U..</text>
+<title>java/lang/ClassLoader.loadClass (2 samples, 6.90%)</title><rect x="539.0" y="307.0" width="81.3" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="542.0" y="318.0">java/lang..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (2 samples, 7.41%)</title><rect x="359.6" y="291.0" width="87.4" height="15" fill="#4fe34f" rx="2" ry="2"/>
-<text x="362.6" y="302.0">java/secur..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (2 samples, 6.90%)</title><rect x="539.0" y="291.0" width="81.3" height="15" fill="#4fe34f" rx="2" ry="2"/>
+<text x="542.0" y="302.0">sun/misc/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (2 samples, 7.41%)</title><rect x="359.6" y="275.0" width="87.4" height="15" fill="#3ad03a" rx="2" ry="2"/>
-<text x="362.6" y="286.0">java/net/U..</text>
+<title>java/lang/ClassLoader.loadClass (2 samples, 6.90%)</title><rect x="539.0" y="275.0" width="81.3" height="15" fill="#3ad03a" rx="2" ry="2"/>
+<text x="542.0" y="286.0">java/lang..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (2 samples, 7.41%)</title><rect x="359.6" y="259.0" width="87.4" height="15" fill="#55e855" rx="2" ry="2"/>
-<text x="362.6" y="270.0">java/net/U..</text>
+<title>java/net/URLClassLoader.findClass (2 samples, 6.90%)</title><rect x="539.0" y="259.0" width="81.3" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="542.0" y="270.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.access$100 (1 samples, 3.70%)</title><rect x="359.6" y="243.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="362.6" y="254.0">java..</text>
+<title>java/security/AccessController.doPrivileged (2 samples, 6.90%)</title><rect x="539.0" y="243.0" width="81.3" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="542.0" y="254.0">java/secu..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.defineClass (1 samples, 3.70%)</title><rect x="359.6" y="227.0" width="43.7" height="15" fill="#55e855" rx="2" ry="2"/>
-<text x="362.6" y="238.0">java..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="539.0" y="227.0" width="81.3" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="542.0" y="238.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.getByteBuffer (1 samples, 3.70%)</title><rect x="359.6" y="211.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="362.6" y="222.0">sun/..</text>
+<title>java/net/URLClassLoader$1.run (2 samples, 6.90%)</title><rect x="539.0" y="211.0" width="81.3" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="542.0" y="222.0">java/net/..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.cachedInputStream (1 samples, 3.70%)</title><rect x="359.6" y="195.0" width="43.7" height="15" fill="#53e653" rx="2" ry="2"/>
-<text x="362.6" y="206.0">sun/..</text>
+<title>java/net/URLClassLoader.access$100 (1 samples, 3.45%)</title><rect x="539.0" y="195.0" width="40.7" height="15" fill="#53e653" rx="2" ry="2"/>
+<text x="542.0" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$2.getInputStream (1 samples, 3.70%)</title><rect x="359.6" y="179.0" width="43.7" height="15" fill="#3ad03a" rx="2" ry="2"/>
-<text x="362.6" y="190.0">sun/..</text>
+<title>java/net/URLClassLoader.defineClass (1 samples, 3.45%)</title><rect x="539.0" y="179.0" width="40.7" height="15" fill="#3ad03a" rx="2" ry="2"/>
+<text x="542.0" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getInputStream (1 samples, 3.70%)</title><rect x="359.6" y="163.0" width="43.7" height="15" fill="#6cfe6c" rx="2" ry="2"/>
-<text x="362.6" y="174.0">java..</text>
+<title>sun/misc/Resource.getByteBuffer (1 samples, 3.45%)</title><rect x="539.0" y="163.0" width="40.7" height="15" fill="#6cfe6c" rx="2" ry="2"/>
+<text x="542.0" y="174.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getInputStream (1 samples, 3.70%)</title><rect x="359.6" y="147.0" width="43.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="362.6" y="158.0">java..</text>
+<title>sun/misc/Resource.cachedInputStream (1 samples, 3.45%)</title><rect x="539.0" y="147.0" width="40.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="542.0" y="158.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile$ZipFileInputStream.&lt;init&gt; (1 samples, 3.70%)</title><rect x="359.6" y="131.0" width="43.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
-<text x="362.6" y="142.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader$2.getInputStream (1 samples, 3.45%)</title><rect x="539.0" y="131.0" width="40.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
+<text x="542.0" y="142.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.access$1100 (1 samples, 3.70%)</title><rect x="359.6" y="115.0" width="43.7" height="15" fill="#53e753" rx="2" ry="2"/>
-<text x="362.6" y="126.0">java..</text>
+<title>java/util/jar/JarFile.getInputStream (1 samples, 3.45%)</title><rect x="539.0" y="115.0" width="40.7" height="15" fill="#53e753" rx="2" ry="2"/>
+<text x="542.0" y="126.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntryCSize (1 samples, 3.70%)</title><rect x="359.6" y="99.0" width="43.7" height="15" fill="#41d541" rx="2" ry="2"/>
-<text x="362.6" y="110.0">java..</text>
+<title>java/util/zip/ZipFile.getInputStream (1 samples, 3.45%)</title><rect x="539.0" y="99.0" width="40.7" height="15" fill="#41d541" rx="2" ry="2"/>
+<text x="542.0" y="110.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (1 samples, 3.70%)</title><rect x="403.3" y="243.0" width="43.7" height="15" fill="#4fe24f" rx="2" ry="2"/>
-<text x="406.3" y="254.0">sun/..</text>
+<title>java/util/zip/ZipFile.getEntryMethod (1 samples, 3.45%)</title><rect x="539.0" y="83.0" width="40.7" height="15" fill="#4fe24f" rx="2" ry="2"/>
+<text x="542.0" y="94.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.70%)</title><rect x="403.3" y="227.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="406.3" y="238.0">sun/..</text>
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="579.7" y="195.0" width="40.6" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="582.7" y="206.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.70%)</title><rect x="403.3" y="211.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="406.3" y="222.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.45%)</title><rect x="579.7" y="179.0" width="40.6" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="582.7" y="190.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getEntry (1 samples, 3.70%)</title><rect x="403.3" y="195.0" width="43.7" height="15" fill="#39ce39" rx="2" ry="2"/>
-<text x="406.3" y="206.0">java..</text>
+<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.45%)</title><rect x="579.7" y="163.0" width="40.6" height="15" fill="#39ce39" rx="2" ry="2"/>
+<text x="582.7" y="174.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntry (1 samples, 3.70%)</title><rect x="403.3" y="179.0" width="43.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
-<text x="406.3" y="190.0">java..</text>
+<title>java/util/jar/JarFile.getEntry (1 samples, 3.45%)</title><rect x="579.7" y="147.0" width="40.6" height="15" fill="#3dd23d" rx="2" ry="2"/>
+<text x="582.7" y="158.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getZipEntry (1 samples, 3.70%)</title><rect x="403.3" y="163.0" width="43.7" height="15" fill="#45d945" rx="2" ry="2"/>
-<text x="406.3" y="174.0">java..</text>
+<title>java/util/zip/ZipFile.getEntry (1 samples, 3.45%)</title><rect x="579.7" y="131.0" width="40.6" height="15" fill="#45d945" rx="2" ry="2"/>
+<text x="582.7" y="142.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntryFlag (1 samples, 3.70%)</title><rect x="403.3" y="147.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="406.3" y="158.0">java..</text>
+<title>java/util/zip/ZipFile.getZipEntry (1 samples, 3.45%)</title><rect x="579.7" y="115.0" width="40.6" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="582.7" y="126.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>org/apache/log4j/helpers/PatternParser.&lt;init&gt; (1 samples, 3.70%)</title><rect x="447.0" y="355.0" width="43.7" height="15" fill="#39ce39" rx="2" ry="2"/>
-<text x="450.0" y="366.0">org/..</text>
+<title>java/util/zip/ZipFile.getEntryBytes (1 samples, 3.45%)</title><rect x="579.7" y="99.0" width="40.6" height="15" fill="#39ce39" rx="2" ry="2"/>
+<text x="582.7" y="110.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="447.0" y="339.0" width="43.7" height="15" fill="#59eb59" rx="2" ry="2"/>
-<text x="450.0" y="350.0">java..</text>
+<title>org/apache/log4j/helpers/Loader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="435.0" width="40.7" height="15" fill="#59eb59" rx="2" ry="2"/>
+<text x="623.3" y="446.0">org..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.70%)</title><rect x="447.0" y="323.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="450.0" y="334.0">sun/..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="419.0" width="40.7" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="623.3" y="430.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="447.0" y="307.0" width="43.7" height="15" fill="#62f462" rx="2" ry="2"/>
-<text x="450.0" y="318.0">java..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="403.0" width="40.7" height="15" fill="#62f462" rx="2" ry="2"/>
+<text x="623.3" y="414.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="447.0" y="291.0" width="43.7" height="15" fill="#40d540" rx="2" ry="2"/>
-<text x="450.0" y="302.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="387.0" width="40.7" height="15" fill="#40d540" rx="2" ry="2"/>
+<text x="623.3" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="447.0" y="275.0" width="43.7" height="15" fill="#4ee24e" rx="2" ry="2"/>
-<text x="450.0" y="286.0">java..</text>
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="620.3" y="371.0" width="40.7" height="15" fill="#4ee24e" rx="2" ry="2"/>
+<text x="623.3" y="382.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="447.0" y="259.0" width="43.7" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="450.0" y="270.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="620.3" y="355.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="623.3" y="366.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="447.0" y="243.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="450.0" y="254.0">java..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="620.3" y="339.0" width="40.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="623.3" y="350.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (1 samples, 3.70%)</title><rect x="447.0" y="227.0" width="43.7" height="15" fill="#33c933" rx="2" ry="2"/>
-<text x="450.0" y="238.0">sun/..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="620.3" y="323.0" width="40.7" height="15" fill="#33c933" rx="2" ry="2"/>
+<text x="623.3" y="334.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.70%)</title><rect x="447.0" y="211.0" width="43.7" height="15" fill="#68f968" rx="2" ry="2"/>
-<text x="450.0" y="222.0">sun/..</text>
+<title>java/net/URLClassLoader.access$100 (1 samples, 3.45%)</title><rect x="620.3" y="307.0" width="40.7" height="15" fill="#68f968" rx="2" ry="2"/>
+<text x="623.3" y="318.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.70%)</title><rect x="447.0" y="195.0" width="43.7" height="15" fill="#4bdf4b" rx="2" ry="2"/>
-<text x="450.0" y="206.0">java..</text>
+<title>java/net/URLClassLoader.defineClass (1 samples, 3.45%)</title><rect x="620.3" y="291.0" width="40.7" height="15" fill="#4bdf4b" rx="2" ry="2"/>
+<text x="623.3" y="302.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getEntry (1 samples, 3.70%)</title><rect x="447.0" y="179.0" width="43.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
-<text x="450.0" y="190.0">java..</text>
+<title>java/security/SecureClassLoader.defineClass (1 samples, 3.45%)</title><rect x="620.3" y="275.0" width="40.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
+<text x="623.3" y="286.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getEntry (1 samples, 3.70%)</title><rect x="447.0" y="163.0" width="43.7" height="15" fill="#6afc6a" rx="2" ry="2"/>
-<text x="450.0" y="174.0">java..</text>
+<title>java/lang/ClassLoader.defineClass (1 samples, 3.45%)</title><rect x="620.3" y="259.0" width="40.7" height="15" fill="#6afc6a" rx="2" ry="2"/>
+<text x="623.3" y="270.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.70%)</title><rect x="447.0" y="147.0" width="43.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="450.0" y="158.0">java..</text>
+<title>java/lang/ClassLoader.defineClass1 (1 samples, 3.45%)</title><rect x="620.3" y="243.0" width="40.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="623.3" y="254.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/String.toCharArray (1 samples, 3.70%)</title><rect x="447.0" y="131.0" width="43.7" height="15" fill="#39cf39" rx="2" ry="2"/>
-<text x="450.0" y="142.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="227.0" width="40.7" height="15" fill="#39cf39" rx="2" ry="2"/>
+<text x="623.3" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/invoke/MethodHandleNatives.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="490.7" y="659.0" width="43.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="493.7" y="670.0">java..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="211.0" width="40.7" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="623.3" y="222.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/invoke/MethodHandleNatives.registerNatives (1 samples, 3.70%)</title><rect x="490.7" y="643.0" width="43.7" height="15" fill="#37cd37" rx="2" ry="2"/>
-<text x="493.7" y="654.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="620.3" y="195.0" width="40.7" height="15" fill="#37cd37" rx="2" ry="2"/>
+<text x="623.3" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/instrument/InstrumentationImpl.loadClassAndCallPremain (14 samples, 51.85%)</title><rect x="534.4" y="659.0" width="611.9" height="15" fill="#3bd03b" rx="2" ry="2"/>
-<text x="537.4" y="670.0">sun/instrument/InstrumentationImpl.loadClassAndCallPremain</text>
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="620.3" y="179.0" width="40.7" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="623.3" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/instrument/InstrumentationImpl.loadClassAndStartAgent (14 samples, 51.85%)</title><rect x="534.4" y="643.0" width="611.9" height="15" fill="#36cb36" rx="2" ry="2"/>
-<text x="537.4" y="654.0">sun/instrument/InstrumentationImpl.loadClassAndStartAgent</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="620.3" y="163.0" width="40.7" height="15" fill="#36cb36" rx="2" ry="2"/>
+<text x="623.3" y="174.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (14 samples, 51.85%)</title><rect x="534.4" y="627.0" width="611.9" height="15" fill="#47dc47" rx="2" ry="2"/>
-<text x="537.4" y="638.0">java/lang/ClassLoader.loadClass</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="620.3" y="147.0" width="40.7" height="15" fill="#47dc47" rx="2" ry="2"/>
+<text x="623.3" y="158.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (14 samples, 51.85%)</title><rect x="534.4" y="611.0" width="611.9" height="15" fill="#41d541" rx="2" ry="2"/>
-<text x="537.4" y="622.0">sun/misc/Launcher$AppClassLoader.loadClass</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="620.3" y="131.0" width="40.7" height="15" fill="#41d541" rx="2" ry="2"/>
+<text x="623.3" y="142.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (14 samples, 51.85%)</title><rect x="534.4" y="595.0" width="611.9" height="15" fill="#3acf3a" rx="2" ry="2"/>
-<text x="537.4" y="606.0">java/lang/ClassLoader.loadClass</text>
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="620.3" y="115.0" width="40.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
+<text x="623.3" y="126.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="534.4" y="579.0" width="43.7" height="15" fill="#60f360" rx="2" ry="2"/>
-<text x="537.4" y="590.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.45%)</title><rect x="620.3" y="99.0" width="40.7" height="15" fill="#60f360" rx="2" ry="2"/>
+<text x="623.3" y="110.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="534.4" y="563.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="537.4" y="574.0">java..</text>
+<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.45%)</title><rect x="620.3" y="83.0" width="40.7" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="623.3" y="94.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="534.4" y="547.0" width="43.7" height="15" fill="#46db46" rx="2" ry="2"/>
-<text x="537.4" y="558.0">java..</text>
+<title>java/util/jar/JarFile.getEntry (1 samples, 3.45%)</title><rect x="620.3" y="67.0" width="40.7" height="15" fill="#46db46" rx="2" ry="2"/>
+<text x="623.3" y="78.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="534.4" y="531.0" width="43.7" height="15" fill="#4de04d" rx="2" ry="2"/>
-<text x="537.4" y="542.0">java..</text>
+<title>java/util/zip/ZipFile.getEntry (1 samples, 3.45%)</title><rect x="620.3" y="51.0" width="40.7" height="15" fill="#4de04d" rx="2" ry="2"/>
+<text x="623.3" y="62.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="534.4" y="515.0" width="43.7" height="15" fill="#62f462" rx="2" ry="2"/>
-<text x="537.4" y="526.0">java..</text>
+<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.45%)</title><rect x="620.3" y="35.0" width="40.7" height="15" fill="#62f462" rx="2" ry="2"/>
+<text x="623.3" y="46.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (1 samples, 3.70%)</title><rect x="534.4" y="499.0" width="43.7" height="15" fill="#69fb69" rx="2" ry="2"/>
-<text x="537.4" y="510.0">sun/..</text>
+<title>sun/instrument/InstrumentationImpl.loadClassAndCallPremain (13 samples, 44.83%)</title><rect x="661.0" y="611.0" width="529.0" height="15" fill="#69fb69" rx="2" ry="2"/>
+<text x="664.0" y="622.0">sun/instrument/InstrumentationImpl.loadClassAndCallPremain</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getNextLoader (1 samples, 3.70%)</title><rect x="534.4" y="483.0" width="43.7" height="15" fill="#59eb59" rx="2" ry="2"/>
-<text x="537.4" y="494.0">sun/..</text>
+<title>sun/instrument/InstrumentationImpl.loadClassAndStartAgent (13 samples, 44.83%)</title><rect x="661.0" y="595.0" width="529.0" height="15" fill="#59eb59" rx="2" ry="2"/>
+<text x="664.0" y="606.0">sun/instrument/InstrumentationImpl.loadClassAndStartAgent</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getLoader (1 samples, 3.70%)</title><rect x="534.4" y="467.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="537.4" y="478.0">sun/..</text>
+<title>java/lang/ClassLoader.loadClass (12 samples, 41.38%)</title><rect x="661.0" y="579.0" width="488.3" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="664.0" y="590.0">java/lang/ClassLoader.loadClass</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getLoader (1 samples, 3.70%)</title><rect x="534.4" y="451.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="537.4" y="462.0">sun/..</text>
+<title>sun/misc/Launcher$AppClassLoader.loadClass (12 samples, 41.38%)</title><rect x="661.0" y="563.0" width="488.3" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="664.0" y="574.0">sun/misc/Launcher$AppClassLoader.loadClass</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="534.4" y="435.0" width="43.7" height="15" fill="#68f968" rx="2" ry="2"/>
-<text x="537.4" y="446.0">java..</text>
+<title>java/lang/ClassLoader.loadClass (12 samples, 41.38%)</title><rect x="661.0" y="547.0" width="488.3" height="15" fill="#68f968" rx="2" ry="2"/>
+<text x="664.0" y="558.0">java/lang/ClassLoader.loadClass</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$3.run (1 samples, 3.70%)</title><rect x="534.4" y="419.0" width="43.7" height="15" fill="#41d541" rx="2" ry="2"/>
-<text x="537.4" y="430.0">sun/..</text>
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="661.0" y="531.0" width="40.7" height="15" fill="#41d541" rx="2" ry="2"/>
+<text x="664.0" y="542.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$3.run (1 samples, 3.70%)</title><rect x="534.4" y="403.0" width="43.7" height="15" fill="#65f765" rx="2" ry="2"/>
-<text x="537.4" y="414.0">sun/..</text>
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="661.0" y="515.0" width="40.7" height="15" fill="#65f765" rx="2" ry="2"/>
+<text x="664.0" y="526.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="387.0" width="43.7" height="15" fill="#4ee14e" rx="2" ry="2"/>
-<text x="537.4" y="398.0">sun/..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="661.0" y="499.0" width="40.7" height="15" fill="#4ee14e" rx="2" ry="2"/>
+<text x="664.0" y="510.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.ensureOpen (1 samples, 3.70%)</title><rect x="534.4" y="371.0" width="43.7" height="15" fill="#50e350" rx="2" ry="2"/>
-<text x="537.4" y="382.0">sun/..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="661.0" y="483.0" width="40.7" height="15" fill="#50e350" rx="2" ry="2"/>
+<text x="664.0" y="494.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="534.4" y="355.0" width="43.7" height="15" fill="#56e956" rx="2" ry="2"/>
-<text x="537.4" y="366.0">java..</text>
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="661.0" y="467.0" width="40.7" height="15" fill="#56e956" rx="2" ry="2"/>
+<text x="664.0" y="478.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$1.run (1 samples, 3.70%)</title><rect x="534.4" y="339.0" width="43.7" height="15" fill="#63f463" rx="2" ry="2"/>
-<text x="537.4" y="350.0">sun/..</text>
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="661.0" y="451.0" width="40.7" height="15" fill="#63f463" rx="2" ry="2"/>
+<text x="664.0" y="462.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$1.run (1 samples, 3.70%)</title><rect x="534.4" y="323.0" width="43.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
-<text x="537.4" y="334.0">sun/..</text>
+<title>sun/misc/URLClassPath.getNextLoader (1 samples, 3.45%)</title><rect x="661.0" y="435.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="664.0" y="446.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.access$800 (1 samples, 3.70%)</title><rect x="534.4" y="307.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="537.4" y="318.0">sun/..</text>
+<title>sun/misc/URLClassPath.getLoader (1 samples, 3.45%)</title><rect x="661.0" y="419.0" width="40.7" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="664.0" y="430.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getJarFile (1 samples, 3.70%)</title><rect x="534.4" y="291.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="537.4" y="302.0">sun/..</text>
+<title>sun/misc/URLClassPath.getLoader (1 samples, 3.45%)</title><rect x="661.0" y="403.0" width="40.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="664.0" y="414.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="275.0" width="43.7" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="537.4" y="286.0">java..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="661.0" y="387.0" width="40.7" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="664.0" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="259.0" width="43.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
-<text x="537.4" y="270.0">java..</text>
+<title>sun/misc/URLClassPath$3.run (1 samples, 3.45%)</title><rect x="661.0" y="371.0" width="40.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
+<text x="664.0" y="382.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="243.0" width="43.7" height="15" fill="#63f563" rx="2" ry="2"/>
-<text x="537.4" y="254.0">java..</text>
+<title>sun/misc/URLClassPath$3.run (1 samples, 3.45%)</title><rect x="661.0" y="355.0" width="40.7" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="664.0" y="366.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="227.0" width="43.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
-<text x="537.4" y="238.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="339.0" width="40.7" height="15" fill="#5bed5b" rx="2" ry="2"/>
+<text x="664.0" y="350.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/PerfCounter.getZipFileOpenTime (1 samples, 3.70%)</title><rect x="534.4" y="211.0" width="43.7" height="15" fill="#5cee5c" rx="2" ry="2"/>
-<text x="537.4" y="222.0">sun/..</text>
+<title>sun/misc/URLClassPath$JarLoader.ensureOpen (1 samples, 3.45%)</title><rect x="661.0" y="323.0" width="40.7" height="15" fill="#5cee5c" rx="2" ry="2"/>
+<text x="664.0" y="334.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/PerfCounter$CoreCounters.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="534.4" y="195.0" width="43.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="537.4" y="206.0">sun/..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="661.0" y="307.0" width="40.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="664.0" y="318.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/PerfCounter.newPerfCounter (1 samples, 3.70%)</title><rect x="534.4" y="179.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="537.4" y="190.0">sun/..</text>
+<title>sun/misc/URLClassPath$JarLoader$1.run (1 samples, 3.45%)</title><rect x="661.0" y="291.0" width="40.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="664.0" y="302.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/PerfCounter.&lt;init&gt; (1 samples, 3.70%)</title><rect x="534.4" y="163.0" width="43.7" height="15" fill="#65f665" rx="2" ry="2"/>
-<text x="537.4" y="174.0">sun/..</text>
+<title>sun/misc/URLClassPath$JarLoader$1.run (1 samples, 3.45%)</title><rect x="661.0" y="275.0" width="40.7" height="15" fill="#65f665" rx="2" ry="2"/>
+<text x="664.0" y="286.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Perf.createLong (1 samples, 3.70%)</title><rect x="534.4" y="147.0" width="43.7" height="15" fill="#43d743" rx="2" ry="2"/>
-<text x="537.4" y="158.0">sun/..</text>
+<title>sun/misc/URLClassPath$JarLoader.access$800 (1 samples, 3.45%)</title><rect x="661.0" y="259.0" width="40.7" height="15" fill="#43d743" rx="2" ry="2"/>
+<text x="664.0" y="270.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/nio/DirectByteBuffer.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="534.4" y="131.0" width="43.7" height="15" fill="#52e552" rx="2" ry="2"/>
-<text x="537.4" y="142.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.getJarFile (1 samples, 3.45%)</title><rect x="661.0" y="243.0" width="40.7" height="15" fill="#52e552" rx="2" ry="2"/>
+<text x="664.0" y="254.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (13 samples, 48.15%)</title><rect x="578.1" y="579.0" width="568.2" height="15" fill="#50e450" rx="2" ry="2"/>
-<text x="581.1" y="590.0">java/net/URLClassLoader.findClass</text>
+<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="227.0" width="40.7" height="15" fill="#50e450" rx="2" ry="2"/>
+<text x="664.0" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (13 samples, 48.15%)</title><rect x="578.1" y="563.0" width="568.2" height="15" fill="#38cd38" rx="2" ry="2"/>
-<text x="581.1" y="574.0">java/security/AccessController.doPrivileged</text>
+<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="211.0" width="40.7" height="15" fill="#38cd38" rx="2" ry="2"/>
+<text x="664.0" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (13 samples, 48.15%)</title><rect x="578.1" y="547.0" width="568.2" height="15" fill="#4ade4a" rx="2" ry="2"/>
-<text x="581.1" y="558.0">java/net/URLClassLoader$1.run</text>
+<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="195.0" width="40.7" height="15" fill="#4ade4a" rx="2" ry="2"/>
+<text x="664.0" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (13 samples, 48.15%)</title><rect x="578.1" y="531.0" width="568.2" height="15" fill="#54e754" rx="2" ry="2"/>
-<text x="581.1" y="542.0">java/net/URLClassLoader$1.run</text>
+<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="179.0" width="40.7" height="15" fill="#54e754" rx="2" ry="2"/>
+<text x="664.0" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.access$100 (2 samples, 7.41%)</title><rect x="578.1" y="515.0" width="87.5" height="15" fill="#66f866" rx="2" ry="2"/>
-<text x="581.1" y="526.0">java/net/U..</text>
+<title>sun/misc/PerfCounter.getZipFileOpenTime (1 samples, 3.45%)</title><rect x="661.0" y="163.0" width="40.7" height="15" fill="#66f866" rx="2" ry="2"/>
+<text x="664.0" y="174.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.defineClass (2 samples, 7.41%)</title><rect x="578.1" y="499.0" width="87.5" height="15" fill="#4ce04c" rx="2" ry="2"/>
-<text x="581.1" y="510.0">java/net/U..</text>
+<title>sun/misc/PerfCounter$CoreCounters.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="661.0" y="147.0" width="40.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
+<text x="664.0" y="158.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/SecureClassLoader.defineClass (1 samples, 3.70%)</title><rect x="578.1" y="483.0" width="43.8" height="15" fill="#5df05d" rx="2" ry="2"/>
-<text x="581.1" y="494.0">java..</text>
+<title>sun/misc/PerfCounter.newPerfCounter (1 samples, 3.45%)</title><rect x="661.0" y="131.0" width="40.7" height="15" fill="#5df05d" rx="2" ry="2"/>
+<text x="664.0" y="142.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.defineClass (1 samples, 3.70%)</title><rect x="578.1" y="467.0" width="43.8" height="15" fill="#66f766" rx="2" ry="2"/>
-<text x="581.1" y="478.0">java..</text>
+<title>sun/misc/PerfCounter.&lt;init&gt; (1 samples, 3.45%)</title><rect x="661.0" y="115.0" width="40.7" height="15" fill="#66f766" rx="2" ry="2"/>
+<text x="664.0" y="126.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.defineClass1 (1 samples, 3.70%)</title><rect x="578.1" y="451.0" width="43.8" height="15" fill="#5cef5c" rx="2" ry="2"/>
-<text x="581.1" y="462.0">java..</text>
+<title>java/nio/DirectByteBuffer.asLongBuffer (1 samples, 3.45%)</title><rect x="661.0" y="99.0" width="40.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
+<text x="664.0" y="110.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.getByteBuffer (1 samples, 3.70%)</title><rect x="621.9" y="483.0" width="43.7" height="15" fill="#62f462" rx="2" ry="2"/>
-<text x="624.9" y="494.0">sun/..</text>
+<title>java/net/URLClassLoader.findClass (11 samples, 37.93%)</title><rect x="701.7" y="531.0" width="447.6" height="15" fill="#62f462" rx="2" ry="2"/>
+<text x="704.7" y="542.0">java/net/URLClassLoader.findClass</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.cachedInputStream (1 samples, 3.70%)</title><rect x="621.9" y="467.0" width="43.7" height="15" fill="#5cee5c" rx="2" ry="2"/>
-<text x="624.9" y="478.0">sun/..</text>
+<title>java/security/AccessController.doPrivileged (11 samples, 37.93%)</title><rect x="701.7" y="515.0" width="447.6" height="15" fill="#5cee5c" rx="2" ry="2"/>
+<text x="704.7" y="526.0">java/security/AccessController.doPrivileged</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$2.getInputStream (1 samples, 3.70%)</title><rect x="621.9" y="451.0" width="43.7" height="15" fill="#5ef05e" rx="2" ry="2"/>
-<text x="624.9" y="462.0">sun/..</text>
+<title>java/net/URLClassLoader$1.run (11 samples, 37.93%)</title><rect x="701.7" y="499.0" width="447.6" height="15" fill="#5ef05e" rx="2" ry="2"/>
+<text x="704.7" y="510.0">java/net/URLClassLoader$1.run</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getInputStream (1 samples, 3.70%)</title><rect x="621.9" y="435.0" width="43.7" height="15" fill="#33c933" rx="2" ry="2"/>
-<text x="624.9" y="446.0">java..</text>
+<title>java/net/URLClassLoader$1.run (11 samples, 37.93%)</title><rect x="701.7" y="483.0" width="447.6" height="15" fill="#33c933" rx="2" ry="2"/>
+<text x="704.7" y="494.0">java/net/URLClassLoader$1.run</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.initializeVerifier (1 samples, 3.70%)</title><rect x="621.9" y="419.0" width="43.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="624.9" y="430.0">java..</text>
+<title>java/net/URLClassLoader.access$100 (1 samples, 3.45%)</title><rect x="701.7" y="467.0" width="40.7" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="704.7" y="478.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/security/util/SignatureFileVerifier.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="621.9" y="403.0" width="43.7" height="15" fill="#51e451" rx="2" ry="2"/>
-<text x="624.9" y="414.0">sun/..</text>
+<title>java/net/URLClassLoader.defineClass (1 samples, 3.45%)</title><rect x="701.7" y="451.0" width="40.7" height="15" fill="#51e451" rx="2" ry="2"/>
+<text x="704.7" y="462.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/security/util/DisabledAlgorithmConstraints.&lt;init&gt; (1 samples, 3.70%)</title><rect x="621.9" y="387.0" width="43.7" height="15" fill="#4de14d" rx="2" ry="2"/>
-<text x="624.9" y="398.0">sun/..</text>
+<title>sun/misc/Resource.getByteBuffer (1 samples, 3.45%)</title><rect x="701.7" y="435.0" width="40.7" height="15" fill="#4de14d" rx="2" ry="2"/>
+<text x="704.7" y="446.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/security/util/AlgorithmDecomposer.&lt;clinit&gt; (1 samples, 3.70%)</title><rect x="621.9" y="371.0" width="43.7" height="15" fill="#35cb35" rx="2" ry="2"/>
-<text x="624.9" y="382.0">sun/..</text>
+<title>sun/misc/Resource.cachedInputStream (1 samples, 3.45%)</title><rect x="701.7" y="419.0" width="40.7" height="15" fill="#35cb35" rx="2" ry="2"/>
+<text x="704.7" y="430.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.compile (1 samples, 3.70%)</title><rect x="621.9" y="355.0" width="43.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
-<text x="624.9" y="366.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader$2.getInputStream (1 samples, 3.45%)</title><rect x="701.7" y="403.0" width="40.7" height="15" fill="#5cef5c" rx="2" ry="2"/>
+<text x="704.7" y="414.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.&lt;init&gt; (1 samples, 3.70%)</title><rect x="621.9" y="339.0" width="43.7" height="15" fill="#4fe24f" rx="2" ry="2"/>
-<text x="624.9" y="350.0">java..</text>
+<title>java/util/jar/JarFile.getInputStream (1 samples, 3.45%)</title><rect x="701.7" y="387.0" width="40.7" height="15" fill="#4fe24f" rx="2" ry="2"/>
+<text x="704.7" y="398.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.compile (1 samples, 3.70%)</title><rect x="621.9" y="323.0" width="43.7" height="15" fill="#5aec5a" rx="2" ry="2"/>
-<text x="624.9" y="334.0">java..</text>
+<title>java/util/jar/JarFile.initializeVerifier (1 samples, 3.45%)</title><rect x="701.7" y="371.0" width="40.7" height="15" fill="#5aec5a" rx="2" ry="2"/>
+<text x="704.7" y="382.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.expr (1 samples, 3.70%)</title><rect x="621.9" y="307.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="624.9" y="318.0">java..</text>
+<title>sun/security/util/SignatureFileVerifier.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="701.7" y="355.0" width="40.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="704.7" y="366.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.sequence (1 samples, 3.70%)</title><rect x="621.9" y="291.0" width="43.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
-<text x="624.9" y="302.0">java..</text>
+<title>sun/security/util/DisabledAlgorithmConstraints.&lt;init&gt; (1 samples, 3.45%)</title><rect x="701.7" y="339.0" width="40.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
+<text x="704.7" y="350.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.atom (1 samples, 3.70%)</title><rect x="621.9" y="275.0" width="43.7" height="15" fill="#68fa68" rx="2" ry="2"/>
-<text x="624.9" y="286.0">java..</text>
+<title>sun/security/util/DisabledAlgorithmConstraints.&lt;init&gt; (1 samples, 3.45%)</title><rect x="701.7" y="323.0" width="40.7" height="15" fill="#68fa68" rx="2" ry="2"/>
+<text x="704.7" y="334.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/regex/Pattern.newSingle (1 samples, 3.70%)</title><rect x="621.9" y="259.0" width="43.7" height="15" fill="#65f765" rx="2" ry="2"/>
-<text x="624.9" y="270.0">java..</text>
+<title>sun/security/util/AbstractAlgorithmConstraints.getAlgorithms (1 samples, 3.45%)</title><rect x="701.7" y="307.0" width="40.7" height="15" fill="#65f765" rx="2" ry="2"/>
+<text x="704.7" y="318.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getResource (11 samples, 40.74%)</title><rect x="665.6" y="515.0" width="480.7" height="15" fill="#67f867" rx="2" ry="2"/>
-<text x="668.6" y="526.0">sun/misc/URLClassPath.getResource</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="701.7" y="291.0" width="40.7" height="15" fill="#67f867" rx="2" ry="2"/>
+<text x="704.7" y="302.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getNextLoader (11 samples, 40.74%)</title><rect x="665.6" y="499.0" width="480.7" height="15" fill="#52e552" rx="2" ry="2"/>
-<text x="668.6" y="510.0">sun/misc/URLClassPath.getNextLoader</text>
+<title>sun/security/util/AbstractAlgorithmConstraints$1.run (1 samples, 3.45%)</title><rect x="701.7" y="275.0" width="40.7" height="15" fill="#52e552" rx="2" ry="2"/>
+<text x="704.7" y="286.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getLoader (11 samples, 40.74%)</title><rect x="665.6" y="483.0" width="480.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
-<text x="668.6" y="494.0">sun/misc/URLClassPath.getLoader</text>
+<title>sun/security/util/AbstractAlgorithmConstraints$1.run (1 samples, 3.45%)</title><rect x="701.7" y="259.0" width="40.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
+<text x="704.7" y="270.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getClassPath (5 samples, 18.52%)</title><rect x="665.6" y="467.0" width="218.5" height="15" fill="#4de04d" rx="2" ry="2"/>
-<text x="668.6" y="478.0">sun/misc/URLClassPath$JarLoad..</text>
+<title>java/security/Security.&lt;clinit&gt; (1 samples, 3.45%)</title><rect x="701.7" y="243.0" width="40.7" height="15" fill="#4de04d" rx="2" ry="2"/>
+<text x="704.7" y="254.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JavaUtilJarAccessImpl.jarFileHasClassPathAttribute (5 samples, 18.52%)</title><rect x="665.6" y="451.0" width="218.5" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="668.6" y="462.0">java/util/jar/JavaUtilJarAcce..</text>
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="701.7" y="227.0" width="40.7" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="704.7" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.hasClassPathAttribute (5 samples, 18.52%)</title><rect x="665.6" y="435.0" width="218.5" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="668.6" y="446.0">java/util/jar/JarFile.hasClas..</text>
+<title>java/security/Security$1.run (1 samples, 3.45%)</title><rect x="701.7" y="211.0" width="40.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="704.7" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.checkForSpecialAttributes (5 samples, 18.52%)</title><rect x="665.6" y="419.0" width="218.5" height="15" fill="#4ce04c" rx="2" ry="2"/>
-<text x="668.6" y="430.0">java/util/jar/JarFile.checkFo..</text>
+<title>java/security/Security$1.run (1 samples, 3.45%)</title><rect x="701.7" y="195.0" width="40.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
+<text x="704.7" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getBytes (2 samples, 7.41%)</title><rect x="665.6" y="403.0" width="87.4" height="15" fill="#44d944" rx="2" ry="2"/>
-<text x="668.6" y="414.0">java/util/..</text>
+<title>java/security/Security.access$000 (1 samples, 3.45%)</title><rect x="701.7" y="179.0" width="40.7" height="15" fill="#44d944" rx="2" ry="2"/>
+<text x="704.7" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/IOUtils.readFully (2 samples, 7.41%)</title><rect x="665.6" y="387.0" width="87.4" height="15" fill="#50e450" rx="2" ry="2"/>
-<text x="668.6" y="398.0">sun/misc/I..</text>
+<title>java/security/Security.initialize (1 samples, 3.45%)</title><rect x="701.7" y="163.0" width="40.7" height="15" fill="#50e450" rx="2" ry="2"/>
+<text x="704.7" y="174.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/InflaterInputStream.read (2 samples, 7.41%)</title><rect x="665.6" y="371.0" width="87.4" height="15" fill="#66f866" rx="2" ry="2"/>
-<text x="668.6" y="382.0">java/util/..</text>
+<title>java/util/Properties.load (1 samples, 3.45%)</title><rect x="701.7" y="147.0" width="40.7" height="15" fill="#66f866" rx="2" ry="2"/>
+<text x="704.7" y="158.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/Inflater.inflate (2 samples, 7.41%)</title><rect x="665.6" y="355.0" width="87.4" height="15" fill="#4ce04c" rx="2" ry="2"/>
-<text x="668.6" y="366.0">java/util/..</text>
+<title>java/util/Properties.load0 (1 samples, 3.45%)</title><rect x="701.7" y="131.0" width="40.7" height="15" fill="#4ce04c" rx="2" ry="2"/>
+<text x="704.7" y="142.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/Inflater.inflateBytes (2 samples, 7.41%)</title><rect x="665.6" y="339.0" width="87.4" height="15" fill="#4ee14e" rx="2" ry="2"/>
-<text x="668.6" y="350.0">java/util/..</text>
+<title>java/util/Properties.loadConvert (1 samples, 3.45%)</title><rect x="701.7" y="115.0" width="40.7" height="15" fill="#4ee14e" rx="2" ry="2"/>
+<text x="704.7" y="126.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.match (3 samples, 11.11%)</title><rect x="753.0" y="403.0" width="131.1" height="15" fill="#62f462" rx="2" ry="2"/>
-<text x="756.0" y="414.0">java/util/jar/Ja..</text>
+<title>sun/misc/URLClassPath.getResource (10 samples, 34.48%)</title><rect x="742.4" y="467.0" width="406.9" height="15" fill="#62f462" rx="2" ry="2"/>
+<text x="745.4" y="478.0">sun/misc/URLClassPath.getResource</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/Math.max (1 samples, 3.70%)</title><rect x="840.4" y="387.0" width="43.7" height="15" fill="#47dc47" rx="2" ry="2"/>
-<text x="843.4" y="398.0">java..</text>
+<title>sun/misc/URLClassPath.getNextLoader (10 samples, 34.48%)</title><rect x="742.4" y="451.0" width="406.9" height="15" fill="#47dc47" rx="2" ry="2"/>
+<text x="745.4" y="462.0">sun/misc/URLClassPath.getNextLoader</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath.getLoader (6 samples, 22.22%)</title><rect x="884.1" y="467.0" width="262.2" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="887.1" y="478.0">sun/misc/URLClassPath.getLoader</text>
+<title>sun/misc/URLClassPath.getLoader (10 samples, 34.48%)</title><rect x="742.4" y="435.0" width="406.9" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="745.4" y="446.0">sun/misc/URLClassPath.getLoader</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (6 samples, 22.22%)</title><rect x="884.1" y="451.0" width="262.2" height="15" fill="#6dfe6d" rx="2" ry="2"/>
-<text x="887.1" y="462.0">java/security/AccessController.doPr..</text>
+<title>sun/misc/URLClassPath$JarLoader.getClassPath (5 samples, 17.24%)</title><rect x="742.4" y="419.0" width="203.5" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="745.4" y="430.0">sun/misc/URLClassPath$JarLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$3.run (6 samples, 22.22%)</title><rect x="884.1" y="435.0" width="262.2" height="15" fill="#3bd03b" rx="2" ry="2"/>
-<text x="887.1" y="446.0">sun/misc/URLClassPath$3.run</text>
+<title>java/util/jar/JavaUtilJarAccessImpl.jarFileHasClassPathAttribute (5 samples, 17.24%)</title><rect x="742.4" y="403.0" width="203.5" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="745.4" y="414.0">java/util/jar/JavaUtilJarAc..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$3.run (6 samples, 22.22%)</title><rect x="884.1" y="419.0" width="262.2" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="887.1" y="430.0">sun/misc/URLClassPath$3.run</text>
+<title>java/util/jar/JarFile.hasClassPathAttribute (5 samples, 17.24%)</title><rect x="742.4" y="387.0" width="203.5" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="745.4" y="398.0">java/util/jar/JarFile.hasCl..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.&lt;init&gt; (6 samples, 22.22%)</title><rect x="884.1" y="403.0" width="262.2" height="15" fill="#56e956" rx="2" ry="2"/>
-<text x="887.1" y="414.0">sun/misc/URLClassPath$JarLoader.&lt;in..</text>
+<title>java/util/jar/JarFile.checkForSpecialAttributes (5 samples, 17.24%)</title><rect x="742.4" y="371.0" width="203.5" height="15" fill="#56e956" rx="2" ry="2"/>
+<text x="745.4" y="382.0">java/util/jar/JarFile.check..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.ensureOpen (6 samples, 22.22%)</title><rect x="884.1" y="387.0" width="262.2" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="887.1" y="398.0">sun/misc/URLClassPath$JarLoader.ens..</text>
+<title>java/util/jar/JarFile.getBytes (4 samples, 13.79%)</title><rect x="742.4" y="355.0" width="162.8" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="745.4" y="366.0">java/util/jar/JarFile..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (6 samples, 22.22%)</title><rect x="884.1" y="371.0" width="262.2" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="887.1" y="382.0">java/security/AccessController.doPr..</text>
+<title>java/util/zip/ZipFile.getInputStream (3 samples, 10.34%)</title><rect x="742.4" y="339.0" width="122.1" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="745.4" y="350.0">java/util/zip/Z..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$1.run (6 samples, 22.22%)</title><rect x="884.1" y="355.0" width="262.2" height="15" fill="#60f260" rx="2" ry="2"/>
-<text x="887.1" y="366.0">sun/misc/URLClassPath$JarLoader$1.run</text>
+<title>java/util/zip/ZipFile$ZipFileInflaterInputStream.&lt;init&gt; (1 samples, 3.45%)</title><rect x="742.4" y="323.0" width="40.7" height="15" fill="#60f260" rx="2" ry="2"/>
+<text x="745.4" y="334.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader$1.run (6 samples, 22.22%)</title><rect x="884.1" y="339.0" width="262.2" height="15" fill="#5df05d" rx="2" ry="2"/>
-<text x="887.1" y="350.0">sun/misc/URLClassPath$JarLoader$1.run</text>
+<title>java/util/zip/InflaterInputStream.&lt;init&gt; (1 samples, 3.45%)</title><rect x="742.4" y="307.0" width="40.7" height="15" fill="#5df05d" rx="2" ry="2"/>
+<text x="745.4" y="318.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/JarIndex.getJarIndex (1 samples, 3.70%)</title><rect x="884.1" y="323.0" width="43.7" height="15" fill="#45d945" rx="2" ry="2"/>
-<text x="887.1" y="334.0">sun/..</text>
+<title>java/util/zip/ZipFile.getInflater (2 samples, 6.90%)</title><rect x="783.1" y="323.0" width="81.4" height="15" fill="#45d945" rx="2" ry="2"/>
+<text x="786.1" y="334.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.getInputStream (1 samples, 3.70%)</title><rect x="884.1" y="307.0" width="43.7" height="15" fill="#4bde4b" rx="2" ry="2"/>
-<text x="887.1" y="318.0">java..</text>
+<title>java/util/zip/Inflater.&lt;init&gt; (2 samples, 6.90%)</title><rect x="783.1" y="307.0" width="81.4" height="15" fill="#4bde4b" rx="2" ry="2"/>
+<text x="786.1" y="318.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getInputStream (1 samples, 3.70%)</title><rect x="884.1" y="291.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="887.1" y="302.0">java..</text>
+<title>java/util/zip/Inflater.init (2 samples, 6.90%)</title><rect x="783.1" y="291.0" width="81.4" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="786.1" y="302.0">java/util..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.getInflater (1 samples, 3.70%)</title><rect x="884.1" y="275.0" width="43.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
-<text x="887.1" y="286.0">java..</text>
+<title>sun/misc/IOUtils.readFully (1 samples, 3.45%)</title><rect x="864.5" y="339.0" width="40.7" height="15" fill="#5aed5a" rx="2" ry="2"/>
+<text x="867.5" y="350.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/Inflater.&lt;init&gt; (1 samples, 3.70%)</title><rect x="884.1" y="259.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="887.1" y="270.0">java..</text>
+<title>java/util/Arrays.copyOf (1 samples, 3.45%)</title><rect x="864.5" y="323.0" width="40.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="867.5" y="334.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/Inflater.init (1 samples, 3.70%)</title><rect x="884.1" y="243.0" width="43.7" height="15" fill="#64f664" rx="2" ry="2"/>
-<text x="887.1" y="254.0">java..</text>
+<title>java/util/jar/JarFile.match (1 samples, 3.45%)</title><rect x="905.2" y="355.0" width="40.7" height="15" fill="#64f664" rx="2" ry="2"/>
+<text x="908.2" y="366.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.access$800 (5 samples, 18.52%)</title><rect x="927.8" y="323.0" width="218.5" height="15" fill="#5cee5c" rx="2" ry="2"/>
-<text x="930.8" y="334.0">sun/misc/URLClassPath$JarLoad..</text>
+<title>sun/misc/URLClassPath.getLoader (5 samples, 17.24%)</title><rect x="945.9" y="419.0" width="203.4" height="15" fill="#5cee5c" rx="2" ry="2"/>
+<text x="948.9" y="430.0">sun/misc/URLClassPath.getLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$JarLoader.getJarFile (5 samples, 18.52%)</title><rect x="927.8" y="307.0" width="218.5" height="15" fill="#63f563" rx="2" ry="2"/>
-<text x="930.8" y="318.0">sun/misc/URLClassPath$JarLoad..</text>
+<title>java/security/AccessController.doPrivileged (5 samples, 17.24%)</title><rect x="945.9" y="403.0" width="203.4" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="948.9" y="414.0">java/security/AccessControl..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.&lt;init&gt; (4 samples, 14.81%)</title><rect x="927.8" y="291.0" width="174.8" height="15" fill="#37cd37" rx="2" ry="2"/>
-<text x="930.8" y="302.0">java/util/jar/JarFile...</text>
+<title>sun/misc/URLClassPath$3.run (5 samples, 17.24%)</title><rect x="945.9" y="387.0" width="203.4" height="15" fill="#37cd37" rx="2" ry="2"/>
+<text x="948.9" y="398.0">sun/misc/URLClassPath$3.run</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/jar/JarFile.&lt;init&gt; (4 samples, 14.81%)</title><rect x="927.8" y="275.0" width="174.8" height="15" fill="#36cc36" rx="2" ry="2"/>
-<text x="930.8" y="286.0">java/util/jar/JarFile...</text>
+<title>sun/misc/URLClassPath$3.run (5 samples, 17.24%)</title><rect x="945.9" y="371.0" width="203.4" height="15" fill="#36cc36" rx="2" ry="2"/>
+<text x="948.9" y="382.0">sun/misc/URLClassPath$3.run</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.&lt;init&gt; (4 samples, 14.81%)</title><rect x="927.8" y="259.0" width="174.8" height="15" fill="#5ff25f" rx="2" ry="2"/>
-<text x="930.8" y="270.0">java/util/zip/ZipFile...</text>
+<title>sun/misc/URLClassPath$JarLoader.&lt;init&gt; (5 samples, 17.24%)</title><rect x="945.9" y="355.0" width="203.4" height="15" fill="#5ff25f" rx="2" ry="2"/>
+<text x="948.9" y="366.0">sun/misc/URLClassPath$JarLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.&lt;init&gt; (4 samples, 14.81%)</title><rect x="927.8" y="243.0" width="174.8" height="15" fill="#57ea57" rx="2" ry="2"/>
-<text x="930.8" y="254.0">java/util/zip/ZipFile...</text>
+<title>sun/misc/URLClassPath$JarLoader.ensureOpen (5 samples, 17.24%)</title><rect x="945.9" y="339.0" width="203.4" height="15" fill="#57ea57" rx="2" ry="2"/>
+<text x="948.9" y="350.0">sun/misc/URLClassPath$JarLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/File.lastModified (1 samples, 3.70%)</title><rect x="927.8" y="227.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="930.8" y="238.0">java..</text>
+<title>java/security/AccessController.doPrivileged (5 samples, 17.24%)</title><rect x="945.9" y="323.0" width="203.4" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="948.9" y="334.0">java/security/AccessControl..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/UnixFileSystem.getLastModifiedTime (1 samples, 3.70%)</title><rect x="927.8" y="211.0" width="43.7" height="15" fill="#3ed33e" rx="2" ry="2"/>
-<text x="930.8" y="222.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader$1.run (5 samples, 17.24%)</title><rect x="945.9" y="307.0" width="203.4" height="15" fill="#3ed33e" rx="2" ry="2"/>
+<text x="948.9" y="318.0">sun/misc/URLClassPath$JarLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/util/zip/ZipFile.open (3 samples, 11.11%)</title><rect x="971.5" y="227.0" width="131.1" height="15" fill="#36cc36" rx="2" ry="2"/>
-<text x="974.5" y="238.0">java/util/zip/Zi..</text>
+<title>sun/misc/URLClassPath$JarLoader$1.run (5 samples, 17.24%)</title><rect x="945.9" y="291.0" width="203.4" height="15" fill="#36cc36" rx="2" ry="2"/>
+<text x="948.9" y="302.0">sun/misc/URLClassPath$JarLo..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/FileURLMapper.exists (1 samples, 3.70%)</title><rect x="1102.6" y="291.0" width="43.7" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="1105.6" y="302.0">sun/..</text>
+<title>sun/misc/JarIndex.getJarIndex (1 samples, 3.45%)</title><rect x="945.9" y="275.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="948.9" y="286.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/File.exists (1 samples, 3.70%)</title><rect x="1102.6" y="275.0" width="43.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
-<text x="1105.6" y="286.0">java..</text>
+<title>sun/misc/JarIndex.&lt;init&gt; (1 samples, 3.45%)</title><rect x="945.9" y="259.0" width="40.7" height="15" fill="#6bfc6b" rx="2" ry="2"/>
+<text x="948.9" y="270.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/UnixFileSystem.getBooleanAttributes (1 samples, 3.70%)</title><rect x="1102.6" y="259.0" width="43.7" height="15" fill="#6afc6a" rx="2" ry="2"/>
-<text x="1105.6" y="270.0">java..</text>
+<title>sun/misc/JarIndex.read (1 samples, 3.45%)</title><rect x="945.9" y="243.0" width="40.7" height="15" fill="#6afc6a" rx="2" ry="2"/>
+<text x="948.9" y="254.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/UnixFileSystem.getBooleanAttributes0 (1 samples, 3.70%)</title><rect x="1102.6" y="243.0" width="43.7" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="1105.6" y="254.0">java..</text>
+<title>java/io/BufferedReader.readLine (1 samples, 3.45%)</title><rect x="945.9" y="227.0" width="40.7" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="948.9" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/launcher/LauncherHelper.checkAndLoadMain (1 samples, 3.70%)</title><rect x="1146.3" y="659.0" width="43.7" height="15" fill="#42d642" rx="2" ry="2"/>
-<text x="1149.3" y="670.0">sun/..</text>
+<title>java/io/BufferedReader.readLine (1 samples, 3.45%)</title><rect x="945.9" y="211.0" width="40.7" height="15" fill="#42d642" rx="2" ry="2"/>
+<text x="948.9" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="1146.3" y="643.0" width="43.7" height="15" fill="#5bee5b" rx="2" ry="2"/>
-<text x="1149.3" y="654.0">java..</text>
+<title>java/io/BufferedReader.fill (1 samples, 3.45%)</title><rect x="945.9" y="195.0" width="40.7" height="15" fill="#5bee5b" rx="2" ry="2"/>
+<text x="948.9" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.70%)</title><rect x="1146.3" y="627.0" width="43.7" height="15" fill="#43d743" rx="2" ry="2"/>
-<text x="1149.3" y="638.0">sun/..</text>
+<title>java/io/InputStreamReader.read (1 samples, 3.45%)</title><rect x="945.9" y="179.0" width="40.7" height="15" fill="#43d743" rx="2" ry="2"/>
+<text x="948.9" y="190.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/lang/ClassLoader.loadClass (1 samples, 3.70%)</title><rect x="1146.3" y="611.0" width="43.7" height="15" fill="#60f260" rx="2" ry="2"/>
-<text x="1149.3" y="622.0">java..</text>
+<title>sun/nio/cs/StreamDecoder.read (1 samples, 3.45%)</title><rect x="945.9" y="163.0" width="40.7" height="15" fill="#60f260" rx="2" ry="2"/>
+<text x="948.9" y="174.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.findClass (1 samples, 3.70%)</title><rect x="1146.3" y="595.0" width="43.7" height="15" fill="#61f361" rx="2" ry="2"/>
-<text x="1149.3" y="606.0">java..</text>
+<title>sun/nio/cs/StreamDecoder.implRead (1 samples, 3.45%)</title><rect x="945.9" y="147.0" width="40.7" height="15" fill="#61f361" rx="2" ry="2"/>
+<text x="948.9" y="158.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/security/AccessController.doPrivileged (1 samples, 3.70%)</title><rect x="1146.3" y="579.0" width="43.7" height="15" fill="#4bdf4b" rx="2" ry="2"/>
-<text x="1149.3" y="590.0">java..</text>
+<title>sun/nio/cs/StreamDecoder.readBytes (1 samples, 3.45%)</title><rect x="945.9" y="131.0" width="40.7" height="15" fill="#4bdf4b" rx="2" ry="2"/>
+<text x="948.9" y="142.0">sun..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="1146.3" y="563.0" width="43.7" height="15" fill="#42d742" rx="2" ry="2"/>
-<text x="1149.3" y="574.0">java..</text>
+<title>java/util/zip/InflaterInputStream.read (1 samples, 3.45%)</title><rect x="945.9" y="115.0" width="40.7" height="15" fill="#42d742" rx="2" ry="2"/>
+<text x="948.9" y="126.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader$1.run (1 samples, 3.70%)</title><rect x="1146.3" y="547.0" width="43.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
-<text x="1149.3" y="558.0">java..</text>
+<title>java/util/zip/Inflater.inflate (1 samples, 3.45%)</title><rect x="945.9" y="99.0" width="40.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
+<text x="948.9" y="110.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.access$100 (1 samples, 3.70%)</title><rect x="1146.3" y="531.0" width="43.7" height="15" fill="#32c832" rx="2" ry="2"/>
-<text x="1149.3" y="542.0">java..</text>
+<title>java/util/zip/Inflater.inflateBytes (1 samples, 3.45%)</title><rect x="945.9" y="83.0" width="40.7" height="15" fill="#32c832" rx="2" ry="2"/>
+<text x="948.9" y="94.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/net/URLClassLoader.defineClass (1 samples, 3.70%)</title><rect x="1146.3" y="515.0" width="43.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
-<text x="1149.3" y="526.0">java..</text>
+<title>sun/misc/URLClassPath$JarLoader.access$800 (4 samples, 13.79%)</title><rect x="986.6" y="275.0" width="162.7" height="15" fill="#3dd23d" rx="2" ry="2"/>
+<text x="989.6" y="286.0">sun/misc/URLClassPath..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.getByteBuffer (1 samples, 3.70%)</title><rect x="1146.3" y="499.0" width="43.7" height="15" fill="#6cfe6c" rx="2" ry="2"/>
-<text x="1149.3" y="510.0">sun/..</text>
+<title>sun/misc/URLClassPath$JarLoader.getJarFile (4 samples, 13.79%)</title><rect x="986.6" y="259.0" width="162.7" height="15" fill="#6cfe6c" rx="2" ry="2"/>
+<text x="989.6" y="270.0">sun/misc/URLClassPath..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/Resource.cachedInputStream (1 samples, 3.70%)</title><rect x="1146.3" y="483.0" width="43.7" height="15" fill="#40d540" rx="2" ry="2"/>
-<text x="1149.3" y="494.0">sun/..</text>
+<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="986.6" y="243.0" width="40.6" height="15" fill="#40d540" rx="2" ry="2"/>
+<text x="989.6" y="254.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>sun/misc/URLClassPath$FileLoader$1.getInputStream (1 samples, 3.70%)</title><rect x="1146.3" y="467.0" width="43.7" height="15" fill="#63f563" rx="2" ry="2"/>
-<text x="1149.3" y="478.0">sun/..</text>
+<title>java/util/jar/JarFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="986.6" y="227.0" width="40.6" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="989.6" y="238.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/FileInputStream.&lt;init&gt; (1 samples, 3.70%)</title><rect x="1146.3" y="451.0" width="43.7" height="15" fill="#3acf3a" rx="2" ry="2"/>
-<text x="1149.3" y="462.0">java..</text>
+<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="986.6" y="211.0" width="40.6" height="15" fill="#3acf3a" rx="2" ry="2"/>
+<text x="989.6" y="222.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/FileInputStream.open (1 samples, 3.70%)</title><rect x="1146.3" y="435.0" width="43.7" height="15" fill="#49dd49" rx="2" ry="2"/>
-<text x="1149.3" y="446.0">java..</text>
+<title>java/util/zip/ZipFile.&lt;init&gt; (1 samples, 3.45%)</title><rect x="986.6" y="195.0" width="40.6" height="15" fill="#49dd49" rx="2" ry="2"/>
+<text x="989.6" y="206.0">jav..</text>
 </g>
 <g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
-<title>java/io/FileInputStream.open0 (1 samples, 3.70%)</title><rect x="1146.3" y="419.0" width="43.7" height="15" fill="#56e956" rx="2" ry="2"/>
-<text x="1149.3" y="430.0">java..</text>
+<title>java/util/zip/ZipFile.open (1 samples, 3.45%)</title><rect x="986.6" y="179.0" width="40.6" height="15" fill="#56e956" rx="2" ry="2"/>
+<text x="989.6" y="190.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/misc/FileURLMapper.exists (3 samples, 10.34%)</title><rect x="1027.2" y="243.0" width="122.1" height="15" fill="#3cd13c" rx="2" ry="2"/>
+<text x="1030.2" y="254.0">sun/misc/FileUR..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/io/File.exists (3 samples, 10.34%)</title><rect x="1027.2" y="227.0" width="122.1" height="15" fill="#63f563" rx="2" ry="2"/>
+<text x="1030.2" y="238.0">java/io/File.ex..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/io/UnixFileSystem.getBooleanAttributes (3 samples, 10.34%)</title><rect x="1027.2" y="211.0" width="122.1" height="15" fill="#3bd03b" rx="2" ry="2"/>
+<text x="1030.2" y="222.0">java/io/UnixFil..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/io/UnixFileSystem.getBooleanAttributes0 (3 samples, 10.34%)</title><rect x="1027.2" y="195.0" width="122.1" height="15" fill="#6dfe6d" rx="2" ry="2"/>
+<text x="1030.2" y="206.0">java/io/UnixFil..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/String.getBytes (1 samples, 3.45%)</title><rect x="1108.6" y="179.0" width="40.7" height="15" fill="#41d641" rx="2" ry="2"/>
+<text x="1111.6" y="190.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/StringCoding.encode (1 samples, 3.45%)</title><rect x="1108.6" y="163.0" width="40.7" height="15" fill="#40d440" rx="2" ry="2"/>
+<text x="1111.6" y="174.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/StringCoding$StringEncoder.encode (1 samples, 3.45%)</title><rect x="1108.6" y="147.0" width="40.7" height="15" fill="#38cd38" rx="2" ry="2"/>
+<text x="1111.6" y="158.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/reflect/Method.invoke (1 samples, 3.45%)</title><rect x="1149.3" y="579.0" width="40.7" height="15" fill="#3fd43f" rx="2" ry="2"/>
+<text x="1152.3" y="590.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/reflect/DelegatingMethodAccessorImpl.invoke (1 samples, 3.45%)</title><rect x="1149.3" y="563.0" width="40.7" height="15" fill="#58ea58" rx="2" ry="2"/>
+<text x="1152.3" y="574.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/reflect/NativeMethodAccessorImpl.invoke (1 samples, 3.45%)</title><rect x="1149.3" y="547.0" width="40.7" height="15" fill="#5bee5b" rx="2" ry="2"/>
+<text x="1152.3" y="558.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/reflect/NativeMethodAccessorImpl.invoke0 (1 samples, 3.45%)</title><rect x="1149.3" y="531.0" width="40.7" height="15" fill="#61f361" rx="2" ry="2"/>
+<text x="1152.3" y="542.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>com/intellij/rt/execution/application/AppMainV2$Agent.premain (1 samples, 3.45%)</title><rect x="1149.3" y="515.0" width="40.7" height="15" fill="#5bee5b" rx="2" ry="2"/>
+<text x="1152.3" y="526.0">com..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="1149.3" y="499.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="1152.3" y="510.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/misc/Launcher$AppClassLoader.loadClass (1 samples, 3.45%)</title><rect x="1149.3" y="483.0" width="40.7" height="15" fill="#5aec5a" rx="2" ry="2"/>
+<text x="1152.3" y="494.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/lang/ClassLoader.loadClass (1 samples, 3.45%)</title><rect x="1149.3" y="467.0" width="40.7" height="15" fill="#58ea58" rx="2" ry="2"/>
+<text x="1152.3" y="478.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/net/URLClassLoader.findClass (1 samples, 3.45%)</title><rect x="1149.3" y="451.0" width="40.7" height="15" fill="#35cb35" rx="2" ry="2"/>
+<text x="1152.3" y="462.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/security/AccessController.doPrivileged (1 samples, 3.45%)</title><rect x="1149.3" y="435.0" width="40.7" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="1152.3" y="446.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="1149.3" y="419.0" width="40.7" height="15" fill="#3fd43f" rx="2" ry="2"/>
+<text x="1152.3" y="430.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/net/URLClassLoader$1.run (1 samples, 3.45%)</title><rect x="1149.3" y="403.0" width="40.7" height="15" fill="#45d945" rx="2" ry="2"/>
+<text x="1152.3" y="414.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/misc/URLClassPath.getResource (1 samples, 3.45%)</title><rect x="1149.3" y="387.0" width="40.7" height="15" fill="#5bee5b" rx="2" ry="2"/>
+<text x="1152.3" y="398.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>sun/misc/URLClassPath$JarLoader.getResource (1 samples, 3.45%)</title><rect x="1149.3" y="371.0" width="40.7" height="15" fill="#39ce39" rx="2" ry="2"/>
+<text x="1152.3" y="382.0">sun..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/util/jar/JarFile.getJarEntry (1 samples, 3.45%)</title><rect x="1149.3" y="355.0" width="40.7" height="15" fill="#5ff15f" rx="2" ry="2"/>
+<text x="1152.3" y="366.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/util/jar/JarFile.getEntry (1 samples, 3.45%)</title><rect x="1149.3" y="339.0" width="40.7" height="15" fill="#51e451" rx="2" ry="2"/>
+<text x="1152.3" y="350.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/util/zip/ZipFile.getEntry (1 samples, 3.45%)</title><rect x="1149.3" y="323.0" width="40.7" height="15" fill="#53e653" rx="2" ry="2"/>
+<text x="1152.3" y="334.0">jav..</text>
+</g>
+<g class="func_g" onmouseover="s(this)" onmouseout="c()" onclick="zoom(this)">
+<title>java/util/zip/ZipCoder.getBytes (1 samples, 3.45%)</title><rect x="1149.3" y="307.0" width="40.7" height="15" fill="#55e855" rx="2" ry="2"/>
+<text x="1152.3" y="318.0">jav..</text>
 </g>
 </svg>
