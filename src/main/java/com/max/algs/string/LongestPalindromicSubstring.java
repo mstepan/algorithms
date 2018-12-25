@@ -2,6 +2,7 @@ package com.max.algs.string;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+
 /**
  * Manacher's algorithm to find the longest palindromic substring.
  * See https://articles.leetcode.com/longest-palindromic-substring-part-ii/
@@ -17,7 +18,7 @@ final class LongestPalindromicSubstring {
      * time: O(N^3)
      * space: O(1)
      */
-    public static String findBruteforce(String str) {
+    static String findBruteforce(String str) {
 
         int maxLength = 1;
         int start = 0;
@@ -48,7 +49,7 @@ final class LongestPalindromicSubstring {
         return true;
     }
 
-    public static String find(String str) {
+    static String find(String str) {
         checkNotNull(str, "null 'str' passed");
 
         if (str.length() < 2) {
