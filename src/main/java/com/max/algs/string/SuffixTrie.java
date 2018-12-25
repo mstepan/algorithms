@@ -4,6 +4,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 final class SuffixTrie {
 
+    private static final int MIN_CH = 'a';
+    private static final int MAX_CH = 'z';
+    private static final int ALPHABET_SIZE = MAX_CH - MIN_CH + 1;
+
     private final Node root = new Node();
 
     /**
@@ -11,6 +15,7 @@ final class SuffixTrie {
      */
     void add(String value) {
         checkNotNull(value, "Can't store 'null' value");
+        checkAllCharsWithinAlphabet(value);
 
         for (int i = 1; i < value.length(); ++i) {
             addWordOrSuffix(value, i);
@@ -49,6 +54,12 @@ final class SuffixTrie {
      */
     boolean contains(String searchValue) {
         checkNotNull(searchValue, "Can't query 'null' value");
+        checkAllCharsWithinAlphabet(searchValue);
+
+        if (searchValue.length() == 0) {
+            return false;
+        }
+
         return search(searchValue, EndMarker.WORD);
     }
 
@@ -57,6 +68,12 @@ final class SuffixTrie {
      */
     boolean hasSuffix(String suffixToSearch) {
         checkNotNull(suffixToSearch, "Can't query 'null' value");
+        checkAllCharsWithinAlphabet(suffixToSearch);
+
+        if (suffixToSearch.length() == 0) {
+            return false;
+        }
+
         return search(suffixToSearch, EndMarker.SUFFIX);
     }
 
@@ -81,10 +98,22 @@ final class SuffixTrie {
         return level.hasMarker(lastCh, marker);
     }
 
+    private static void checkAllCharsWithinAlphabet(String value) {
+
+        for (int i = 0; i < value.length(); ++i) {
+            char ch = value.charAt(i);
+
+            if (ch < MIN_CH || ch > MAX_CH) {
+                throw new IllegalArgumentException("Unsupported character detected: " + ch +
+                                                           ", should be in range: [" + MIN_CH + ", " + MAX_CH + "]");
+            }
+        }
+
+    }
 
     private static final class Node {
 
-        private final Edge[] nodes = new Edge['z' - 'a' + 1];
+        private final Edge[] nodes = new Edge[ALPHABET_SIZE];
 
         Node next(char ch) {
             if (nodes[index(ch)] == null) {

@@ -49,7 +49,6 @@ public class SuffixTrieTest {
         assertTrue(trie.hasSuffix("at"));
 
         assertFalse(trie.hasSuffix("cat"));
-//        assertFalse(trie.hasSuffix(""));
         assertFalse(trie.hasSuffix("p"));
         assertFalse(trie.hasSuffix("patterson"));
 
@@ -57,5 +56,46 @@ public class SuffixTrieTest {
         assertFalse(trie.contains("ca"));
         assertFalse(trie.contains("ra"));
         assertFalse(trie.contains("ba"));
+    }
+
+    @Test
+    public void searchForEmptyString() {
+        SuffixTrie trie = new SuffixTrie();
+
+        trie.add("cat");
+        trie.add("rat");
+        trie.add("bat");
+
+        assertFalse(trie.hasSuffix(""));
+        assertFalse(trie.contains(""));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addShouldFailForIncorrectAlphabet() {
+        SuffixTrie trie = new SuffixTrie();
+
+        trie.add("cat8");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void containsShouldFailForIncorrectAlphabet() {
+        SuffixTrie trie = new SuffixTrie();
+
+        trie.add("cat");
+        trie.add("rat");
+        trie.add("bat");
+
+        trie.contains("cat1");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void hasSuffixShouldFailForIncorrectAlphabet() {
+        SuffixTrie trie = new SuffixTrie();
+
+        trie.add("cat");
+        trie.add("rat");
+        trie.add("bat");
+
+        trie.hasSuffix("cat1");
     }
 }
