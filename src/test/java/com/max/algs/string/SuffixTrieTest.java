@@ -8,7 +8,7 @@ import static org.junit.Assert.assertFalse;
 public class SuffixTrieTest {
 
     @Test
-    public void addAndContains() {
+    public void addAndContainsWholeWord() {
 
         SuffixTrie trie = new SuffixTrie();
 
@@ -18,16 +18,44 @@ public class SuffixTrieTest {
         assertFalse(trie.contains("mat"));
 
         trie.add("cat");
-        assertTrue("Can't find 'cat' in trie", trie.contains("cat"));
-        assertFalse("Trie contains 'rat'", trie.contains("rat"));
-        assertFalse("Trie contains 'bat'", trie.contains("bat"));
-        assertFalse("Trie contains 'mat'", trie.contains("mat"));
+        assertTrue(trie.contains("cat"));
+        assertFalse(trie.contains("rat"));
+        assertFalse(trie.contains("bat"));
+        assertFalse(trie.contains("mat"));
 
         trie.add("rat");
         trie.add("bat");
-        assertTrue("Can't find 'cat' in trie", trie.contains("cat"));
-        assertTrue("Can't find 'rat' in trie'", trie.contains("rat"));
-        assertTrue("Can't find 'bat' in trie'", trie.contains("bat"));
-        assertFalse("Trie contains 'mat'", trie.contains("mat"));
+        assertTrue(trie.contains("cat"));
+        assertTrue(trie.contains("rat"));
+        assertTrue(trie.contains("bat"));
+        assertFalse(trie.contains("mat"));
+        assertFalse(trie.contains("catapult"));
+
+        assertFalse(trie.contains("m"));
+        assertFalse(trie.contains("ma"));
+        assertFalse(trie.contains("ba"));
+        assertFalse(trie.contains("ca"));
+    }
+
+    @Test
+    public void addAndContainsSuffix() {
+        SuffixTrie trie = new SuffixTrie();
+
+        trie.add("cat");
+        trie.add("rat");
+        trie.add("bat");
+
+        assertTrue(trie.hasSuffix("t"));
+        assertTrue(trie.hasSuffix("at"));
+
+        assertFalse(trie.hasSuffix("cat"));
+//        assertFalse(trie.hasSuffix(""));
+        assertFalse(trie.hasSuffix("p"));
+        assertFalse(trie.hasSuffix("patterson"));
+
+        assertFalse(trie.contains("c"));
+        assertFalse(trie.contains("ca"));
+        assertFalse(trie.contains("ra"));
+        assertFalse(trie.contains("ba"));
     }
 }
