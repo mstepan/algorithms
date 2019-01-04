@@ -8,13 +8,11 @@ public final class AlgorithmsMain {
     private static final Logger LOG = Logger.getLogger(AlgorithmsMain.class);
 
 
-
-    private AlgorithmsMain() {
+    private AlgorithmsMain() throws Exception {
 
 
         LOG.info("Main done... java-" + System.getProperty("java.version"));
     }
-
 
     public static void main(String[] args) {
         try {
