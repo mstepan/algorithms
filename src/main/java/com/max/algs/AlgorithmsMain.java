@@ -1,10 +1,7 @@
 package com.max.algs;
 
+import com.max.algs.util.MathUtils;
 import org.apache.log4j.Logger;
-import org.openjdk.jol.info.ClassLayout;
-import org.openjdk.jol.vm.VM;
-
-import java.util.HashMap;
 
 public final class AlgorithmsMain {
 
@@ -12,8 +9,7 @@ public final class AlgorithmsMain {
 
     private AlgorithmsMain() throws Exception {
 
-        System.out.println(VM.current().details());
-        System.out.println(ClassLayout.parseClass(HashMap.class).toPrintable());
+        System.out.println(MathUtils.log2(Integer.MAX_VALUE));
 
         LOG.info("Main done... java-" + System.getProperty("java.version"));
     }
