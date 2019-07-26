@@ -16,11 +16,12 @@
         <jdepend.version>2.9.5</jdepend.version>
         <enforcer.api.version>1.4.1</enforcer.api.version>
         <junit5.version>5.2.0</junit5.version>
+        <native.source.dir>/Users/mstepan/repo/algorithms</native.source.dir>
+        <commonCompilerOptions></commonCompilerOptions>
     </properties>
 
     <build>
         <plugins>
-
             <!-- Custom plugin which checks package cycles using JDepend -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -166,9 +167,56 @@
                 </dependencies>
             </plugin>
 
-
+            <!-- Run Makefile build -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="make">
+                                <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath"/>
+                                <exec executable="make" failonerror="true" dir="${project.basedir}"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>ant-contrib</groupId>
+                            <artifactId>ant-contrib</artifactId>
+                            <version>1.0b3</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>ant</groupId>
+                                    <artifactId>ant</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.ant</groupId>
+                            <artifactId>ant-nodeps</artifactId>
+                            <version>1.8.1</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
+
 
     <reporting>
         <plugins>
