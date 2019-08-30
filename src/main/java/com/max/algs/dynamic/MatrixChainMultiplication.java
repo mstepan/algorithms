@@ -1,6 +1,8 @@
 package com.max.algs.dynamic;
 
 
+import java.util.Arrays;
+
 public final class MatrixChainMultiplication {
 
     private final MatrixDimension[] matrixes;
@@ -13,7 +15,7 @@ public final class MatrixChainMultiplication {
             throw new IllegalArgumentException("NULL 'matrixes' parameter passed");
         }
 
-        this.matrixes = matrixes;
+        this.matrixes = Arrays.copyOf(matrixes, matrixes.length);;
         this.matrixLength = matrixes.length;
     }
 

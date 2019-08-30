@@ -43,7 +43,7 @@ public final class ShortestPathInMatrix {
             throw new IllegalArgumentException("NULL 'start point' passed");
         }
 
-        matrix = searchMatrix;
+        matrix = Arrays.copyOf(searchMatrix, searchMatrix.length);
         startPoint = pointToStartSearch;
         rowLength = matrix.length;
 

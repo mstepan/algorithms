@@ -3,6 +3,7 @@ package com.max.algs.combination;
 import com.max.algs.util.SameOnesCountIterator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,7 +15,7 @@ public class CombinationsIterator<E> implements Iterator<List<E>> {
     private final Iterator<Integer> maskIt;
 
     public CombinationsIterator(E[] arr, int combinationLength) {
-        this.arr = arr;
+        this.arr = Arrays.copyOf(arr, arr.length);;
         this.combinationLength = combinationLength;
         this.maskIt = new SameOnesCountIterator(combinationLength, arr.length);
     }

@@ -1,5 +1,7 @@
 package com.max.algs.rmq;
 
+import java.util.Arrays;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
@@ -11,7 +13,7 @@ public final class RangeMinQueryDynamic {
     private final int[][] data;
 
     public RangeMinQueryDynamic(int[] arr) {
-        this.originalArr = arr;
+        this.originalArr = Arrays.copyOf(arr, arr.length);;
         this.data = createResult(arr);
     }
 

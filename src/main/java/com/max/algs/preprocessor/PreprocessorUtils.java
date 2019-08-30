@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -37,7 +38,7 @@ public final class PreprocessorUtils {
 
     public PreprocessorUtils(Path[] classpath) {
         super();
-        this.classpath = classpath;
+        this.classpath = Arrays.copyOf(classpath, classpath.length);
     }
 
     public void handle(Path in, Path out) {

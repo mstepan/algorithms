@@ -2,6 +2,7 @@ package com.max.algs.arrays;
 
 import com.max.algs.util.MathUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public final class MinRangeQueryArray {
 
     public MinRangeQueryArray(int[] arr) {
         checkNotNull(arr, "null 'arr' parameter passed");
-        this.arr = arr;
+        this.arr = Arrays.copyOf(arr, arr.length);
         this.minValues = buildMap(arr);
     }
 
