@@ -8,16 +8,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 public final class CarUser {
 
     private final String firstName;
     private final String lastName;
     private final Optional<Car> car;
+    private final int age;
 
-    public CarUser(String firstName, String lastName, Car car) {
+    public CarUser(String firstName, String lastName, Car car, int age) {
+        checkArgument(age >= 18 && age < 200, "Incorrect age provided %s", age);
         this.firstName = Objects.requireNonNull(firstName);
         this.lastName = Objects.requireNonNull(lastName);
         this.car = Optional.ofNullable(car);
+        this.age = age;
     }
 
     public String getFirstName() {
@@ -32,6 +37,15 @@ public final class CarUser {
         return car;
     }
 
+    public static String getCarInsuranceName(CarUser user, int minAge) {
+        return Optional.ofNullable(user).
+                filter(u -> u.age >= minAge).
+                flatMap(CarUser::getCar).
+                flatMap(Car::getInsurance).
+                map(Insurance::getName).
+                orElse("Unknown");
+    }
+
     public static String getInsuranceName(Optional<CarUser> userOptional) {
         return userOptional.
                 flatMap(CarUser::getCar).
@@ -39,12 +53,11 @@ public final class CarUser {
                 map(Insurance::getName).
                 orElse("<UNKNOWN>");
 
-
     }
 
     public static Optional<Insurance> findCheapest(Optional<CarUser> userOpt, Optional<Car> carOpt) {
 
-        return userOpt.flatMap(u -> carOpt.map( c -> find(u, c)));
+        return userOpt.flatMap(u -> carOpt.map(c -> find(u, c)));
     }
 
     private static Insurance find(CarUser user, Car car) {
