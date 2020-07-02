@@ -489,14 +489,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Vert.x -->
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <version>3.4.2</version>
-        </dependency>
-
         <!-- EqualsTester -->
         <dependency>
             <groupId>com.google.guava</groupId>
