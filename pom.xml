@@ -10,14 +10,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <google.guava.version>21.0</google.guava.version>
         <log4j.version>1.2.17</log4j.version>
-        <jetty.version>7.2.0.v20101020</jetty.version>
+        <jetty.version>9.4.17.v20190418</jetty.version>
         <quasar.version>0.7.3</quasar.version>
         <rxjava.version>1.2.5</rxjava.version>
         <jdepend.version>2.9.5</jdepend.version>
         <enforcer.api.version>1.4.1</enforcer.api.version>
         <junit5.version>5.2.0</junit5.version>
         <native.source.dir>/Users/mstepan/repo/algorithms</native.source.dir>
-        <commonCompilerOptions></commonCompilerOptions>
     </properties>
 
     <build>
@@ -136,26 +135,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-
-            <!-- Flyway DB migration plugin -->
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>4.2.0</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3306/my?serverTimezone=UTC</url>
-                    <user>root</user>
-                </configuration>
-                <dependencies>
-                    <!-- mysql jdbc driver -->
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>6.0.6</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!-- Surefire with junit 4/5 -->
@@ -444,18 +423,6 @@
             <version>3.12.1.GA</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>2.0.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>libthrift</artifactId>
-            <version>0.9.3</version>
-        </dependency>
-
         <!-- Functional library for java (Scala like syntax) -->
         <dependency>
             <groupId>io.javaslang</groupId>
@@ -476,20 +443,6 @@
             <artifactId>rxjava</artifactId>
             <version>${rxjava.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <!--compile project(':rxnetty-spectator-http')-->
 
         <!-- Eclipse Collections -->
         <dependency>
