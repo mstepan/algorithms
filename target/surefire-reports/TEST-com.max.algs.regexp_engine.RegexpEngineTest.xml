@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.max.algs.regexp_engine.RegexpEngineTest" time="0.007" tests="20" errors="0" skipped="3" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.max.algs.regexp_engine.RegexpEngineTest" time="0.008" tests="20" errors="0" skipped="3" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib"/>
@@ -21,7 +21,7 @@
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="java.io.tmpdir" value="/var/folders/mk/c8l5q0g97kv__rggn4b7z3c40000gn/T/"/>
+    <property name="java.io.tmpdir" value="/var/folders/59/wckqr5dx4t16wxrx1fytgzx40000gn/T/"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
@@ -32,8 +32,9 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.15.5"/>
+    <property name="os.version" value="10.16"/>
     <property name="library.jansi.path" value="/Users/mstepan/maven-3.5.0/lib/jansi-native/osx64"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/mstepan"/>
     <property name="user.timezone" value="Europe/Kiev"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
@@ -53,17 +54,18 @@
     <property name="java.ext.dirs" value="/Users/mstepan/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.awt.headless" value="true"/>
     <property name="maven.home" value="/Users/mstepan/maven-3.5.0"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="regexpMatchingWithQuestionMarkAtEnd" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
+  <testcase name="regexpMatchingWithQuestionMarkAtEnd" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
   <testcase name="regexpMatchingWithTwoDots" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
-  <testcase name="regexpMatchingWithTwoQuestionMarks" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
+  <testcase name="regexpMatchingWithTwoQuestionMarks" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
   <testcase name="regexpMatchingWithQuestionMark" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="incorrectRegexpWithTwoAsterix" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="regexpMatchingCharClassWithChars" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0">
@@ -73,18 +75,18 @@
   <testcase name="regexpMatchingWithPlus" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="simpleRegexpMatching" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="incorrectRegexpWithTwoPluses" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
-  <testcase name="incorrectRegexpWithIncorrectorSyntax" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
+  <testcase name="incorrectRegexpWithIncorrectorSyntax" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
   <testcase name="simpleRegexpMatchingWithSingleChar" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="regexpMatchingEmail2" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0">
     <skipped/>
   </testcase>
   <testcase name="regexpMatchingWithDigitCharClass" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
-  <testcase name="regexpMatchingWithCharClasses" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
-  <testcase name="regexpMatchingWithOr" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
+  <testcase name="regexpMatchingWithCharClasses" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
+  <testcase name="regexpMatchingWithOr" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="regexpMatchingWithDot" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
   <testcase name="regexpMatchingEmail" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0">
     <skipped/>
   </testcase>
   <testcase name="regexpPerformance" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
-  <testcase name="simpleRegexpMatchingWithNumbers" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0.001"/>
+  <testcase name="simpleRegexpMatchingWithNumbers" classname="com.max.algs.regexp_engine.RegexpEngineTest" time="0"/>
 </testsuite>

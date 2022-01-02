@@ -38,8 +38,7 @@ public class Edge<U> implements Comparable<U> {
 
     @Override
     public String toString() {
-        return "[" + String.valueOf(src) + "->" + String.valueOf(dest)
-                + ", w: " + weight + "]";
+        return "[" + src + "->" + dest + ", w: " + weight + "]";
     }
 
     @Override

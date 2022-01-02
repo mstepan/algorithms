@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.max.algs.primes.PrimeUtilitiesTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.859 sec - in com.max.algs.primes.PrimeUtilitiesTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.783 sec - in com.max.algs.primes.PrimeUtilitiesTest

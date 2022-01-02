@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.max.algs.regexp_engine.RegexpEngineTest
 -------------------------------------------------------------------------------
-Tests run: 20, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.007 sec - in com.max.algs.regexp_engine.RegexpEngineTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.008 sec - in com.max.algs.regexp_engine.RegexpEngineTest

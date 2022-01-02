@@ -6,7 +6,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/tim/TimSorterMain.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/graph/IGraphNodeCallback.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/ZeroOneKnapsack.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/model/User.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/graph/EulerTour.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/search/SortedMatrixSearch.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/compression/lz/Triple.java
@@ -29,7 +28,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/ioc/container/ContextManager.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/dphilosophers/DiningPhilosophersTryLock.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/stack/StackFromHeap.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/LongestStutteringSubSequence.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/rope/RopeNode.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/tim/Run.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/graph/ShortestPathInMatrix.java
@@ -109,13 +107,11 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/bytewatcher/ByteWatcherSingleThread.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hashing/universal/UniversalHashFunction.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/isa/IpsMasterIndex.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/GetElementFromSecondHalf.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hashing/cuckoo/CuckooHashSet.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/IntegerPartitionUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/tim/BinaryInsertionSort.java
 /Users/mstepan/repo/algorithms/src/main/java/merger/binary/ComplexBinaryNode.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/io/BitInputStream.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/MaxConsSubarrayProduct.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/AbstractLock.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/DateUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/leetcode/GenerateParentheses.java
@@ -125,13 +121,11 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/heap/MinHeap.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/matcher/RegexpMatcher.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/string/matching/NewShiftAndMatcher.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/FindValueWithIndexDoubleArray.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/permutation/PermutationIterator.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/leetcode/JumpGame2.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/offheap/OffHeapCleanerThread.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/GeneralUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/LongestPalindromicSebSequence.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/car/Insurance.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/ArithConverterUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/lock/PetersonLock.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/lock/ILock.java
@@ -168,7 +162,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/GrayCodesUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/dphilosophers/DiningPhilosophersChandyMisra.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/RadixSorter.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/bloom/BloomFilter.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/queue/OptimizedQueue.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/tim/TimSorter.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/FindMissedIpMain.java
@@ -178,7 +171,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/effectivejava/EffectiveJavaMain.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/tree/geometry/XYLine.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/char_class/CharClass.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/TwoLargestElementsInSet.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hashing/perfect/PerfectHashSet.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/compression/lz/SearchBuffer.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/hamt/ValueNode.java
@@ -189,7 +181,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hashing/lsh/LocalitySensitiveHashing.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/dstree/DigitizableInteger.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/dphilosophers/DiningPhilosophersArbiter.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/OrderStatistics.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/io/BitOutputStream2.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/facebook/BooleanParenthesization.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/SetPartitionUtils.java
@@ -200,7 +191,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/external/ExternalString.java
 /Users/mstepan/repo/algorithms/src/main/java/merger/iterator/FileIterator.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/arrays/MinRangeQueryArray.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/model/MyEnum.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/hamt/EncodeUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/statistic/ReservoirSampling.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hashing/HashUtils.java
@@ -282,6 +272,7 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/maze/PointAndPath.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/linked_list/AddTwoNumbers.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/AutoLock.java
+/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/probabalistic/BloomFilter.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/dht/cache_node/CacheHandler.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/number/BigNumber.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/file_indexer/FileIndexerMain.java
@@ -302,7 +293,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/backtracking/DefectiveJugsProblem.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/MinArrayHopes.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/permutation/PermutationGeneratorUtils.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/MakeMaxHeap.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/RegexpEngine.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/compression/CompressionUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/backoff/ExponentialBackoff.java
@@ -317,7 +307,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/MulUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/tree/Treap.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/char_class/SingleChar.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/KMPMatching.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/FileShuffler.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/compression/lz/SelfFetchBuffer.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/string/ZboxUtils.java
@@ -328,7 +317,6 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/ioc/services/UtilityApiProxyClient.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/FileUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/io/BitOutputStream.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/KthSmallerOrEquals.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/huffman/encoder/HuffmanEncoder.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/compact/CompactDate.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/random/DenseWeightedRandom.java
@@ -366,12 +354,10 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/list/ConcurrentLinkedList.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/concurrency/barrier/SenseBarrier.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/leetcode/WildcardMatching.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/car/Car.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/it/BaseAllValuesIterator.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/escape/ThisEscape.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/LongestCommonSubsequence.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/map/SoftHashMap.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/car/CarUser.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/char_class/DChar.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/string/PalindromeSubstringQuery.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/DyckPathsCount.java
@@ -389,14 +375,12 @@
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/LongestSubstringWithSameSumOfDigits.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/functional/utils/FunctionalUtils.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/regengine/RegexpValidator.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/creative/BoyerMooreMatching.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/string/Substring.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/radix/DigitalSearchTree.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/util/SameOnesCountIterator.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/ds/tree/ITreeVisitor.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dynamic/MinCostPathForMatrix.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/ioc/InjectorMain.java
-/Users/mstepan/repo/algorithms/src/main/java/com/max/algs/dto/Customer.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/hanoii/HanoiiSolver.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/external/SortFileLines.java
 /Users/mstepan/repo/algorithms/src/main/java/com/max/algs/sorting/FloydHeapSorter.java

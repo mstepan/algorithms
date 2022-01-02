@@ -125,7 +125,7 @@ public class KDTree {
         }
     }
 
-    private static enum Axis {
+    private enum Axis {
         X, Y;
 
         public Axis next() {
@@ -149,7 +149,7 @@ public class KDTree {
 
         @Override
         public String toString() {
-            return String.valueOf(point) + ", axis: " + axis;
+            return point + ", axis: " + axis;
         }
 
     }

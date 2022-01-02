@@ -5,13 +5,11 @@ com/max/algs/concurrency/CustomReadWriteLock$ReadLock.class
 com/max/algs/compression/huffman/PrefixCode.class
 merger/binary/IBinaryNode.class
 com/max/algs/lru/LruQueue.class
-com/max/algs/ds/bloom/BloomFilter.class
 com/max/algs/concurrency/exchanger/ExchangerExample$ByteData.class
 com/max/algs/ds/queue/DigitQueue$ArrayStorage.class
 com/max/algs/it/SameBitsCountIterator.class
 com/max/algs/util/ArithConverterUtils.class
 com/max/algs/random/WeightedRandom.class
-com/max/algs/dto/Customer.class
 com/max/algs/ds/trie/ArrayTrie.class
 com/max/algs/sorting/FloydHeapSorter.class
 com/max/algs/sorting/external/ExternalString.class
@@ -51,13 +49,11 @@ com/max/algs/string/ZboxUtils.class
 com/max/algs/concurrency/lock/ILock.class
 com/max/algs/ds/heap/HeapUtils$MutableInt.class
 com/max/algs/sorting/tim/BinaryInsertionSort.class
-com/max/algs/creative/GetElementFromSecondHalf.class
 com/max/algs/EncryptionUtils.class
 com/max/algs/permutation/PermutationIterator$Direction.class
 com/max/algs/sorting/tim/Side.class
 com/max/algs/ds/radix/DigitalSearchTree$DigitalNode.class
 com/max/algs/io/BitOutputStream2.class
-com/max/algs/creative/TwoLargestElementsInSet$Tuple.class
 com/max/lombok/User.class
 com/max/algs/chess/KnightShortestPathResolver.class
 com/max/algs/ds/probabalistic/CountMinSketch$1.class
@@ -92,7 +88,6 @@ com/max/algs/ds/probabalistic/CountMinSketch$FindMinCounter.class
 com/max/algs/eightpuzzle/Puzzle8Main.class
 com/max/algs/leetcode/MergeIntervals$Interval.class
 com/max/algs/ds/queue/DigitQueue$StorageStrategy.class
-com/max/algs/dto/AutoValue_Customer.class
 com/max/algs/permutation/SubsetGenerator.class
 com/max/algs/search/UnboundedBinarySearch.class
 com/max/algs/GolygonFinder$1.class
@@ -130,12 +125,9 @@ com/max/algs/ds/map/SoftHashMap$ReferenceQueueCleaner.class
 com/max/algs/regengine/RegexpSimplifier.class
 com/max/algs/compression/huffman/HuffmanCoding.class
 com/max/algs/dynamic/Max2DSubarray.class
-com/max/algs/AlgorithmsMain$RemoveEldestEntryFunction.class
 com/max/algs/regengine/char_class/WChar.class
 com/max/algs/compression/MatchedData.class
-com/max/algs/creative/BoyerMooreMatching.class
 com/max/algs/string/matching/KMPMatcher.class
-com/max/car/Insurance.class
 com/max/algs/sorting/ShellSort.class
 com/max/algs/dynamic/LongestPalindrome.class
 com/max/algs/util/SetPartitionUtils.class
@@ -164,7 +156,6 @@ com/max/algs/effectivejava/EffectiveJavaMain$1.class
 com/max/algs/merger/MergeTree$CombinedNode.class
 com/max/functional/utils/FunctionalUtils.class
 com/max/algs/ds/queue/OptimizedQueue.class
-com/max/model/User.class
 com/max/algs/patterns/factory/Pizza.class
 com/max/algs/patterns/singleton/OsVariables.class
 com/max/algs/leetcode/JumpGame2.class
@@ -246,7 +237,6 @@ com/max/algs/concurrency/dphilosophers/DiningPhilosophersTryLock.class
 com/max/algs/ds/Pair.class
 com/max/algs/ds/hamt/ValueNode.class
 com/max/algs/graph/CliqueFinder.class
-com/max/model/MyEnum.class
 com/max/algs/ds/tree/Treap.class
 com/max/algs/concurrency/MostVisitedPages$1.class
 com/max/algs/string/MutableString.class
@@ -285,6 +275,7 @@ com/max/algs/dynamic/LongestBitonicSequence.class
 com/max/algs/util/SilentObjectCreator$MySingleton.class
 com/max/algs/ds/tree/geometry/KDTree$KDEntry.class
 com/max/algs/leetcode/NQueens2$1.class
+com/max/algs/ds/probabalistic/BloomFilter.class
 com/max/algs/concurrency/barrier/Barrier.class
 com/max/algs/ds/heap/BinaryHeap.class
 com/max/algs/ds/queue/QueueFromHeap.class
@@ -344,7 +335,6 @@ com/max/algs/regengine/RegexpMetachar.class
 com/max/algs/graph/Edge$1.class
 com/max/algs/ds/tree/RandomBSTree.class
 com/max/algs/number/BigNumber.class
-com/max/algs/creative/KMPMatching.class
 com/max/algs/concurrency/exchanger/ExchangerExample$1.class
 com/max/algs/eightpuzzle/Puzzle8New$MoveDirection.class
 com/max/algs/hashing/universal/UniversalHashes.class
@@ -383,7 +373,6 @@ com/max/algs/eightpuzzle/Puzzle8New$1.class
 com/max/algs/string/GenerateAllPalindromesFromStringPermutation.class
 com/max/algs/cmp/StringOrderComparator.class
 com/max/algs/compression/lz/Triple.class
-com/max/algs/creative/LongestStutteringSubSequence.class
 com/max/algs/ds/dstree/TStree$1.class
 com/max/huffman/common/TreeNodeFileUtil.class
 com/max/algs/string/Substring.class
@@ -406,18 +395,14 @@ com/max/algs/backtracking/StringPermutationUtils.class
 com/max/algs/string/SearchWordsInMatrix.class
 com/max/algs/ds/stack/StackFromHeap$Entry.class
 com/max/algs/ds/radix/DigitalSearchTree$SearchResult.class
-com/max/car/Car.class
 com/max/algs/sorting/tim/MergeLo.class
 com/max/algs/patterns/factory/CheesePizza.class
 com/max/algs/ShortestUncommonSubsequence.class
-com/max/algs/creative/FindValueWithIndexDoubleArray.class
-com/max/algs/creative/OrderStatistics.class
 com/max/huffman/encoder/PrefixCode.class
 com/max/algs/regengine/char_class/UnconditionalCharClass.class
 com/max/algs/string/matching/NewShiftAndMatcher.class
 com/max/algs/util/RangeSumUtils$RangeSumEmpty.class
 com/max/algs/compression/lz/SelfFetchBuffer.class
-com/max/algs/creative/TwoLargestElementsInSet.class
 com/max/algs/ds/rope/RopeString.class
 com/max/algs/string/matching/ShiftAndMatcher.class
 com/max/algs/backtracking/Subsets.class
@@ -429,7 +414,6 @@ com/max/algs/presorted/OpenInterval.class
 com/max/algs/isa/IpSinglePage.class
 com/max/algs/leetcode/NQueens.class
 com/max/algs/sorting/CountingSorter.class
-com/max/algs/creative/MakeMaxHeap.class
 com/max/algs/dynamic/LongestSubstringWithSameSumOfDigits.class
 com/max/algs/concurrency/ConcurrentStack$Node.class
 com/max/algs/leetcode/WildcardMatching.class
@@ -439,7 +423,6 @@ com/max/algs/ds/tree/BinaryTree$1.class
 com/max/algs/util/FileUtils$1.class
 com/max/algs/io/BitInputStream2.class
 com/max/algs/compression/RleEncoder.class
-com/max/algs/creative/MaxConsSubarrayProduct.class
 com/max/algs/baylor/CrosswordAnswers.class
 com/max/algs/ConvertNumbers.class
 com/max/algs/cache/LFUCache$Node.class
@@ -455,7 +438,6 @@ com/max/algs/util/GeneralUtils.class
 com/max/algs/ds/list/SingleLinkedList$Node.class
 merger/iterator/FileIterator.class
 com/max/algs/ds/skiplist/SkipListSet$Node.class
-com/max/algs/dto/Customer$Builder.class
 com/max/algs/leetcode/ReverseNodesInKGroup.class
 com/max/algs/hashing/open/OpenHashMap$1.class
 com/max/algs/sesssions/SessionsHolder$SessionsCleaner.class
@@ -476,7 +458,6 @@ com/max/algs/escape/ThisEscape.class
 com/max/huffman/common/FileCharsIterator.class
 com/max/algs/hashing/cuckoo/CuckooHashSet$CuckooHashSetIterator.class
 com/max/algs/string/SuffixTrie.class
-com/max/algs/dto/AutoValue_Customer$Builder.class
 com/max/algs/ds/tree/WeightedTree$Node.class
 com/max/algs/graph/MazeSearchMain$Dimensions.class
 com/max/algs/np/PartitionSetIntoKSubsets.class
@@ -509,14 +490,12 @@ com/max/algs/dynamic/CoinChange.class
 com/max/algs/dynamic/LongestIncreasedSubsequence.class
 com/max/concurrent/hash/ConcurrentSet.class
 com/max/algs/backtracking/Sudoku.class
-com/max/algs/creative/KthSmallerOrEquals.class
 com/max/algs/ds/dstree/TStree$Entry.class
 com/max/algs/util/FileUtils.class
 com/max/algs/ds/queue/QueueFromHeap$Entry.class
 com/max/algs/concurrency/AbstractLock.class
 com/max/concurrent/list/SynchList$Node.class
 com/max/algs/eightpuzzle/Puzzle8Main$MoveDirection.class
-com/max/algs/AlgorithmsMain$Operator.class
 com/max/algs/arrays/MinRangeQueryArray$PositionAndLength.class
 com/max/algs/sesssions/UserSesssion.class
 com/max/algs/leetcode/NQueens2$MutableInt.class
@@ -552,7 +531,6 @@ com/max/algs/util/SilentObjectCreator.class
 com/max/algs/ds/probabalistic/CountMinSketch.class
 com/max/huffman/HuffmanMain.class
 com/max/algs/lru/LruQueue$1.class
-com/max/algs/creative/TwoLargestElementsInSet$MaxAndCandidates.class
 com/max/algs/util/IntegerUtils$1.class
 com/max/algs/ds/tree/BinaryTree$Node.class
 com/max/algs/ds/external/BTree.class
@@ -570,7 +548,6 @@ com/max/functional/ImmutableStack.class
 com/max/algs/ds/compact/CompactIntArray.class
 com/max/algs/ds/heap/BinaryHeap$BinaryHeapIterator.class
 com/max/algs/graph/MazeSearchMain$MoveDirections.class
-com/max/algs/dto/AutoValue_Customer$1.class
 com/max/algs/dynamic/KnapsackProblem.class
 com/max/algs/ds/dht/Node.class
 com/max/algs/ds/tree/CompetitionTree.class
@@ -580,7 +557,6 @@ com/max/ioc/services/BillTrendsCws.class
 com/max/algs/ds/radix/PatriciaTree$Node.class
 com/max/algs/compact/CompactDate.class
 com/max/algs/sesssions/SessionsHolder$1.class
-com/max/car/CarUser.class
 com/max/algs/offheap/OffHeapCleanerThread.class
 com/max/algs/merger/MergeTree$LeafNode.class
 com/max/functional/ImmutableStack$ImmutableStateSerializationProxy.class
