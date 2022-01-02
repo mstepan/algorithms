@@ -1,5 +1,6 @@
 package com.max.algs.ds.bloom;
 
+import com.max.algs.ds.probabalistic.BloomFilter;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
