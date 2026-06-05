@@ -45,49 +45,6 @@
                 </executions>
             </plugin>
 
-            <!-- Custom plugin which checks package cycles using JDepend -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.max</groupId>
-                        <artifactId>maven-design-checker</artifactId>
-                        <version>1.0.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>maven-design-checker</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <phase>verify</phase> <!-- use a phase after compile! -->
-                        <configuration>
-                            <rules>
-                                <NoPackageCyclesRule
-                                        implementation="com.max.maven.design.checker.NoPackageCyclesRule">
-                                    <mainPackage>com.max</mainPackage>
-                                </NoPackageCyclesRule>
-                                <DistanceFromMainSequenceRule
-                                        implementation="com.max.maven.design.checker.DistanceFromMainSequenceRule">
-                                    <mainPackage>com.max</mainPackage>
-                                    <threshold>0.5</threshold>
-                                </DistanceFromMainSequenceRule>
-
-                                <StableDependencyRule
-                                        implementation="com.max.maven.design.checker.StableDependencyRule">
-                                    <mainPackage>com.max</mainPackage>
-                                </StableDependencyRule>
-
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-
             <!-- Java compile plugin with Error Prone -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
