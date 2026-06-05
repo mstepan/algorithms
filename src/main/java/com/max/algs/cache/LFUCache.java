@@ -1,7 +1,6 @@
 package com.max.algs.cache;
 
-import cern.colt.Arrays;
-
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;

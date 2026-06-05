@@ -1,4 +1,4 @@
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home
+JAVA_HOME ?= $(shell java -XshowSettings:properties -version 2>&1 | awk -F= '/^[[:space:]]*java.home =/ {gsub(/^[[:space:]]+|[[:space:]]+$$/, "", $$2); print $$2; exit}')
 INCLUDE=-I $(JAVA_HOME)/include -I $(JAVA_HOME)/include/darwin
 CC=g++
 CPPFLAGS=-dynamiclib

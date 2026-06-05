@@ -1,7 +1,5 @@
 package com.max.algs.ds.set;
 
-import sun.misc.SharedSecrets;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -40,7 +38,7 @@ public class SpecializedEnumSet<K extends Enum<K>> extends AbstractSet<K> implem
     }
 
     private static <K extends Enum<K>> K[] getKeyUniverse(Class<K> keyType) {
-        return SharedSecrets.getJavaLangAccess().getEnumConstantsShared(keyType);
+        return keyType.getEnumConstants();
     }
 
     @Override

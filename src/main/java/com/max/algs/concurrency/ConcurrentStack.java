@@ -1,10 +1,10 @@
 package com.max.algs.concurrency;
 
-import akka.jsr166y.ThreadLocalRandom;
 import org.apache.log4j.Logger;
 
 import java.util.Random;
 import java.util.concurrent.Exchanger;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;

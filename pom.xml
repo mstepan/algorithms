@@ -16,6 +16,7 @@
         <jdepend.version>2.9.5</jdepend.version>
         <enforcer.api.version>1.4.1</enforcer.api.version>
         <junit5.version>5.2.0</junit5.version>
+        <lombok.version>1.18.46</lombok.version>
         <native.source.dir>/Users/mstepan/repo/algorithms</native.source.dir>
     </properties>
 
@@ -26,7 +27,14 @@
             <plugin>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.10.0</version>
+                <version>1.18.20.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -84,28 +92,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.15.0</version>
                 <configuration>
-                    <compilerId>javac-with-errorprone</compilerId>
-                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-compiler-javac-errorprone</artifactId>
-                        <version>2.8.3</version>
-                    </dependency>
-                    <!-- override plexus-compiler-javac-errorprone's dependency on
-                         Error Prone with the latest version -->
-                    <dependency>
-                        <groupId>com.google.errorprone</groupId>
-                        <artifactId>error_prone_core</artifactId>
-                        <version>2.2.0</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!-- PIT, mutation test plugin -->
@@ -278,12 +270,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.9.3</artifactId>
-            <version>0.8.1-incubating</version>
-        </dependency>
-
         <!-- Needed for Potter stemmer -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
@@ -338,13 +324,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${google.guava.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>trove</groupId>
-            <artifactId>trove</artifactId>
-            <version>3.0.3</version>
         </dependency>
 
 <!--        <dependency>-->
@@ -500,7 +479,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
