@@ -28,5 +28,8 @@ hs_err_pid*
 target/
 
 # IntelliJ files
-.idea
+.idea/
+
+# MacOS files
+.DS_Store
 
